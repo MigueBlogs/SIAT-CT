@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="UTF-8" name="viewport" 
+	content="width=device-width, initial-scale=1.0">
 	<title>SIAT-CT</title>
-	
 	<style>
 		.box{
-			width: 2550px;
-			height: 3300px;
+			width: 90%;
+			height: 90%;
 			padding: 20px;
 			margin: 0px auto;
 			box-shadow: 0px 0px 10px 2px grey;
@@ -16,40 +16,70 @@
 			background: #D9D9D9 ;
 			color: #A50021;
 			font-weight: bold;
-			font-size: 30px;
+			font-size: 25px;
+			text-align: center;
+		}
+		.encabezado{
+			background: gray ;
+			color: white;
+			font-weight: bold;
+			font-size: 23px;
+			text-align: center;
+			width: 100%;
 		}
 		.fecha{
-			background: white;
+			/*background: white;*/
 			color: black;
-			font-size: 25px;
+			font-size: 20px;
+		}
+		.logos{
+			display: grid;
+			grid-template-columns: 33.3% 33.3% 33.3%;
+		}
+		.tableData{
+			display: grid;
+			grid-template-columns: 50% 50%;
+			border-left: 1px solid black;
+		    border-top: 1px solid black;
+		    border-right: 1px solid black;
+		    border-bottom: 1px solid black;
+		}
+		.subtitle{
+			display: grid;
+			
+
 		}
 	</style>
 </head>
 <body>
 	<div class="box">
-		<div>
-		 <img src="img/head1.png" width="25%" align="left">
-		 <img src="img/head2.png" width="25%" align="center">
-		 <img src="img/head3.png" width="25%" align="right"> 
-		</div>
-	<br>
-	<table bgcolor="gray"> 
-		<div class="titulo">
-			<center>
-				BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
-			</center>
+		<div class="logos">
+			<div align="left">
+				<img src="img/head1.png" width="60%">
+			</div>
+			<div align="center">
+				<img src="img/head2.png" width="60%">
+			</div>
 			<div align="right">
-				<p class="fecha">Generado el <span id="datetime"></span></p>
+				<img src="img/head3.png" width="60%" >
 			</div>
 		</div>
-			
-		<div>
-			
-		</div>
-			
-	</table>
-
-
+		<br>
+			<div class="titulo">
+				BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
+			</div>
+				<div align="center" class="fecha">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >
+			</div>
+			<div>
+				<textarea type="Text" class="encabezado">SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL</textarea>
+			</div>
+			<div class="tableData">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+			</div> 
 	</div>
 	    <script src="JS/funciones.js"></script>
 		<script src="StaticText.js"></script>
