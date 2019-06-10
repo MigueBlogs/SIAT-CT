@@ -39,16 +39,22 @@
 		.tableData{
 			display: grid;
 			grid-template-columns: 50% 50%;
-			border-left: 1px solid black;
-		    border-top: 1px solid black;
-		    border-right: 1px solid black;
-		    border-bottom: 1px solid black;
+			height: 700px;
+		}
+		.tableDataL{
+			display: grid;
+			grid-template-rows: auto 50% 30%;
+			
+		}
+		.tableDataR{
+			display: grid;
+			grid-template-rows: 40% auto;
+			
 		}
 		.subtitle{
 			display: grid;
-			
-
 		}
+		.solid {border-style: solid;}
 	</style>
 </head>
 <body>
@@ -65,21 +71,46 @@
 			</div>
 		</div>
 		<br>
-			<div class="titulo">
-				BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
+		<div class="titulo">
+			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
+		</div>
+		<div align="center" class="fecha">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >
+		</div>
+		<div>
+			<textarea type="Text" class="encabezado">SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL</textarea>
+		</div>
+		<div class="tableData">
+		<div class="tableDataL">
+			<div class="solid">
+				<table>
+					<tr>
+						<th class="solid">1</th>
+						<th class="solid">2</th>
+					</tr>
+					<tr>
+						<th class="solid">3</th>
+						<th class="solid" rowspan="2">4</th>
+					</tr>
+					<tr>
+						<th class="solid">5</th>
+					</tr>
+				</table>
+				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores impedit maiores iure et aspernatur ea, fuga fugit quibusdam? Sint, iste quisquam harum repellat magni quam at! In neque, laborum officiis!</div>
+				<div>Nobis voluptas est eveniet enim error asperiores saepe, sequi, aliquid incidunt molestias minima explicabo placeat beatae laboriosam adipisci. Iste illo excepturi in voluptatum laborum vel ad harum cumque, tenetur neque!</div>
+				lorem*2
 			</div>
-				<div align="center" class="fecha">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >
-			</div>
-			<div>
-				<textarea type="Text" class="encabezado">SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL</textarea>
-			</div>
-			<div class="tableData">
-				<div>1</div>
-				<div>2</div>
-				<div>3</div>
-				<div>4</div>
-				<div>5</div>
-			</div> 
+			<div class="solid">2</div>
+			<div class="solid">3</div>
+		</div> 
+		<div class="tableDataR">
+			<div class="solid">4</div>
+			<div class="solid">5</div>
+		</div>
+		</div>
+		
+		<br>
+		<br>
+
 	</div>
 	    <script src="JS/funciones.js"></script>
 		<script src="StaticText.js"></script>
