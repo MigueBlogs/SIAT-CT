@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8" name="viewport" 
-	content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+	<link rel="stylesheet" href="CSS/jquery.timepicker.min.css">
 	<title>SIAT-CT</title>
 	<style>
 		.box{
@@ -11,6 +15,7 @@
 			padding: 20px;
 			margin: 0px auto;
 			box-shadow: 0px 0px 10px 2px grey;
+			font-family: Arial;
 		}
 		.titulo{
 			background: #D9D9D9 ;
@@ -19,11 +24,18 @@
 			font-size: 25px;
 			text-align: center;
 		}
+		.tituloTable{
+			border-style: solid;
+			font-weight: bold;
+			font-size: 25px;
+			text-align: center;
+		}
 		.encabezado{
+			font-family: Arial;
 			background: gray ;
 			color: white;
 			font-weight: bold;
-			font-size: 23px;
+			font-size: 19px;
 			text-align: center;
 			width: 100%;
 		}
@@ -38,7 +50,7 @@
 		}
 		.tableData{
 			display: grid;
-			grid-template-columns: 50% 50%;
+			grid-template-columns: auto 50%;
 			height: 700px;
 		}
 		.tableDataL{
@@ -48,13 +60,23 @@
 		}
 		.tableDataR{
 			display: grid;
-			grid-template-rows: 40% auto;
+			grid-template-rows: 1fr 1fr ;
 			
 		}
 		.subtitle{
 			display: grid;
 		}
 		.solid {border-style: solid;}
+		
+		@media print{
+			input{
+				border: none;
+				text-shadow: unset;
+			}
+			.box{
+				box-shadow: none;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -74,7 +96,10 @@
 		<div class="titulo">
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
-		<div align="center" class="fecha">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >
+		
+		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <element id="Number"></element> <element id="secretButton"></element>
+			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
+
 		</div>
 		<div>
 			<textarea type="Text" class="encabezado">SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL</textarea>
@@ -82,37 +107,87 @@
 		<div class="tableData">
 		<div class="tableDataL">
 			<div class="solid">
-				<table>
+			<div class="tituloTable">NIVEL DE ALERTA SIAT - CT</div>
+				<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
+					<tr>
+						<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
+						<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
+					</tr>
+					<tr>
+						<th class="solid" style="background-color: red; ">ROJA</th>
+						<th class="solid" style="background-color: red; ">ROJA</th>
+					</tr>
 					<tr>
 						<th class="solid">1</th>
 						<th class="solid">2</th>
 					</tr>
 					<tr>
-						<th class="solid">3</th>
-						<th class="solid" rowspan="2">4</th>
+						<th class="solid" style="background-color: orange;">NARANJA</th>
+						<th class="solid" style="background-color: orange;">NARANJA</th>
 					</tr>
 					<tr>
-						<th class="solid">5</th>
+						<th class="solid">1</th>
+						<th class="solid">2</th>
+					</tr>
+					<tr>
+						<th class="solid" style="background-color: yellow;">AMARILLA</th>
+						<th class="solid" style="background-color: yellow;">AMARILLA</th>
+					</tr>
+					<tr>
+						<th class="solid">1</th>
+						<th class="solid">2</th>
+					</tr>
+					<tr>
+						<th class="solid" style="background-color: #38BF34;">VERDE</th>
+						<th class="solid" style="background-color: #38BF34;">VERDE</th>
+					</tr>
+					<tr><th class="solid">1</th>
+						<th class="solid">2</th>
+					</tr>
+					<tr>
+						<th class="solid" style="background-color: #4F81BC">AZUL</th>
+						<th class="solid" style="background-color: #4F81BC">AZUL</th>
+					</tr>
+					<tr><th class="solid">1</th>
+						<th class="solid">2</th>
 					</tr>
 				</table>
-				<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores impedit maiores iure et aspernatur ea, fuga fugit quibusdam? Sint, iste quisquam harum repellat magni quam at! In neque, laborum officiis!</div>
-				<div>Nobis voluptas est eveniet enim error asperiores saepe, sequi, aliquid incidunt molestias minima explicabo placeat beatae laboriosam adipisci. Iste illo excepturi in voluptatum laborum vel ad harum cumque, tenetur neque!</div>
-				lorem*2
 			</div>
-			<div class="solid">2</div>
+			<div class="solid">
+				<div class="tituloTable">INFORMACIÓN GENERAL</div>
+				<div id="info"></div>
+			</div>
 			<div class="solid">3</div>
 		</div> 
 		<div class="tableDataR">
-			<div class="solid">4</div>
+			<div class="solid">
+				<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA</div>
+				<div id="map" >
+					<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style='height: 100%; width: 100%;' src="img/mapaTest.jpg" ></a>
+				</div>
+			</div>
 			<div class="solid">5</div>
 		</div>
 		</div>
 		
 		<br>
 		<br>
+		
 
 	</div>
+
+		<!--JQUERY-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<!--MY SCRIPTS-->
 	    <script src="JS/funciones.js"></script>
-		<script src="StaticText.js"></script>
-</body>
+		<script src="JS/StaticText.js"></script>
+		<!--JS BOOTSRAP-->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		time picker and date picker-->
+		<script src="JS/bootstrap-datepicker.js"></script>
+		<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+		<script src="JS/jquery.timepicker.min.js"></script>
+     </body>
 </html>
