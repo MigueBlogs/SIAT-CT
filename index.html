@@ -5,7 +5,7 @@
 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><!--Error en esta seccion al imprimir-->
 	<link rel="stylesheet" href="CSS/jquery.timepicker.min.css">
 	<title>SIAT-CT</title>
 	<style>
@@ -13,7 +13,7 @@
 			width: 90%;
 			height: 90%;
 			padding: 20px;
-			margin: 0px auto;
+			margin: 10px auto;
 			box-shadow: 0px 0px 10px 2px grey;
 			font-family: Arial;
 		}
@@ -37,10 +37,10 @@
 			font-weight: bold;
 			font-size: 19px;
 			text-align: center;
-			width: 100%;
+			
 		}
 		.fecha{
-			/*background: white;*/
+			font-family: Arial;
 			color: black;
 			font-size: 20px;
 		}
@@ -55,7 +55,7 @@
 		}
 		.tableDataL{
 			display: grid;
-			grid-template-rows: auto 50% 30%;
+			grid-template-rows: auto auto 30%;
 			
 		}
 		.tableDataR{
@@ -67,11 +67,25 @@
 			display: grid;
 		}
 		.solid {border-style: solid;}
+		.dataH{
+			font-weight: bold;
+		}
+		.dataD{
+			font-weight: normal;
+		}
+		
+		textarea {
+			height: auto;
+			width: 100%;
+		}
 		
 		@media print{
 			input{
 				border: none;
 				text-shadow: unset;
+			}
+			@page{
+				margin:0px;
 			}
 			.box{
 				box-shadow: none;
@@ -97,12 +111,12 @@
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
 		
-		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span> / <input type="Text" name="nameEvent" size="5"  value="Andrea" > / No. <element id="Number"></element> <element id="secretButton"></element>
+		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 
 		</div>
 		<div>
-			<textarea type="Text" class="encabezado">SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL</textarea>
+			<textarea id="subtitle" class='autoExpand encabezado' rows="1" placeholder='Auto-Expanding Textarea'></textarea>
 		</div>
 		<div class="tableData">
 		<div class="tableDataL">
@@ -155,7 +169,12 @@
 			</div>
 			<div class="solid">
 				<div class="tituloTable">INFORMACIÓN GENERAL</div>
-				<div id="info"></div>
+				<div class="dataH"> HORA: <element class="dataD" id="hora"></element> </div>
+				<div class="dataH"> COORDENADAS: <element class="dataD" id="coords"></element> </div>
+				<div class="dataH"> LOCALIZACIÓN: <element class="dataD" id="loc"></element> </div>
+				<div class="dataH"> DESPLAZAMIENTO: <element class="dataD" id="despl"></element> </div>
+				<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="dataD" id="viento"></element> </div>
+				<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="dataD" id="racha"></element> </div>
 			</div>
 			<div class="solid">3</div>
 		</div> 

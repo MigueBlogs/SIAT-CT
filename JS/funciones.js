@@ -1,7 +1,8 @@
 var dt = new Date();
 var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-var hora = {hour:'2-digit', minute:'2-digit'}
-document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+' h';
+var hora2 = {hour:'2-digit', minute:'2-digit'}
+var hora = {hour:'2-digit'}
+document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
 
 
 var swiped = false;
@@ -16,7 +17,7 @@ function swipe(){
 ;	}
 }
 
-function editar(){
+function editarF(){
 document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/> '+
 												'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/> '+
 												'<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button></div>'
@@ -43,12 +44,17 @@ document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <inpu
 				});
 			});
 }
+function editarE(){
+	document.getElementById("NombreEvento").innerHTML = '<input type="Text" name="nameEvent" size="5" value="Andrea" >'
+}
 
 function secretI(){
-	document.getElementById("secretButton").innerHTML = '<button type="button" class="btn btn-primary" onclick="editar()"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar </button>'
+	document.getElementById("secretButton").innerHTML = '<button type="button" class="btn btn-primary" onclick="editarF()"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Fecha</button>'
+	document.getElementById("secretButton2").innerHTML = '<button type="button" class="btn btn-primary" onclick="editarE()"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Evento</button>'
 }
 function secretO(){
 	document.getElementById("secretButton").innerHTML = ' '
+	document.getElementById("secretButton2").innerHTML = ' '
 }
 
 function saveDate(){
@@ -56,5 +62,35 @@ function saveDate(){
 	 newDate= $(".datepicker").datepicker("getDate");
 	 newDate.setHours($('#time').timepicker("getTime").getHours());
 	 //console.log(newDate);
-	 document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora)+' h';
+	 document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h';
 }
+
+//FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
+var autoExpand = function (field) {
+
+	// Reset field height
+	field.style.height = 'inherit';
+
+	// Get the computed styles for the element
+	var computed = window.getComputedStyle(field);
+
+	// Calculate the height
+	var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+	             + parseInt(computed.getPropertyValue('padding-top'), 10)
+	             + field.scrollHeight
+	             + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+	             + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+	
+	field.style.height = height  + 'px';
+};
+
+document.addEventListener('input', function (event) {
+	if (event.target.tagName.toLowerCase() !== 'textarea') return;
+	autoExpand(event.target);
+}, false);
+
+
+document.addEventListener("DOMContentLoaded", function(event) {
+	//carga una vez para acomodar texto
+	autoExpand(document.getElementById("subtitle"));
+  });

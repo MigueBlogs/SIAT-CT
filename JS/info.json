@@ -1,7 +1,10 @@
-{"hora": "17:30 (22:30 GMT)", 
+{			"NombreEvento":"Andrea",
+			"hora": "17:30 (22:30 GMT)", 
 			"coords": "28.8°Norte 68.7° Oeste.",
 			"loc": "A 540 km al suroeste de Bermuda y a 2,010 km al este-noreste de las costas de Quintana Roo.",
 			"despl": "Hacia el norte (350°) a 22km/h.",
 			"viento": "65 km/h.",
-			"racha":"85 km/h."
+			"racha":"85 km/h.",
+			"texto": "SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL"
 }
+

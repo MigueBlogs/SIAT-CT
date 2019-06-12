@@ -40,13 +40,50 @@ function readJSON(path) {
     }
     xhr.send();
 }
-
-
-//var data;
-//
+//Carga del evento
 $.getJSON('JS/info.json',function(data){
 	//console.log(data);
-	var output = document.getElementById('info');
+	var output = document.getElementById('NombreEvento');
+	output.innerHTML = data.NombreEvento;
+});
+
+
+//Cargando datos del Subtítulo
+$.getJSON('JS/info.json',function(data){
+	//console.log(data);
+	var output = document.getElementById('subtitle');
+	output.innerHTML = data.texto;
+});
+
+
+//Cargando datos en zona de Información Gneral
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('hora');
 	output.innerHTML = data.hora;
+});
+
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('coords');
+	output.innerHTML = data.coords;
+});
+
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('loc');
+	output.innerHTML = data.loc;
+});
+
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('despl');
+	output.innerHTML = data.despl;
+});
+
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('viento');
+	output.innerHTML = data.viento;
+});
+
+$.getJSON('JS/info.json',function(data){
+	var output = document.getElementById('racha');
+	output.innerHTML = data.racha;
 });
 
