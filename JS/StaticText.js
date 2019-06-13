@@ -1,3 +1,4 @@
+//la base de datos va a caluclar e valor del numero de boletín?
 var texto = {"numero":"1"};
 
 
@@ -45,6 +46,12 @@ $.getJSON('JS/info.json',function(data){
 	//console.log(data);
 	var output = document.getElementById('NombreEvento');
 	output.innerHTML = data.NombreEvento;
+});
+
+$.getJSON('JS/info.json',function(data){
+	//console.log(data);
+	var output = document.getElementById('tipo');
+	output.innerHTML = data.tipo;
 });
 
 

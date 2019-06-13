@@ -37,7 +37,12 @@
 			font-weight: bold;
 			font-size: 19px;
 			text-align: center;
-			
+		}
+		.comentarios{
+			height: 90%;
+			font-family: Arial;
+			background: transparent;
+			font-size: 14px;
 		}
 		.fecha{
 			font-family: Arial;
@@ -50,17 +55,17 @@
 		}
 		.tableData{
 			display: grid;
-			grid-template-columns: auto 50%;
-			height: 700px;
+			grid-template-columns: 50% 50%;
+			height: auto;
 		}
 		.tableDataL{
 			display: grid;
-			grid-template-rows: auto auto 30%;
+			grid-template-rows: auto auto;
 			
 		}
 		.tableDataR{
 			display: grid;
-			grid-template-rows: 1fr 1fr ;
+			grid-template-rows: 1fr 1fr 1fr;
 			
 		}
 		.subtitle{
@@ -83,6 +88,9 @@
 			input{
 				border: none;
 				text-shadow: unset;
+			}
+			textarea{
+				border: none;
 			}
 			@page{
 				margin:0px;
@@ -111,82 +119,106 @@
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
 		
-		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element>
+		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
-
 		</div>
 		<div>
-			<textarea id="subtitle" class='autoExpand encabezado' rows="1" placeholder='Auto-Expanding Textarea'></textarea>
+			<textarea id="subtitle" class='autoExpand encabezado' rows="1" placeholder='Encabezado del boletín'></textarea>
 		</div>
 		<div class="tableData">
-		<div class="tableDataL">
-			<div class="solid">
-			<div class="tituloTable">NIVEL DE ALERTA SIAT - CT</div>
-				<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
-					<tr>
-						<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
-						<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
-					</tr>
-					<tr>
-						<th class="solid" style="background-color: red; ">ROJA</th>
-						<th class="solid" style="background-color: red; ">ROJA</th>
-					</tr>
-					<tr>
-						<th class="solid">1</th>
-						<th class="solid">2</th>
-					</tr>
-					<tr>
-						<th class="solid" style="background-color: orange;">NARANJA</th>
-						<th class="solid" style="background-color: orange;">NARANJA</th>
-					</tr>
-					<tr>
-						<th class="solid">1</th>
-						<th class="solid">2</th>
-					</tr>
-					<tr>
-						<th class="solid" style="background-color: yellow;">AMARILLA</th>
-						<th class="solid" style="background-color: yellow;">AMARILLA</th>
-					</tr>
-					<tr>
-						<th class="solid">1</th>
-						<th class="solid">2</th>
-					</tr>
-					<tr>
-						<th class="solid" style="background-color: #38BF34;">VERDE</th>
-						<th class="solid" style="background-color: #38BF34;">VERDE</th>
-					</tr>
-					<tr><th class="solid">1</th>
-						<th class="solid">2</th>
-					</tr>
-					<tr>
-						<th class="solid" style="background-color: #4F81BC">AZUL</th>
-						<th class="solid" style="background-color: #4F81BC">AZUL</th>
-					</tr>
-					<tr><th class="solid">1</th>
-						<th class="solid">2</th>
-					</tr>
-				</table>
-			</div>
-			<div class="solid">
-				<div class="tituloTable">INFORMACIÓN GENERAL</div>
-				<div class="dataH"> HORA: <element class="dataD" id="hora"></element> </div>
-				<div class="dataH"> COORDENADAS: <element class="dataD" id="coords"></element> </div>
-				<div class="dataH"> LOCALIZACIÓN: <element class="dataD" id="loc"></element> </div>
-				<div class="dataH"> DESPLAZAMIENTO: <element class="dataD" id="despl"></element> </div>
-				<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="dataD" id="viento"></element> </div>
-				<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="dataD" id="racha"></element> </div>
-			</div>
-			<div class="solid">3</div>
-		</div> 
-		<div class="tableDataR">
-			<div class="solid">
-				<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA</div>
-				<div id="map" >
-					<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style='height: 100%; width: 100%;' src="img/mapaTest.jpg" ></a>
+			<div class="tableDataL">
+				<div class="solid">
+				<div class="tituloTable" title="click para editar" onmouseenter="secretoI()" onmouseleave="secretoO()">NIVEL DE ALERTA SIAT - CT
+				<element id="tabla"></element>
+				</div>
+
+				<div id="regiones">
+					<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
+						<tr>
+							<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
+							<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
+						</tr>
+						<tr>
+							<th class="solid" style="background-color: red; ">ROJA</th>
+							<th class="solid" style="background-color: red; ">ROJA</th>
+						</tr>
+						<tr>
+							<th class="solid">1</th>
+							<th class="solid">2</th>
+						</tr>
+						<tr>
+							<th class="solid" style="background-color: orange;">NARANJA</th>
+							<th class="solid" style="background-color: orange;">NARANJA</th>
+						</tr>
+						<tr>
+							<th class="solid">1</th>
+							<th class="solid">2</th>
+						</tr>
+						<tr>
+							<th class="solid" style="background-color: yellow;">AMARILLA</th>
+							<th class="solid" style="background-color: yellow;">AMARILLA</th>
+						</tr>
+						<tr>
+							<th class="solid">1</th>
+							<th class="solid">2</th>
+						</tr>
+						<tr>
+							<th class="solid" style="background-color: #38BF34;">VERDE</th>
+							<th class="solid" style="background-color: #38BF34;">VERDE</th>
+						</tr>
+						<tr><th class="solid">1</th>
+							<th class="solid">2</th>
+						</tr>
+						<tr>
+							<th class="solid" style="background-color: #4F81BC">AZUL</th>
+							<th class="solid" style="background-color: #4F81BC">AZUL</th>
+						</tr>
+						<tr><th class="solid">1</th>
+							<th class="solid">2</th>
+						</tr>
+					</table>
+				</div>
+					
+					
+
+
+				</div>
+				<div class="solid">
+					<div class="tituloTable">INFORMACIÓN GENERAL</div>
+					<div class="dataH"> HORA: <element class="dataD" id="hora"></element> </div>
+					<div class="dataH"> COORDENADAS: <element class="dataD" id="coords"></element> </div>
+					<div class="dataH"> LOCALIZACIÓN: <element class="dataD" id="loc"></element> </div>
+					<div class="dataH"> DESPLAZAMIENTO: <element class="dataD" id="despl"></element> </div>
+					<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="dataD" id="viento"></element> </div>
+					<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="dataD" id="racha"></element> </div>
+				</div>
+				
+			</div> 
+			<div class="tableDataR">
+				<div class="solid">
+					<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA </div>
+					<div id="map" >
+						<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style='height: 100%; width: 100%;' src="img/mapaTest.jpg" ></a>
+					</div>
+				</div>
+
+				<div class="solid">
+				<div class="tituloTable">Comentarios</div>
+				<textarea class='autoExpand comentarios' placeholder='Escribe aquí los comentarios'>
+&#9679 Recomendación 1
+&#9679 Recomendación 2
+&#9679 Recomendación 3
+&#9679 Recomendación 4
+&#9679 Recomendación 5
+				</textarea>
+				</div>
+
+				<div class="solid">
+					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
+					No se han establecido zonas de vigilancia por este sistema en México.
+
 				</div>
 			</div>
-			<div class="solid">5</div>
-		</div>
 		</div>
 		
 		<br>

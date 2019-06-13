@@ -16,11 +16,15 @@ function swipe(){
 		swiped= !swiped
 ;	}
 }
+var editandoF = false;
+var editandoE = false;
 
 function editarF(){
+editandoF = true;
+document.getElementById("secretButton").innerHTML = ''
 document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/> '+
-												'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/> '+
-												'<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button></div>'
+												'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/></div>'
+document.getElementById("saveButton").innerHTML ='<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button>'									
 	
 	  $(function(){
 				newDate=$('.datepicker').datepicker({
@@ -44,25 +48,65 @@ document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <inpu
 				});
 			});
 }
+
 function editarE(){
-	document.getElementById("NombreEvento").innerHTML = '<input type="Text" name="nameEvent" size="5" value="Andrea" >'
+	editandoE = true;
+	document.getElementById("secretButton2").innerHTML = ''
+	document.getElementById("NombreEvento").innerHTML = '<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >'
+	document.getElementById("saveButton").innerHTML ='<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button>'
+	document.getElementById("tipo").innerHTML = '<select id="opt">			<option>DT</option>			<option>TT</option>			<option>Huracán</option>		</select>'
+
 }
 
 function secretI(){
+	if(editandoF){
+		//nada
+	}else{
 	document.getElementById("secretButton").innerHTML = '<button type="button" class="btn btn-primary" onclick="editarF()"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Fecha</button>'
+	}
+	if(editandoE){
+		//nada
+	}else{
 	document.getElementById("secretButton2").innerHTML = '<button type="button" class="btn btn-primary" onclick="editarE()"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Evento</button>'
+	}
 }
 function secretO(){
 	document.getElementById("secretButton").innerHTML = ' '
 	document.getElementById("secretButton2").innerHTML = ' '
 }
 
+function secretoI(){
+	document.getElementById("tabla").innerHTML = '<button type="button" class="btn btn-primary" onclick="#"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>'
+}
+function secretoO(){
+	document.getElementById("tabla").innerHTML = ''
+}
+
 function saveDate(){
+	if(editandoF){
+	 //document.getElementById("saveButton").innerHTML =''
 	 var newDate = new Date();
 	 newDate= $(".datepicker").datepicker("getDate");
 	 newDate.setHours($('#time').timepicker("getTime").getHours());
 	 //console.log(newDate);
 	 document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h';
+	 editandoF=false;
+	}
+	if(editandoE){
+	//document.getElementById("saveButton").innerHTML =''
+		if((document.getElementById("textEvent").value) != ''){
+			document.getElementById("NombreEvento").innerHTML = document.getElementById("textEvent").value;
+			document.getElementById("tipo").innerHTML = document.getElementById("opt").value;
+			editandoE=false;
+		}else{
+			alert("Ingresa el nombre y categoría del evento");
+			editarF();
+			editarE();
+		}
+	}
+	if((editandoE && editandoF) == false){
+		document.getElementById("saveButton").innerHTML =''
+	}
 }
 
 //FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
