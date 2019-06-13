@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="CSS/jquery.timepicker.min.css">
 	<title>SIAT-CT</title>
 	<style>
+		#root {
+        }
 		.box{
 			width: 90%;
 			height: 90%;
@@ -16,6 +18,17 @@
 			margin: 10px auto;
 			box-shadow: 0px 0px 10px 2px grey;
 			font-family: Arial;
+		}
+		.selected{
+			cursor: pointer;
+		}
+		.selected:hover{	
+			background-color: #0585C0;
+			color: white;
+		}
+		.seleccionada{
+			background-color: #0585CF;
+			color: white;
 		}
 		.titulo{
 			background: #D9D9D9 ;
@@ -58,9 +71,16 @@
 			grid-template-columns: 50% 50%;
 			height: auto;
 		}
+		.tableRegiones{
+			text-align: center;
+			display: grid;
+			grid-template-rows: 30px auto 30px auto;
+			height: auto;
+			width: auto;
+		}
 		.tableDataL{
 			display: grid;
-			grid-template-rows: auto auto;
+			grid-template-rows: 1fr 1fr;
 			
 		}
 		.tableDataR{
@@ -98,11 +118,15 @@
 			.box{
 				box-shadow: none;
 			}
+			#root {
+        	 width: 500px;
+        	 height: 700px;
+        	}
 		}
 	</style>
 </head>
 <body>
-	<div class="box">
+	<div class="box" id="root">
 		<div class="logos">
 			<div align="left">
 				<img src="img/head1.png" width="60%">
@@ -131,7 +155,7 @@
 				<div class="tituloTable" title="click para editar" onmouseenter="secretoI()" onmouseleave="secretoO()">NIVEL DE ALERTA SIAT - CT
 				<element id="tabla"></element>
 				</div>
-
+				
 				<div id="regiones">
 					<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
 						<tr>
@@ -178,9 +202,79 @@
 						</tr>
 					</table>
 				</div>
-					
-					
 
+				<div id="tablaEditar" class="tableRegiones solid">
+					<div class="solid" style="background-color: #DBBE99">CICLÓN ACERCÁNDOSE</div>
+						<div class="solid">
+							<table id="tablaEdos1" style=" border-collapse: collapse; width: 100%; text-align: center;">
+								<tr id="Encabezado">
+									<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
+									<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
+								</tr>
+						 <tr id="filatest">
+									<th class="solid">
+											<select id=""> 
+												<option value="1" style="background-color: red; ">ROJA</option>
+												<option value="2" style="background-color: orange;">NARANJA</option>
+												<option value="3" style="background-color: yellow;">AMARILLA</option>
+												<option value="4" style="background-color: #38BF34;">VERDE</option>
+												<option value="5" style="background-color: #4F81BC">AZUL</option>
+											</select>
+									</th>
+									<th class="solid">
+											<select id="Region"> 
+												<option value="">BCS - Norte</option>
+												<option value="">BCS - Centro</option>
+												<option value="">BCS - Sur</option>
+											</select>
+											<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
+									</th>
+								</tr>
+							</table>
+								<tr>
+									<th><button id="bt_add" type="button" onclick="agregar('tablaEdos1')" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
+									
+								</tr>
+						</div>
+					<div class="solid" style="background-color: #DBBE99">CICLÓN ALEJÁNDOSE</div>
+					<div class="solid">
+						<div class="solid">
+						<table id="tablaEdos2" style=" border-collapse: collapse; width: 100%; text-align: center;">
+							<tr id="Encabezado">
+								<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
+								<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
+							</tr>
+					 <tr id="filatest">
+								<th class="solid">
+										<select id=""> 
+											<option value="1" style="background-color: red; ">ROJA</option>
+											<option value="2" style="background-color: orange;">NARANJA</option>
+											<option value="3" style="background-color: yellow;">AMARILLA</option>
+											<option value="4" style="background-color: #38BF34;">VERDE</option>
+											<option value="5" style="background-color: #4F81BC">AZUL</option>
+										</select>
+								</th>
+								<th class="solid">
+										<select id="Region"> 
+											<option value="">BCS - Norte</option>
+											<option value="">BCS - Centro</option>
+											<option value="">BCS - Sur</option>
+										</select>
+										<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
+								</th>
+							</tr>
+						</table>
+							<tr>
+								<th><button id="bt_add" type="button" onclick="agregar('tablaEdos2')" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
+								
+							</tr>
+					</div>
+					</div>
+					<center>
+						<button class="btn btn-outline-success" id="SaveData">Guardar datos</button>	
+					</center>
+				</div>	
+				
 
 				</div>
 				<div class="solid">
@@ -226,6 +320,13 @@
 		
 
 	</div>
+	
+	<!-- Button to generate PDF. -->
+	<center>
+	<button class="btn btn-outline-success" onclick="test()">Generar PDF</button>	
+	</center>
+   
+
 
 		<!--JQUERY-->
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -240,5 +341,23 @@
 		<script src="JS/bootstrap-datepicker.js"></script>
 		<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 		<script src="JS/jquery.timepicker.min.js"></script>
+		 
+		 <!-- Include html2pdf bundle. -->
+	     <script src="dist/html2pdf.bundle.js"></script>
+
+	    <script>
+	      function test() {
+	        // Get the element.
+	        var element = document.getElementById('root');
+
+	        // Generate the PDF.
+	        html2pdf().from(element).set({
+	          margin: 1,
+	          filename: 'test.pdf',
+	          html2canvas: { scale: 3 },
+	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
+	        }).save();
+	      }
+	    </script>
      </body>
 </html>

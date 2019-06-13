@@ -76,7 +76,7 @@ function secretO(){
 }
 
 function secretoI(){
-	document.getElementById("tabla").innerHTML = '<button type="button" class="btn btn-primary" onclick="#"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>'
+	document.getElementById("tabla").innerHTML = '<button id="mostrar" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>'
 }
 function secretoO(){
 	document.getElementById("tabla").innerHTML = ''
@@ -136,5 +136,29 @@ document.addEventListener('input', function (event) {
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	//carga una vez para acomodar texto
+	$('#tablaEditar').hide();
 	autoExpand(document.getElementById("subtitle"));
   });
+
+
+//funciones para agregar y eliminar elementos de la tabla de Regiones Afectadas
+$(document).ready(function(){
+	$('#tabla').click(function(){
+		$('#regiones').hide();
+		$('#tablaEditar').show();
+	});
+	$('#SaveData').click(function(){
+		$('#regiones').show();
+		$('#tablaEditar').hide();
+	});
+});
+var cont=0;
+function agregar(nameTable){
+	cont++;
+	var fila='<tr id="fila'+cont+'">								<th class="solid">										<select id=""> 											<option value="1" style="background-color: red; ">ROJA</option>											<option value="2" style="background-color: orange;">NARANJA</option>											<option value="3" style="background-color: yellow;">AMARILLA</option>											<option value="4" style="background-color: #38BF34;">VERDE</option>											<option value="5" style="background-color: #4F81BC">AZUL</option>										</select>								</th>								<th class="solid">										<select id="Region"> 											<option value="">BCS - Norte</option>											<option value="">BCS - Centro</option>											<option value="">BCS - Sur</option>										</select>										<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>								</th>							</tr>';
+	$('#'+nameTable).append(fila);
+};
+
+function eliminar(id_fila){
+	$('#'+id_fila).remove();
+}
