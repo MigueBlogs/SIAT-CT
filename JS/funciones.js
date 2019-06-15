@@ -111,13 +111,14 @@ function saveDate(){
 
 //FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
 var autoExpand = function (field) {
-
+	console.log(field);
 	// Reset field height
-	field.style.height = 'inherit';
+	field.style.height = 'auto';
+	
 
 	// Get the computed styles for the element
 	var computed = window.getComputedStyle(field);
-
+	
 	// Calculate the height
 	var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
 	             + parseInt(computed.getPropertyValue('padding-top'), 10)
@@ -126,7 +127,14 @@ var autoExpand = function (field) {
 	             + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 	
 	field.style.height = height  + 'px';
+	
 };
+
+document.addEventListener('mouseover', function (event) {
+	if (event.target.tagName.toLowerCase() !== 'textarea') return;
+	autoExpand(event.target);
+}, false);
+
 
 document.addEventListener('input', function (event) {
 	if (event.target.tagName.toLowerCase() !== 'textarea') return;
@@ -137,8 +145,13 @@ document.addEventListener('input', function (event) {
 document.addEventListener("DOMContentLoaded", function(event) {
 	//carga una vez para acomodar texto
 	$('#tablaEditar').hide();
+	//setTimeout(alert("4 seconds"),4000);
+	//document.getElementById("subtitle").rows=1;
 	autoExpand(document.getElementById("subtitle"));
+	
   });
+
+
 
 
 //funciones para agregar y eliminar elementos de la tabla de Regiones Afectadas

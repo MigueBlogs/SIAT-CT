@@ -9,15 +9,21 @@
 	<link rel="stylesheet" href="CSS/jquery.timepicker.min.css">
 	<title>SIAT-CT</title>
 	<style>
+		@font-face{
+				font-family:Montserrat-Bold;
+				src:url(font/Montserrat-Bold.otf);
+			}
+
 		#root {
         }
 		.box{
 			width: 90%;
 			height: 90%;
 			padding: 20px;
-			margin: 10px auto;
+			margin: 20px auto;
 			box-shadow: 0px 0px 10px 2px grey;
-			font-family: Arial;
+			font-family:Montserrat-Bold;
+
 		}
 		.selected{
 			cursor: pointer;
@@ -44,21 +50,22 @@
 			text-align: center;
 		}
 		.encabezado{
-			font-family: Arial;
+			font-family: Montserrat-Bold;
 			background: gray ;
 			color: white;
 			font-weight: bold;
 			font-size: 19px;
+			/*font-size: 30px;*/
 			text-align: center;
 		}
 		.comentarios{
 			height: 90%;
-			font-family: Arial;
+			font-family: Montserrat-Bold;3
 			background: transparent;
 			font-size: 14px;
 		}
 		.fecha{
-			font-family: Arial;
+			font-family: Montserrat-Bold;
 			color: black;
 			font-size: 20px;
 		}
@@ -100,7 +107,6 @@
 		}
 		
 		textarea {
-			height: auto;
 			width: 100%;
 		}
 		
@@ -119,9 +125,11 @@
 				box-shadow: none;
 			}
 			#root {
-        	 width: 500px;
-        	 height: 700px;
+    
         	}
+        	.encabezado{
+				font-size: 30px;
+			}
 		}
 	</style>
 </head>
@@ -147,7 +155,7 @@
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 		</div>
 		<div>
-			<textarea id="subtitle" class='autoExpand encabezado' rows="1" placeholder='Encabezado del boletín'></textarea>
+			<textarea id="subtitle" rows="1" class='autoExpand encabezado' placeholder='Encabezado del boletín'></textarea>
 		</div>
 		<div class="tableData">
 			<div class="tableDataL">
@@ -347,14 +355,41 @@
 
 	    <script>
 	      function test() {
-	        // Get the element.
-	        var element = document.getElementById('root');
 
+	      	/*Cambios para imprimir correctamente el documento*/
+	      	$(".titulo").css("font-size", "15px");
+	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
+	      	$(".encabezado").css("font-size", "30px");
+	      	autoExpand(document.getElementById("subtitle"));
+	        //$(".encabezado").css("font-size", "25px");
+	        //alert(document.getElementById("subtitle").style.height);
+	        if(parseInt(document.getElementById("subtitle").style.height) > 0 && parseInt(document.getElementById("subtitle").style.height) <=55 ){
+	        	document.getElementById("subtitle").rows = 1;
+	        	//alert(document.getElementById("subtitle").style.height);
+	        	//alert(document.getElementById("subtitle").rows);
+	        }if(parseInt(document.getElementById("subtitle").style.height) > 55 && parseInt(document.getElementById("subtitle").style.height) <=100 ){
+	        	document.getElementById("subtitle").rows = 2;
+	        	//alert(document.getElementById("subtitle").style.height);
+	        	//alert(document.getElementById("subtitle").rows);
+	        }if(parseInt(document.getElementById("subtitle").style.height) > 100 && parseInt(document.getElementById("subtitle").style.height) <=235 ){
+	        	document.getElementById("subtitle").rows = 3;
+	        	//alert(document.getElementById("subtitle").style.height);
+	        	//alert(document.getElementById("subtitle").rows);
+	        }
+	        
+	        
+	        $(".encabezado").css("font-size", "15px");
+	        autoExpand(document.getElementById("subtitle"));
+	        $(".tituloTable").css("font-size", "19px");
+	        /* Get the element.*/
+	        var element = document.getElementById('root');
 	        // Generate the PDF.
 	        html2pdf().from(element).set({
-	          margin: 1,
+	          margin: [-0.3,-0.65],
 	          filename: 'test.pdf',
+	          mode: 'avoid-all',
 	          html2canvas: { scale: 3 },
+	          letterRendering: true,
 	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
 	        }).save();
 	      }

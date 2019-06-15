@@ -58,8 +58,9 @@ $.getJSON('JS/info.json',function(data){
 //Cargando datos del Subtítulo
 $.getJSON('JS/info.json',function(data){
 	//console.log(data);
-	var output = document.getElementById('subtitle');
-	output.innerHTML = data.texto;
+	//var output = document.getElementById('subtitle');
+	//output.innerHTML = data.texto;
+	document.getElementById("subtitle").value = data.texto;
 });
 
 
