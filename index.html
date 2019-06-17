@@ -25,7 +25,7 @@
 			font-family:Montserrat-Bold;
 
 		}
-		.selected{
+		/*.selected{
 			cursor: pointer;
 		}
 		.selected:hover{	
@@ -35,7 +35,7 @@
 		.seleccionada{
 			background-color: #0585CF;
 			color: white;
-		}
+		}*/
 		.titulo{
 			background: #D9D9D9 ;
 			color: #A50021;
@@ -175,7 +175,7 @@
 							<th class="solid" style="background-color: red; ">ROJA</th>
 						</tr>
 						<tr>
-							<th class="solid">1</th>
+							<th id="NearR" class="solid">1</th>
 							<th class="solid">2</th>
 						</tr>
 						<tr>
@@ -221,7 +221,7 @@
 								</tr>
 						 <tr id="filatest">
 									<th class="solid">
-											<select id=""> 
+											<select id="NivelDeAlerta"> 
 												<option value="1" style="background-color: red; ">ROJA</option>
 												<option value="2" style="background-color: orange;">NARANJA</option>
 												<option value="3" style="background-color: yellow;">AMARILLA</option>
@@ -230,10 +230,15 @@
 											</select>
 									</th>
 									<th class="solid">
+										<select id="Estado"> 
+											<option value="">Baja California Norte</option>
+											<option value="">Baja California Sur</option>
+											<option value="">Sinaloa</option>
+										</select>
 											<select id="Region"> 
-												<option value="">BCS - Norte</option>
-												<option value="">BCS - Centro</option>
-												<option value="">BCS - Sur</option>
+												<option value="">Norte</option>
+												<option value="">Centro</option>
+												<option value="">Sur</option>
 											</select>
 											<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
 									</th>
@@ -254,7 +259,7 @@
 							</tr>
 					 <tr id="filatest">
 								<th class="solid">
-										<select id=""> 
+										<select id="NivelDeAlerta"> 
 											<option value="1" style="background-color: red; ">ROJA</option>
 											<option value="2" style="background-color: orange;">NARANJA</option>
 											<option value="3" style="background-color: yellow;">AMARILLA</option>
@@ -263,10 +268,15 @@
 										</select>
 								</th>
 								<th class="solid">
+										<select id="Estado"> 
+											<option value="">Baja California Norte</option>
+											<option value="">Baja California Sur</option>
+											<option value="">Sinaloa</option>
+										</select>
 										<select id="Region"> 
-											<option value="">BCS - Norte</option>
-											<option value="">BCS - Centro</option>
-											<option value="">BCS - Sur</option>
+											<option value="">Norte</option>
+											<option value="">Centro</option>
+											<option value="">Sur</option>
 										</select>
 										<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
 								</th>
@@ -279,7 +289,7 @@
 					</div>
 					</div>
 					<center>
-						<button class="btn btn-outline-success" id="SaveData">Guardar datos</button>	
+						<button class="btn btn-outline-success" onclick="guardarDatos()" id="SaveData">Guardar datos</button>	
 					</center>
 				</div>	
 				
@@ -377,10 +387,13 @@
 	        	//alert(document.getElementById("subtitle").rows);
 	        }
 	        
-	        
+
+	        $("fecha").css("font-size", "14px");
 	        $(".encabezado").css("font-size", "15px");
 	        autoExpand(document.getElementById("subtitle"));
 	        $(".tituloTable").css("font-size", "19px");
+	       
+			
 	        /* Get the element.*/
 	        var element = document.getElementById('root');
 	        // Generate the PDF.

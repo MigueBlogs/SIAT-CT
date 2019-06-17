@@ -111,7 +111,7 @@ function saveDate(){
 
 //FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
 var autoExpand = function (field) {
-	console.log(field);
+	//console.log(field);
 	// Reset field height
 	field.style.height = 'auto';
 	
@@ -168,10 +168,63 @@ $(document).ready(function(){
 var cont=0;
 function agregar(nameTable){
 	cont++;
-	var fila='<tr id="fila'+cont+'">								<th class="solid">										<select id=""> 											<option value="1" style="background-color: red; ">ROJA</option>											<option value="2" style="background-color: orange;">NARANJA</option>											<option value="3" style="background-color: yellow;">AMARILLA</option>											<option value="4" style="background-color: #38BF34;">VERDE</option>											<option value="5" style="background-color: #4F81BC">AZUL</option>										</select>								</th>								<th class="solid">										<select id="Region"> 											<option value="">BCS - Norte</option>											<option value="">BCS - Centro</option>											<option value="">BCS - Sur</option>										</select>										<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>								</th>							</tr>';
+	var fila='<tr id="fila'+cont+'"><th class="solid">\
+										<select id="NivelDeAlerta"> \
+											<option value="1" style="background-color: red; ">ROJA</option>\
+											<option value="2" style="background-color: orange;">NARANJA</option>\
+											<option value="3" style="background-color: yellow;">AMARILLA</option>\
+											<option value="4" style="background-color: #38BF34;">VERDE</option>\
+											<option value="5" style="background-color: #4F81BC">AZUL</option>\
+										</select>\
+								</th>\
+									<th class="solid">\
+										<select id="Estado"> \
+											<option value="">Baja California Norte</option>\
+											<option value="">Baja California Sur</option>\
+											<option value="">Sinaloa</option>\
+										</select>\
+										<select id="Region"> \
+											<option value="">Norte</option>\
+											<option value="">Centro</option>\
+											<option value="">Sur</option>\
+										</select>\
+										<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+								</th>';
+	
 	$('#'+nameTable).append(fila);
 };
 
 function eliminar(id_fila){
 	$('#'+id_fila).remove();
 }
+ 
+
+
+function guardarDatos(){
+
+	$('#tablaEdos1').find('th,td').each(function(){
+		$(this).find('#Estado').each(function(){
+			console.log($('option:selected',this).text());
+			a = $('option:selected',this).text();
+		});
+		console.log(a);
+		$(this).find('#Region').each(function(){
+			console.log($('option:selected',this).text());
+			$('option:selected',this).text();
+		});
+		$(this).find('#NivelDeAlerta').each(function(){
+			console.log($('option:selected',this).text());
+			switch(parseInt($('option:selected',this).val())){
+				case 1:
+					document.getElementById("NearR").innerHTML += a;
+				case 2:
+					break;
+				default:
+					console.log('Error al guardar');
+			}
+		});
+		
+	});
+}
+
+var a;
