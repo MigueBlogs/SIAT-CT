@@ -184,6 +184,7 @@ function agregar(nameTable){
 											<option value="">Sinaloa</option>\
 										</select>\
 										<select id="Region"> \
+											<option value="">Todo el Edo</option> \
 											<option value="">Norte</option>\
 											<option value="">Centro</option>\
 											<option value="">Sur</option>\
@@ -199,32 +200,301 @@ function eliminar(id_fila){
 }
  
 
-
-function guardarDatos(){
-
-	$('#tablaEdos1').find('th,td').each(function(){
-		$(this).find('#Estado').each(function(){
-			console.log($('option:selected',this).text());
-			a = $('option:selected',this).text();
-		});
-		console.log(a);
-		$(this).find('#Region').each(function(){
-			console.log($('option:selected',this).text());
-			$('option:selected',this).text();
-		});
-		$(this).find('#NivelDeAlerta').each(function(){
-			console.log($('option:selected',this).text());
-			switch(parseInt($('option:selected',this).val())){
+function ImprimeDatos(Param,a,b){
+			$(Param).find('#NivelDeAlerta').each(function(){
+//			console.log($('option:selected',Param).text());
+			switch(parseInt($('option:selected',Param).val())){
 				case 1:
-					document.getElementById("NearR").innerHTML += a;
+					document.getElementById("NearR").innerHTML += b+a;
+					break;
 				case 2:
 					break;
 				default:
 					console.log('Error al guardar');
 			}
 		});
+}
+
+
+var a,b;
+function guardarDatos(){
+var elementos = $('#tablaEdos1').find('tr').length - 1;
+
+console.log("PRIMERA CUENTA: "+elementos);
+if(elementos == 0){
+	var unico = true;
+}
+// limpieza de campos
+document.getElementById("NearR").innerHTML = '';
+	$('#tablaEdos1').find('tr').each(function(){
+		//console.log(this);
+		$(this).find('#Estado').each(function(){
+			//console.log($('option:selected',this).text());
+			a = $('option:selected',this).text();
+		});
+		$(this).find('#Region').each(function(){
+			console.log(elementos);
+			//console.log($('option:selected',this).text());
+			b = $('option:selected',this).text();
+			/* En esta sección se aplica el formato de texto*/
+			if(elementos == 0 && !unico){
+				if(b=='Todo el Edo'){
+					
+				}else{
+					
+				}
+			}
+
+		});
 		
+		ImprimeDatos(this,a,b);
+		elementos--;
+	});
+}
+ 
+
+function generaArreglo(afectados,size){
+var lista = new Array();
+var temp;
+var contador=0;
+	afectados.forEach(function(item, index, array){
+		console.log(item.reg, index);
+		console.log("Valor a copiar: ",afectados[index].reg);
+		temp = afectados[index].reg;
+		console.log("Valor copiado: ",temp);
+		//lista.splice(0,1);
+		//con esto si funciona 
+		lista[index] = temp;
+		//lista.push(temp);
+		console.log("Tamaño de lista: ",lista.length);
+		console.log("Valor guardado a la lista[0]: ",lista);
+		afectados[index].reg = lista;
+		lista.shift();
+		lista.pop();
+		//afectados[index].reg.splice(1);
+		console.log("Result hasta el momento---> ",afectados);
+	});
+/*
+	for (var k=0; k<size; k++){
+		//afectados[0].reg.splice(1,0);
+		console.log("Valor a copiar: ",afectados[k].reg);
+		temp = afectados[k].reg;
+		console.log("Valor copiado: ",temp);
+		lista[0] = temp;
+		console.log("Valor guardado a la lista[0]: ",lista);
+		afectados[k].reg = lista;
+		console.log("Valor hasta el final ",afectados[k].reg);
+		console.log("Result hasta el momento---> ",afectados[k]);
+		console.log("A ver si dice lo mismo :v ",afectados[k].reg);
+		if(k==2){
+			break;
+		}
+	}*/
+	console.log("Resultado de la funcion: ",afectados);
+	return afectados;
+}
+
+function busquedaRecursiva(afectados,size){
+var res;
+
+	for (var i=0; i<size; i++){
+			//console.log("afectado iesimo: ",afectados);
+			var edoAct = afectados[i].edo;
+			var colorAct = afectados[i].na;
+			//console.log("Edo Actual: ",edoAct);
+			for (var j=0; j<size; j++){
+				//console.log("Edo a comparar: ",afectados[j].edo);
+				if(i!=j && afectados[j].edo == edoAct && afectados[j].na == colorAct){
+					//console.log("hay un repetido: "+afectados[j].edo+" (J:"+j+") con: "+edoAct+" (I: "+i+") Con las regiones siguientes: "+afectados[i].reg+" y "+afectados[j].reg);
+					if(afectados[j].reg =='Todo el Edo' || afectados[i].reg =='Todo el Edo'  ){
+						afectados[j].reg = '';
+						afectados[j].regArray = new Array;
+						afectados[i].reg = '';
+						afectados[i].regArray = new Array;
+					}
+					afectados[i].reg = afectados[j].reg.concat(", "+afectados[i].reg);
+					res = afectados[i].reg.split(", ");
+					afectados[i].regArray.push(res);
+					afectados.splice(j,1);
+					size = afectados.length;	
+					//console.log("llamada Iterativa");
+					afectados = busquedaRecursiva(afectados,size);
+					size = afectados.length;
+				}
+			}
+		}
+	if(i==size){
+		return afectados;
+	}
+}
+
+function guardaData(){
+var edo,reg,na;
+var afectados = [];
+	$('#tablaEdos1').find('tr').each(function(){
+	
+		var find = $(this).find('#NivelDeAlerta');
+			//console.log($('option:selected',find).text());
+			na = $('option:selected',find).text();
+			
+
+		var find = $(this).find('#Estado');
+			//console.log($('option:selected',find).text());
+			edo = $('option:selected',find).text();
+
+		
+
+		var find = $(this).find('#Region');
+			//console.log($('option:selected',find).text());
+		
+		if($('option:selected',find).text() != ''){
+		reg = $('option:selected',find).text();
+		/*if(reg = 'Todo el Edo'){
+				reg='';
+			}*/
+		}
+		
+		var regArray=[];
+		afectados.push({na,edo,reg,regArray});
+		
+	});
+
+	afectados.shift();
+	var size = afectados.length;
+	//afectados= generaArreglo(afectados,size);
+	//Encontrando repetidos y unificando
+	afectados=busquedaRecursiva(afectados,size);
+	
+	
+	console.log("Valor retornado: ",afectados);
+	imprimeTabla(afectados,size)
+
+var edo,reg,na;
+var afecta2 = [];
+	$('#tablaEdos2').find('tr').each(function(){
+	
+		var find = $(this).find('#NivelDeAlerta');
+			//console.log($('option:selected',find).text());
+			na = $('option:selected',find).text();
+			
+
+		var find = $(this).find('#Estado');
+			//console.log($('option:selected',find).text());
+			edo = $('option:selected',find).text();
+		
+
+		var find = $(this).find('#Region');
+			//console.log($('option:selected',find).text());
+			if($('option:selected',find).text() != ''){
+			reg = $('option:selected',find).text();
+			}
+		var regArray=[];
+		afecta2.push({na,edo,reg,regArray});
+		
+	});
+
+	afecta2.shift();
+	var size = afecta2.length;
+	//afectados= generaArreglo(afectados,size);
+	//Encontrando repetidos y unificando
+	afecta2=busquedaRecursiva(afecta2,size);
+	
+	
+	console.log("Valor retornado: ",afecta2);
+	imprimeTabla1(afecta2,size)
+
+$('#regiones').find('tr').each(function(){
+		$(this).find('th').each(function(){
+		if(this.textContent == ''){
+			this.innerHTML = '--';
+		}
+		});
 	});
 }
 
-var a;
+String.prototype.replaceAt=function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+String.prototype.insert_at=function(index, string)
+{   
+  return this.substr(0, index) + string + this.substr(index);
+}
+
+function imprimeTabla(afectados,size){
+	//imprime y da formato al texto de la tabla
+	document.getElementById("NearR").innerHTML = "";
+	document.getElementById("NearO").innerHTML = "";
+	document.getElementById("NearY").innerHTML = "";
+	document.getElementById("NearG").innerHTML = "";
+	document.getElementById("NearB").innerHTML = "";
+
+	//puntos, comas y finales
+	afectados.forEach(function(item, index, array){
+	
+	if(afectados[index].reg.lastIndexOf(",") > 0){
+		//console.log("valor del index: ",index);
+		//console.log("Valor en index: ",afectados[index].regArray[0]);
+		afectados[index].reg=afectados[index].reg.replaceAt(afectados[index].reg.lastIndexOf(","),"y");
+		afectados[index].reg=afectados[index].reg.insert_at(afectados[index].reg.lastIndexOf("y")," ");
+	}
+	switch(afectados[index].na){
+			case "ROJA":
+					document.getElementById("NearR").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "NARANJA":
+					document.getElementById("NearO").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "AMARILLA":
+					document.getElementById("NearY").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "VERDE":
+					document.getElementById("NearG").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "AZUL":
+					document.getElementById("NearB").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			default:
+				alert('Error al guardar');
+		}
+	});
+}
+
+function imprimeTabla1(afectados,size){
+	//imprime y da formato al texto de la tabla
+
+	document.getElementById("FarR").innerHTML = "";
+	document.getElementById("FarO").innerHTML = "";
+	document.getElementById("FarY").innerHTML = "";
+	document.getElementById("FarG").innerHTML = "";
+	document.getElementById("FarB").innerHTML = "";/**/
+
+	//puntos, comas y finales
+	afectados.forEach(function(item, index, array){
+	
+	if(afectados[index].reg.lastIndexOf(",") > 0){
+		//console.log("valor del index: ",index);
+		//console.log("Valor en index: ",afectados[index].regArray[0]);
+		afectados[index].reg=afectados[index].reg.replaceAt(afectados[index].reg.lastIndexOf(","),"y");
+		afectados[index].reg=afectados[index].reg.insert_at(afectados[index].reg.lastIndexOf("y")," ");
+	}
+	switch(afectados[index].na){
+			case "ROJA":
+					document.getElementById("FarR").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "NARANJA":
+					document.getElementById("FarO").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "AMARILLA":
+					document.getElementById("FarY").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "VERDE":
+					document.getElementById("FarG").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			case "AZUL":
+					document.getElementById("FarB").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
+				break;
+			default:
+				alert('Error al guardar');
+		}
+	});
+}

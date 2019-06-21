@@ -25,17 +25,9 @@
 			font-family:Montserrat-Bold;
 
 		}
-		/*.selected{
-			cursor: pointer;
+		th {
+			width:50%
 		}
-		.selected:hover{	
-			background-color: #0585C0;
-			color: white;
-		}
-		.seleccionada{
-			background-color: #0585CF;
-			color: white;
-		}*/
 		.titulo{
 			background: #D9D9D9 ;
 			color: #A50021;
@@ -175,38 +167,38 @@
 							<th class="solid" style="background-color: red; ">ROJA</th>
 						</tr>
 						<tr>
-							<th id="NearR" class="solid">1</th>
-							<th class="solid">2</th>
+							<th id="NearR" class="solid">--</th>
+							<th id="FarR" class="solid">--</th>
 						</tr>
 						<tr>
 							<th class="solid" style="background-color: orange;">NARANJA</th>
 							<th class="solid" style="background-color: orange;">NARANJA</th>
 						</tr>
 						<tr>
-							<th class="solid">1</th>
-							<th class="solid">2</th>
+							<th id="NearO" class="solid">--</th>
+							<th id="FarO" class="solid">--</th>
 						</tr>
 						<tr>
 							<th class="solid" style="background-color: yellow;">AMARILLA</th>
 							<th class="solid" style="background-color: yellow;">AMARILLA</th>
 						</tr>
 						<tr>
-							<th class="solid">1</th>
-							<th class="solid">2</th>
+							<th id="NearY" class="solid">--</th>
+							<th id="FarY" class="solid">--</th>
 						</tr>
 						<tr>
 							<th class="solid" style="background-color: #38BF34;">VERDE</th>
 							<th class="solid" style="background-color: #38BF34;">VERDE</th>
 						</tr>
-						<tr><th class="solid">1</th>
-							<th class="solid">2</th>
+						<tr><th id="NearG" class="solid">--</th>
+							<th id="FarG" class="solid">--</th>
 						</tr>
 						<tr>
 							<th class="solid" style="background-color: #4F81BC">AZUL</th>
 							<th class="solid" style="background-color: #4F81BC">AZUL</th>
 						</tr>
-						<tr><th class="solid">1</th>
-							<th class="solid">2</th>
+						<tr><th id="NearB" class="solid">--</th>
+							<th id="FarB" class="solid">--</th>
 						</tr>
 					</table>
 				</div>
@@ -219,30 +211,31 @@
 									<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
 									<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
 								</tr>
-						 <tr id="filatest">
-									<th class="solid">
-											<select id="NivelDeAlerta"> 
-												<option value="1" style="background-color: red; ">ROJA</option>
-												<option value="2" style="background-color: orange;">NARANJA</option>
-												<option value="3" style="background-color: yellow;">AMARILLA</option>
-												<option value="4" style="background-color: #38BF34;">VERDE</option>
-												<option value="5" style="background-color: #4F81BC">AZUL</option>
-											</select>
-									</th>
-									<th class="solid">
-										<select id="Estado"> 
-											<option value="">Baja California Norte</option>
-											<option value="">Baja California Sur</option>
-											<option value="">Sinaloa</option>
+						<tr id="filatest">
+								<th class="solid">
+										<select id="NivelDeAlerta"> 
+											<option value="1" style="background-color: red; ">ROJA</option>
+											<option value="2" style="background-color: orange;">NARANJA</option>
+											<option value="3" style="background-color: yellow;">AMARILLA</option>
+											<option value="4" style="background-color: #38BF34;">VERDE</option>
+											<option value="5" style="background-color: #4F81BC">AZUL</option>
 										</select>
-											<select id="Region"> 
-												<option value="">Norte</option>
-												<option value="">Centro</option>
-												<option value="">Sur</option>
-											</select>
-											<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
-									</th>
-								</tr>
+								</th>
+								<th class="solid">
+									<select id="Estado"> 
+										<option value="">Baja California Norte</option>
+										<option value="">Baja California Sur</option>
+										<option value="">Sinaloa</option>
+									</select>
+										<select id="Region">
+											<option value="">Todo el Edo</option>
+											<option value="">Norte</option>
+											<option value="">Centro</option>
+											<option value="">Sur</option>
+										</select>
+										<button id="filatest" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
+								</th>
+						</tr>	
 							</table>
 								<tr>
 									<th><button id="bt_add" type="button" onclick="agregar('tablaEdos1')" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
@@ -289,7 +282,7 @@
 					</div>
 					</div>
 					<center>
-						<button class="btn btn-outline-success" onclick="guardarDatos()" id="SaveData">Guardar datos</button>	
+						<button class="btn btn-outline-success" onclick="guardaData()" id="SaveData">Guardar datos</button>	
 					</center>
 				</div>	
 				
