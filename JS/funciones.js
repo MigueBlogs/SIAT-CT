@@ -306,12 +306,6 @@ var res;
 				//console.log("Edo a comparar: ",afectados[j].edo);
 				if(i!=j && afectados[j].edo == edoAct && afectados[j].na == colorAct){
 					//console.log("hay un repetido: "+afectados[j].edo+" (J:"+j+") con: "+edoAct+" (I: "+i+") Con las regiones siguientes: "+afectados[i].reg+" y "+afectados[j].reg);
-					if(afectados[j].reg =='Todo el Edo' || afectados[i].reg =='Todo el Edo'  ){
-						afectados[j].reg = '';
-						afectados[j].regArray = new Array;
-						afectados[i].reg = '';
-						afectados[i].regArray = new Array;
-					}
 					afectados[i].reg = afectados[j].reg.concat(", "+afectados[i].reg);
 					res = afectados[i].reg.split(", ");
 					afectados[i].regArray.push(res);
@@ -346,13 +340,11 @@ var afectados = [];
 
 		var find = $(this).find('#Region');
 			//console.log($('option:selected',find).text());
-		
-		if($('option:selected',find).text() != ''){
-		reg = $('option:selected',find).text();
-		/*if(reg = 'Todo el Edo'){
-				reg='';
-			}*/
-		}
+			reg = $('option:selected',find).text();
+			/*if(reg == 'Todo el Edo'){
+					var reg = '';
+					console.log("nuevo valor de reg",reg);
+				}*/
 		
 		var regArray=[];
 		afectados.push({na,edo,reg,regArray});
@@ -437,7 +429,29 @@ function imprimeTabla(afectados,size){
 		afectados[index].reg=afectados[index].reg.replaceAt(afectados[index].reg.lastIndexOf(","),"y");
 		afectados[index].reg=afectados[index].reg.insert_at(afectados[index].reg.lastIndexOf("y")," ");
 	}
-	switch(afectados[index].na){
+	
+	if(afectados[index].reg.includes('Todo el Edo')){
+		switch(afectados[index].na){
+			case "ROJA":
+					document.getElementById("NearR").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "NARANJA":
+					document.getElementById("NearO").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "AMARILLA":
+					document.getElementById("NearY").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "VERDE":
+					document.getElementById("NearG").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "AZUL":
+					document.getElementById("NearB").innerHTML += afectados[index].edo+"; ";
+				break;
+			default:
+				alert('Error al guardar');
+		}
+	}else{
+		switch(afectados[index].na){
 			case "ROJA":
 					document.getElementById("NearR").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
 				break;
@@ -456,6 +470,9 @@ function imprimeTabla(afectados,size){
 			default:
 				alert('Error al guardar');
 		}
+	}
+
+	
 	});
 }
 
@@ -477,7 +494,29 @@ function imprimeTabla1(afectados,size){
 		afectados[index].reg=afectados[index].reg.replaceAt(afectados[index].reg.lastIndexOf(","),"y");
 		afectados[index].reg=afectados[index].reg.insert_at(afectados[index].reg.lastIndexOf("y")," ");
 	}
-	switch(afectados[index].na){
+
+	if(afectados[index].reg.includes('Todo el Edo')){
+		switch(afectados[index].na){
+			case "ROJA":
+					document.getElementById("FarR").innerHTML +=  afectados[index].edo+"; ";
+				break;
+			case "NARANJA":
+					document.getElementById("FarO").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "AMARILLA":
+					document.getElementById("FarY").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "VERDE":
+					document.getElementById("FarG").innerHTML += afectados[index].edo+"; ";
+				break;
+			case "AZUL":
+					document.getElementById("FarB").innerHTML += afectados[index].edo+"; ";
+				break;
+			default:
+				alert('Error al guardar');
+		}
+	}else{
+		switch(afectados[index].na){
 			case "ROJA":
 					document.getElementById("FarR").innerHTML += afectados[index].reg +" de "+ afectados[index].edo+"; ";
 				break;
@@ -496,5 +535,8 @@ function imprimeTabla1(afectados,size){
 			default:
 				alert('Error al guardar');
 		}
+	}
+
+	
 	});
 }
