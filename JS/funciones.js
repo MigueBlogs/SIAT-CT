@@ -186,7 +186,7 @@ $(function() {
 			$('#regiones').hide();
 			$('#tablaEditar').show();
 		});
-		$('#SaveData').click(function(){
+		$('#GuardaTabla').click(function(){
 			$('#regiones').show();
 			$('#tablaEditar').hide();
 		});
@@ -384,7 +384,7 @@ $(function() {
 		afectados=busquedaRecursiva(afectados,size);
 		
 		
-		console.log("Valor retornado: ",afectados);
+		//console.log("Valor retornado: ",afectados);
 		imprimeTabla(afectados,size)
 
 	var edo,reg,na;
@@ -575,6 +575,11 @@ $(function() {
 	$("#secretButton2").click(function() { editarE(); });
 	$("#saveButton").click(function() { saveDate(); });
 	$("#pdf").click(function() { generaPdf(); });
+
+	$(".botoncito").click(function() { eliminar(this.id); });
+	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
+	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
+	$("#GuardaTabla").click(function() { guardaData(); });
 
 	$('#tablaEditar').hide();
 	autoExpand(document.getElementById("subtitle"));
