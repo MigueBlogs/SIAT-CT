@@ -5,126 +5,24 @@
 	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
 	<link rel="shortcut icon" href="">
 	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!--Error en esta seccion al imprimir-->
+	
+
+	<!--JQUERY-->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!--DATE PICKER AND TIME PICKER-->
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><!--Error en esta seccion al imprimir-->
 	<link rel="stylesheet" href="css/jquery.timepicker.min.css">
+	<script src="JS/bootstrap-datepicker.js"></script>
+	<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+	<script src="JS/jquery.timepicker.min.js"></script>
+	 
+	 <!-- Generador de PDF's html2pdf bundle. -->
+	 <script src="dist/html2pdf.bundle.js"></script>
+
+	<link rel="stylesheet" href="css/styles.css">
 	<title>SIAT-CT</title>
-	<style>
-		@font-face{
-				font-family:Montserrat-Bold;
-				src:url(font/Montserrat-Bold.otf);
-			}
-
-		#root {
-        }
-		.box{
-			width: 90%;
-			height: 90%;
-			padding: 20px;
-			margin: 20px auto;
-			box-shadow: 0px 0px 10px 2px grey;
-			font-family:Montserrat-Bold;
-
-		}
-		th {
-			width:50%
-		}
-		.titulo{
-			background: #D9D9D9 ;
-			color: #A50021;
-			font-weight: bold;
-			font-size: 25px;
-			text-align: center;
-		}
-		.tituloTable{
-			border-style: solid;
-			font-weight: bold;
-			font-size: 25px;
-			text-align: center;
-		}
-		.encabezado{
-			font-family: Montserrat-Bold;
-			background: gray ;
-			color: white;
-			font-weight: bold;
-			font-size: 19px;
-			/*font-size: 30px;*/
-			text-align: center;
-		}
-		.comentarios{
-			height: 90%;
-			font-family: Montserrat-Bold;3
-			background: transparent;
-			font-size: 14px;
-		}
-		.fecha{
-			font-family: Montserrat-Bold;
-			color: black;
-			font-size: 20px;
-		}
-		.logos{
-			display: grid;
-			grid-template-columns: 33.3% 33.3% 33.3%;
-		}
-		.tableData{
-			display: grid;
-			grid-template-columns: 50% 50%;
-			height: auto;
-		}
-		.tableRegiones{
-			text-align: center;
-			display: grid;
-			grid-template-rows: 30px auto 30px auto;
-			height: auto;
-			width: auto;
-		}
-		.tableDataL{
-			display: grid;
-			grid-template-rows: 1fr 1fr;
-			
-		}
-		.tableDataR{
-			display: grid;
-			grid-template-rows: 1fr 1fr 1fr;
-			
-		}
-		.subtitle{
-			display: grid;
-		}
-		.solid {border-style: solid;}
-		.dataH{
-			font-weight: bold;
-		}
-		.dataD{
-			font-weight: normal;
-		}
-		
-		textarea {
-			width: 100%;
-		}
-		
-		@media print{
-			input{
-				border: none;
-				text-shadow: unset;
-			}
-			textarea{
-				border: none;
-			}
-			@page{
-				margin:0px;
-			}
-			.box{
-				box-shadow: none;
-			}
-			#root {
-    
-        	}
-        	.encabezado{
-				font-size: 30px;
-			}
-		}
-	</style>
 </head>
 <body>
 	<div class="box" id="root">
@@ -144,7 +42,7 @@
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
 		
-		<div align="center" class="fecha" title="click para editar" onmouseenter="secretI()" onmouseleave="secretO()">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
+		<div align="center" class="fecha" title="click para editar">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 		</div>
 		<div>
@@ -153,9 +51,9 @@
 		<div class="tableData">
 			<div class="tableDataL">
 				<div class="solid">
-				<div class="tituloTable" title="click para editar" onmouseenter="secretoI()" onmouseleave="secretoO()">NIVEL DE ALERTA SIAT - CT
-				<element id="tabla"></element>
-				</div>
+					<div class="tituloTable" title="click para editar">NIVEL DE ALERTA SIAT - CT
+						<element id="tabla"></element>
+					</div>
 				
 				<div id="regiones">
 					<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
@@ -335,71 +233,12 @@
 	
 	<!-- Button to generate PDF. -->
 	<center>
-	<button class="btn btn-outline-success" onclick="test()">Generar PDF</button>	
+	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	</center>
-   
 
-
-		<!--JQUERY-->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-		<!--MY SCRIPTS-->
-	    <script src="JS/funciones.js"></script>
-		<script src="JS/StaticText.js"></script>
-		<!--JS BOOTSRAP-->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-		time picker and date picker-->
-		<script src="JS/bootstrap-datepicker.js"></script>
-		<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
-		<script src="JS/jquery.timepicker.min.js"></script>
-		 
-		 <!-- Include html2pdf bundle. -->
-	     <script src="dist/html2pdf.bundle.js"></script>
-
-	    <script>
-	      function test() {
-
-	      	/*Cambios para imprimir correctamente el documento*/
-	      	$(".titulo").css("font-size", "15px");
-	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
-	      	$(".encabezado").css("font-size", "30px");
-	      	autoExpand(document.getElementById("subtitle"));
-	        //$(".encabezado").css("font-size", "25px");
-	        //alert(document.getElementById("subtitle").style.height);
-	        if(parseInt(document.getElementById("subtitle").style.height) > 0 && parseInt(document.getElementById("subtitle").style.height) <=55 ){
-	        	document.getElementById("subtitle").rows = 1;
-	        	//alert(document.getElementById("subtitle").style.height);
-	        	//alert(document.getElementById("subtitle").rows);
-	        }if(parseInt(document.getElementById("subtitle").style.height) > 55 && parseInt(document.getElementById("subtitle").style.height) <=100 ){
-	        	document.getElementById("subtitle").rows = 2;
-	        	//alert(document.getElementById("subtitle").style.height);
-	        	//alert(document.getElementById("subtitle").rows);
-	        }if(parseInt(document.getElementById("subtitle").style.height) > 100 && parseInt(document.getElementById("subtitle").style.height) <=235 ){
-	        	document.getElementById("subtitle").rows = 3;
-	        	//alert(document.getElementById("subtitle").style.height);
-	        	//alert(document.getElementById("subtitle").rows);
-	        }
-	        
-
-	        $("fecha").css("font-size", "14px");
-	        $(".encabezado").css("font-size", "15px");
-	        autoExpand(document.getElementById("subtitle"));
-	        $(".tituloTable").css("font-size", "19px");
-	       
-			
-	        /* Get the element.*/
-	        var element = document.getElementById('root');
-	        // Generate the PDF.
-	        html2pdf().from(element).set({
-	          margin: [-0.3,-0.65],
-	          filename: 'test.pdf',
-	          mode: 'avoid-all',
-	          html2canvas: { scale: 3 },
-	          letterRendering: true,
-	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
-	        }).save();
-	      }
-	    </script>
+	<!--MY SCRIPTS-->
+	<script src="JS/funciones.js"></script>
+	<script src="JS/StaticText.js"></script>
+	
      </body>
 </html>
