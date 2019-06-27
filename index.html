@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+	<link rel="shortcut icon" href="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/cenapred_icon.ico"/>
 	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" href="">
 	<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<!--JQUERY-->
+	<!--JQUERY-->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<!--DATE PICKER AND TIME PICKER-->
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
@@ -14,13 +15,68 @@
 	<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
 	<script src="JS/jquery.timepicker.min.js"></script>
 	 
-	 <!-- Generador de PDF's html2pdf bundle. -->
-	 <script src="dist/html2pdf.bundle.js"></script>
+	<!-- Generador de PDF's html2pdf bundle. -->
+	<script src="dist/html2pdf.bundle.js"></script>
 
 	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
   <script src="https://js.arcgis.com/4.11/"></script>
 
 	<link rel="stylesheet" href="css/styles.css">
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+  	<script src="https://js.arcgis.com/4.11/"></script>
+	<style>
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 25em;
+      width: 100%;
+    }
+  	</style>
+	<script>
+    require([
+      "esri/WebScene",
+      "esri/views/SceneView"
+    ], function(WebScene, SceneView) {
+
+      var webscene = new WebScene({
+        basemap: "satellite"
+      });
+
+      var view = new SceneView({
+        container: "viewDiv",
+        map: webscene,
+        center: [-102.12,23.56],
+        zoom: 5
+      });
+
+      function showPreview(screenshot) {
+           $('.js-screenshot-image').show();
+          // add the screenshot dataUrl as the src of an image element
+          const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
+          screenshotImage.width = screenshot.data.width;
+          screenshotImage.height = screenshot.data.height;
+          screenshotImage.src = screenshot.dataUrl;
+          //console.log("ya cambie la imagen");
+          //console.log(screenshotImage.src);
+          $('#viewDiv').hide();
+          generaPdf();
+          console.log("ya cambie la imagen");
+        }
+
+       // the button that triggers screen shot
+        const screenshotBtn = document.getElementById("pdf");
+
+        screenshotBtn.addEventListener("click", function() {
+        	view
+                .takeScreenshot({format: "png" })
+                .then(function(screenshot) {
+                  // display a preview of the image
+                  showPreview(screenshot);
+              });
+        });
+    });
+  	</script>
 	<title>SIAT-CT</title>
 </head>
 <body>
@@ -232,6 +288,7 @@
 	
 	<!-- Button to generate PDF. -->
 	<center>
+	
 	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	</center>
 	
