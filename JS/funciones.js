@@ -574,7 +574,7 @@ $(function() {
 	$("#secretButton").click(function() { editarF(); });
 	$("#secretButton2").click(function() { editarE(); });
 	$("#saveButton").click(function() { saveDate(); });
-	$("#pdf").click(function() { generaPdf(); });
+	//$("#pdf").click(function() { generaPdf(); });
 
 	$(".botoncito").click(function() { eliminar(this.id); });
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
@@ -582,5 +582,6 @@ $(function() {
 	$("#GuardaTabla").click(function() { guardaData(); });
 
 	$('#tablaEditar').hide();
+	 $('.js-screenshot-image').hide();
 	autoExpand(document.getElementById("subtitle"));
 });
