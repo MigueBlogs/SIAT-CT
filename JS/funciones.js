@@ -6,7 +6,7 @@ $(function() {
 	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
 
 	function generaPdf() {
-
+			
 	      	/*Cambios para imprimir correctamente el documento*/
 	      	$(".titulo").css("font-size", "15px");
 	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
@@ -574,7 +574,8 @@ $(function() {
 	$("#secretButton").click(function() { editarF(); });
 	$("#secretButton2").click(function() { editarE(); });
 	$("#saveButton").click(function() { saveDate(); });
-	//$("#pdf").click(function() { generaPdf(); });
+	$("#pdf").click(function() {generaPdf();});
+	
 
 	$(".botoncito").click(function() { eliminar(this.id); });
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
