@@ -17,6 +17,9 @@
 	 <!-- Generador de PDF's html2pdf bundle. -->
 	 <script src="dist/html2pdf.bundle.js"></script>
 
+	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.11/"></script>
+
 	<link rel="stylesheet" href="css/styles.css">
 	<title>SIAT-CT</title>
 </head>
@@ -197,8 +200,8 @@
 			<div class="tableDataR">
 				<div class="solid">
 					<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA </div>
-					<div id="map" >
-						<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style='height: 100%; width: 100%;' src="img/mapaTest.jpg" ></a>
+					<div id="map-container">
+						<div id="map"></div>
 					</div>
 				</div>
 
@@ -231,10 +234,9 @@
 	<center>
 	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	</center>
-
-	<!--MY SCRIPTS-->
+	
 	<script src="JS/funciones.js"></script>
 	<script src="JS/StaticText.js"></script>
-	
-     </body>
+	<script src="JS/map.js"></script>	
+</body>
 </html>
