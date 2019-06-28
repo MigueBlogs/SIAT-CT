@@ -18,8 +18,62 @@ $(function() {
             view["ui"]["components"] = ["attributtion"];
 
             loadCiclones(map);
+
+            // the button that triggers screen shot
+            const screenshotBtn = document.getElementById("pdf");
+
+            var area = {
+                x:200,
+                y:30,
+                width: 400,
+                height: 300
+              };
+            screenshotBtn.addEventListener("mouseenter", function() {
+            $("#map-container").css("width","400px");
+            $("#map-container").css("height","300px");    
+                view
+                    .takeScreenshot({ format: "png", quality:100 })
+                    .then(function(screenshot) {
+                      showPreview(screenshot);
+                  });
+            });
+
+            /**/screenshotBtn.addEventListener("mouseleave", function() {
+                $('.js-screenshot-image').hide();
+                $('#map-container').show();
+                //console.log("mouseleave");
+                  
+            });
         });
     }
+
+
+/*
+      function showPreview(screenshot) {
+           $('.js-screenshot-image').show();
+          const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
+          screenshotImage.width = screenshot.data.width;
+          screenshotImage.height = screenshot.data.height;
+          screenshotImage.src = screenshot.dataUrl;
+          $('#viewDiv').hide();
+          generaPdf();
+          console.log("ya cambie la imagen");
+        }
+
+      
+        const screenshotBtn = document.getElementById("pdf");
+
+        screenshotBtn.addEventListener("click", function() {
+            view
+                .takeScreenshot({format: "png" })
+                .then(function(screenshot) {
+                  showPreview(screenshot);
+              });
+        });
+  */
+
+
+
 
     function addFeatureLayer(map, url, properties, renderer = null) {
         require([
@@ -274,6 +328,18 @@ $(function() {
         //     ]);  
         // });
     }
+
+
+    function showPreview(screenshot) {
+              
+              $('.js-screenshot-image').show();
+              const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
+              screenshotImage.width = screenshot.data.width;
+              screenshotImage.height = screenshot.data.height;
+              screenshotImage.src = screenshot.dataUrl;
+
+              $('#map-container').hide();
+            }
 
     loadMap("map-container");
 });

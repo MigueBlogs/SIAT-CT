@@ -42,6 +42,9 @@ $(function() {
 	          letterRendering: true,
 	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
 	        }).save();
+
+	        $("#map-container").css("width","100%");
+            $("#map-container").css("height","300px"); 
 	      }
 
 	var swiped = false;
