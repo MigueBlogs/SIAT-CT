@@ -1,4 +1,4 @@
-$(function() {
+/*$(function() {
 	require([
 	      "esri/WebScene",
 	      "esri/views/SceneView"
@@ -26,12 +26,7 @@ $(function() {
 
 	       // the button that triggers screen shot
 	        const screenshotBtn = document.getElementById("pdf");
-	        var options = {
-	          //x:view.width/2,
-	          //y:view.height/2,
-			  width: 800,
-			  height: 800
-			};
+	        
 	        screenshotBtn.addEventListener("mouseenter", function() {
 	        	view
 	                .takeScreenshot({ format: "png" })
@@ -48,4 +43,4 @@ $(function() {
 	        });
 
 	    });
-});
+});*/
