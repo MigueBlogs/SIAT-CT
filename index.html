@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><!--Error en esta seccion al imprimir-->
 	<link rel="stylesheet" href="css/jquery.timepicker.min.css">
+<<<<<<< Updated upstream
 	<title>SIAT-CT</title>
 	<style>
 		@font-face{
@@ -125,6 +126,22 @@
 			}
 		}
 	</style>
+=======
+	<script src="JS/bootstrap-datepicker.js"></script>
+	<script src="JS/bootstrap-datepicker.es.min.js" charset="UTF-8"></script>
+	<script src="JS/jquery.timepicker.min.js"></script>
+	 
+	<!-- Generador de PDF's html2pdf bundle. -->
+	<script src="dist/html2pdf.bundle.js"></script>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.11/"></script>
+
+	<link rel="stylesheet" href="css/styles.css">
+
+
+	<title>SIAT-CT</title>
+>>>>>>> Stashed changes
 </head>
 <body>
 	<div class="box" id="root">
@@ -302,10 +319,20 @@
 			</div> 
 			<div class="tableDataR">
 				<div class="solid">
+<<<<<<< Updated upstream
 					<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA </div>
 					<div id="map" >
 						<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style='height: 100%; width: 100%;' src="img/mapaTest.jpg" ></a>
+=======
+
+					
+
+					<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA</div>
+					<div id="map-container">
+						<div id="map"></div>
+>>>>>>> Stashed changes
 					</div>
+					<img id="imagen" style='object-fit: cover;' class="js-screenshot-image"/>
 				</div>
 
 				<div class="solid">
@@ -335,6 +362,7 @@
 	
 	<!-- Button to generate PDF. -->
 	<center>
+<<<<<<< Updated upstream
 	<button class="btn btn-outline-success" onclick="test()">Generar PDF</button>	
 	</center>
    
@@ -402,4 +430,24 @@
 	      }
 	    </script>
      </body>
+=======
+	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
+	</center>
+
+
+	<!--MY SCRIPTS-->
+	<script src="JS/screenshot.js"></script>
+	<script src="JS/funciones.js"></script>
+	<script src="JS/StaticText.js"></script>
+
+	
+     </body>
+
+	
+	<script src="JS/funciones.js"></script>
+	<script src="JS/StaticText.js"></script>
+	<script src="JS/map.js"></script>	
+</body>
+
+>>>>>>> Stashed changes
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 var dt = new Date();
 var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 var hora2 = {hour:'2-digit', minute:'2-digit'}
@@ -36,6 +37,89 @@ document.getElementById("saveButton").innerHTML ='<button type="button" onclick=
 					todayBtn: "linked",
 				    autoclose: true,
 				    todayHighlight: true
+=======
+$(function() {
+	var dt = new Date();
+	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+	var hora2 = {hour:'2-digit', minute:'2-digit'}
+	var hora = {hour:'2-digit'}
+	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
+
+	function generaPdf() {
+			
+	      	/*Cambios para imprimir correctamente el documento*/
+	      	$(".titulo").css("font-size", "15px");
+	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
+	      	$(".encabezado").css("font-size", "30px");
+	      	autoExpand(document.getElementById("subtitle"));
+	        
+	        if(parseInt(document.getElementById("subtitle").style.height) > 0 && parseInt(document.getElementById("subtitle").style.height) <=55 ){
+	        	document.getElementById("subtitle").rows = 1;
+	        	
+	        }if(parseInt(document.getElementById("subtitle").style.height) > 55 && parseInt(document.getElementById("subtitle").style.height) <=100 ){
+	        	document.getElementById("subtitle").rows = 2;
+	        	
+	        }if(parseInt(document.getElementById("subtitle").style.height) > 100 && parseInt(document.getElementById("subtitle").style.height) <=235 ){
+	        	document.getElementById("subtitle").rows = 3;
+	        	
+	        }
+	        
+
+	        $("fecha").css("font-size", "14px");
+	        $(".encabezado").css("font-size", "15px");
+	        autoExpand(document.getElementById("subtitle"));
+	        /*$(".tituloTable").css("font-size", "19px");
+	        $(".js-screenshot-image").css("width","395px");
+            $(".js-screenshot-image").css("height","248px");
+            $(".js-screenshot-image").css("object-position","50% 0");
+            console.log("antes de imprimir",document.getElementById("imagen"));*/
+			
+	        /* Get the element.*/
+	        var element = document.getElementById('root');
+	        // Generate the PDF.
+	        html2pdf().from(element).set({
+	          margin: [-0.3,-0.65],
+	          filename: 'boletin.pdf',
+	          mode: 'avoid-all',
+	          html2canvas: { scale: 3 },
+	          letterRendering: true,
+	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
+	        }).save();
+	      }
+
+	var swiped = false;
+	function swipe(){
+		if(swiped){
+			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest.jpg" ></a>'
+			swiped= !swiped;
+	//		console.log("nuevo valor de SWIPED: "+swiped);
+		}else{
+			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest2.gif" ></a>'
+			swiped= !swiped
+	;	}
+	}
+	var editandoF = false;
+	var editandoE = false;
+
+	function editarF(){
+	editandoF = true;
+	document.getElementById("secretButton").innerHTML = ''
+	document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/> '+
+													'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/></div>'
+	document.getElementById("saveButton").innerHTML ='<button type="button" id="saveDate" class="btn btn-outline-success">Guardar</button>'									
+		
+		$(function(){
+					newDate=$('.datepicker').datepicker({
+						language: "es",
+						days: true,
+						autoclose: true,
+						format: 'dd/mm/yyyy',
+						startDate: '-3d',
+						todayBtn: "linked",
+						autoclose: true,
+						todayHighlight: true
+					});
+>>>>>>> Stashed changes
 				});
 			});
 	
