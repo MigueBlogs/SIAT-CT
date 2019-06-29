@@ -5,6 +5,9 @@ $(function() {
 	var hora = {hour:'2-digit'}
 	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
 
+
+
+
 	function generaPdf() {
 			
 	      	/*Cambios para imprimir correctamente el documento*/
@@ -584,8 +587,21 @@ $(function() {
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
 	$("#GuardaTabla").click(function() { guardaData(); });
-
+	
+	$('#Select-Event').hide();
 	$('#tablaEditar').hide();
-	 $('.js-screenshot-image').hide();
+	$('.js-screenshot-image').hide();
 	autoExpand(document.getElementById("subtitle"));
+	$('#exampleModal').modal('show');
+
+	
+
+	$(".form-check-input").click(function() {
+    if(this.checked && this.value=="option2") {
+        $('#Select-Event').show();
+    }else{
+    	$('#Select-Event').hide();
+    }
+});
+   
 });
