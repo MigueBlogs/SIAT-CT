@@ -39,10 +39,11 @@ function readJSON(path) {
 $("#SeleccionaEvento").click(function() {
 	//console.log(this);
     if(this.value=="1") {
+        //Carga del evento
         $.getJSON('JS/info.json',function(data){
 		var output = document.getElementById('NombreEvento');
 		output.innerHTML = data.NombreEvento;
-		//Carga del evento
+		
 		$.getJSON('JS/info.json',function(data){
 			var output = document.getElementById('tipo');
 			output.innerHTML = data.tipo;
@@ -101,6 +102,25 @@ $("#SeleccionaEvento").click(function() {
 	});
     }else{
     	var output = document.getElementById('NombreEvento');
+		output.innerHTML = '';
+		var output = document.getElementById('tipo');
+		output.innerHTML = '';
+		document.getElementById("subtitle").value = '';
+		var output = document.getElementById('comentarios');
+		output.innerHTML = '';
+		var output = document.getElementById('zonas');
+		output.innerHTML = '';
+		var output = document.getElementById('hora');
+		output.innerHTML = '';
+		var output = document.getElementById('coords');
+		output.innerHTML = '';
+		var output = document.getElementById('loc');
+		output.innerHTML = '';
+		var output = document.getElementById('despl');
+		output.innerHTML = '';
+		var output = document.getElementById('viento');
+		output.innerHTML = '';
+		var output = document.getElementById('racha');
 		output.innerHTML = '';
     }
   });

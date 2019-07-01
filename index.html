@@ -63,6 +63,7 @@
 						Selecciona uno de los ciclones actuales:
 						<br>
 						<select id="SeleccionaEvento">
+							<option> -- </option>
 							<option value="1">TT-Andrea</option>
 							<option>TT-Edson</option>
 							<option>DT-01</option>
@@ -243,22 +244,27 @@
 						<div class="tituloTable EditInfo">INFORMACIÓN GENERAL
 							<button id="ButtonInfo" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar información</button> 
 						</div>
-							<div id="showInfo">
-								<div class="dataH"> HORA: <element class="regularTxt" id="hora"></element> </div>
+							<div id="cargaInfo">
+								<div class="dataH"> HORA: <element class="regularTxt" id="hora"></element></div>
 								<div class="dataH"> COORDENADAS: <element class="regularTxt" id="coords"></element> </div>
 								<div class="dataH"> LOCALIZACIÓN: <element class="regularTxt" id="loc"></element> </div>
 								<div class="dataH"> DESPLAZAMIENTO: <element class="regularTxt" id="despl"></element> </div>
 								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="regularTxt" id="viento"></element> </div>
 								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="regularTxt" id="racha"></element> </div>
+								<div id="mas-info" style="white-space: pre-line;"></div>
 							</div>
-							<textarea id="info" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí la información general del sistema'>
-HORA: 
-COORDENADAS: 
-LOCALIZACIÓN: 
-DESPLAZAMIENTO: 
-VIENTOS MÁXIMOS SOSTENIDOS: 
-RACHAS DE VIENTO MÁXIMAS:
-							</textarea>
+							<div id="entradaInfo">
+								<div class="dataH"> HORA:  <input id="hour" class="InputInfo" type="Text" name="nameEvent" size="15" placeholder="Hora del evento" > </div>
+								<div class="dataH"> COORDENADAS:  <input id="coordinates" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Coordenadas del evento" ></div>
+								<div class="dataH"> LOCALIZACIÓN:  <input id="location" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Localización del evento" > </div>
+								<div class="dataH"> DESPLAZAMIENTO: <input id="displacement" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Desplazamiento del evento" > </div>
+								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS:  <input id="max-winds-s" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Vientos máximos del evento" > </div>
+								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS:  <input id="max-wind" class="InputInfo"type="Text" name="nameEvent" size="15" placeholder="Viento del evento" > </div>
+								<textarea  id="more-info" class='autoExpand comentarios regularTxt' placeholder='Información adicional'></textarea>
+								<center>
+									<button class="btn btn-outline-success" id="GuardaInfo">Guardar Información</button>
+								</center>	
+							</div>
 						
 					</div>
 				</div>
@@ -285,8 +291,6 @@ RACHAS DE VIENTO MÁXIMAS:
 				<div class="solid">
 					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
 					<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
-					
-
 				</div>
 			</div>
 		</div>

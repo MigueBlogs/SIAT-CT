@@ -32,8 +32,8 @@ $(function() {
 	        $(".fecha").css("font-size", "14px");
 	        $(".encabezado").css("font-size", "15px");
 	        autoExpand(document.getElementById("subtitle"));
-	        
-	       
+	        $("textarea").css( "border", "none");
+	        $(".dataH").css("font-size", "11px");
 			
 	        /* Get the element.*/
 	        var element = document.getElementById('root');
@@ -154,6 +154,31 @@ $(function() {
 			document.getElementById("saveButton").innerHTML =''
 		}
 	}
+
+	function guardaInfo(){
+		document.getElementById("hora").innerHTML = document.getElementById("hour").value;
+		document.getElementById("coords").innerHTML = document.getElementById("coordinates").value;
+		document.getElementById("loc").innerHTML = document.getElementById("location").value;
+		document.getElementById("despl").innerHTML = document.getElementById("displacement").value;
+		document.getElementById("viento").innerHTML = document.getElementById("max-winds-s").value;
+		document.getElementById("racha").innerHTML = document.getElementById("max-wind").value;
+		document.getElementById("mas-info").innerHTML = document.getElementById("more-info").value;
+//		console.log("Saved info!");
+		$('#entradaInfo').hide();
+		$('#cargaInfo').show();
+	}
+
+	function autoFillInfo(){
+	 //console.log("Esta es la hora: "+document.getElementById("hora").textContent);
+		document.getElementById("hour").value = document.getElementById("hora").textContent;
+		document.getElementById("coordinates").value = document.getElementById("coords").textContent;
+		document.getElementById("location").value = document.getElementById("loc").textContent;
+		 document.getElementById("displacement").value = document.getElementById("despl").textContent;
+		document.getElementById("max-winds-s").value =document.getElementById("viento").textContent;
+		document.getElementById("max-wind").value = document.getElementById("racha").textContent;
+		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
+	}
+
 
 	//FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
 	var autoExpand = function (field) {
@@ -518,7 +543,7 @@ $(function() {
 		document.getElementById("FarO").innerHTML = "";
 		document.getElementById("FarY").innerHTML = "";
 		document.getElementById("FarG").innerHTML = "";
-		document.getElementById("FarB").innerHTML = "";/**/
+		document.getElementById("FarB").innerHTML = "";
 
 		//puntos, comas y finales
 		afectados.forEach(function(item, index, array){
@@ -591,15 +616,21 @@ $(function() {
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
 	$("#GuardaTabla").click(function() { guardaData(); });
+	$("#GuardaInfo").click(function() {guardaInfo()})
 	
 	$('#ButtonInfo').hide();
-	$('#info').hide();
+	$('#entradaInfo').hide();
 	$('#Select-Event').hide();
 	$('#tablaEditar').hide();
 	$('.js-screenshot-image').hide();
 	autoExpand(document.getElementById("subtitle"));
 	$('#exampleModal').modal('show');
-	$("#ButtonInfo").click(function(){ $('#info').show(); $('#showInfo').hide(); autoExpand(document.getElementById("info"))});
+	$("#ButtonInfo").click(function(){ 
+		$('#entradaInfo').show(); 
+		$('#cargaInfo').hide(); 
+		//autoExpand(document.getElementById("info"));
+		autoFillInfo();
+	});
 
 	
 
