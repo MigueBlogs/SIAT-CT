@@ -1,16 +1,10 @@
-//la base de datos va a caluclar e valor del numero de boletín?
+//la base de datos va a calcular e valor del numero de boletín?
 var texto = {"numero":"1"};
 
 
 var output = document.getElementById('Number');
 output.innerHTML = texto.numero;
-
-/*var infoGen={"hora": "17:30 (22:30 GMT)", 
-			"coords": "28.8°Norte 68.7° Oeste.",
-			"loc": "A 540 km al suroeste de Bermuda y a 2,010 km al este-noreste de las costas de Quintana Roo."
-			"despl": "Hacia el norte (350°) a 22km/h."
-			"viento": "65 km/h."
-			"racha":"85 km/h."};*/
+/*
 function loadJSON(callback) {   
 
     var xobj = new XMLHttpRequest();
@@ -40,58 +34,74 @@ function readJSON(path) {
       } 
     }
     xhr.send();
-}
-//Carga del evento
-$.getJSON('JS/info.json',function(data){
-	//console.log(data);
-	var output = document.getElementById('NombreEvento');
-	output.innerHTML = data.NombreEvento;
-});
+}*/
 
-$.getJSON('JS/info.json',function(data){
-	//console.log(data);
-	var output = document.getElementById('tipo');
-	output.innerHTML = data.tipo;
-});
+$("#SeleccionaEvento").click(function() {
+	//console.log(this);
+    if(this.value=="1") {
+        $.getJSON('JS/info.json',function(data){
+		var output = document.getElementById('NombreEvento');
+		output.innerHTML = data.NombreEvento;
+		//Carga del evento
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('tipo');
+			output.innerHTML = data.tipo;
+		});
 
+		//Cargando datos del Subtítulo
+		$.getJSON('JS/info.json',function(data){
+			//var output = document.getElementById('subtitle');
+			//output.innerHTML = data.texto;
+			document.getElementById("subtitle").value = data.texto;
+		});
 
-//Cargando datos del Subtítulo
-$.getJSON('JS/info.json',function(data){
-	//console.log(data);
-	//var output = document.getElementById('subtitle');
-	//output.innerHTML = data.texto;
-	document.getElementById("subtitle").value = data.texto;
-});
+		/// cargando comentarios
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('comentarios');
+			output.innerHTML = data.comentarios;
+		});
 
+		/// cargando zonas
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('zonas');
+			output.innerHTML = data.zonas;
+		});
 
-//Cargando datos en zona de Información Gneral
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('hora');
-	output.innerHTML = data.hora;
-});
+		//Cargando datos en zona de Información Gneral
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('hora');
+			output.innerHTML = data.hora;
+		});
 
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('coords');
-	output.innerHTML = data.coords;
-});
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('coords');
+			output.innerHTML = data.coords;
+		});
 
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('loc');
-	output.innerHTML = data.loc;
-});
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('loc');
+			output.innerHTML = data.loc;
+		});
 
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('despl');
-	output.innerHTML = data.despl;
-});
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('despl');
+			output.innerHTML = data.despl;
+		});
 
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('viento');
-	output.innerHTML = data.viento;
-});
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('viento');
+			output.innerHTML = data.viento;
+		});
 
-$.getJSON('JS/info.json',function(data){
-	var output = document.getElementById('racha');
-	output.innerHTML = data.racha;
-});
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('racha');
+			output.innerHTML = data.racha;
+		});
+
+	});
+    }else{
+    	var output = document.getElementById('NombreEvento');
+		output.innerHTML = '';
+    }
+  });
 

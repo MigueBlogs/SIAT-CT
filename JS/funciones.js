@@ -26,12 +26,13 @@ $(function() {
 	        	document.getElementById("subtitle").rows = 3;
 	        	
 	        }
-	        
-
-	        $("fecha").css("font-size", "14px");
+	        $(".regularTxt").css("font-size", "10px");
+	        $("#regiones").css("font-size", "10px");
+			$(".tituloTable").css("font-size", "12px");
+	        $(".fecha").css("font-size", "14px");
 	        $(".encabezado").css("font-size", "15px");
 	        autoExpand(document.getElementById("subtitle"));
-	        $(".tituloTable").css("font-size", "19px");
+	        
 	       
 			
 	        /* Get the element.*/
@@ -434,6 +435,8 @@ $(function() {
 			}
 			});
 		});
+
+
 	}
 
 	String.prototype.replaceAt=function(index, replacement) {
@@ -572,9 +575,10 @@ $(function() {
 		
 		});
 	}
-
-	$(".tituloTable").on("mouseenter", function() { secretoI(); });
-	$(".tituloTable").on("mouseleave", function() { secretoO(); });
+	$(".EditInfo").on("mouseenter", function() { $('#ButtonInfo').show() });
+	$(".EditInfo").on("mouseleave", function() { $('#ButtonInfo').hide() });
+	$(".EditTable").on("mouseenter", function() { secretoI(); });
+	$(".EditTable").on("mouseleave", function() { secretoO(); });
 	$(".fecha").on("mouseenter", function() { secretI(); });
 	$(".fecha").on("mouseleave", function() { secretO(); });
 	$("#secretButton").click(function() { editarF(); });
@@ -588,11 +592,14 @@ $(function() {
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
 	$("#GuardaTabla").click(function() { guardaData(); });
 	
+	$('#ButtonInfo').hide();
+	$('#info').hide();
 	$('#Select-Event').hide();
 	$('#tablaEditar').hide();
 	$('.js-screenshot-image').hide();
 	autoExpand(document.getElementById("subtitle"));
 	$('#exampleModal').modal('show');
+	$("#ButtonInfo").click(function(){ $('#info').show(); $('#showInfo').hide(); autoExpand(document.getElementById("info"))});
 
 	
 

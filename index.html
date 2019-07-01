@@ -36,18 +36,18 @@
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">Menú de Inicio</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Al cerrar esta ventana editarás el fenómeno meteorológico actual">
+		      <div style="background-color: #35695D; color:white" class="modal-header">
+		        <h5 class="modal-title"  id="exampleModalLabel">Menú de Inicio</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close" title="Al cerrar esta ventana editarás un nuevo boletín">
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
 		      <div class="modal-body">
 		        Elige la opción deseada:
 		        <div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+				  <input  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
 				  <label class="form-check-label" for="exampleRadios1">
-				    Editar en el evento actual
+				    Generar nuevo boletín
 				  </label>
 				</div>
 				<div class="form-check">
@@ -60,10 +60,10 @@
 				<center>
 				<div id="Select-Event">
 					<div>
-						Selecciona uno de los eventos actuales:
+						Selecciona uno de los ciclones actuales:
 						<br>
-						<select>
-							<option>TT-Andrea</option>
+						<select id="SeleccionaEvento">
+							<option value="1">TT-Andrea</option>
 							<option>TT-Edson</option>
 							<option>DT-01</option>
 						</select>
@@ -85,7 +85,7 @@
 				<img src="img/head2.png" width="60%">
 			</div>
 			<div align="right">
-				<img src="img/head3.png" width="60%" >
+				<img src="img/Sinaprocsolo.png" width="70%" >
 			</div>
 		</div>
 		<br>
@@ -102,151 +102,166 @@
 		<div class="tableData">
 			<div class="tableDataL">
 				<div class="solid">
-					<div class="tituloTable" title="click para editar">NIVEL DE ALERTA SIAT - CT
-						<element id="tabla"></element>
-					</div>
-				
-				<div id="regiones">
-					<table  style=" border-collapse: collapse; width: 100%; text-align: center;">
-						<tr>
-							<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
-							<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
-						</tr>
-						<tr>
-							<th class="solid" style="background-color: red; ">ROJA</th>
-							<th class="solid" style="background-color: red; ">ROJA</th>
-						</tr>
-						<tr>
-							<th id="NearR" class="solid">--</th>
-							<th id="FarR" class="solid">--</th>
-						</tr>
-						<tr>
-							<th class="solid" style="background-color: orange;">NARANJA</th>
-							<th class="solid" style="background-color: orange;">NARANJA</th>
-						</tr>
-						<tr>
-							<th id="NearO" class="solid">--</th>
-							<th id="FarO" class="solid">--</th>
-						</tr>
-						<tr>
-							<th class="solid" style="background-color: yellow;">AMARILLA</th>
-							<th class="solid" style="background-color: yellow;">AMARILLA</th>
-						</tr>
-						<tr>
-							<th id="NearY" class="solid">--</th>
-							<th id="FarY" class="solid">--</th>
-						</tr>
-						<tr>
-							<th class="solid" style="background-color: #38BF34;">VERDE</th>
-							<th class="solid" style="background-color: #38BF34;">VERDE</th>
-						</tr>
-						<tr><th id="NearG" class="solid">--</th>
-							<th id="FarG" class="solid">--</th>
-						</tr>
-						<tr>
-							<th class="solid" style="background-color: #4F81BC">AZUL</th>
-							<th class="solid" style="background-color: #4F81BC">AZUL</th>
-						</tr>
-						<tr><th id="NearB" class="solid">--</th>
-							<th id="FarB" class="solid">--</th>
-						</tr>
-					</table>
-				</div>
-
-				<div id="tablaEditar" class="tableRegiones solid">
-					<div class="solid" style="background-color: #DBBE99">CICLÓN ACERCÁNDOSE</div>
-						<div class="solid">
-							<table id="tablaEdos1" style=" border-collapse: collapse; width: 100%; text-align: center;">
-								<tr id="Encabezado">
-									<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
-									<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
-								</tr>
-						<tr id="filatest">
-								<th class="solid">
-										<select id="NivelDeAlerta"> 
-											<option value="1" style="background-color: red; ">ROJA</option>
-											<option value="2" style="background-color: orange;">NARANJA</option>
-											<option value="3" style="background-color: yellow;">AMARILLA</option>
-											<option value="4" style="background-color: #38BF34;">VERDE</option>
-											<option value="5" style="background-color: #4F81BC">AZUL</option>
-										</select>
-								</th>
-								<th class="solid">
-									<select id="Estado"> 
-										<option value="">Baja California Norte</option>
-										<option value="">Baja California Sur</option>
-										<option value="">Sinaloa</option>
-									</select>
-										<select id="Region">
-											<option value="">Todo el Edo</option>
-											<option value="">Norte</option>
-											<option value="">Centro</option>
-											<option value="">Sur</option>
-										</select>
-										<button id="filatest" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
-								</th>
-						</tr>	
-							</table>
-								<tr>
-									<th><button id="bt_add1" type="button" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
-									
-								</tr>
+						
+						<div class="segment-table" style="height: 100%">
+						<div class="tituloTable EditTable">NIVEL DE ALERTA SIAT - CT
+							<element id="tabla"></element>
 						</div>
-					<div class="solid" style="background-color: #DBBE99">CICLÓN ALEJÁNDOSE</div>
-					<div class="solid">
-						<div class="solid">
-						<table id="tablaEdos2" style=" border-collapse: collapse; width: 100%; text-align: center;">
-							<tr id="Encabezado">
-								<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
-								<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
-							</tr>
-					 <tr id="filatest">
-								<th class="solid">
-										<select id="NivelDeAlerta"> 
-											<option value="1" style="background-color: red; ">ROJA</option>
-											<option value="2" style="background-color: orange;">NARANJA</option>
-											<option value="3" style="background-color: yellow;">AMARILLA</option>
-											<option value="4" style="background-color: #38BF34;">VERDE</option>
-											<option value="5" style="background-color: #4F81BC">AZUL</option>
-										</select>
-								</th>
-								<th class="solid">
-										<select id="Estado"> 
-											<option value="">Baja California Norte</option>
-											<option value="">Baja California Sur</option>
-											<option value="">Sinaloa</option>
-										</select>
-										<select id="Region"> 
-											<option value="">Norte</option>
-											<option value="">Centro</option>
-											<option value="">Sur</option>
-										</select>
-										<button id="filatest" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
-								</th>
-							</tr>
-						</table>
-							<tr>
-								<th><button id="bt_add2" type="button" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
-								
-							</tr>
-					</div>
-					</div>
-					<center>
-						<button class="btn btn-outline-success" id="GuardaTabla">Guardar datos</button>	
-					</center>
-				</div>	
-	
+							<div id="regiones" style="height: calc(100% - 43px)">
+								<table id="tablecss" style=" border-collapse: collapse; width: 100%; height: 100%; text-align: center;">
+									<tr>
+										<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
+										<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
+									</tr>
+									<tr>
+										<th class="solid" style="background-color: red; ">ROJA</th>
+										<th class="solid" style="background-color: red; ">ROJA</th>
+									</tr>
+									<tr>
+										<th id="NearR" class="solid regularTxt">--</th>
+										<th id="FarR" class="solid regularTxt">--</th>
+									</tr>
+									<tr>
+										<th class="solid" style="background-color: orange;">NARANJA</th>
+										<th class="solid" style="background-color: orange;">NARANJA</th>
+									</tr>
+									<tr>
+										<th id="NearO" class="solid regularTxt">--</th>
+										<th id="FarO" class="solid regularTxt">--</th>
+									</tr>
+									<tr>
+										<th class="solid" style="background-color: yellow;">AMARILLA</th>
+										<th class="solid" style="background-color: yellow;">AMARILLA</th>
+									</tr>
+									<tr>
+										<th id="NearY" class="solid regularTxt">--</th>
+										<th id="FarY" class="solid regularTxt">--</th>
+									</tr>
+									<tr>
+										<th class="solid" style="background-color: #38BF34;">VERDE</th>
+										<th class="solid" style="background-color: #38BF34;">VERDE</th>
+									</tr>
+									<tr><th id="NearG" class="solid regularTxt">--</th>
+										<th id="FarG" class="solid regularTxt">--</th>
+									</tr>
+									<tr>
+										<th class="solid" style="background-color: #4F81BC">AZUL</th>
+										<th class="solid" style="background-color: #4F81BC">AZUL</th>
+									</tr>
+									<tr>
+										<th id="NearB" class="solid regularTxt">--</th>
+										<th id="FarB" class="solid regularTxt">--</th>
+									</tr>
+								</table>
+							</div>
+							<div id="tablaEditar" class="tableRegiones solid">
+								<div class="solid" style="background-color: #DBBE99">CICLÓN ACERCÁNDOSE</div>
+									<div class="solid">
+										<table id="tablaEdos1" style=" border-collapse: collapse; width: 100%; text-align: center;">
+											<tr id="Encabezado">
+												<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
+												<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
+											</tr>
+											<tr id="filatest">
+													<th class="solid">
+															<select id="NivelDeAlerta"> 
+																<option value="1" style="background-color: red; ">ROJA</option>
+																<option value="2" style="background-color: orange;">NARANJA</option>
+																<option value="3" style="background-color: yellow;">AMARILLA</option>
+																<option value="4" style="background-color: #38BF34;">VERDE</option>
+																<option value="5" style="background-color: #4F81BC">AZUL</option>
+															</select>
+													</th>
+													<th class="solid">
+														<select id="Estado"> 
+															<option value="">Baja California Norte</option>
+															<option value="">Baja California Sur</option>
+															<option value="">Sinaloa</option>
+														</select>
+															<select id="Region">
+																<option value="">Todo el Edo</option>
+																<option value="">Norte</option>
+																<option value="">Centro</option>
+																<option value="">Sur</option>
+															</select>
+															<button id="filatest" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
+													</th>
+											</tr>	
+										</table>
+											<tr>
+												<th><button id="bt_add1" type="button" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
+												
+											</tr>
+									</div>
+								<div class="solid" style="background-color: #DBBE99">CICLÓN ALEJÁNDOSE</div>
+								<div class="solid">
+									<div class="solid">
+									<table id="tablaEdos2" style=" border-collapse: collapse; width: 100%; text-align: center;">
+										<tr id="Encabezado">
+											<th class="solid" style="background-color: #D9D9D9">Nivel de Alerta</th>
+											<th class="solid" style="background-color: #D9D9D9">Región afectada</th>
+										</tr>
+								 <tr id="filatest">
+											<th class="solid">
+													<select id="NivelDeAlerta"> 
+														<option value="1" style="background-color: red; ">ROJA</option>
+														<option value="2" style="background-color: orange;">NARANJA</option>
+														<option value="3" style="background-color: yellow;">AMARILLA</option>
+														<option value="4" style="background-color: #38BF34;">VERDE</option>
+														<option value="5" style="background-color: #4F81BC">AZUL</option>
+													</select>
+											</th>
+											<th class="solid">
+													<select id="Estado"> 
+														<option value="">Baja California Norte</option>
+														<option value="">Baja California Sur</option>
+														<option value="">Sinaloa</option>
+													</select>
+													<select id="Region"> 
+														<option value="">Norte</option>
+														<option value="">Centro</option>
+														<option value="">Sur</option>
+													</select>
+													<button id="filatest" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
+											</th>
+										</tr>
+									</table>
+										<tr>
+											<th><button id="bt_add2" type="button" class="btn btn-outline-info btn-sm" title="Agregar una región"><ion-icon name="add"></ion-icon></button></th>
+											
+										</tr>
+								</div>
+								<center>
+									<button class="btn btn-outline-success" id="GuardaTabla">Guardar datos</button>	
+								</center>
+								</div>	
+							</div>	
+						</div>
 				</div>
 				<div class="solid">
-					<div class="tituloTable">INFORMACIÓN GENERAL</div>
-					<div class="dataH"> HORA: <element class="dataD" id="hora"></element> </div>
-					<div class="dataH"> COORDENADAS: <element class="dataD" id="coords"></element> </div>
-					<div class="dataH"> LOCALIZACIÓN: <element class="dataD" id="loc"></element> </div>
-					<div class="dataH"> DESPLAZAMIENTO: <element class="dataD" id="despl"></element> </div>
-					<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="dataD" id="viento"></element> </div>
-					<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="dataD" id="racha"></element> </div>
+					<div>
+						<div class="tituloTable EditInfo">INFORMACIÓN GENERAL
+							<button id="ButtonInfo" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar información</button> 
+						</div>
+							<div id="showInfo">
+								<div class="dataH"> HORA: <element class="regularTxt" id="hora"></element> </div>
+								<div class="dataH"> COORDENADAS: <element class="regularTxt" id="coords"></element> </div>
+								<div class="dataH"> LOCALIZACIÓN: <element class="regularTxt" id="loc"></element> </div>
+								<div class="dataH"> DESPLAZAMIENTO: <element class="regularTxt" id="despl"></element> </div>
+								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="regularTxt" id="viento"></element> </div>
+								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="regularTxt" id="racha"></element> </div>
+							</div>
+							<textarea id="info" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí la información general del sistema'>
+HORA: 
+COORDENADAS: 
+LOCALIZACIÓN: 
+DESPLAZAMIENTO: 
+VIENTOS MÁXIMOS SOSTENIDOS: 
+RACHAS DE VIENTO MÁXIMAS:
+							</textarea>
+						
+					</div>
 				</div>
-				
 			</div> 
 			<div class="tableDataR">
 				<div class="solid">
@@ -259,18 +274,18 @@
 
 				<div class="solid">
 				<div class="tituloTable">Comentarios</div>
-				<textarea class='autoExpand comentarios' placeholder='Escribe aquí los comentarios'>
+				<textarea id="comentarios" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí los comentarios'>
 &#9679 Recomendación 1
 &#9679 Recomendación 2
 &#9679 Recomendación 3
 &#9679 Recomendación 4
-&#9679 Recomendación 5
 				</textarea>
 				</div>
 
 				<div class="solid">
 					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
-					No se han establecido zonas de vigilancia por este sistema en México.
+					<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
+					
 
 				</div>
 			</div>
@@ -284,7 +299,7 @@
 	
 	<!-- Button to generate PDF. -->
 	<center>
-	
+	<button class="btn btn-success">Guardar Boletín</button>
 	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	</center>
 

@@ -13,7 +13,7 @@
   src: url(../font/Montserrat-Regular.otf); }
 .regularTxt {
   font-family: Montserrat-Regular;
-  font-size: 14px; }
+  font-size: 12px; }
 
 .box {
   width: 90%;
@@ -49,6 +49,7 @@ th {
 
 .comentarios {
   height: 90%;
+  font-family: Montserrat-Bold;
   background: transparent;
   font-size: 14px; }
 
