@@ -94,7 +94,7 @@
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
 		
-		<div align="center" class="fecha" title="click para editar">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
+		<div align="center" class="fecha" title="click para editar">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="sea"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 		</div>
 		<div>
@@ -175,15 +175,21 @@
 													</th>
 													<th class="solid">
 														<select id="Estado"> 
-															<option value="">Baja California Norte</option>
-															<option value="">Baja California Sur</option>
-															<option value="">Sinaloa</option>
+															<option value="1">Baja California Norte</option>
+															<option value="2">Baja California Sur</option>
+															<option value="3">Sinaloa</option>
 														</select>
 															<select id="Region">
-																<option value="">Todo el Edo</option>
-																<option value="">Norte</option>
-																<option value="">Centro</option>
-																<option value="">Sur</option>
+																<option value="-1">Todo el Edo</option>
+																<option value="0">Centro</option>
+																<option value="1">Norte</option>
+																<option value="2">Noreste</option>
+																<option value="3">Este</option>
+																<option value="4">Sureste</option>
+																<option value="5">Sur</option>
+																<option value="6">Suroeste</option>
+																<option value="7">Oeste</option>
+																<option value="8">Noroeste</option>
 															</select>
 															<button id="filatest" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>
 													</th>
@@ -271,11 +277,14 @@
 			</div> 
 			<div class="tableDataR">
 				<div class="solid">
-					<div class="tituloTable">PRONÓSTICO DE TRAYECTORIA </div>
-					<div id="map-container">
+					<div id="capturaMapa" class="tituloTable">PRONÓSTICO DE TRAYECTORIA 
+						<button id="capture" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="camera"></ion-icon> Obtener captura</button> 
+						<button id="mapa_ciclon" type="button" class="btn btn-danger"><ion-icon name="map"></ion-icon> Vista mapa</button>
+					</div>
+					<center><div id="map-container">
 						<div id="map"></div>
 					</div>
-					<img id="imagen" style='object-fit: cover;' class="js-screenshot-image"/>
+					<img id="imagen" style='object-fit: cover;' class="js-screenshot-image"/></center>		
 				</div>
 
 				<div class="solid">
@@ -290,27 +299,51 @@
 
 				<div class="solid">
 					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
-					<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
+						<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
 				</div>
 			</div>
 		</div>
-		
-		<br>
-		<br>
-		
+		<div class="disable_on_print" align="center">
+			<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+			    <input type=file id="media" name=media >
+			    <input type="submit">
+			</form>
 
+			<div class="progress">
+			  <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+			    0%
+			  </div>
+			</div>
+		</div>
+		<div class="tituloEfectos">
+			EFECTOS
+		</div>
+		<br class="disable_on_print" >
+		<div id="efectos" class="solid">
+				<div class="tituloTable solido">Viento</div>
+				<textarea id="efectoViento" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '>&#9679 Recomendación 1</textarea>
+				<div class="tituloTable solido">Lluvia</div>
+				<textarea id="efectoLluvia" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<div class="tituloTable solido">Oleaje elevado</div>
+				<textarea id="efectoOleaje" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<div class="tituloTable solido">Marea de tormenta</div>
+				<textarea id="efectoMarea" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+		</div>
+		<element id="autores" type="Text"></element>	
+		<br>
+		<br>
 	</div>
 	
-	<!-- Button to generate PDF. -->
+	<!-- Button of actions -->
 	<center>
-	<button class="btn btn-success">Guardar Boletín</button>
+	<button class="btn btn-success" id="guardarInfo" >Guardar Boletín</button>
 	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	</center>
 
 
 	
 	<script src="JS/funciones.js"></script>
-	<script src="JS/StaticText.js"></script>
+	<script type="module" src="JS/StaticText.js"></script>
 	<script src="JS/map.js"></script>	
 
 

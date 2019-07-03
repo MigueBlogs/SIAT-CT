@@ -1,9 +1,55 @@
 //la base de datos va a calcular e valor del numero de boletín?
 var texto = {"numero":"1"};
+var autores = [{"nombre":"Alí","id_autor":"1"},{"nombre":"Beto","id_autor":"2"}]
+
+
+$.each(autores, function(i,autor){
+	$('#autores').append('<li>Nombre: '+autor.nombre+', id_autor: '+autor.id_autor+'</li>')
+});
 
 
 var output = document.getElementById('Number');
 output.innerHTML = texto.numero;
+
+var dataArr = [];
+	$("#guardarInfo").click(function(){
+		var near = readTables();
+		var efectos = readEfects();
+		var data = JSON.stringify({
+			NombreEvento : $('#NombreEvento').text(),
+			cat_evento : $('#tipo').text(),
+			fecha : $('#datetime').text(),
+			oceano : $('#sea').text(),
+			hora : $('#hora').text(),
+			coords : $('#coords').text(),
+			loc : $('#loc').text(),
+			despl : $('#despl').text(),
+			viento : $('#viento').text(),
+			racha : $('#racha').text(),
+			subtitulo : $('#subtitle').val(),
+			comentarios : $('#comentarios').text(),
+			zonas : $('#zonas').text(),
+			autores : autores,
+			archivos : $('#media').val(),
+			regiones: near,
+			efectos : efectos
+		});
+		dataArr.push(data);
+        alert(data);
+        console.log(dataArr);
+
+        $.ajax({
+        	type: 'POST',
+        	headers: {
+	          "Content-Type": "application/json",
+	        },
+        	url:'http://rest.learncode.academy/api/SIAT-CT/boletines',
+        	data: data,
+        	success: function(nuevoDato){
+        		alert("se ha añadido nuevo nombre: "+nuevoDato.NombreEvento);
+        	}
+        });
+	});
 /*
 function loadJSON(callback) {   
 
@@ -39,6 +85,7 @@ function readJSON(path) {
 $("#SeleccionaEvento").click(function() {
 	//console.log(this);
     if(this.value=="1") {
+    	
         //Carga del evento
         $.getJSON('JS/info.json',function(data){
 		var output = document.getElementById('NombreEvento');
@@ -46,14 +93,14 @@ $("#SeleccionaEvento").click(function() {
 		
 		$.getJSON('JS/info.json',function(data){
 			var output = document.getElementById('tipo');
-			output.innerHTML = data.tipo;
+			output.innerHTML = data.cat_evento;
 		});
 
 		//Cargando datos del Subtítulo
 		$.getJSON('JS/info.json',function(data){
 			//var output = document.getElementById('subtitle');
 			//output.innerHTML = data.texto;
-			document.getElementById("subtitle").value = data.texto;
+			document.getElementById("subtitle").value = data.subtitulo;
 		});
 
 		/// cargando comentarios
@@ -125,3 +172,82 @@ $("#SeleccionaEvento").click(function() {
     }
   });
 
+//Upload 
+
+$('form').on('submit', function(event) {
+
+		event.preventDefault();
+
+		var formData = new FormData($('form')[0]);
+
+		$.ajax({
+			xhr : function() {
+				var xhr = new window.XMLHttpRequest();
+
+				xhr.upload.addEventListener('progress', function(e) {
+
+					if (e.lengthComputable) {
+
+						console.log('Bytes Loaded: ' + e.loaded);
+						console.log('Total Size: ' + e.total);
+						console.log('Percentage Uploaded: ' + (e.loaded / e.total))
+
+						var percent = Math.round((e.loaded / e.total) * 100);
+
+						$('#progressBar').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
+
+					}
+
+				});
+
+				return xhr;
+			},
+			type : 'POST',
+			//este post falla en la URL
+			url : '/upload',
+			data : formData,
+			processData : false,
+			contentType : false,
+			success : function() {
+				alert('File uploaded!');
+			}
+		});
+
+	});
+
+
+function readTables(){
+	var id_edo,id_reg,id_nivel_alerta;
+	var regiones=[];
+	$('#tablaEdos1').find('tr').each(function(){
+			
+				var find = $(this).find('#NivelDeAlerta');
+					id_nivel_alerta = $('option:selected',find).val();
+					
+
+				var find = $(this).find('#Estado');
+					id_edo = $('option:selected',find).val();
+
+				
+
+				var find = $(this).find('#Region');
+					id_reg = $('option:selected',find).val();
+				
+				regiones.push({id_nivel_alerta,id_edo,id_reg});
+				
+			});
+	regiones.shift();
+	console.log(regiones);
+	return regiones;
+}
+
+function readEfects(){
+	var id_efecto=1, coment;
+	var efectos=[];
+	$('#efectos').find('textarea').each(function(){
+		id_efecto = $(this).attr('id');
+		coment = $(this).val();
+		efectos.push({id_efecto,coment});
+	});
+	return efectos;
+}

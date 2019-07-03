@@ -33,6 +33,14 @@ th {
   font-size: 25px;
   text-align: center; }
 
+.tituloEfectos {
+  background: #BFBFBF;
+  color: black;
+  font-family: Montserrat-Bold;
+  font-size: 25px;
+  text-align: center;
+  box-shadow: 0px 10px 10px 1px grey; }
+
 .tituloTable {
   border-style: solid;
   font-weight: bold;
@@ -86,6 +94,14 @@ th {
 
 .solid {
   border-style: solid; }
+
+.solido {
+  border-style: solid;
+  background: #BFBFBF;
+  color: black;
+  font-family: Montserrat-Bold;
+  font-size: 25px;
+  text-align: center; }
 
 .dataH {
   font-weight: bold; }

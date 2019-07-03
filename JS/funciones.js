@@ -34,7 +34,7 @@ $(function() {
 	        autoExpand(document.getElementById("subtitle"));
 	        $("textarea").css( "border", "none");
 	        $(".dataH").css("font-size", "11px");
-			
+			$(".disable_on_print").hide();
 	        /* Get the element.*/
 	        var element = document.getElementById('root');
 	        // Generate the PDF.
@@ -101,7 +101,7 @@ $(function() {
 		document.getElementById("NombreEvento").innerHTML = '<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >'
 		document.getElementById("saveButton").innerHTML ='<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button>'
 		document.getElementById("tipo").innerHTML = '<select id="opt">			<option>DT</option>			<option>TT</option>			<option>Huracán</option>		</select>'
-
+		document.getElementById("sea").innerHTML = '<select id="oceano">			<option>Pacífico</option>			<option>Atlántico</option>	</select>'
 	}
 
 	function secretI(){
@@ -143,6 +143,7 @@ $(function() {
 			if((document.getElementById("textEvent").value) != ''){
 				document.getElementById("NombreEvento").innerHTML = document.getElementById("textEvent").value;
 				document.getElementById("tipo").innerHTML = document.getElementById("opt").value;
+				document.getElementById("sea").innerHTML = '';
 				editandoE=false;
 			}else{
 				alert("Ingresa el nombre y categoría del evento");
@@ -173,7 +174,7 @@ $(function() {
 		document.getElementById("hour").value = document.getElementById("hora").textContent;
 		document.getElementById("coordinates").value = document.getElementById("coords").textContent;
 		document.getElementById("location").value = document.getElementById("loc").textContent;
-		 document.getElementById("displacement").value = document.getElementById("despl").textContent;
+		document.getElementById("displacement").value = document.getElementById("despl").textContent;
 		document.getElementById("max-winds-s").value =document.getElementById("viento").textContent;
 		document.getElementById("max-wind").value = document.getElementById("racha").textContent;
 		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
@@ -406,7 +407,7 @@ $(function() {
 			
 			var regArray=[];
 			afectados.push({na,edo,reg,regArray});
-			
+			//console.log(afectados);
 		});
 
 		afectados.shift();
@@ -600,6 +601,10 @@ $(function() {
 		
 		});
 	}
+	$("#capturaMapa").on("mouseenter", function() { $('#capture').show();
+												 $('#mapa_ciclon').show(); });
+	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
+												$('#mapa_ciclon').hide(); });
 	$(".EditInfo").on("mouseenter", function() { $('#ButtonInfo').show() });
 	$(".EditInfo").on("mouseleave", function() { $('#ButtonInfo').hide() });
 	$(".EditTable").on("mouseenter", function() { secretoI(); });
@@ -618,6 +623,8 @@ $(function() {
 	$("#GuardaTabla").click(function() { guardaData(); });
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	
+	$('#capture').hide();
+	$('#mapa_ciclon').hide();
 	$('#ButtonInfo').hide();
 	$('#entradaInfo').hide();
 	$('#Select-Event').hide();

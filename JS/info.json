@@ -1,13 +1,39 @@
 {			"NombreEvento":"Andrea",
-			"tipo":"Huracán",
+			"cat_evento":"Huracán",
+			"fecha": "02/07/2019",
+			"oceano":"Pacífico",
 			"hora": "17:30 (22:30 GMT)", 
 			"coords": "28.8°Norte 68.7° Oeste.",
 			"loc": "A 540 km al suroeste de Bermuda y a 2,010 km al este-noreste de las costas de Quintana Roo.",
 			"despl": "Hacia el norte (350°) a 22km/h.",
 			"viento": "65 km/h.",
 			"racha":"85 km/h.",
-			"texto": "SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL",
+			"subtitulo": "SE HA FORMADO LA TORMENTA SUBTROPICAL 'ANDREA' EN EL OCÉANO ATLÁNTICO, LEJOS DEL TERRITORIO NACIONAL",
 			"comentarios": "&#9679 Recomendación 1 \n&#9679 Recomendación 2 \n&#9679 Recomendación 3 \n&#9679 Recomendación 4 \n &#9679 Esta es una recomendación de prueba",
-			"zonas": "No se han establecido zonas de vigilancia por este sistema en México."
+			"zonas": "No se han establecido zonas de vigilancia por este sistema en México.",
+			"autores": [
+						"Ing. Ali Barcelata Luna",
+						"Ing. Belén Morales Alegre"
+						],
+			"archivos":[
+						{
+							"url":"#",
+							"nombre":"archivo1.jpg"
+						}
+						],
+			"regiones":[
+						{
+							"id_estado":"BCS",
+							"id_región":"2",
+							"id_nivel_alerta":"1"
+						}
+						],
+			"efectos":[
+						{
+							"id_efecto":"1",
+							"comentarios":"Debido a la distancia de este sistema, no se prevén efectos que afecten al país."
+						}
+						]
+
 }
 

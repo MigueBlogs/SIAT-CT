@@ -20,7 +20,7 @@ $(function() {
             loadCiclones(map);
 
             // the button that triggers screen shot
-            const screenshotBtn = document.getElementById("pdf");
+            const screenshotBtn = document.getElementById("capture");
 
             var area = {
                 x:200,
@@ -28,49 +28,24 @@ $(function() {
                 width: 400,
                 height: 300
               };
-            screenshotBtn.addEventListener("mouseenter", function() {
-            $("#map-container").css("width","400px");
-            $("#map-container").css("height","300px");    
+            
+            var capturing = true; 
+
+            screenshotBtn.addEventListener("click", function() {    
                 view
-                    .takeScreenshot({ format: "png", quality:100 })
+                    .takeScreenshot({ area:area, format: "png", quality:100 })
                     .then(function(screenshot) {
                       showPreview(screenshot);
                   });
             });
-
-            /**/screenshotBtn.addEventListener("mouseleave", function() {
+            
+            $('#mapa_ciclon').click(function() {
                 $('.js-screenshot-image').hide();
                 $('#map-container').show();
-                //console.log("mouseleave");
-                  
             });
+           
         });
     }
-
-
-/*
-      function showPreview(screenshot) {
-           $('.js-screenshot-image').show();
-          const screenshotImage = document.getElementsByClassName("js-screenshot-image")[0];
-          screenshotImage.width = screenshot.data.width;
-          screenshotImage.height = screenshot.data.height;
-          screenshotImage.src = screenshot.dataUrl;
-          $('#viewDiv').hide();
-          generaPdf();
-          console.log("ya cambie la imagen");
-        }
-
-      
-        const screenshotBtn = document.getElementById("pdf");
-
-        screenshotBtn.addEventListener("click", function() {
-            view
-                .takeScreenshot({format: "png" })
-                .then(function(screenshot) {
-                  showPreview(screenshot);
-              });
-        });
-  */
 
 
 
