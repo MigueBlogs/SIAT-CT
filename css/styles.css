@@ -87,7 +87,7 @@ th {
 
 .tableDataR {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr; }
+  grid-template-rows: 1fr 1fr auto; }
 
 .subtitle {
   display: grid; }

@@ -29,8 +29,6 @@ $(function() {
                 height: 300
               };
             
-            var capturing = true; 
-
             screenshotBtn.addEventListener("click", function() {    
                 view
                     .takeScreenshot({ area:area, format: "png", quality:100 })
