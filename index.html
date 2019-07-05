@@ -32,7 +32,7 @@
 </head>
 <body>
 	<div class="box" id="root">
-		<!-- Modal -->
+		<!-- Menú del Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -78,6 +78,32 @@
 		    </div>
 		  </div>
 		</div>
+		<!-- Menu de confirmación -->
+		<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div style="background-color: #35695D; color:white" class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Ventana de confirmación</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ¿Estás seguro que éste será el último boletín?
+		        <br><center>
+		        	<button id="yes" type="button" class="btn btn-success" data-dismiss="modal">SI</button>
+					<button id="no" type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+		        </center>
+		        
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
 		<div class="logos">
 			<div align="left">
 				<img src="img/head1.png" width="60%">
@@ -109,49 +135,49 @@
 							<element id="tabla"></element>
 						</div>
 							<div id="regiones" style="height: calc(100% - 43px)">
-								<table id="tablecss" style=" border-collapse: collapse; width: 100%; height: 100%; text-align: center;">
+								<table style=" border-collapse: collapse; width: 100%; height: 100%; text-align: center;">
 									<tr>
-										<th class="solid" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
-										<th class="solid" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
+										<th class="" style="background-color: #D9D9D9">CICLÓN ACERCÁNDOSE</th>
+										<th class="" style="background-color: #D9D9D9">CICLÓN ALEJÁNDOSE</th>
 									</tr>
 									<tr>
-										<th class="solid" style="background-color: red; ">ROJA</th>
-										<th class="solid" style="background-color: red; ">ROJA</th>
+										<th class="" style="background-color: red; ">ROJA</th>
+										<th class="" style="background-color: red; ">ROJA</th>
 									</tr>
 									<tr>
-										<th id="NearR" class="solid regularTxt">--</th>
-										<th id="FarR" class="solid regularTxt">--</th>
+										<th id="NearR" class=" regularTxt">--</th>
+										<th id="FarR" class=" regularTxt">--</th>
 									</tr>
 									<tr>
-										<th class="solid" style="background-color: orange;">NARANJA</th>
-										<th class="solid" style="background-color: orange;">NARANJA</th>
+										<th class="" style="background-color: orange;">NARANJA</th>
+										<th class="" style="background-color: orange;">NARANJA</th>
 									</tr>
 									<tr>
-										<th id="NearO" class="solid regularTxt">--</th>
-										<th id="FarO" class="solid regularTxt">--</th>
+										<th id="NearO" class=" regularTxt">--</th>
+										<th id="FarO" class=" regularTxt">--</th>
 									</tr>
 									<tr>
-										<th class="solid" style="background-color: yellow;">AMARILLA</th>
-										<th class="solid" style="background-color: yellow;">AMARILLA</th>
+										<th class="" style="background-color: yellow;">AMARILLA</th>
+										<th class="" style="background-color: yellow;">AMARILLA</th>
 									</tr>
 									<tr>
-										<th id="NearY" class="solid regularTxt">--</th>
-										<th id="FarY" class="solid regularTxt">--</th>
+										<th id="NearY" class=" regularTxt">--</th>
+										<th id="FarY" class=" regularTxt">--</th>
 									</tr>
 									<tr>
-										<th class="solid" style="background-color: #38BF34;">VERDE</th>
-										<th class="solid" style="background-color: #38BF34;">VERDE</th>
+										<th class="" style="background-color: #38BF34;">VERDE</th>
+										<th class="" style="background-color: #38BF34;">VERDE</th>
 									</tr>
-									<tr><th id="NearG" class="solid regularTxt">--</th>
-										<th id="FarG" class="solid regularTxt">--</th>
-									</tr>
-									<tr>
-										<th class="solid" style="background-color: #4F81BC">AZUL</th>
-										<th class="solid" style="background-color: #4F81BC">AZUL</th>
+									<tr><th id="NearG" class=" regularTxt">--</th>
+										<th id="FarG" class=" regularTxt">--</th>
 									</tr>
 									<tr>
-										<th id="NearB" class="solid regularTxt">--</th>
-										<th id="FarB" class="solid regularTxt">--</th>
+										<th class="" style="background-color: #4F81BC">AZUL</th>
+										<th class="" style="background-color: #4F81BC">AZUL</th>
+									</tr>
+									<tr>
+										<th id="NearB" class=" regularTxt">--</th>
+										<th id="FarB" class=" regularTxt">--</th>
 									</tr>
 								</table>
 							</div>
@@ -323,23 +349,47 @@
 				<div class="tituloTable solido">Viento</div>
 				<textarea id="efectoViento" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '>&#9679 Recomendación 1</textarea>
 				<div class="tituloTable solido">Lluvia</div>
-				<br>
-				<br>
-				<textarea id="html2pdf__page-break efectoLluvia" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<textarea id="efectoLluvia" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 				<div class="tituloTable solido">Oleaje elevado</div>
 				<textarea id="efectoOleaje" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 				<div class="tituloTable solido">Marea de tormenta</div>
-				<textarea id="efectoMarea" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<textarea id="efectoMarea" class=' autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 		</div>
-		<element id="autores" type="Text"></element>	
+		<!--  nueva hoja -->
+		<div class="html2pdf__page-break "></div>
+		<hr style="height:10px; visibility:hidden;" />
+		<div id="headerLogosG" class="logos">
+			<div align="left">
+				<img src="img/head1.png" width="60%">
+			</div>
+			<div align="center">
+				<img src="img/head2.png" width="60%">
+			</div>
+			<div align="right">
+				<img src="img/Sinaprocsolo.png" width="70%" >
+			</div>
+		</div>
 		<br>
-		<br>
-	</div>
-	
+		<div class="titulo">
+			ALERTA DE CICLÓN TROPICAL EN EL OCÉANO <element  id="TitleOceano"></element>
+		</div>
+		<div id="efectos" class="solid">
+				<div class="tituloTable solido">Cierre de puertos</div>
+				<element class="regularTxt">Consulte a la Unidad de Capitanías de Puerto y Asuntos Marítimos de la Secretaría de Marina para conocer más información sobre el cierre de puertos por condiciones meteorológicas adversas en el siguiente enlace:
+				<a href="https://www.gob.mx/semar/unicapam/acciones-y-programas/estado-operacional-de-puertos">https://www.gob.mx/semar/unicapam/acciones-y-programas/estado-operacional-de-puertos</a></element> 
+				<div class="tituloTable solido">Riesgo por inestabilidad de laderas</div>
+				<textarea class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<div class="tituloTable solido">Riesgo por inundaciones</div>
+				<textarea class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+		</div>
+
+	</div> <!--  Div del BOX -->
+	<element class="html2pdf__page-break" id="autores" type="Text"></element>
 	<!-- Button of actions -->
 	<center>
 	<button class="btn btn-success" id="guardarInfo" >Guardar Boletín</button>
 	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
+	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>
 
 

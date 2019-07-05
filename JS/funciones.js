@@ -27,6 +27,8 @@ $(function() {
 	        	
 	        }
 	        $(".regularTxt").css("font-size", "10px");
+	        $("#headerLogos").show();
+	        //$(".solid").css("border-style", "dotted");
 	        $("#regiones").css("font-size", "10px");
 			$(".tituloTable").css("font-size", "12px");
 	        $(".fecha").css("font-size", "14px");
@@ -39,10 +41,10 @@ $(function() {
 	        var element = document.getElementById('root');
 	        // Generate the PDF.
 	        html2pdf().from(element).set({
-	          margin: [-0.3,-0.65],
+	          margin: [-0.3,-0.65,0,-0.65],
 	          filename: 'boletin.pdf',
-	          mode: 'avoid-all',
-	          html2canvas: { scale: 3 },
+	          //mode: 'avoid-all',
+	          html2canvas: { scale: 5 },
 	          letterRendering: true,
 	          jsPDF: {orientation: 'portrait', unit: 'in', format: 'letter', compressPDF: true}
 	        }).save();
@@ -101,7 +103,7 @@ $(function() {
 		document.getElementById("NombreEvento").innerHTML = '<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >'
 		document.getElementById("saveButton").innerHTML ='<button type="button" onclick="saveDate()" class="btn btn-outline-success">Guardar</button>'
 		document.getElementById("tipo").innerHTML = '<select id="opt">			<option>DT</option>			<option>TT</option>			<option>Huracán</option>		</select>'
-		document.getElementById("sea").innerHTML = '<select id="oceano">			<option>Pacífico</option>			<option>Atlántico</option>	</select>'
+		document.getElementById("sea").innerHTML = '<select id="oceano">			<option>PACÍFICO</option>			<option>ATLÁNTICO</option>	</select>'
 	}
 
 	function secretI(){
@@ -143,6 +145,7 @@ $(function() {
 			if((document.getElementById("textEvent").value) != ''){
 				document.getElementById("NombreEvento").innerHTML = document.getElementById("textEvent").value;
 				document.getElementById("tipo").innerHTML = document.getElementById("opt").value;
+				document.getElementById("TitleOceano").innerHTML = document.getElementById("oceano").value;
 				document.getElementById("sea").innerHTML = '';
 				editandoE=false;
 			}else{
@@ -623,6 +626,7 @@ $(function() {
 	$("#GuardaTabla").click(function() { guardaData(); });
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	
+	$("#headerLogos").hide();
 	$('#capture').hide();
 	$('#mapa_ciclon').hide();
 	$('#ButtonInfo').hide();

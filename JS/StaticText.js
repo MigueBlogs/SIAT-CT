@@ -7,6 +7,15 @@ $.each(autores, function(i,autor){
 	$('#autores').append('<li>Nombre: '+autor.nombre+', id_autor: '+autor.id_autor+'</li>')
 });
 
+var ultimo = 'falso';
+
+$('#no').click(function(){
+	ultimo = 'falso';
+});
+
+$('#yes').click(function(){
+	ultimo = 'verdadero';
+});
 
 var output = document.getElementById('Number');
 output.innerHTML = texto.numero;
@@ -32,7 +41,8 @@ var dataArr = [];
 			autores : autores,
 			archivos : $('#media').val(),
 			regiones: near,
-			efectos : efectos
+			efectos : efectos,
+			ultimo_boletin : ultimo
 		});
 		dataArr.push(data);
         alert(data);
@@ -46,9 +56,10 @@ var dataArr = [];
         	url:'http://rest.learncode.academy/api/SIAT-CT/boletines',
         	data: data,
         	success: function(nuevoDato){
-        		alert("se ha añadido nuevo nombre: "+nuevoDato.NombreEvento);
+        		//alert("se ha añadido nuevo nombre: "+nuevoDato.NombreEvento);
         	}
         });
+        $("#lastOne").show();
 	});
 /*
 function loadJSON(callback) {   
