@@ -87,7 +87,7 @@ table, td, th {
 
 .tableDataL {
   display: grid;
-  grid-template-rows: auto 1fr; }
+  grid-template-rows: auto auto; }
 
 .tableDataR {
   display: grid;
