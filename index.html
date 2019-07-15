@@ -33,7 +33,7 @@
 <body>
 	<div class="box" id="root">
 		<!-- Menú del Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div style="background-color: #35695D; color:white" class="modal-header">
@@ -64,7 +64,7 @@
 						<br>
 						<select id="SeleccionaEvento">
 							<option> -- </option>
-							<option value="1">TT-Andrea</option>
+							<option value="1">Huracán-Andrea</option>
 							<option>TT-Edson</option>
 							<option>DT-01</option>
 						</select>
@@ -73,7 +73,7 @@
 				</center>
 		      	</div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+		        <button id="next" type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
 		      </div>
 		    </div>
 		  </div>
@@ -100,6 +100,14 @@
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 		      </div>
 		    </div>
+		  </div>
+		</div>
+		<!-- Logo printing -->
+		<div class="modal fade" id="printing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <center>
+		  	<img src="img/loading.gif">
+		 	</center>
 		  </div>
 		</div>
 		<div class="logos disable_on_print">
@@ -369,14 +377,16 @@
 		</div>-->
 		<br>
 		<div class="titulo" style="page-break-before: always;">
-			ALERTA DE CICLÓN TROPICAL EN EL OCÉANO <element  id="TitleOceano"></element>
+			ALERTA DE <element  id="TitleTipo"></element> EN EL OCÉANO <element  id="TitleOceano"></element>
 		</div>
 		<div id="efectos" class="solid">
 				<div class="tituloTable solido">Cierre de puertos</div>
 				<element class="regularTxt">Consulte a la Unidad de Capitanías de Puerto y Asuntos Marítimos de la Secretaría de Marina para conocer más información sobre el cierre de puertos por condiciones meteorológicas adversas en el siguiente enlace:
 				<a href="https://www.gob.mx/semar/unicapam/acciones-y-programas/estado-operacional-de-puertos">https://www.gob.mx/semar/unicapam/acciones-y-programas/estado-operacional-de-puertos</a></element> 
 				<div class="tituloTable solido">Riesgo por inestabilidad de laderas</div>
-				<textarea class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+				<element class="regularTxt">Consulte el Atlas Nacional de Riesgos del Centro Nacional de Prevención de Desastres para más información: <br>
+&#9679 Riesgo por inestabilidad de laderas:	<a href="http://www.atlasnacionalderiesgos.gob.mx/archivo/inestabilidad-laderas.html">http://www.atlasnacionalderiesgos.gob.mx/archivo/inestabilidad-laderas.html 
+</a></element> 
 				<div class="tituloTable solido">Riesgo por inundaciones</div>
 				<textarea class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 		</div>
@@ -386,7 +396,7 @@
 	<!-- Button of actions -->
 	<center>
 	<button class="btn btn-success" id="guardarInfo" >Guardar Boletín</button>
-	<button class="btn btn-outline-success" id="pdf">Generar PDF</button>	
+	<button type="button" data-toggle="modal" data-target="#printing"  class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>
 

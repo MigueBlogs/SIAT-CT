@@ -60,6 +60,7 @@ var dataArr = [];
         	}
         });
         $("#lastOne").show();
+        $("#pdf").show();
 	});
 /*
 function loadJSON(callback) {   
@@ -102,6 +103,12 @@ $("#SeleccionaEvento").click(function() {
 		var output = document.getElementById('NombreEvento');
 		output.innerHTML = data.NombreEvento;
 		
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('sea');
+			output.innerHTML = data.oceano;
+			$('#sea').hide();
+		});
+
 		$.getJSON('JS/info.json',function(data){
 			var output = document.getElementById('tipo');
 			output.innerHTML = data.cat_evento;
