@@ -45,8 +45,8 @@ var dataArr = [];
 			ultimo_boletin : ultimo
 		});
 		dataArr.push(data);
-        alert(data);
-        console.log(dataArr);
+        
+        //console.log(dataArr);
 
         $.ajax({
         	type: 'POST',
@@ -56,7 +56,7 @@ var dataArr = [];
         	url:'http://rest.learncode.academy/api/SIAT-CT/boletines',
         	data: data,
         	success: function(nuevoDato){
-        		//alert("se ha añadido nuevo nombre: "+nuevoDato.NombreEvento);
+        		alert("Se han guardado los datos de: "+nuevoDato.NombreEvento);
         	}
         });
         $("#lastOne").show();

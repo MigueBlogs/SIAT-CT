@@ -11,8 +11,8 @@ $(function() {
 	function generaPdf() {
 			
 	      	/*Cambios para imprimir correctamente el documento*/
-	      	
-
+	      	$('#imagen').css("widht","400px");
+			$('#imagen').css("widht","270px")
 	      	$(".box").css("padding", "0px");
 	      	$(".box").css("margin", "0px auto");
 	      	$(".titulo").css("font-size", "15px");
@@ -63,6 +63,7 @@ $(function() {
 				}
 
 				//regresando el html a su versión original
+				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
 		      	$(".box").removeAttr('style');
 		      	$(".titulo").removeAttr('style');
@@ -77,12 +78,16 @@ $(function() {
 		        //autoExpand(document.getElementsByClassName("autoExpand"));
 		        $("textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
-		        $("#printing").modal('hide');
+		        //oculta modal de espera
+		        setTimeout(function(){
+				  $("#printing").modal('hide');
+				}, 3000);
 				
 	          }).save();
 
 	        $("#map-container").css("width","100%");
             $("#map-container").css("height","300px");
+
            /* $($('link')[6]).remove();
             $.get('/css/styles.css', function(d){
             	$('head').append($('<style/>').html(d))

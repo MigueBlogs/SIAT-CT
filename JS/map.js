@@ -310,7 +310,9 @@ $(function() {
               screenshotImage.width = screenshot.data.width;
               screenshotImage.height = screenshot.data.height;
               screenshotImage.src = screenshot.dataUrl;
-
+              $('#imagen').css("width","100%");
+              $('#imagen').css("height","100%");
+            console.log("cambiado!");
               $('#map-container').hide();
             }
 
