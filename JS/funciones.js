@@ -11,8 +11,13 @@ $(function() {
 	function generaPdf() {
 			
 	      	/*Cambios para imprimir correctamente el documento*/
-	      	$('#imagen').css("widht","400px");
-			$('#imagen').css("widht","270px")
+	      	//Esto genera un mapa cuadrado
+	      	var ancho = $("#map-container").css("width");
+	      	parseInt(ancho, 10);
+	      	$("#map-container").css("height", ancho);
+	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
+	      	$("#imagen").css("width", "400px");
+	      	$("#imagen").css("height", "300px");
 	      	$(".box").css("padding", "0px");
 	      	$(".box").css("margin", "0px auto");
 	      	$(".titulo").css("font-size", "15px");
@@ -80,13 +85,17 @@ $(function() {
 		        $(".dataH").removeAttr('style');
 		        //oculta modal de espera
 		        setTimeout(function(){
-				  $("#printing").modal('hide');
+					$("#printing").modal('hide');
 				}, 3000);
+				//Después de tomar la captura muestra mapa normal
+				$("#imagen").removeAttr('style');
+				$('.js-screenshot-image').hide();
+				$("#map-container").removeAttr('style');
+	            $('#map-container').show();
 				
 	          }).save();
-
-	        $("#map-container").css("width","100%");
-            $("#map-container").css("height","300px");
+			 
+			
 
            /* $($('link')[6]).remove();
             $.get('/css/styles.css', function(d){

@@ -12,7 +12,7 @@ $(function() {
                 container: container,
                 map: map,
                 center: [-101.608429, 23.200961],
-                zoom: 4
+                zoom: 5
             });
     
             view["ui"]["components"] = ["attributtion"];
@@ -31,7 +31,7 @@ $(function() {
             
             screenshotBtn.addEventListener("click", function() {    
                 view
-                    .takeScreenshot({ area:area, format: "png", quality:100 })
+                    .takeScreenshot({ format: "png", quality:100 })
                     .then(function(screenshot) {
                       showPreview(screenshot);
                   });
@@ -310,9 +310,9 @@ $(function() {
               screenshotImage.width = screenshot.data.width;
               screenshotImage.height = screenshot.data.height;
               screenshotImage.src = screenshot.dataUrl;
-              $('#imagen').css("width","100%");
-              $('#imagen').css("height","100%");
-            console.log("cambiado!");
+              //$('#imagen').css("width","100%");
+              //$('#imagen').css("height","100%");
+         
               $('#map-container').hide();
             }
 
