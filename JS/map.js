@@ -23,8 +23,8 @@ $(function() {
             const screenshotBtn = document.getElementById("capture");
 
             var area = {
-                x:200,
-                y:30,
+                x: 200,
+                y: 30,
                 width: 400,
                 height: 300
               };
@@ -34,7 +34,7 @@ $(function() {
                     .takeScreenshot({ area:area, format: "png", quality:100 })
                     .then(function(screenshot) {
                       showPreview(screenshot);
-                  });
+              });
             });
             
             $('#mapa_ciclon').click(function() {
