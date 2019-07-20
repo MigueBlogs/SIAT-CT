@@ -47,7 +47,7 @@ strong{
 
 table, td, th {
   border: 1px solid black; }
-  
+
 .otraTabla{
   border: none;  width: 100%; height: 100%; text-align: center;
 }
@@ -86,6 +86,21 @@ table, td, th {
   border-style: solid;
   display: grid;
   grid-template-columns: 85% 15%;
+  height: auto; 
+  background: #D9D9D9;
+  color: black;
+  font-family: Montserrat-Bold;
+  font-size: 14px;
+  }
+
+.DosRenglones{
+  display: grid;
+  grid-template-rows: auto auto;
+}
+
+.QR_box2 {
+  border: 5px;
+  border-style: solid;
   height: auto; 
   background: #D9D9D9;
   color: black;
