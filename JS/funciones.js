@@ -11,6 +11,7 @@ $(function() {
 	function generaPdf() {
 			
 	      	/*Cambios para imprimir correctamente el documento*/
+	      	$("#enable_on_print").show();
 	      	//Esto genera un mapa cuadrado
 	      	var ancho = $("#map-container").css("width");
 	      	parseInt(ancho, 10);
@@ -21,6 +22,7 @@ $(function() {
 	      	$(".box").css("padding", "0px");
 	      	$(".box").css("margin", "0px auto");
 	      	$(".titulo").css("font-size", "15px");
+	      	$(".tituloEfectos").css("font-size", "14px");
 	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
 	      	$(".encabezado").css("font-size", "30px");
 	      	autoExpand(document.getElementById("subtitle"));
@@ -36,6 +38,9 @@ $(function() {
 	        	
 	        }
 	        $(".regularTxt").css("font-size", "10px");
+	        $(".QR_box").css("font-size", "12px");
+	        //$(".QR_box").css("background", "#D9D9D9");
+	        $(".QR_box").css("border", "solid 3px");
 	        $("#headerLogos").show();
 	        //$(".solid").css("border-style", "dotted");
 	        $("#regiones").css("font-size", "10px");
@@ -68,6 +73,7 @@ $(function() {
 				}
 
 				//regresando el html a su versión original
+
 				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
 		      	$(".box").removeAttr('style');
@@ -76,6 +82,8 @@ $(function() {
 		      	$(".encabezado").removeAttr('style');
 		        $(".regularTxt").removeAttr('style');
 		        $("#regiones").removeAttr('style');
+		        $(".QR_box").removeAttr('style');
+		        $("#regiones").css("height", "calc(100% - 43px)");
 				$(".tituloTable").removeAttr('style');
 		        $(".fecha").removeAttr('style');
 		        $(".encabezado").removeAttr('style');
@@ -83,20 +91,27 @@ $(function() {
 		        //autoExpand(document.getElementsByClassName("autoExpand"));
 		        $("textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
-		        //oculta modal de espera
-		        setTimeout(function(){
-					$("#printing").modal('hide');
-				}, 3000);
+		        $(".tituloEfectos").removeAttr('style');
 				//Después de tomar la captura muestra mapa normal
 				$("#imagen").removeAttr('style');
 				$('.js-screenshot-image').hide();
 				$("#map-container").removeAttr('style');
 	            $('#map-container').show();
 				
-	          }).save();
+	          }).save().then( function(){
+		          	//oculta modal de espera
+			        setTimeout(function(){
+						$("#printing").modal('hide');
+						$("#enable_on_print").hide();
+					}, 3000);
+		          	$("#printing").modal('hide');
+					//console.log("aparecÍ Después del PDF!!!");
+					$('textarea').each(function(){
+					 	autoExpand(this);
+					});
+	          });
 			 
 			
-
            /* $($('link')[6]).remove();
             $.get('/css/styles.css', function(d){
             	$('head').append($('<style/>').html(d))
@@ -673,8 +688,14 @@ $(function() {
 		
 		});
 	}
-	$("#capturaMapa").on("mouseenter", function() { $('#capture').show();
-												 $('#mapa_ciclon').show(); });
+	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
+										                $('#mapa_ciclon').show();
+										                $('#capture').hide();
+										            }else{
+										                $('#capture').show();
+										                $('#mapa_ciclon').hide();
+										            } 
+										        });
 	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
 												$('#mapa_ciclon').hide(); });
 	$(".EditInfo").on("mouseenter", function() { $('#ButtonInfo').show() });
@@ -697,7 +718,7 @@ $(function() {
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
 	
-
+	$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
 	$("#headerLogos").hide();
@@ -717,7 +738,12 @@ $(function() {
 		autoFillInfo();
 	});
 
-	
+	//ajuste de todos los inputs para que el texto quede legible
+	$("#next").click(function(){
+		$('textarea').each(function(){
+		 	autoExpand(this);
+		});
+	});
 
 	$(".form-check-input").click(function() {
     if(this.checked && this.value=="option2") {

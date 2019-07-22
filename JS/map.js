@@ -31,8 +31,9 @@ $(function() {
                 width: 400,
                 height: 300
               };
-            
+           
             screenshotBtn.addEventListener("click", function() {    
+               
                 view
                     .takeScreenshot({ format: "png", quality:100 })
                     .then(function(screenshot) {
@@ -40,6 +41,8 @@ $(function() {
               });
             });
             
+           
+
             $('#mapa_ciclon').click(function() {
                 $('.js-screenshot-image').hide();
                 $('#map-container').show();

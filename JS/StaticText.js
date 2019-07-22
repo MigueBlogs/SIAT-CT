@@ -1,11 +1,6 @@
-//la base de datos va a calcular e valor del numero de boletín?
+
 var texto = {"numero":"1"};
-var autores = [{"nombre":"Alí","id_autor":"1"},{"nombre":"Beto","id_autor":"2"}]
-
-
-$.each(autores, function(i,autor){
-	$('#autores').append('<li>Nombre: '+autor.nombre+', id_autor: '+autor.id_autor+'</li>')
-});
+//var autores = [{"nombre":"Alí","id_autor":"1"},{"nombre":"Beto","id_autor":"2"}]
 
 var ultimo = 'falso';
 
@@ -162,6 +157,11 @@ $("#SeleccionaEvento").click(function() {
 		$.getJSON('JS/info.json',function(data){
 			var output = document.getElementById('racha');
 			output.innerHTML = data.racha;
+		});
+
+		$.getJSON('JS/info.json',function(data){
+			var output = document.getElementById('autores');
+			output.innerHTML = data.autores;
 		});
 
 	});
