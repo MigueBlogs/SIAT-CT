@@ -11,6 +11,7 @@
 @font-face {
   font-family: Montserrat-Regular;
   src: url(../font/Montserrat-Regular.otf); }
+
 .regularTxt {
   font-family: Montserrat-Regular;
   font-size: 14px; }
@@ -77,9 +78,17 @@ table, td, th {
   color: black;
   font-size: 20px; }
 
+.textFooter{
+  font-family: Montserrat-Bold;
+  color: black;
+  font-size: 10px; }
+
 .logos {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.3%; }
+.tablaAutores{
+  width:100%;
+}
 
 .QR_box {
   border: 5px;
@@ -93,15 +102,34 @@ table, td, th {
   font-size: 14px;
   }
 
+.footer_box {
+  border: 1px;
+  border-style: solid;
+  height: auto; 
+  width:80%;
+  color: black;
+  font-family: Montserrat-Bold;
+  font-size: 6px;
+  text-align: center;
+  box-shadow: 0px 10px 10px 1px grey;
+  }
+
 .DosRenglones{
   display: grid;
   grid-template-rows: auto auto;
-}
-
-.QR_box2 {
   border: 5px;
   border-style: solid;
   height: auto; 
+  background: #D9D9D9;
+  color: black;
+  font-family: Montserrat-Bold;
+  font-size: 14px;
+}
+
+.QR_box2 {
+  display: grid;
+  grid-template-columns: 85% 15%;
+  height: auto; width: auto;
   background: #D9D9D9;
   color: black;
   font-family: Montserrat-Bold;

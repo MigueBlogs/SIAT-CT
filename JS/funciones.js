@@ -11,6 +11,7 @@ $(function() {
 	function generaPdf() {
 			
 	      	/*Cambios para imprimir correctamente el documento*/
+	      	$("#enable_on_print").show();
 	      	//Esto genera un mapa cuadrado
 	      	var ancho = $("#map-container").css("width");
 	      	parseInt(ancho, 10);
@@ -101,6 +102,7 @@ $(function() {
 		          	//oculta modal de espera
 			        setTimeout(function(){
 						$("#printing").modal('hide');
+						$("#enable_on_print").hide();
 					}, 3000);
 		          	$("#printing").modal('hide');
 					//console.log("aparecÍ Después del PDF!!!");
@@ -716,7 +718,7 @@ $(function() {
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
 	
-
+	$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
 	$("#headerLogos").hide();
