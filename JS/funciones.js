@@ -311,39 +311,61 @@ $(function() {
 			$('#tablaEditar').hide();
 		});
 	});
-	var cont=0;
+//	var cont=0;
 	function agregar(nameTable){
 		cont++;
-		var fila='<tr id="fila'+cont+'"><th class="solid">\
-											<select id="NivelDeAlerta"> \
-												<option value="1" style="background-color: red; ">ROJA</option>\
-												<option value="2" style="background-color: orange;">NARANJA</option>\
-												<option value="3" style="background-color: yellow;">AMARILLA</option>\
-												<option value="4" style="background-color: #38BF34;">VERDE</option>\
-												<option value="5" style="background-color: #4F81BC">AZUL</option>\
-											</select>\
-									</th>\
-										<th class="solid">\
-											<select id="Estado"> \
-												<option value="">Baja California Norte</option>\
-												<option value="">Baja California Sur</option>\
-												<option value="">Sinaloa</option>\
-											</select>\
-											<select id="Region"> \
-												<option value="">Todo el Edo</option> \
-												<option value="">Norte</option>\
-												<option value="">Centro</option>\
-												<option value="">Sur</option>\
-											</select>\
-											<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm" onclick="eliminar(this.id);" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
-									</th>';
-		
+		var fila='<tr id="fila'+cont+'">\
+					<th class="solid">\
+					<p>Fila: '+cont+'</p>\
+							<select id="NivelDeAlerta"> \
+								<option value="1" style="background-color: red; ">ROJA</option>\
+								<option value="2" style="background-color: orange;">NARANJA</option>\
+								<option value="3" style="background-color: yellow;">AMARILLA</option>\
+								<option value="4" style="background-color: #38BF34;">VERDE</option>\
+								<option value="5" style="background-color: #4F81BC">AZUL</option>\
+							</select>\
+					</th>\
+					<th class="solid">\
+						<select id="Estado" class="edosFila'+cont+'">\
+						</select>\
+							<select id="Region">\
+								<option value="-1">Todo el Edo</option>\
+								<option value="0">Centro</option>\
+								<option value="1">Norte</option>\
+								<option value="2">Noreste</option>\
+								<option value="3">Este</option>\
+								<option value="4">Sureste</option>\
+								<option value="5">Sur</option>\
+								<option value="6">Suroeste</option>\
+								<option value="7">Oeste</option>\
+								<option value="8">Noroeste</option>\
+							</select>\
+							<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+					</th>\
+				</tr>'
+
+		$.getJSON('JS/edos.json',function(data){
+		    $.each(data,function(key, value){
+			    $('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
+			});
+		});
 		$('#'+nameTable).append(fila);
+		$(".botoncito").click(function(event){
+			//console.log("elemento a eliminar: "+this.id);
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+			eliminar(this.id); 
+		});
 	};
 
-	function eliminar(id_fila){
+
+	window.eliminar =function(id_fila){
 		$('#'+id_fila).remove();
 	}
+	
+	//function eliminar(id_fila){
+	//	$('#'+id_fila).remove();
+	//}
 	
 
 	function ImprimeDatos(Param,a,b){
@@ -711,7 +733,6 @@ $(function() {
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
 
-	$(".botoncito").click(function() { eliminar(this.id); });
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
 	$("#GuardaTabla").click(function() { guardaData(); });
