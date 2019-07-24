@@ -18,7 +18,6 @@ $(function() {
             view["ui"]["components"] = ["attributtion"];
             view.when(function() {
                 loadCiclones(map);
-                addFeatureLayer(map, "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0", {id: "regionalizacion", outFields: ["Regional_1", "Regional_2"], visible: true});
                 loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_001Aadv_CONE.kmz", {id: "willa_cone"});
             });
 
@@ -107,10 +106,10 @@ $(function() {
 
         Promise.all(activeConesPromises).then(function(results) {
             results.forEach(function(result) {
-                if(result["features"].length) activeCones.push(result["features"][0]);
+                if(result["features"].length) activeCones.push(result["features"][0]["geometry"]);
             });
 
-            if(activeCones.length) queryRegions(map, activeCones);
+            if(activeCones.length) queryRegions(map, activeCones, "objectid");
         });
     }
 
@@ -121,7 +120,7 @@ $(function() {
         return objectidName + " IN (" + array.splice(0, 1000).join(",") + ") OR " + getQuery(array, objectidName);
     }
 
-    function queryRegions(map, geometries) {
+    function queryRegions(map, geometries, objectidField) {
         require([
             "esri/tasks/QueryTask",
             "esri/tasks/support/Query"
@@ -134,6 +133,7 @@ $(function() {
             var regionsLocated = [];
             var queryPromises = [];
 
+            debugger
             geometries.forEach(function(geometry) {
                 var query = new Query();
                 query.geometry = geometry;
@@ -145,9 +145,11 @@ $(function() {
             Promise.all(queryPromises).then(function(results) {
                 var featuresPromises = [];
                 results.forEach(function(result) {
+                    if(!result) return
+
                     const outFields = ["Regional_1", "Regional_2"];
                     var query = new Query();
-                    query.where = getQuery(result, "FID");
+                    query.where = getQuery(result, objectidField);
                     query.returnGeometry = false;
                     query.outFields = outFields;
                     query.returnDistinctValues = true;
@@ -412,10 +414,22 @@ $(function() {
                 const layerId = name + "_" + type;
                 const properties = {
                     id: layerId,  
-                    opacity: 0.5,
+                    opacity: 0.8,
+                    refreshInterval: 10,
                     showLabels: true,
                     outFields: ["*"]
                 };
+
+                if(type == "forecastPoints") {
+                    properties["labelingInfo"] = [forecastPointsLabelClass];
+                    properties["renderer"] = forecastPointsRenderer;
+                } else if(type == "forecastTrack") {
+                    properties["renderer"] = forecastTrackRenderer;
+                } else if(type == "pastTrack") {
+                    properties["renderer"] = pastTrackRenderer;
+                } else if(type == "pastPoints") {
+                    properties["renderer"] = pastTrackPointRenderer;
+                }
 
                 addFeatureLayer(map, layers[type], properties);
             });
@@ -427,7 +441,7 @@ $(function() {
         const layerDetail = evt["detail"];
         const geometries = layerDetail["geometries"]["polygons"].map(function(polygon){ return polygon["geometry"]; });
 
-        queryRegions(layerDetail["map"], geometries);
+        queryRegions(layerDetail["map"], geometries, "FID");
     });
 
     function showPreview(screenshot) {
