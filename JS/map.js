@@ -170,8 +170,9 @@ $(function() {
     
                         regionsLocated.push(eventRegions);
                     });
-
+                    
                     console.log(regionsLocated);
+                   loadEdo(regionsLocated[0]);
                 });
             });
             
@@ -437,7 +438,7 @@ $(function() {
     }
 
     document.addEventListener("kml-added", function(evt) {
-        debugger
+        //debugger
         const layerDetail = evt["detail"];
         const geometries = layerDetail["geometries"]["polygons"].map(function(polygon){ return polygon["geometry"]; });
 
