@@ -133,7 +133,7 @@ $(function() {
             var regionsLocated = [];
             var queryPromises = [];
 
-            debugger
+            //debugger
             geometries.forEach(function(geometry) {
                 var query = new Query();
                 query.geometry = geometry;

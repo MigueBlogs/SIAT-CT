@@ -735,6 +735,8 @@ $(function() {
 
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
+	$("#bt_add1").hide();
+	$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
@@ -771,6 +773,8 @@ $(function() {
         $('#Select-Event').show();
         $("#lastOne").show();
         $("#pdf").show();
+        $("#bt_add1").hide();
+		$("#bt_add2").hide();
     }else{
     	$('#Select-Event').hide();
     	$("#lastOne").hide();
