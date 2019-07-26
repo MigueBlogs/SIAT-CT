@@ -1,4 +1,6 @@
+
 $(function() {
+	
 	var dt = new Date();
 	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 	var hora2 = {hour:'2-digit', minute:'2-digit'}
@@ -305,10 +307,14 @@ $(function() {
 		$('#tabla').click(function(){
 			$('#regiones').hide();
 			$('#tablaEditar').show();
+			//$("th").removeAttr('width');
+			
 		});
 		$('#GuardaTabla').click(function(){
 			$('#regiones').show();
 			$('#tablaEditar').hide();
+			//$("th").attr("width","50%");
+			
 		});
 	});
 //	var cont=0;
@@ -341,10 +347,11 @@ $(function() {
 								<option value="8">Noroeste</option>\
 							</select>\
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+							<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 					</th>\
 				</tr>'
 
-		$.getJSON('JS/edos.json',function(data){
+		$.getJSON('JS/estados.json',function(data){
 		    $.each(data,function(key, value){
 			    $('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
 			});
@@ -356,11 +363,27 @@ $(function() {
 			event.stopImmediatePropagation();
 			eliminar(this.id); 
 		});
+		$(".switch").click(function(event){
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+			change(this.id)})
 	};
 
 
 	window.eliminar =function(id_fila){
 		$('#'+id_fila).remove();
+	}
+
+	window.change = function(id_fila){
+		var filaAct = document.getElementById(id_fila);
+		var tablaFilaAct= $('#'+id_fila).parent().parent();
+		console.log("Tabla actual: ",tablaFilaAct[0].id);
+		if(tablaFilaAct[0].id == 'tablaEdos1'){
+			$('#tablaEdos2').append(filaAct);
+		}
+		if (tablaFilaAct[0].id == 'tablaEdos2'){
+			$('#tablaEdos1').append(filaAct);
+		}
 	}
 	
 	//function eliminar(id_fila){
@@ -710,12 +733,17 @@ $(function() {
 		
 		});
 	}
+	var captura = false;
 	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
 										                $('#mapa_ciclon').show();
 										                $('#capture').hide();
+										                captura=false;
+										                $('#pdf').removeAttr("data-toggle","modal");
 										            }else{
 										                $('#capture').show();
 										                $('#mapa_ciclon').hide();
+										                captura=true;
+										                $('#pdf').attr("data-toggle","modal");
 										            } 
 										        });
 	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
@@ -729,7 +757,7 @@ $(function() {
 	$("#secretButton").click(function() { editarF(); });
 	$("#secretButton2").click(function() { editarE(); });
 	$("#saveButton").click(function() { saveDate(); });
-	$("#pdf").click(function() {generaPdf();});
+	$("#pdf").click(function() {console.log(captura);if(captura==true){generaPdf();  captura=false;  $('#pdf').removeAttr("data-toggle","modal");}else{ alert("Genera una captura del mapa antes de imprimir"); }});
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
 

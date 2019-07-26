@@ -9,10 +9,10 @@ function loadEdo(estados){
 	for(var i in estados){
 		var numRegiones = Object.keys(estados[i]).length;
 		var busqueda = EdosJson.filter(function(EdosJson){ 
-			return EdosJson.nombre == i;
+			return EdosJson.nombre.toUpperCase() == i;
 		});
 		if(busqueda.length != 0){
-			//(Si num regiones del mapa es mayor o igual al numero de regiones del JSON estados)
+			//(Si num regiones del MAPA es mayor o igual al numero de regiones ESTABLECIDAS)
 			if(numRegiones >= busqueda[0].num_reg){
 				//obtener meta datos
 				var datosEdos=[];
@@ -45,12 +45,13 @@ function loadEdo(estados){
 											<option value="8">Noroeste</option>\
 										</select>\
 										<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+										<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 								</th>\
 							</tr>'
 					$('#tablaEdos1').append(fila);
 					//Este segmento carga los estados en la lista
 				    $.each(EdosJson,function(key, value){
-				    	if(value.nombre != i){
+				    	if(value.nombre.toUpperCase() != i){
 				    		$('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
 							}else{
 							$('.edosFila'+cont).append('<option selected="" value=' + key.clave + '>' + value.nombre + '</option>');	
@@ -60,7 +61,7 @@ function loadEdo(estados){
 			}else{
 				for(var j in estados[i]){
 					var value = j;
-					console.log("este es el valor de j en "+i+": "+j); 	
+					//console.log("este es el valor de j en "+i+": "+j); 	
 					j = convierteRegion(j);
 					var fila='<tr id="fila'+cont+'">\
 								<th class="solid">\
@@ -88,13 +89,14 @@ function loadEdo(estados){
 										<option value="8">Noroeste</option>\
 									</select>\
 									<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+									<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 								</th>\
 							</tr>'
 				    $('#tablaEdos1').append(fila);
 					$('.regFila'+cont+' option:contains('+j+')').prop({selected: true});
 				    $.each(EdosJson,function(key, value){
 				    	//console.log("Este es el valor de i: "+i+" Este es el valor de value: "+value.nombre);
-				    	if(value.nombre != i){
+				    	if(value.nombre.toUpperCase() != i){
 				    		$('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
 							}else{
 							$('.edosFila'+cont).append('<option selected="" value=' + key.clave + '>' + value.nombre + '</option>');	
@@ -153,6 +155,10 @@ function loadEdo(estados){
 			event.stopImmediatePropagation();
 			eliminar(this.id); 
 		});
+		$(".switch").click(function(event){
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+			change(this.id)})
 		//muestra botones de añadir estados hasta terminar la carga de estados
 		$("#bt_add1").show();
 		$("#bt_add2").show();

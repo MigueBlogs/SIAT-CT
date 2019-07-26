@@ -172,7 +172,7 @@ $(function() {
                     });
                     
                     console.log(regionsLocated);
-                   loadEdo(regionsLocated[0]);
+                  loadEdo(regionsLocated[0]);
                 });
             });
             
