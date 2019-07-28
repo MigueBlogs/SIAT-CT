@@ -97,6 +97,9 @@ $(function() {
 				//Después de tomar la captura muestra mapa normal
 				$("#imagen").removeAttr('style');
 				$('.js-screenshot-image').hide();
+				$("#pdfError").show();
+                $("#pdf").hide();
+                captured=false;
 				$("#map-container").removeAttr('style');
 	            $('#map-container').show();
 				
@@ -733,17 +736,13 @@ $(function() {
 		
 		});
 	}
-	var captura = false;
 	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
 										                $('#mapa_ciclon').show();
 										                $('#capture').hide();
-										                captura=false;
-										                $('#pdf').removeAttr("data-toggle","modal");
 										            }else{
 										                $('#capture').show();
 										                $('#mapa_ciclon').hide();
-										                captura=true;
-										                $('#pdf').attr("data-toggle","modal");
+
 										            } 
 										        });
 	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
@@ -757,7 +756,8 @@ $(function() {
 	$("#secretButton").click(function() { editarF(); });
 	$("#secretButton2").click(function() { editarE(); });
 	$("#saveButton").click(function() { saveDate(); });
-	$("#pdf").click(function() {console.log(captura);if(captura==true){generaPdf();  captura=false;  $('#pdf').removeAttr("data-toggle","modal");}else{ alert("Genera una captura del mapa antes de imprimir"); }});
+	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
+	$("#pdf").click(function() {generaPdf();});
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
 
@@ -772,6 +772,7 @@ $(function() {
 	$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
+	$("#pdfError").hide();
 	$("#headerLogos").hide();
 	$('#capture').hide();
 	$('#mapa_ciclon').hide();
@@ -800,7 +801,7 @@ $(function() {
     if(this.checked && this.value=="option2") {
         $('#Select-Event').show();
         $("#lastOne").show();
-        $("#pdf").show();
+        $("#pdfError").show();
         $("#bt_add1").hide();
 		$("#bt_add2").hide();
     }else{

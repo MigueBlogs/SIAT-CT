@@ -3,6 +3,8 @@ var texto = {"numero":"1"};
 //var autores = [{"nombre":"Alí","id_autor":"1"},{"nombre":"Beto","id_autor":"2"}]
 
 var ultimo = 'falso';
+var guardadoGlobal;
+window.guardadoGlobal=false;
 
 $('#no').click(function(){
 	ultimo = 'falso';
@@ -54,8 +56,15 @@ var dataArr = [];
         		alert("Se han guardado los datos de: "+nuevoDato.NombreEvento);
         	}
         });
+        window.guardadoGlobal=true;
+        console.log(captured);
         $("#lastOne").show();
-        $("#pdf").show();
+        if(captured){
+ 			$("#pdf").show();
+        }else{
+        	$("#pdfError").show();
+        }
+       
 	});
 /*
 function loadJSON(callback) {   

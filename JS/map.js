@@ -1,3 +1,5 @@
+var captured=false;
+window.captured;
 $(function() {
     function loadMap(container) {
         require([
@@ -38,6 +40,11 @@ $(function() {
                     .then(function(screenshot) {
                       showPreview(screenshot);
               });
+                    if(guardadoGlobal){
+                        $("#pdfError").hide();
+                        $("#pdf").show();
+                    }
+                    window.captured=true;
             });
             
            
@@ -45,6 +52,11 @@ $(function() {
             $('#mapa_ciclon').click(function() {
                 $('.js-screenshot-image').hide();
                 $('#map-container').show();
+                if(guardadoGlobal){
+                    $("#pdfError").show();
+                    $("#pdf").hide();
+                }  
+                 window.captured=false;
             });
            
         });
