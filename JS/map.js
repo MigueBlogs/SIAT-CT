@@ -2,8 +2,15 @@ $(function() {
     function loadMap(container) {
         require([
             "esri/Map",
-            "esri/views/MapView"
-        ], function(Map, MapView) {
+            "esri/views/MapView",
+            "esri/config"
+        ], function(
+            Map,
+            MapView,
+            esriConfig
+        ) {
+            esriConfig.request.proxyUrl = "http://rmgir.cenapred.gob.mx/proxy/proxy.php";
+
             var map = new Map({
                 basemap: "hybrid"
             });
@@ -19,6 +26,12 @@ $(function() {
             view.when(function() {
                 loadCiclones(map);
                 loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_001Aadv_CONE.kmz", {id: "willa_cone"});
+
+                const viewUpdating = view.watch("updating", function(){
+                    viewUpdating.remove();
+
+                    searchCicloneCones(map, view);
+                });
             });
 
             // the button that triggers screen shot
@@ -61,6 +74,57 @@ $(function() {
         });
     }
 
+    function addMapImageLayer(map, options) {
+        require([
+            "esri/layers/MapImageLayer",
+            "esri/layers/support/Sublayer"
+        ], function(
+            MapImageLayer
+        ) {
+            const layer = new MapImageLayer(options);
+            map.add(layer);
+        });
+    }
+
+    function addImageToMapImage(map, layerId, imageUrl, imageOptions, type) {
+        require([
+            "esri/geometry/Extent",
+            "esri/layers/support/MapImage"
+        ], function(
+            Extent,
+            MapImage
+        ) {
+            var tipos = {
+                "topClouds": new Extent({
+                    xmax: -44.5,
+                    xmin: -122.5,
+                    ymax: 35,
+                    ymin: -2,
+                    spatialReference: new SpatialReference(4326)
+                }),
+                "rgbClouds": new Extent({
+                    xmax: -78.9325,
+                    xmin: -125.19056,
+                    ymax: 34.7925,
+                    ymin: 6.295,
+                    spatialReference: new SpatialReference(4326)
+                })
+            };
+          
+            var image = new MapImage({
+                'extent': tipos[layerId],
+                'href': imageUrl
+            });
+            
+            if(!map.findLayerById(layerId)) return
+            
+            map.findLayerById(layerId).addImage(image);
+            var images = map.findLayerById(layerId).getImages();
+            if(images.length >= 3) map.findLayerById(layerId).removeImage(images[0]);
+
+        });
+    }
+
     function loadKMLLayer(map, mapView, url, properties, renderer = null) {
         require([
             "esri/layers/KMLLayer"
@@ -78,6 +142,7 @@ $(function() {
                         const layerViewCreated = new CustomEvent("kml-added", {
                             detail: {
                                 map: map,
+                                view: mapView,
                                 id: layerView["layer"]["id"],
                                 geometries: {
                                     polygons: layerView["allVisiblePolygons"]["items"],
@@ -93,7 +158,7 @@ $(function() {
         });
     }
 
-    function searchCicloneCones(map) {
+    function searchCicloneCones(map, mapView) {
         const conesLayers = map.layers["items"].filter(function(item) {
             return item["id"].indexOf("Cone") != -1;
         });
@@ -105,12 +170,74 @@ $(function() {
         });
 
         Promise.all(activeConesPromises).then(function(results) {
-            results.forEach(function(result) {
-                if(result["features"].length) activeCones.push(result["features"][0]["geometry"]);
+            results.forEach(function(result, resultIdx) {
+                if(result["features"].length) {
+                    activeCones.push({
+                        stormname: result["features"][0]["attributes"]["stormname"],
+                        stormtype: result["features"][0]["attributes"]["stormtype"],
+                        geometry: result["features"][0]["geometry"],
+                        layerid: conesLayers[resultIdx]["id"]
+                    });
+                }
             });
 
-            if(activeCones.length) queryRegions(map, activeCones, "objectid");
+            var templateSource = $("#stormsActive-template").html();
+            var template = Handlebars.compile(templateSource);
+            var outputHTML = template({storms: activeCones});
+            $("#stormsActive").html(outputHTML);
+
+            $("#stormsActive").on("change", function() {
+                require([
+                    "esri/tasks/GeometryService",
+                    "esri/tasks/support/ProjectParameters"
+                ], function(
+                    GeometryService,
+                    ProjectParameters
+                ) {
+                    var layerid = $("#stormsActive option:selected").attr("data-layerid");
+
+                    if(!layerid) {
+                        $("#type").text("");
+                        $("#sea").text("");
+                        $("#name").text("");
+
+                        return;
+                    }
+
+                    var layer = map.findLayerById(layerid);
+                    var coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
+
+                    var geometryService = new GeometryService({ url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer" });
+                    var params = new ProjectParameters({
+                        geometries: [coneActive["geometry"]["extent"]],
+                        outSpatialReference: mapView["spatialReference"]
+                    });
+
+                    geometryService.project(params).then(function(result) {
+                        mapView.goTo(result[0]);
+
+                        $("#type").text(getCicloneType(coneActive["stormtype"]));
+                        $("#name").text(coneActive["stormname"]);
+                        $("#sea").text(getSea(coneActive["stormtype"]) + " / ");
+                    });
+                })
+            });
+
+            // const geometries = activeCones.map(function(cone) { return cone["geometry"]; });
+            // if(activeCones.length) queryRegions(map, geometries, "objectid");
         });
+    }
+
+    function getCicloneType(type) {
+        if(type == "TS") return "TT";
+        else if(type == "TD") return "DT";
+        else if(type == "H") return "Huracán";
+        else return "NA";
+    }
+
+    function getSea(layerId) {
+        if(layerId.indexOf("EP")) return "EP";
+        else return "AT";
     }
 
     function getQuery(array, objectidName = "OBJECTID"){
@@ -120,7 +247,7 @@ $(function() {
         return objectidName + " IN (" + array.splice(0, 1000).join(",") + ") OR " + getQuery(array, objectidName);
     }
 
-    function queryRegions(map, geometries, objectidField) {
+    function queryRegions(map, mapView, geometries, objectidField) {
         require([
             "esri/tasks/QueryTask",
             "esri/tasks/support/Query"
@@ -133,7 +260,6 @@ $(function() {
             var regionsLocated = [];
             var queryPromises = [];
 
-            debugger
             geometries.forEach(function(geometry) {
                 var query = new Query();
                 query.geometry = geometry;
@@ -172,14 +298,12 @@ $(function() {
                     });
                     
                     console.log(regionsLocated);
-                   loadEdo(regionsLocated[0]);
+                    loadEdo(regionsLocated[0]);
                 });
             });
             
         });
     }
-
-    window.searchCicloneCones = searchCicloneCones;
 
     function loadCiclones(map) {
         const activeHurricanesEPUrls = [
@@ -442,7 +566,7 @@ $(function() {
         const layerDetail = evt["detail"];
         const geometries = layerDetail["geometries"]["polygons"].map(function(polygon){ return polygon["geometry"]; });
 
-        queryRegions(layerDetail["map"], geometries, "FID");
+        queryRegions(layerDetail["map"], layerDetail["view"], geometries, "FID");
     });
 
     function showPreview(screenshot) {
@@ -457,5 +581,5 @@ $(function() {
         $('#map-container').hide();
     }
 
-    loadMap("map-container");
+    loadMap("map");
 });

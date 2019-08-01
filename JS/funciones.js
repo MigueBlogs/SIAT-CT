@@ -166,10 +166,7 @@ $(function() {
 		$('#sea').show();
 		editandoE = true;
 		document.getElementById("secretButton2").innerHTML = ''
-		document.getElementById("NombreEvento").innerHTML = '<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >'
 		document.getElementById("saveButton").innerHTML ='<button type="button" class="btn btn-outline-success">Guardar</button>'
-		document.getElementById("tipo").innerHTML = '<select id="opt">			<option>DT</option>			<option>TT</option>			<option>Huracán</option>		</select>'
-		document.getElementById("sea").innerHTML = '<select id="oceano">			<option>PACÍFICO</option>			<option>ATLÁNTICO</option>	</select>'
 	}
 
 	function secretI(){

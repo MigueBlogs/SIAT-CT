@@ -21,9 +21,11 @@
 	<script src="JS/jquery.timepicker.min.js"></script>
 	<!-- PDF's html2pdf -->
 	<script src="dist/html2pdf.bundle.js"></script>
+	<!-- Handlebars -->
+	<script src="./lib/handlebars.js"></script>
 	<!-- ARCGIS MAP's -->
 	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
-    <script src="https://js.arcgis.com/4.11/"></script>
+	<script src="https://js.arcgis.com/4.11/"></script>
 	<!-- Styles -->
 	<link rel="stylesheet" href="css/styles.css">
 
@@ -126,7 +128,17 @@
 			BOLETÍN DEL SISTEMA DE ALERTA TEMPRANA PARA CICLONES TROPICALES SIAT-CT
 		</div>
 		
-		<div align="center" class="fecha" title="click para editar">Generado el <span id="datetime"></span><element id="secretButton"></element> / <element id="tipo"></element> <element id="sea"></element> <element id="NombreEvento"></element> / No. <element id="Number"></element> <element id="secretButton2"></element> <element id="saveButton"></element>
+		<div align="center" class="fecha" title="click para editar">
+			Generado el <span id="datetime"></span>
+			<span id="secretButton"></span>
+			/ <span id="cicloneDescription">
+				<span id="type"></span>
+				<span id="name"></span>
+				<span id="sea"></span>
+			</span>
+			No. <span id="Number"></span>
+			<span id="secretButton2"></span>
+			<span id="saveButton"></span>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 		</div>
 		<div>
@@ -315,6 +327,14 @@
 					</div>
 					<center>
 						<div id="map-container">
+							<div id="stormSelection">
+								<div class="title">Ciclón tropical</div>
+								<div class="options">
+									<select name="stormsActive" id="stormsActive">
+										<option value="">Cargando</option>
+									</select>
+								</div>
+							</div>
 							<div id="map"></div>
 						</div>
 						<img id="imagen" class="js-screenshot-image"/>
@@ -551,6 +571,17 @@
 	<button type="button" data-toggle="modal" data-target="#printing"  class="btn btn-outline-success" id="pdf">Generar PDF</button>	
 	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>
+
+	<script id="stormsActive-template" type="text/x-handlebars-template">
+		{{#each storms as |storm|}}
+			{{#if @first}}
+				<option value="">Selecciona</option>
+			{{/if}}
+			<option value="{{storm.stormname}}" data-layerid="{{storm.layerid}}">{{storm.stormname}}</option>
+		{{else}}
+			<option value="">Sin ciclones</option>
+		{{/each}}
+	</script>
 
 	<script src="JS/cargaEdos.js"></script>
 	<script src="JS/funciones.js"></script>
