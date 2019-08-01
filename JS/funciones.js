@@ -20,7 +20,7 @@ $(function() {
 	      	$("#map-container").css("height", ancho);
 	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
 	      	$("#imagen").css("width", "400px");
-	      	$("#imagen").css("height", "300px");
+	      	$("#imagen").css("height", "100%");
 	      	$(".box").css("padding", "0px");
 	      	$(".box").css("margin", "0px auto");
 	      	$(".titulo").css("font-size", "15px");
@@ -41,6 +41,9 @@ $(function() {
 	        }
 	        $(".regularTxt").css("font-size", "10px");
 	        $(".QR_box").css("font-size", "12px");
+	        $(".QR_box2").css("font-size", "12px");
+	        $('.tableDataL').css("grid-template-rows","auto 25%");
+	        $("#regiones").css("height", "calc(100% - 22px)");
 	        //$(".QR_box").css("background", "#D9D9D9");
 	        $(".QR_box").css("border", "solid 3px");
 	        $("#headerLogos").show();
@@ -61,7 +64,8 @@ $(function() {
 	          margin: [25.4,-10.16,5,-10.16],
 	          filename: 'boletin.pdf',
 	          //mode: 'avoid-all',
-	          html2canvas: { scale: 5 },
+	          html2canvas: { scale: 3 },
+	          pagebreak: {mode:  ['avoid-all', 'css'] , before: ['#enable_on_print','#pag_3','#pag_4']},
 	          letterRendering: true,
 	          jsPDF: {orientation: 'portrait', format: 'letter', compressPDF: false}}).toPdf().get('pdf').then(function (pdf) {
 	          	var totalPages = pdf.internal.getNumberOfPages();
@@ -123,129 +127,91 @@ $(function() {
             });*/ 
 	      }
 
-	var swiped = false;
-	function swipe(){
-		if(swiped){
-			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest.jpg" ></a>'
-			swiped= !swiped;
-	//		console.log("nuevo valor de SWIPED: "+swiped);
-		}else{
-			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest2.gif" ></a>'
-			swiped= !swiped
-	;	}
-	}
-	var editandoF = false;
-	var editandoE = false;
 
 	function editarF(){
-	editandoF = true;
-	document.getElementById("secretButton").innerHTML = ''
-	document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/> '+
-													'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/></div>'
-	document.getElementById("saveButton").innerHTML ='<button type="button" id="saveDate" class="btn btn-outline-success">Guardar</button>'									
-		
-		$(function(){
-					newDate=$('.datepicker').datepicker({
-						language: "es",
-						days: true,
-						autoclose: true,
-						format: 'dd/mm/yyyy',
-						startDate: '-3d',
-						todayBtn: "linked",
-						autoclose: true,
-						todayHighlight: true
+		$("#ButtonFecha").hide();
+		$("#datetime").hide();
+		$("#saveDate").show();			
+		$("#datePicker").show();
+			$(function(){
+						newDate=$('.datepicker').datepicker({
+							language: "es",
+							days: true,
+							autoclose: true,
+							format: 'dd/mm/yyyy',
+							startDate: '-3d',
+							todayBtn: "linked",
+							autoclose: true,
+							todayHighlight: true
+						});
 					});
-				});
-		
-		var nerHour;
-		$(document).ready(function(){
-					$('#time').timepicker({
-						timeFormat: 'HH:mm',
-						interval: 60,
-						scrollbar: true,
+			
+			var nerHour;
+			$(document).ready(function(){
+						$('#time').timepicker({
+							timeFormat: 'HH:mm',
+							interval: 60,
+							scrollbar: true,
+						});
 					});
-				});
 	}
 
 	function editarE(){
-		$('#sea').show();
-		editandoE = true;
-		document.getElementById("secretButton2").innerHTML = ''
-		document.getElementById("NombreEvento").innerHTML = '<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >'
-		document.getElementById("saveButton").innerHTML ='<button type="button" class="btn btn-outline-success">Guardar</button>'
-		document.getElementById("tipo").innerHTML = '<select id="opt">			<option>DT</option>			<option>TT</option>			<option>Huracán</option>		</select>'
-		document.getElementById("sea").innerHTML = '<select id="oceano">			<option>PACÍFICO</option>			<option>ATLÁNTICO</option>	</select>'
-	}
-
-	function secretI(){
-		if(editandoF){
-			//nada
-		}else{
-		document.getElementById("secretButton").innerHTML = '<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Fecha</button>'
-		}
-		if(editandoE){
-			//nada
-		}else{
-		document.getElementById("secretButton2").innerHTML = '<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Evento</button>'
-		}
-	}
-	function secretO(){
-		document.getElementById("secretButton").innerHTML = ' '
-		document.getElementById("secretButton2").innerHTML = ' '
-	}
-
-	function secretoI(){
-		document.getElementById("tabla").innerHTML = '<button id="mostrar" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>'
-	}
-	function secretoO(){
-		document.getElementById("tabla").innerHTML = ''
+		$("#insertDataEvent").show();
+		$("#ButtonEvento").hide();
+		$("#dataOfEvent").hide();
+		$("#saveEvent").show();
 	}
 
 	function saveDate(){
-		if(editandoF){
-		//document.getElementById("saveButton").innerHTML =''
 		var newDate = new Date();
 		newDate= $(".datepicker").datepicker("getDate");
+		if(newDate == null){
+			alert("Selecciona una fecha");
+			return;
+		}
+		if($('#time').timepicker("getTime") == null){
+			alert("Selecciona una hora");
+			return;
+		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
-		//console.log(newDate);
 		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h';
-		editandoF=false;
-		}
-		if(editandoE){
-		//document.getElementById("saveButton").innerHTML =''
-			if((document.getElementById("textEvent").value) != ''){
-				document.getElementById("NombreEvento").innerHTML = document.getElementById("textEvent").value;
-				document.getElementById("tipo").innerHTML = document.getElementById("opt").value;
-				document.getElementById("TitleOceano").innerHTML = document.getElementById("oceano").value;
-				document.getElementById("TitleTipo").innerHTML = $('#tipo').text();
-				tituloSecundario();
-				document.getElementById("sea").innerHTML = '';
-				editandoE=false;
-				//$('#saveButton').hide();
-				$('#sea').hide();
-			}else{
-				alert("Ingresa el nombre y categoría del evento");
-				//editarF();
-				editarE();
-			}
-		}
-		if((editandoE || editandoF) == false){
-			document.getElementById("saveButton").innerHTML =''
-			$('#sea').hide();
+		$("#datetime").show();
+		$("#datePicker").hide();
+		$("#ButtonFecha").show();
+	}
+
+	function saveEvent(){	
+		if($('#textEvent').val() != ''){
+			$('#NombreEvento').text($('#textEvent').val());
+			$('#tipo').text($('#opt').val());
+			$('#sea').text($('#oceano').val());
+			tituloSecundario();
+			$("#insertDataEvent").hide();
+			$("#dataOfEvent").show();
+			$("#saveEvent").hide();
+			$("#ButtonEvento").show();
+		}else{
+			alert("Ingresa el nombre y categoría del evento");
+			editarE();
 		}
 	}
 
 	function tituloSecundario(){
 		if($('#tipo').text() == 'TT'){
-			document.getElementById("TitleTipo").innerHTML = 'TORMENTA TROPICAL'
+			$(".TitleTipo").text('TORMENTA TROPICAL');
 		}
 		if($('#tipo').text() == 'DT'){
-			document.getElementById("TitleTipo").innerHTML = 'DEPRESIÓN TROPICAL'
+			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
 		}
-		if($('#tipo').text() == 'Huracán'){
-			document.getElementById("TitleTipo").innerHTML = 'HURACÁN'
+		if($('#tipo').text() == 'TST'){
+			$(".TitleTipo").text('TORMENTA SUB TROPICAL');
 		}
-		document.getElementById("TitleOceano").innerHTML = $('#sea').text();
+		if($('#tipo').text() == 'Huracán'){		
+			$(".TitleTipo").text('HURACÁN');
+		}
+
+		$(".TitleOceano").text($('#sea').text());
 	}
 
 	function guardaInfo(){
@@ -256,7 +222,6 @@ $(function() {
 		document.getElementById("viento").innerHTML = document.getElementById("max-winds-s").value;
 		document.getElementById("racha").innerHTML = document.getElementById("max-wind").value;
 		document.getElementById("mas-info").innerHTML = document.getElementById("more-info").value;
-//		console.log("Saved info!");
 		$('#entradaInfo').hide();
 		$('#cargaInfo').show();
 	}
@@ -307,17 +272,13 @@ $(function() {
 
 	//funciones para agregar y eliminar elementos de la tabla de Regiones Afectadas
 	$(document).ready(function(){
-		$('#tabla').click(function(){
+		$('#mostrar').click(function(){
 			$('#regiones').hide();
 			$('#tablaEditar').show();
-			//$("th").removeAttr('width');
-			
 		});
 		$('#GuardaTabla').click(function(){
 			$('#regiones').show();
 			$('#tablaEditar').hide();
-			//$("th").attr("width","50%");
-			
 		});
 	});
 //	var cont=0;
@@ -325,7 +286,6 @@ $(function() {
 		cont++;
 		var fila='<tr id="fila'+cont+'">\
 					<th class="solid">\
-					<p>Fila: '+cont+'</p>\
 							<select id="NivelDeAlerta"> \
 								<option value="1" style="background-color: red; ">ROJA</option>\
 								<option value="2" style="background-color: orange;">NARANJA</option>\
@@ -736,26 +696,23 @@ $(function() {
 		
 		});
 	}
+	$("#saveDate").hide();
+	$("#ButtonEvento").hide();
+	$("#datePicker").hide();
 	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
 										                $('#mapa_ciclon').show();
 										                $('#capture').hide();
 										            }else{
 										                $('#capture').show();
 										                $('#mapa_ciclon').hide();
-
 										            } 
 										        });
 	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
 												$('#mapa_ciclon').hide(); });
-	$(".EditInfo").on("mouseenter", function() { $('#ButtonInfo').show() });
-	$(".EditInfo").on("mouseleave", function() { $('#ButtonInfo').hide() });
-	$(".EditTable").on("mouseenter", function() { secretoI(); });
-	$(".EditTable").on("mouseleave", function() { secretoO(); });
-	$(".fecha").on("mouseenter", function() { secretI(); });
-	$(".fecha").on("mouseleave", function() { secretO(); });
-	$("#secretButton").click(function() { editarF(); });
-	$("#secretButton2").click(function() { editarE(); });
-	$("#saveButton").click(function() { saveDate(); });
+	$("#ButtonFecha").click(function() { editarF(); });
+	$("#ButtonEvento").click(function() { editarE(); });
+	$("#saveDate").click(function() { saveDate(); });
+	$("#saveEvent").click(function() { saveEvent(); });
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
 	$("#pdf").click(function() {generaPdf();});
 	//autoExpand(document.getElementsByClassName("autoExpand"));
@@ -763,13 +720,14 @@ $(function() {
 
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
-	$("#bt_add1").hide();
-	$("#bt_add2").hide();
+	//Coment en lo que se repara el problema de COR en mapa de proyectomesoamerica
+	//$("#bt_add1").hide();
+	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
 	
-	$("#enable_on_print").hide();
+	//$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
 	$("#pdfError").hide();
@@ -801,9 +759,13 @@ $(function() {
     if(this.checked && this.value=="option2") {
         $('#Select-Event').show();
         $("#lastOne").show();
+        guardadoGlobal = true;
         $("#pdfError").show();
         $("#bt_add1").hide();
 		$("#bt_add2").hide();
+		$("#insertDataEvent").hide();
+		$("#ButtonEvento").show();
+		$("#saveEvent").hide();
     }else{
     	$('#Select-Event').hide();
     	$("#lastOne").hide();
