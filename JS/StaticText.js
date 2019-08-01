@@ -19,6 +19,10 @@ output.innerHTML = texto.numero;
 
 var dataArr = [];
 	$("#guardarInfo").click(function(){
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") ){
+			alert("Completa los datos antes de guardar el reporte.");
+			return;
+		}
 		var near = readTables();
 		var efectos = readEfects();
 		var data = JSON.stringify({

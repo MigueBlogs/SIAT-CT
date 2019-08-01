@@ -11,7 +11,11 @@ $(function() {
 
 
 	function generaPdf() {
-			
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") ){
+			alert("Guarda datos antes de generar el reporte");
+			return;
+		}
+			hideButtons();
 	      	/*Cambios para imprimir correctamente el documento*/
 	      	$("#enable_on_print").show();
 	      	//Esto genera un mapa cuadrado
@@ -79,7 +83,7 @@ $(function() {
 				}
 
 				//regresando el html a su versión original
-
+				showButtons();
 				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
 		      	$(".box").removeAttr('style');
@@ -127,6 +131,21 @@ $(function() {
             });*/ 
 	      }
 
+	function hideButtons(){
+		$("#ButtonEvento").hide();
+		$("#ButtonFecha").hide();
+		$("#mostrar").hide();
+		$("#capturaMapa").hide();
+		$("#mapa_ciclon").hide(); 
+	}   
+
+	function showButtons(){
+		$("#ButtonEvento").show();
+		$("#ButtonFecha").show();
+		$("#mostrar").show();
+		$("#capturaMapa").show();
+		$("#mapa_ciclon").show(); 
+	}  
 
 	function editarF(){
 		$("#ButtonFecha").hide();
