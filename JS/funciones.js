@@ -1,17 +1,14 @@
 
 $(function() {
-	
+	var modified = false;
 	var dt = new Date();
 	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 	var hora2 = {hour:'2-digit', minute:'2-digit'}
 	var hora = {hour:'2-digit'}
-	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
-
-
-
+	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
 
 	function generaPdf() {
-		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") ){
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible") ){
 			alert("Guarda datos antes de generar el reporte");
 			return;
 		}
@@ -46,7 +43,7 @@ $(function() {
 	        $(".regularTxt").css("font-size", "10px");
 	        $(".QR_box").css("font-size", "12px");
 	        $(".QR_box2").css("font-size", "12px");
-	        $('.tableDataL').css("grid-template-rows","auto 25%");
+	        //$('.tableDataL').css("grid-template-rows","auto 30%");
 	        $("#regiones").css("height", "calc(100% - 22px)");
 	        //$(".QR_box").css("background", "#D9D9D9");
 	        $(".QR_box").css("border", "solid 3px");
@@ -118,33 +115,31 @@ $(function() {
 						$("#enable_on_print").hide();
 					}, 3000);
 		          	$("#printing").modal('hide');
-					//console.log("aparecÍ Después del PDF!!!");
+					
 					$('textarea').each(function(){
 					 	autoExpand(this);
 					});
 	          });
-			 
-			
-           /* $($('link')[6]).remove();
-            $.get('/css/styles.css', function(d){
-            	$('head').append($('<style/>').html(d))
-            });*/ 
-	      }
+	}
 
 	function hideButtons(){
 		$("#ButtonEvento").hide();
 		$("#ButtonFecha").hide();
 		$("#mostrar").hide();
 		$("#capturaMapa").hide();
-		$("#mapa_ciclon").hide(); 
-	}   
+		$("#mapa_ciclon").hide();
+		$('#capture').hide();
+		$('#mapa_ciclon').hide();
+		$('#ButtonInfo').hide();
+	}  
 
 	function showButtons(){
 		$("#ButtonEvento").show();
 		$("#ButtonFecha").show();
 		$("#mostrar").show();
 		$("#capturaMapa").show();
-		$("#mapa_ciclon").show(); 
+		$('#capture').show();
+		$('#ButtonInfo').show();
 	}  
 
 	function editarF(){
@@ -183,6 +178,7 @@ $(function() {
 	}
 
 	function saveDate(){
+		modified = true;
 		var newDate = new Date();
 		newDate= $(".datepicker").datepicker("getDate");
 		if(newDate == null){
@@ -194,13 +190,13 @@ $(function() {
 			return;
 		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
-		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h';
+		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h' + ' / ';
 		$("#datetime").show();
 		$("#datePicker").hide();
 		$("#ButtonFecha").show();
 	}
 
-	function saveEvent(){	
+	function saveEvent(){
 		if($('#textEvent').val() != ''){
 			$('#NombreEvento').text($('#textEvent').val());
 			$('#tipo').text($('#opt').val());
@@ -233,7 +229,7 @@ $(function() {
 		$(".TitleOceano").text($('#sea').text());
 	}
 
-	function guardaInfo(){
+    function guardaInfo(){
 		document.getElementById("hora").innerHTML = document.getElementById("hour").value;
 		document.getElementById("coords").innerHTML = document.getElementById("coordinates").value;
 		document.getElementById("loc").innerHTML = document.getElementById("location").value;
@@ -243,6 +239,7 @@ $(function() {
 		document.getElementById("mas-info").innerHTML = document.getElementById("more-info").value;
 		$('#entradaInfo').hide();
 		$('#cargaInfo').show();
+		$('#ButtonInfo').show();
 	}
 
 	function autoFillInfo(){
@@ -256,8 +253,7 @@ $(function() {
 		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
 	}
 
-
-	//FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
+	//Función para auto ajustar caja de texto.
 	var autoExpand = function (field) {
 		//console.log(field);
 		// Reset field height
@@ -275,7 +271,6 @@ $(function() {
 					+ parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 		
 		field.style.height = height  + 'px';
-		
 	};
 
 	document.addEventListener('mouseover', function (event) {
@@ -286,6 +281,7 @@ $(function() {
 
 	document.addEventListener('input', function (event) {
 		if (event.target.tagName.toLowerCase() !== 'textarea') return;
+		//if (event.target.hasAttribute("limiteAlcanzado")) return;
 		autoExpand(event.target);
 	}, false);
 
@@ -300,7 +296,21 @@ $(function() {
 			$('#tablaEditar').hide();
 		});
 	});
-//	var cont=0;
+	//Función para delimitar que ciertos text area sean de más de 3 renglones
+	$(document).ready(function () {
+	  $('textarea[data-limit-rows=true]')
+	    .on('keypress', function (event) {
+	        var textarea = $(this),
+	            text = textarea.val(),
+	            numberOfLines = (text.match(/\n/g) || []).length + 1,
+	            maxRows = parseInt(textarea.attr('max-rows'));
+
+	        if (event.which === 13 && numberOfLines === maxRows ) {
+	        	return false;
+	        }
+	    });
+	});
+
 	function agregar(nameTable){
 		cont++;
 		var fila='<tr id="fila'+cont+'">\
@@ -340,7 +350,6 @@ $(function() {
 		});
 		$('#'+nameTable).append(fila);
 		$(".botoncito").click(function(event){
-			//console.log("elemento a eliminar: "+this.id);
 			event.stopPropagation();
 			event.stopImmediatePropagation();
 			eliminar(this.id); 
@@ -368,14 +377,9 @@ $(function() {
 		}
 	}
 	
-	//function eliminar(id_fila){
-	//	$('#'+id_fila).remove();
-	//}
-	
 
 	function ImprimeDatos(Param,a,b){
 				$(Param).find('#NivelDeAlerta').each(function(){
-	//			console.log($('option:selected',Param).text());
 				switch(parseInt($('option:selected',Param).val())){
 					case 1:
 						document.getElementById("NearR").innerHTML += b+a;
@@ -496,87 +500,85 @@ $(function() {
 	}
 
 	function guardaData(){
-	var edo,reg,na;
-	var afectados = [];
-		$('#tablaEdos1').find('tr').each(function(){
-		
-			var find = $(this).find('#NivelDeAlerta');
-				//console.log($('option:selected',find).text());
-				na = $('option:selected',find).text();
+		var edo,reg,na;
+		var afectados = [];
+			$('#tablaEdos1').find('tr').each(function(){
+			
+				var find = $(this).find('#NivelDeAlerta');
+					//console.log($('option:selected',find).text());
+					na = $('option:selected',find).text();
+					
+
+				var find = $(this).find('#Estado');
+					//console.log($('option:selected',find).text());
+					edo = $('option:selected',find).text();
+
 				
 
-			var find = $(this).find('#Estado');
-				//console.log($('option:selected',find).text());
-				edo = $('option:selected',find).text();
-
-			
-
-			var find = $(this).find('#Region');
-				//console.log($('option:selected',find).text());
-				reg = $('option:selected',find).text();
-				/*if(reg == 'Todo el Edo'){
-						var reg = '';
-						console.log("nuevo valor de reg",reg);
-					}*/
-			
-			var regArray=[];
-			afectados.push({na,edo,reg,regArray});
-			//console.log(afectados);
-		});
-
-		afectados.shift();
-		var size = afectados.length;
-		//afectados= generaArreglo(afectados,size);
-		//Encontrando repetidos y unificando
-		afectados=busquedaRecursiva(afectados,size);
-		
-		
-		//console.log("Valor retornado: ",afectados);
-		imprimeTabla(afectados,size)
-
-	var edo,reg,na;
-	var afecta2 = [];
-		$('#tablaEdos2').find('tr').each(function(){
-		
-			var find = $(this).find('#NivelDeAlerta');
-				//console.log($('option:selected',find).text());
-				na = $('option:selected',find).text();
+				var find = $(this).find('#Region');
+					//console.log($('option:selected',find).text());
+					reg = $('option:selected',find).text();
+					/*if(reg == 'Todo el Edo'){
+							var reg = '';
+							console.log("nuevo valor de reg",reg);
+						}*/
 				
-
-			var find = $(this).find('#Estado');
-				//console.log($('option:selected',find).text());
-				edo = $('option:selected',find).text();
-			
-
-			var find = $(this).find('#Region');
-				//console.log($('option:selected',find).text());
-				if($('option:selected',find).text() != ''){
-				reg = $('option:selected',find).text();
-				}
-			var regArray=[];
-			afecta2.push({na,edo,reg,regArray});
-			
-		});
-
-		afecta2.shift();
-		var size = afecta2.length;
-		//afectados= generaArreglo(afectados,size);
-		//Encontrando repetidos y unificando
-		afecta2=busquedaRecursiva(afecta2,size);
-		
-		
-		console.log("Valor retornado: ",afecta2);
-		imprimeTabla1(afecta2,size)
-
-	$('#regiones').find('tr').each(function(){
-			$(this).find('th').each(function(){
-			if(this.textContent == ''){
-				this.innerHTML = '--';
-			}
+				var regArray=[];
+				afectados.push({na,edo,reg,regArray});
+				//console.log(afectados);
 			});
-		});
 
+			afectados.shift();
+			var size = afectados.length;
+			//afectados= generaArreglo(afectados,size);
+			//Encontrando repetidos y unificando
+			afectados=busquedaRecursiva(afectados,size);
+			
+			
+			//console.log("Valor retornado: ",afectados);
+			imprimeTabla(afectados,size)
 
+		var edo,reg,na;
+		var afecta2 = [];
+			$('#tablaEdos2').find('tr').each(function(){
+			
+				var find = $(this).find('#NivelDeAlerta');
+					//console.log($('option:selected',find).text());
+					na = $('option:selected',find).text();
+					
+
+				var find = $(this).find('#Estado');
+					//console.log($('option:selected',find).text());
+					edo = $('option:selected',find).text();
+				
+
+				var find = $(this).find('#Region');
+					//console.log($('option:selected',find).text());
+					if($('option:selected',find).text() != ''){
+					reg = $('option:selected',find).text();
+					}
+				var regArray=[];
+				afecta2.push({na,edo,reg,regArray});
+				
+			});
+
+			afecta2.shift();
+			var size = afecta2.length;
+			//afectados= generaArreglo(afectados,size);
+			//Encontrando repetidos y unificando
+			afecta2=busquedaRecursiva(afecta2,size);
+			
+			
+			console.log("Valor retornado: ",afecta2);
+			imprimeTabla1(afecta2,size)
+
+		$('#regiones').find('tr').each(function(){
+				$(this).find('th').each(function(){
+				if(this.textContent == ''){
+					this.innerHTML = '--';
+				}
+				});
+			});
 	}
 
 	String.prototype.replaceAt=function(index, replacement) {
@@ -726,8 +728,13 @@ $(function() {
 										                $('#mapa_ciclon').hide();
 										            } 
 										        });
-	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
-												$('#mapa_ciclon').hide(); });
+	$("#capturaMapa").on("mouseleave", function() {if($('#map-container').is(":visible")){
+										                $('#mapa_ciclon').hide();
+										                $('#capture').show();
+										            }else{
+										                $('#capture').hide();
+										                $('#mapa_ciclon').show();
+										            }});
 	$("#ButtonFecha").click(function() { editarF(); });
 	$("#ButtonEvento").click(function() { editarE(); });
 	$("#saveDate").click(function() { saveDate(); });
@@ -751,9 +758,9 @@ $(function() {
 	$("#pdf").hide();
 	$("#pdfError").hide();
 	$("#headerLogos").hide();
-	$('#capture').hide();
+	//$('#capture').hide();
 	$('#mapa_ciclon').hide();
-	$('#ButtonInfo').hide();
+	//$('#ButtonInfo').hide();
 	$('#entradaInfo').hide();
 	$('#Select-Event').hide();
 	$('#tablaEditar').hide();
@@ -761,6 +768,7 @@ $(function() {
 	autoExpand(document.getElementById("subtitle"));
 	$('#exampleModal').modal('show');
 	$("#ButtonInfo").click(function(){ 
+		$('#ButtonInfo').hide();
 		$('#entradaInfo').show(); 
 		$('#cargaInfo').hide(); 
 		//autoExpand(document.getElementById("info"));

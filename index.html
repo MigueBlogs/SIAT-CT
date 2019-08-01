@@ -138,13 +138,13 @@
 						<button id="ButtonFecha"type="button" class="btn btn-primary">
 							<span class="glyphicon glyphicon-edit"></span> 
 							<ion-icon name="create"></ion-icon> 
-							Editar Fecha</button>
-						 /<span id="dataOfEvent">
+							Editar Fecha
+						</button>
+						 <span id="dataOfEvent">
 						 	<element id="tipo"></element>
 						 	<element id="sea" style="display: none"></element>
 						 	<element id="NombreEvento"></element>
 						 </span>
-						 
 						 <span id="insertDataEvent">
 							<select id="opt">			
 									<option>DT</option>
@@ -157,8 +157,7 @@
 									<option>ATLÁNTICO</option>	
 							</select> 
 							<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento" >
-						</span>
-						/ No. <element id="Number"></element>
+						</span>/ No. <element id="Number"></element>
 						<button id="ButtonEvento" type="button" class="btn btn-primary">
 							<span class="glyphicon glyphicon-edit"></span> 
 							<ion-icon name="create"></ion-icon> Editar Evento
@@ -173,7 +172,6 @@
 		<div class="tableData">
 			<div class="tableDataL">
 				<div class="solid">
-						
 						<div class="segment-table" style="height: 100%">
 						<div class="tituloTable EditTable">NIVEL DE ALERTA SIAT - CT
 							<button id="mostrar" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>
@@ -339,6 +337,10 @@
 						
 					</div>
 				</div>
+				<div class="solid">
+					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
+						<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
+				</div>
 			</div> 
 			<div class="tableDataR">
 				<div class="solid">
@@ -363,11 +365,6 @@
 &#9679 Recomendación 4
 				</textarea>
 				</div>
-
-				<div class="solid">
-					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
-						<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
-				</div>
 			</div>
 		</div>
 		<div class="disable_on_print" align="center">
@@ -389,13 +386,13 @@
 			<br class="disable_on_print" >
 			<div id="efectos" class="solid">
 					<div class="tituloTable solido">Viento</div>
-					<textarea id="efectoViento" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '>&#9679 Recomendación 1</textarea>
+					<textarea id="efectoViento" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '>&#9679 Recomendación 1</textarea>
 					<div class="tituloTable solido">Lluvia</div>
-					<textarea id="efectoLluvia" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+					<textarea id="efectoLluvia" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 					<div class="tituloTable solido">Oleaje elevado</div>
-					<textarea id="efectoOleaje" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+					<textarea id="efectoOleaje" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 					<div class="tituloTable solido">Marea de tormenta</div>
-					<textarea id="efectoMarea" rows="1" class=' autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+					<textarea id="efectoMarea" data-limit-rows="true" max-rows="3" rows="1" class=' autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
 			</div>
 		<br>
 		<div id="enable_on_print">

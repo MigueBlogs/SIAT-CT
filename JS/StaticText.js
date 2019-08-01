@@ -19,7 +19,7 @@ output.innerHTML = texto.numero;
 
 var dataArr = [];
 	$("#guardarInfo").click(function(){
-		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") ){
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible")  ){
 			alert("Completa los datos antes de guardar el reporte.");
 			return;
 		}
