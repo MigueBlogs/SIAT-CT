@@ -1,15 +1,18 @@
+
 $(function() {
+	var modified = false;
 	var dt = new Date();
 	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
 	var hora2 = {hour:'2-digit', minute:'2-digit'}
 	var hora = {hour:'2-digit'}
-	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h';
-
-
-
+	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
 
 	function generaPdf() {
-			
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible") ){
+			alert("Guarda datos antes de generar el reporte");
+			return;
+		}
+			hideButtons();
 	      	/*Cambios para imprimir correctamente el documento*/
 	      	$("#enable_on_print").show();
 	      	//Esto genera un mapa cuadrado
@@ -18,7 +21,7 @@ $(function() {
 	      	$("#map-container").css("height", ancho);
 	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
 	      	$("#imagen").css("width", "400px");
-	      	$("#imagen").css("height", "300px");
+	      	$("#imagen").css("height", "100%");
 	      	$(".box").css("padding", "0px");
 	      	$(".box").css("margin", "0px auto");
 	      	$(".titulo").css("font-size", "15px");
@@ -39,6 +42,9 @@ $(function() {
 	        }
 	        $(".regularTxt").css("font-size", "10px");
 	        $(".QR_box").css("font-size", "12px");
+	        $(".QR_box2").css("font-size", "12px");
+	        //$('.tableDataL').css("grid-template-rows","auto 30%");
+	        $("#regiones").css("height", "calc(100% - 22px)");
 	        //$(".QR_box").css("background", "#D9D9D9");
 	        $(".QR_box").css("border", "solid 3px");
 	        $("#headerLogos").show();
@@ -59,7 +65,8 @@ $(function() {
 	          margin: [25.4,-10.16,5,-10.16],
 	          filename: 'boletin.pdf',
 	          //mode: 'avoid-all',
-	          html2canvas: { scale: 5 },
+	          html2canvas: { scale: 3 },
+	          pagebreak: {mode:  ['avoid-all', 'css'] , before: ['#enable_on_print','#pag_3','#pag_4']},
 	          letterRendering: true,
 	          jsPDF: {orientation: 'portrait', format: 'letter', compressPDF: false}}).toPdf().get('pdf').then(function (pdf) {
 	          	var totalPages = pdf.internal.getNumberOfPages();
@@ -73,7 +80,7 @@ $(function() {
 				}
 
 				//regresando el html a su versión original
-
+				showButtons();
 				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
 		      	$(".box").removeAttr('style');
@@ -95,6 +102,9 @@ $(function() {
 				//Después de tomar la captura muestra mapa normal
 				$("#imagen").removeAttr('style');
 				$('.js-screenshot-image').hide();
+				$("#pdfError").show();
+                $("#pdf").hide();
+                captured=false;
 				$("#map-container").removeAttr('style');
 	            $('#map-container').show();
 				
@@ -105,142 +115,121 @@ $(function() {
 						$("#enable_on_print").hide();
 					}, 3000);
 		          	$("#printing").modal('hide');
-					//console.log("aparecÍ Después del PDF!!!");
+					
 					$('textarea').each(function(){
 					 	autoExpand(this);
 					});
 	          });
-			 
-			
-           /* $($('link')[6]).remove();
-            $.get('/css/styles.css', function(d){
-            	$('head').append($('<style/>').html(d))
-            });*/ 
-	      }
-
-	var swiped = false;
-	function swipe(){
-		if(swiped){
-			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest.jpg" ></a>'
-			swiped= !swiped;
-	//		console.log("nuevo valor de SWIPED: "+swiped);
-		}else{
-			document.getElementById("map").innerHTML = '<a onclick="swipe()"  onmouseover="" style="cursor: pointer;"><img style="height: 100%; width: 100%;" src="img/mapaTest2.gif" ></a>'
-			swiped= !swiped
-	;	}
 	}
-	var editandoF = false;
-	var editandoE = false;
+
+	function hideButtons(){
+		$("#ButtonEvento").hide();
+		$("#ButtonFecha").hide();
+		$("#mostrar").hide();
+		$("#capturaMapa").hide();
+		$("#mapa_ciclon").hide();
+		$('#capture').hide();
+		$('#mapa_ciclon').hide();
+		$('#ButtonInfo').hide();
+	}  
+
+	function showButtons(){
+		$("#ButtonEvento").show();
+		$("#ButtonFecha").show();
+		$("#mostrar").show();
+		$("#capturaMapa").show();
+		$('#capture').show();
+		$('#ButtonInfo').show();
+	}  
 
 	function editarF(){
-	editandoF = true;
-	document.getElementById("secretButton").innerHTML = ''
-	document.getElementById("datetime").innerHTML = '<div class="well">	Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/> '+
-													'Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/></div>'
-	document.getElementById("saveButton").innerHTML ='<button type="button" id="saveDate" class="btn btn-outline-success">Guardar</button>'									
-		
-		$(function(){
-					newDate=$('.datepicker').datepicker({
-						language: "es",
-						days: true,
-						autoclose: true,
-						format: 'dd/mm/yyyy',
-						startDate: '-3d',
-						todayBtn: "linked",
-						autoclose: true,
-						todayHighlight: true
+		$("#ButtonFecha").hide();
+		$("#datetime").hide();
+		$("#saveDate").show();			
+		$("#datePicker").show();
+			$(function(){
+						newDate=$('.datepicker').datepicker({
+							language: "es",
+							days: true,
+							autoclose: true,
+							format: 'dd/mm/yyyy',
+							startDate: '-3d',
+							todayBtn: "linked",
+							autoclose: true,
+							todayHighlight: true
+						});
 					});
-				});
-		
-		var nerHour;
-		$(document).ready(function(){
-					$('#time').timepicker({
-						timeFormat: 'HH:mm',
-						interval: 60,
-						scrollbar: true,
+			
+			var nerHour;
+			$(document).ready(function(){
+						$('#time').timepicker({
+							timeFormat: 'HH:mm',
+							interval: 60,
+							scrollbar: true,
+						});
 					});
-				});
 	}
 
 	function editarE(){
-		$('#sea').show();
-		editandoE = true;
-		document.getElementById("secretButton2").innerHTML = ''
-		document.getElementById("saveButton").innerHTML ='<button type="button" class="btn btn-outline-success">Guardar</button>'
-	}
-
-	function secretI(){
-		if(editandoF){
-			//nada
-		}else{
-		document.getElementById("secretButton").innerHTML = '<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Fecha</button>'
-		}
-		if(editandoE){
-			//nada
-		}else{
-		document.getElementById("secretButton2").innerHTML = '<button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar Evento</button>'
-		}
-	}
-	function secretO(){
-		document.getElementById("secretButton").innerHTML = ' '
-		document.getElementById("secretButton2").innerHTML = ' '
-	}
-
-	function secretoI(){
-		document.getElementById("tabla").innerHTML = '<button id="mostrar" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="create"></ion-icon> Editar regiones</button>'
-	}
-	function secretoO(){
-		document.getElementById("tabla").innerHTML = ''
+		$("#insertDataEvent").show();
+		$("#ButtonEvento").hide();
+		$("#dataOfEvent").hide();
+		$("#saveEvent").show();
 	}
 
 	function saveDate(){
-		if(editandoF){
-		//document.getElementById("saveButton").innerHTML =''
+		modified = true;
 		var newDate = new Date();
 		newDate= $(".datepicker").datepicker("getDate");
+		if(newDate == null){
+			alert("Selecciona una fecha");
+			return;
+		}
+		if($('#time').timepicker("getTime") == null){
+			alert("Selecciona una hora");
+			return;
+		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
-		//console.log(newDate);
-		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h';
-		editandoF=false;
-		}
-		if(editandoE){
-		//document.getElementById("saveButton").innerHTML =''
-			if((document.getElementById("textEvent").value) != ''){
-				document.getElementById("NombreEvento").innerHTML = document.getElementById("textEvent").value;
-				document.getElementById("tipo").innerHTML = document.getElementById("opt").value;
-				document.getElementById("TitleOceano").innerHTML = document.getElementById("oceano").value;
-				document.getElementById("TitleTipo").innerHTML = $('#tipo').text();
-				tituloSecundario();
-				document.getElementById("sea").innerHTML = '';
-				editandoE=false;
-				//$('#saveButton').hide();
-				$('#sea').hide();
-			}else{
-				alert("Ingresa el nombre y categoría del evento");
-				//editarF();
-				editarE();
-			}
-		}
-		if((editandoE || editandoF) == false){
-			document.getElementById("saveButton").innerHTML =''
-			$('#sea').hide();
+		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h' + ' / ';
+		$("#datetime").show();
+		$("#datePicker").hide();
+		$("#ButtonFecha").show();
+	}
+
+	function saveEvent(){
+		if($('#textEvent').val() != ''){
+			$('#NombreEvento').text($('#textEvent').val());
+			$('#tipo').text($('#opt').val());
+			$('#sea').text($('#oceano').val());
+			tituloSecundario();
+			$("#insertDataEvent").hide();
+			$("#dataOfEvent").show();
+			$("#saveEvent").hide();
+			$("#ButtonEvento").show();
+		}else{
+			alert("Ingresa el nombre y categoría del evento");
+			editarE();
 		}
 	}
 
 	function tituloSecundario(){
 		if($('#tipo').text() == 'TT'){
-			document.getElementById("TitleTipo").innerHTML = 'TORMENTA TROPICAL'
+			$(".TitleTipo").text('TORMENTA TROPICAL');
 		}
 		if($('#tipo').text() == 'DT'){
-			document.getElementById("TitleTipo").innerHTML = 'DEPRESIÓN TROPICAL'
+			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
 		}
-		if($('#tipo').text() == 'Huracán'){
-			document.getElementById("TitleTipo").innerHTML = 'HURACÁN'
+		if($('#tipo').text() == 'TST'){
+			$(".TitleTipo").text('TORMENTA SUB TROPICAL');
 		}
-		document.getElementById("TitleOceano").innerHTML = $('#sea').text();
+		if($('#tipo').text() == 'Huracán'){		
+			$(".TitleTipo").text('HURACÁN');
+		}
+
+		$(".TitleOceano").text($('#sea').text());
 	}
 
-	function guardaInfo(){
+    function guardaInfo(){
 		document.getElementById("hora").innerHTML = document.getElementById("hour").value;
 		document.getElementById("coords").innerHTML = document.getElementById("coordinates").value;
 		document.getElementById("loc").innerHTML = document.getElementById("location").value;
@@ -248,9 +237,9 @@ $(function() {
 		document.getElementById("viento").innerHTML = document.getElementById("max-winds-s").value;
 		document.getElementById("racha").innerHTML = document.getElementById("max-wind").value;
 		document.getElementById("mas-info").innerHTML = document.getElementById("more-info").value;
-//		console.log("Saved info!");
 		$('#entradaInfo').hide();
 		$('#cargaInfo').show();
+		$('#ButtonInfo').show();
 	}
 
 	function autoFillInfo(){
@@ -264,8 +253,7 @@ $(function() {
 		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
 	}
 
-
-	//FUNCION PARA AUTOAJUSTAR CAJA DE TEXTO 
+	//Función para auto ajustar caja de texto.
 	var autoExpand = function (field) {
 		//console.log(field);
 		// Reset field height
@@ -283,7 +271,6 @@ $(function() {
 					+ parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 		
 		field.style.height = height  + 'px';
-		
 	};
 
 	document.addEventListener('mouseover', function (event) {
@@ -294,12 +281,13 @@ $(function() {
 
 	document.addEventListener('input', function (event) {
 		if (event.target.tagName.toLowerCase() !== 'textarea') return;
+		//if (event.target.hasAttribute("limiteAlcanzado")) return;
 		autoExpand(event.target);
 	}, false);
 
 	//funciones para agregar y eliminar elementos de la tabla de Regiones Afectadas
 	$(document).ready(function(){
-		$('#tabla').click(function(){
+		$('#mostrar').click(function(){
 			$('#regiones').hide();
 			$('#tablaEditar').show();
 		});
@@ -308,12 +296,25 @@ $(function() {
 			$('#tablaEditar').hide();
 		});
 	});
-//	var cont=0;
+	//Función para delimitar que ciertos text area sean de más de 3 renglones
+	$(document).ready(function () {
+	  $('textarea[data-limit-rows=true]')
+	    .on('keypress', function (event) {
+	        var textarea = $(this),
+	            text = textarea.val(),
+	            numberOfLines = (text.match(/\n/g) || []).length + 1,
+	            maxRows = parseInt(textarea.attr('max-rows'));
+
+	        if (event.which === 13 && numberOfLines === maxRows ) {
+	        	return false;
+	        }
+	    });
+	});
+
 	function agregar(nameTable){
 		cont++;
 		var fila='<tr id="fila'+cont+'">\
 					<th class="solid">\
-					<p>Fila: '+cont+'</p>\
 							<select id="NivelDeAlerta"> \
 								<option value="1" style="background-color: red; ">ROJA</option>\
 								<option value="2" style="background-color: orange;">NARANJA</option>\
@@ -338,36 +339,47 @@ $(function() {
 								<option value="8">Noroeste</option>\
 							</select>\
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
+							<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 					</th>\
 				</tr>'
 
-		$.getJSON('JS/edos.json',function(data){
+		$.getJSON('JS/estados.json',function(data){
 		    $.each(data,function(key, value){
 			    $('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
 			});
 		});
 		$('#'+nameTable).append(fila);
 		$(".botoncito").click(function(event){
-			//console.log("elemento a eliminar: "+this.id);
 			event.stopPropagation();
 			event.stopImmediatePropagation();
 			eliminar(this.id); 
 		});
+		$(".switch").click(function(event){
+			event.stopPropagation();
+			event.stopImmediatePropagation();
+			change(this.id)})
 	};
 
 
 	window.eliminar =function(id_fila){
 		$('#'+id_fila).remove();
 	}
-	
-	//function eliminar(id_fila){
-	//	$('#'+id_fila).remove();
-	//}
+
+	window.change = function(id_fila){
+		var filaAct = document.getElementById(id_fila);
+		var tablaFilaAct= $('#'+id_fila).parent().parent();
+		console.log("Tabla actual: ",tablaFilaAct[0].id);
+		if(tablaFilaAct[0].id == 'tablaEdos1'){
+			$('#tablaEdos2').append(filaAct);
+		}
+		if (tablaFilaAct[0].id == 'tablaEdos2'){
+			$('#tablaEdos1').append(filaAct);
+		}
+	}
 	
 
 	function ImprimeDatos(Param,a,b){
 				$(Param).find('#NivelDeAlerta').each(function(){
-	//			console.log($('option:selected',Param).text());
 				switch(parseInt($('option:selected',Param).val())){
 					case 1:
 						document.getElementById("NearR").innerHTML += b+a;
@@ -488,87 +500,85 @@ $(function() {
 	}
 
 	function guardaData(){
-	var edo,reg,na;
-	var afectados = [];
-		$('#tablaEdos1').find('tr').each(function(){
-		
-			var find = $(this).find('#NivelDeAlerta');
-				//console.log($('option:selected',find).text());
-				na = $('option:selected',find).text();
+		var edo,reg,na;
+		var afectados = [];
+			$('#tablaEdos1').find('tr').each(function(){
+			
+				var find = $(this).find('#NivelDeAlerta');
+					//console.log($('option:selected',find).text());
+					na = $('option:selected',find).text();
+					
+
+				var find = $(this).find('#Estado');
+					//console.log($('option:selected',find).text());
+					edo = $('option:selected',find).text();
+
 				
 
-			var find = $(this).find('#Estado');
-				//console.log($('option:selected',find).text());
-				edo = $('option:selected',find).text();
-
-			
-
-			var find = $(this).find('#Region');
-				//console.log($('option:selected',find).text());
-				reg = $('option:selected',find).text();
-				/*if(reg == 'Todo el Edo'){
-						var reg = '';
-						console.log("nuevo valor de reg",reg);
-					}*/
-			
-			var regArray=[];
-			afectados.push({na,edo,reg,regArray});
-			//console.log(afectados);
-		});
-
-		afectados.shift();
-		var size = afectados.length;
-		//afectados= generaArreglo(afectados,size);
-		//Encontrando repetidos y unificando
-		afectados=busquedaRecursiva(afectados,size);
-		
-		
-		//console.log("Valor retornado: ",afectados);
-		imprimeTabla(afectados,size)
-
-	var edo,reg,na;
-	var afecta2 = [];
-		$('#tablaEdos2').find('tr').each(function(){
-		
-			var find = $(this).find('#NivelDeAlerta');
-				//console.log($('option:selected',find).text());
-				na = $('option:selected',find).text();
+				var find = $(this).find('#Region');
+					//console.log($('option:selected',find).text());
+					reg = $('option:selected',find).text();
+					/*if(reg == 'Todo el Edo'){
+							var reg = '';
+							console.log("nuevo valor de reg",reg);
+						}*/
 				
-
-			var find = $(this).find('#Estado');
-				//console.log($('option:selected',find).text());
-				edo = $('option:selected',find).text();
-			
-
-			var find = $(this).find('#Region');
-				//console.log($('option:selected',find).text());
-				if($('option:selected',find).text() != ''){
-				reg = $('option:selected',find).text();
-				}
-			var regArray=[];
-			afecta2.push({na,edo,reg,regArray});
-			
-		});
-
-		afecta2.shift();
-		var size = afecta2.length;
-		//afectados= generaArreglo(afectados,size);
-		//Encontrando repetidos y unificando
-		afecta2=busquedaRecursiva(afecta2,size);
-		
-		
-		console.log("Valor retornado: ",afecta2);
-		imprimeTabla1(afecta2,size)
-
-	$('#regiones').find('tr').each(function(){
-			$(this).find('th').each(function(){
-			if(this.textContent == ''){
-				this.innerHTML = '--';
-			}
+				var regArray=[];
+				afectados.push({na,edo,reg,regArray});
+				//console.log(afectados);
 			});
-		});
 
+			afectados.shift();
+			var size = afectados.length;
+			//afectados= generaArreglo(afectados,size);
+			//Encontrando repetidos y unificando
+			afectados=busquedaRecursiva(afectados,size);
+			
+			
+			//console.log("Valor retornado: ",afectados);
+			imprimeTabla(afectados,size)
 
+		var edo,reg,na;
+		var afecta2 = [];
+			$('#tablaEdos2').find('tr').each(function(){
+			
+				var find = $(this).find('#NivelDeAlerta');
+					//console.log($('option:selected',find).text());
+					na = $('option:selected',find).text();
+					
+
+				var find = $(this).find('#Estado');
+					//console.log($('option:selected',find).text());
+					edo = $('option:selected',find).text();
+				
+
+				var find = $(this).find('#Region');
+					//console.log($('option:selected',find).text());
+					if($('option:selected',find).text() != ''){
+					reg = $('option:selected',find).text();
+					}
+				var regArray=[];
+				afecta2.push({na,edo,reg,regArray});
+				
+			});
+
+			afecta2.shift();
+			var size = afecta2.length;
+			//afectados= generaArreglo(afectados,size);
+			//Encontrando repetidos y unificando
+			afecta2=busquedaRecursiva(afecta2,size);
+			
+			
+			console.log("Valor retornado: ",afecta2);
+			imprimeTabla1(afecta2,size)
+
+		$('#regiones').find('tr').each(function(){
+				$(this).find('th').each(function(){
+				if(this.textContent == ''){
+					this.innerHTML = '--';
+				}
+				});
+			});
 	}
 
 	String.prototype.replaceAt=function(index, replacement) {
@@ -707,6 +717,9 @@ $(function() {
 		
 		});
 	}
+	$("#saveDate").hide();
+	$("#ButtonEvento").hide();
+	$("#datePicker").hide();
 	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
 										                $('#mapa_ciclon').show();
 										                $('#capture').hide();
@@ -715,34 +728,39 @@ $(function() {
 										                $('#mapa_ciclon').hide();
 										            } 
 										        });
-	$("#capturaMapa").on("mouseleave", function() { $('#capture').hide();
-												$('#mapa_ciclon').hide(); });
-	$(".EditInfo").on("mouseenter", function() { $('#ButtonInfo').show() });
-	$(".EditInfo").on("mouseleave", function() { $('#ButtonInfo').hide() });
-	$(".EditTable").on("mouseenter", function() { secretoI(); });
-	$(".EditTable").on("mouseleave", function() { secretoO(); });
-	$(".fecha").on("mouseenter", function() { secretI(); });
-	$(".fecha").on("mouseleave", function() { secretO(); });
-	$("#secretButton").click(function() { editarF(); });
-	$("#secretButton2").click(function() { editarE(); });
-	$("#saveButton").click(function() { saveDate(); });
+	$("#capturaMapa").on("mouseleave", function() {if($('#map-container').is(":visible")){
+										                $('#mapa_ciclon').hide();
+										                $('#capture').show();
+										            }else{
+										                $('#capture').hide();
+										                $('#mapa_ciclon').show();
+										            }});
+	$("#ButtonFecha").click(function() { editarF(); });
+	$("#ButtonEvento").click(function() { editarE(); });
+	$("#saveDate").click(function() { saveDate(); });
+	$("#saveEvent").click(function() { saveEvent(); });
+	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
 	$("#pdf").click(function() {generaPdf();});
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
 
 	$("#bt_add1").click(function(){ agregar('tablaEdos1'); });
 	$("#bt_add2").click(function(){ agregar('tablaEdos2'); });
+	//Coment en lo que se repara el problema de COR en mapa de proyectomesoamerica
+	//$("#bt_add1").hide();
+	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
 	
-	$("#enable_on_print").hide();
+	//$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
+	$("#pdfError").hide();
 	$("#headerLogos").hide();
-	$('#capture').hide();
+	//$('#capture').hide();
 	$('#mapa_ciclon').hide();
-	$('#ButtonInfo').hide();
+	//$('#ButtonInfo').hide();
 	$('#entradaInfo').hide();
 	$('#Select-Event').hide();
 	$('#tablaEditar').hide();
@@ -750,6 +768,7 @@ $(function() {
 	autoExpand(document.getElementById("subtitle"));
 	$('#exampleModal').modal('show');
 	$("#ButtonInfo").click(function(){ 
+		$('#ButtonInfo').hide();
 		$('#entradaInfo').show(); 
 		$('#cargaInfo').hide(); 
 		//autoExpand(document.getElementById("info"));
@@ -767,7 +786,13 @@ $(function() {
     if(this.checked && this.value=="option2") {
         $('#Select-Event').show();
         $("#lastOne").show();
-        $("#pdf").show();
+        guardadoGlobal = true;
+        $("#pdfError").show();
+        $("#bt_add1").hide();
+		$("#bt_add2").hide();
+		$("#insertDataEvent").hide();
+		$("#ButtonEvento").show();
+		$("#saveEvent").hide();
     }else{
     	$('#Select-Event').hide();
     	$("#lastOne").hide();

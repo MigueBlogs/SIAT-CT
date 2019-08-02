@@ -15,6 +15,11 @@
 	font-size: 14px; 
 }
 
+.rotate-90 {
+  display: inline-block; 
+  transform: rotate(90deg);
+}
+
 .box {
 	width: 90%;
 	height: 90%;
@@ -22,10 +27,12 @@
 	margin: 20px auto;
 	box-shadow: 0px 0px 10px 2px grey;
 	font-family: Montserrat-Bold; }
-  
-  th {
-	width: 50%; }
-  
+ 
+  th { width: auto; } 
+
+ .adjust {width: 50%;}
+
+
   .titulo {
 	background: #D9D9D9;
 	color: #A50021;
@@ -149,11 +156,11 @@
   
   .tableDataL {
 	display: grid;
-	grid-template-rows: auto auto; }
+	grid-template-rows: auto auto auto; }
   
   .tableDataR {
 	display: grid;
-	grid-template-rows: auto auto auto; }
+	grid-template-rows: auto auto; }
   
   .subtitle {
 	display: grid; }
