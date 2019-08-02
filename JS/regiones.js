@@ -1,3 +1,29 @@
+let id_a_estado = function (id_option){
+    switch(id_option){
+        case "0":
+            return 'C';
+        case "1":
+            return 'N';
+        case "2":
+            return 'NE';
+        case "3":
+            return 'E';
+        case "4":
+            return 'SE';
+        case "5":
+            return 'S';
+        case "6":
+            return 'SW';
+        case "7":
+            return 'W';
+        case "8":
+            return 'NW';
+        default:
+            return 'T';
+    }
+};
+
+
 let get_regiones = function () {
     let data = {};
 
@@ -11,15 +37,14 @@ let get_regiones = function () {
 
         const estado = $(this).find('#Estado option:selected').text();
 
-        const find3 = $(this).find('#Region option:selected');
-        const id_reg = find3.val();
+        const id_reg = $(this).find('#Region option:selected').val();
 
-        let region;
-        if(id_reg==='-1'){
-            region = 'T';
-        }else{
-            region= find3.text();
-        }
+        let region = id_a_estado(id_reg);
+        // if(id_reg==='-1'){
+        //     region = 'T';
+        // }else{
+        //     region= find3.text();
+        // }
         // guardado de datos
         if (!(estado in data)){
             data[estado] = {};
@@ -43,15 +68,14 @@ let get_regiones = function () {
 
         const estado = $(this).find('#Estado option:selected').text();
 
-        const find3 = $(this).find('#Region option:selected');
-        const id_reg = find3.val();
+        const id_reg = $(this).find('#Region option:selected').val();
 
-        let region;
-        if(id_reg==='-1'){
-            region = 'T';
-        }else{
-            region= find3.text();
-        }
+        let region = id_a_estado(id_reg);
+        // if(id_reg==='-1'){
+        //     region = 'T';
+        // }else{
+        //     region= find3.text();
+        // }
         // guardado de datos
         if (!(estado in data)){
             data[estado] = {};
