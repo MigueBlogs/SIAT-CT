@@ -231,6 +231,9 @@ $(function() {
                         $("#type").text(getCicloneType(coneActive["stormtype"]));
                         $("#name").text(coneActive["stormname"]);
                         $("#sea").text(getSea(coneActive["stormtype"]) + " / ");
+
+                        tituloSecundario();
+                        $(".TitleOceano").text(getSea(coneActive["stormtype"]));
                     });
                 })
             });
