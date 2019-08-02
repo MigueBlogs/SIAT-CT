@@ -48,13 +48,15 @@ $(function() {
 	        //$(".QR_box").css("background", "#D9D9D9");
 	        $(".QR_box").css("border", "solid 3px");
 	        $("#headerLogos").show();
-	        //$(".solid").css("border-style", "dotted");
 	        $("#regiones").css("font-size", "10px");
 			$(".tituloTable").css("font-size", "12px");
 	        $(".fecha").css("font-size", "14px");
 	        $(".encabezado").css("font-size", "15px");
 	        autoExpand(document.getElementById("subtitle"));
-	        //autoExpand(document.getElementsByClassName("autoExpand"));
+	        //reajusta a cada text area
+	        $('textarea').each(function(){
+	        	autoExpand(document.getElementById(this.id));
+	        });
 	        $("textarea").css( "border", "none");
 	        $(".dataH").css("font-size", "11px");
 			$(".disable_on_print").hide();
@@ -95,19 +97,12 @@ $(function() {
 		        $(".fecha").removeAttr('style');
 		        $(".encabezado").removeAttr('style');
 		        autoExpand(document.getElementById("subtitle"));
-		        //autoExpand(document.getElementsByClassName("autoExpand"));
 		        $("textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
 		        $(".tituloEfectos").removeAttr('style');
-				//Después de tomar la captura muestra mapa normal
 				$("#imagen").removeAttr('style');
-				$('.js-screenshot-image').hide();
-				$("#pdfError").show();
-                $("#pdf").hide();
-                captured=false;
 				$("#map-container").removeAttr('style');
-	            $('#map-container').show();
-				
+				$("#map-container").hide();								
 	          }).save().then( function(){
 		          	//oculta modal de espera
 			        setTimeout(function(){
@@ -115,7 +110,7 @@ $(function() {
 						$("#enable_on_print").hide();
 					}, 3000);
 		          	$("#printing").modal('hide');
-					
+					//reajuste de texareas
 					$('textarea').each(function(){
 					 	autoExpand(this);
 					});
@@ -126,7 +121,6 @@ $(function() {
 		$("#ButtonEvento").hide();
 		$("#ButtonFecha").hide();
 		$("#mostrar").hide();
-		$("#capturaMapa").hide();
 		$("#mapa_ciclon").hide();
 		$('#capture').hide();
 		$('#mapa_ciclon').hide();
@@ -138,7 +132,7 @@ $(function() {
 		$("#ButtonFecha").show();
 		$("#mostrar").show();
 		$("#capturaMapa").show();
-		$('#capture').show();
+		$('#mapa_ciclon').show();
 		$('#ButtonInfo').show();
 	}  
 
@@ -168,13 +162,6 @@ $(function() {
 							scrollbar: true,
 						});
 					});
-	}
-
-	function editarE(){
-		$("#insertDataEvent").show();
-		$("#ButtonEvento").hide();
-		$("#dataOfEvent").hide();
-		$("#saveEvent").show();
 	}
 
 	function saveDate(){
@@ -212,21 +199,21 @@ $(function() {
 		}
 	}
 
-	function tituloSecundario(){
-		if($('#tipo').text() == 'TT'){
+	window.tituloSecundario =function(){
+		if($('#type').text() == 'TT'){
 			$(".TitleTipo").text('TORMENTA TROPICAL');
 		}
-		if($('#tipo').text() == 'DT'){
+		if($('#type').text() == 'DT'){
 			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
 		}
-		if($('#tipo').text() == 'TST'){
+		if($('#type').text() == 'TST'){
 			$(".TitleTipo").text('TORMENTA SUB TROPICAL');
 		}
-		if($('#tipo').text() == 'Huracán'){		
+		if($('#type').text() == 'Huracán'){		
 			$(".TitleTipo").text('HURACÁN');
 		}
 
-		$(".TitleOceano").text($('#sea').text());
+		//$(".TitleOceano").text($('#sea').text());
 	}
 
     function guardaInfo(){
@@ -290,10 +277,12 @@ $(function() {
 		$('#mostrar').click(function(){
 			$('#regiones').hide();
 			$('#tablaEditar').show();
+			$("#mostrar").hide();
 		});
 		$('#GuardaTabla').click(function(){
 			$('#regiones').show();
 			$('#tablaEditar').hide();
+			$("#mostrar").show();
 		});
 	});
 	//Función para delimitar que ciertos text area sean de más de 3 renglones
@@ -717,9 +706,12 @@ $(function() {
 		
 		});
 	}
+	$("#mostrar").hide();
 	$("#saveDate").hide();
 	$("#ButtonEvento").hide();
 	$("#datePicker").hide();
+	$('#regiones').hide();
+	$('#tablaEditar').hide();
 	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
 										                $('#mapa_ciclon').show();
 										                $('#capture').hide();

@@ -165,7 +165,8 @@ function loadEdo(estados){
 		$("#bt_add2").show();
 	}
 	
-		
+	$('#tablaEditar').show();
+	$('#loading_table').hide();	
 }
 
 

@@ -23,7 +23,7 @@ var dataArr = [];
 			alert("Completa los datos antes de guardar el reporte.");
 			return;
 		}
-		var near = readTables();
+		const reg = get_regiones();  // devuelve un objeto con los estados, tipo de alerta, nivel de alerta y regiones del estado por nivel de alerta
 		var efectos = readEfects();
 		var data = JSON.stringify({
 			NombreEvento : $('#NombreEvento').text(),
@@ -41,7 +41,7 @@ var dataArr = [];
 			zonas : $('#zonas').text(),
 			autores : autores,
 			archivos : $('#media').val(),
-			regiones: near,
+			regiones: reg,
 			efectos : efectos,
 			ultimo_boletin : ultimo
 		});
@@ -245,69 +245,6 @@ $('form').on('submit', function(event) {
 		});
 
 	});
-
-
-function readTables(){
-	var id_edo,id_reg,reg,id_nivel_alerta;
-	var tipo_alerta;
-	var regiones=[];
-	var cuenta=1;
-	$('#tablaEdos1').find('tr').each(function(){
-		
-				//console.log("Esta es la vuelta: " +cuenta)
-				var find1 = $(this).find('#NivelDeAlerta');
-					id_nivel_alerta = $('option:selected',find1).val();
-					tipo_alerta = 'acercándose';	
-
-				var find2 = $(this).find('#Estado');
-					//id_edo = $('option:selected',find2).val(); Para el valor 
-					id_edo = $('option:selected',find2).text();
-
-				var find3 = $(this).find('#Region');
-					id_reg = $('option:selected',find3).val();
-					//console.log("Este es el array de id_reg: ",id_reg);
-					if(id_reg=='-1'){
-						reg = $('option:selected',find3).attr("data-arrayedos");
-						//console.log("Este es el array de "+id_edo+": "+id_reg);
-					}else{
-						reg=$('option:selected',find3).text();
-					}
-				
-				regiones.push({id_nivel_alerta,id_edo,id_reg,reg,tipo_alerta});
-				if(find1["prevObject"].attr("id") == 'Encabezado'){
-						regiones.pop();
-					}
-				cuenta++;
-			});
-	//regiones.shift();
-	$('#tablaEdos2').find('tr').each(function(){
-		
-				var find1 = $(this).find('#NivelDeAlerta');
-					id_nivel_alerta = $('option:selected',find1).val();
-					tipo_alerta = 'alejandose';	
-										
-				var find2 = $(this).find('#Estado');
-					id_edo = $('option:selected',find2).text();
-
-				var find3 = $(this).find('#Region');
-					id_reg = $('option:selected',find3).val();
-					//console.log("Este es el array de id_reg: ",id_reg);
-					if(id_reg=='-1'){
-						reg = $('option:selected',find3).attr("data-arrayedos");
-						//console.log("Este es el array de "+id_edo+": "+id_reg);
-					}else{
-						reg=$('option:selected',find3).text();
-					}
-				
-				regiones.push({id_nivel_alerta,id_edo,id_reg,reg,tipo_alerta});
-				if(find1["prevObject"].attr("id") == 'Encabezado'){
-						regiones.pop();
-					}
-				
-			});
-	//console.log(regiones);
-	return regiones;
-}
 
 function readEfects(){
 	var id_efecto=1, coment;
