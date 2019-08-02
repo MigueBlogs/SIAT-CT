@@ -41,7 +41,7 @@ var dataArr = [];
 			zonas : $('#zonas').text(),
 			autores : autores,
 			archivos : $('#media').val(),
-			regiones: near,
+			regiones: reg,
 			efectos : efectos,
 			ultimo_boletin : ultimo
 		});
