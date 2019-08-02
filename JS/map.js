@@ -212,6 +212,7 @@ $(function() {
                         $("#type").text("");
                         $("#sea").text("");
                         $("#name").text("");
+                        $(".TitleOceano").text("");
 
                         return;
                     }
@@ -230,13 +231,15 @@ $(function() {
 
                         $("#type").text(getCicloneType(coneActive["stormtype"]));
                         $("#name").text(coneActive["stormname"]);
-                        $("#sea").text(getSea(coneActive["stormtype"]) + " / ");
+                        $("#sea").text(getSea(coneActive["layerid"]) + " / ");
+
+                        const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
+                        $(".TitleOceano").text(oceano);
+                        debugger
+                        queryRegions(map, mapView, [coneActive["geometry"]], "objectid");
                     });
                 })
             });
-
-            // const geometries = activeCones.map(function(cone) { return cone["geometry"]; });
-            // if(activeCones.length) queryRegions(map, geometries, "objectid");
         });
     }
 
@@ -248,7 +251,7 @@ $(function() {
     }
 
     function getSea(layerId) {
-        if(layerId.indexOf("EP")) return "EP";
+        if(layerId.indexOf("EP") != -1) return "EP";
         else return "AT";
     }
 

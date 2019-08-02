@@ -6,6 +6,7 @@ $.getJSON('JS/estados.json', function(data){
 });
 
 function loadEdo(estados){
+	$('#tablaEdos1').html("");
 	for(var i in estados){
 		var numRegiones = Object.keys(estados[i]).length;
 		var busqueda = EdosJson.filter(function(EdosJson){ 
