@@ -6,7 +6,8 @@ $.getJSON('JS/estados.json', function(data){
 });
 
 function loadEdo(estados){
-	$('#tablaEdos1').html("");
+	$('#tablaEdos1 > tbody').html("");
+	$('#tablaEdos2 > tbody').html("");
 	for(var i in estados){
 		var numRegiones = Object.keys(estados[i]).length;
 		var busqueda = EdosJson.filter(function(EdosJson){ 
@@ -49,7 +50,7 @@ function loadEdo(estados){
 										<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 								</th>\
 							</tr>'
-					$('#tablaEdos1').append(fila);
+					$('#tablaEdos1 > tbody').append(fila);
 					//Este segmento carga los estados en la lista
 				    $.each(EdosJson,function(key, value){
 				    	if(value.nombre.toUpperCase() != i){
@@ -93,7 +94,7 @@ function loadEdo(estados){
 									<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 								</th>\
 							</tr>'
-				    $('#tablaEdos1').append(fila);
+				    $('#tablaEdos1 > tbody').append(fila);
 					$('.regFila'+cont+' option:contains('+j+')').prop({selected: true});
 				    $.each(EdosJson,function(key, value){
 				    	//console.log("Este es el valor de i: "+i+" Este es el valor de value: "+value.nombre);

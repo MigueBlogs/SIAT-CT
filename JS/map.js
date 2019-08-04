@@ -27,7 +27,7 @@ $(function() {
             view["ui"]["components"] = ["attributtion"];
             view.when(function() {
                 loadCiclones(map);
-                loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_001Aadv_CONE.kmz", {id: "willa_cone"});
+                loadKMLLayer(map, view, "https://www.nhc.noaa.gov/gis/archive/2015/EP202015_011Aadv_CONE.kmz", {id: "willa_cone"});
 
                 const viewUpdating = view.watch("updating", function(){
                     viewUpdating.remove();
@@ -213,6 +213,8 @@ $(function() {
                         $("#sea").text("");
                         $("#name").text("");
                         $(".TitleOceano").text("");
+                        $('#tablaEdos1 > tbody').html("");
+	                    $('#tablaEdos2 > tbody').html("");
 
                         return;
                     }
@@ -235,7 +237,6 @@ $(function() {
 
                         const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
                         $(".TitleOceano").text(oceano);
-                        debugger
                         queryRegions(map, mapView, [coneActive["geometry"]], "objectid");
                     });
                 })
