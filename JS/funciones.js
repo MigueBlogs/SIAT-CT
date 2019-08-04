@@ -561,7 +561,7 @@ $(function() {
 			afecta2=busquedaRecursiva(afecta2,size);
 			
 			
-			console.log("Valor retornado: ",afecta2);
+			//console.log("Valor retornado: ",afecta2);
 			imprimeTabla1(afecta2,size)
 
 		$('#regiones').find('tr').each(function(){
@@ -748,7 +748,7 @@ $(function() {
 	$("#GuardaInfo").click(function() {guardaInfo()})
 	$("#next").click(function() {tituloSecundario()});
 	
-	//$("#enable_on_print").hide();
+	$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
 	$("#pdfError").hide();

@@ -208,15 +208,23 @@ $(function() {
                 ) {
                     var layerid = $("#stormsActive option:selected").attr("data-layerid");
 
+                    //si no hay Evento en la selección
                     if(!layerid) {
                         $("#type").text("");
                         $("#sea").text("");
                         $("#name").text("");
                         $(".TitleOceano").text("");
+                        $(".TitleTipo").text('');
                         $('#tablaEdos1 > tbody').html("");
 	                    $('#tablaEdos2 > tbody').html("");
-
+                        $("#regiones").hide();
+                        $("#mostrar").hide();
+                        $('#tablaEditar').show();
                         return;
+                    }else{//si existe el evento muestra la tabla correspondiente
+                        $("#regiones").hide();
+                        $("#mostrar").hide();
+                        $('#tablaEditar').show();
                     }
 
                     var layer = map.findLayerById(layerid);
@@ -234,7 +242,7 @@ $(function() {
                         $("#type").text(getCicloneType(coneActive["stormtype"]));
                         $("#name").text(coneActive["stormname"]);
                         $("#sea").text(getSea(coneActive["layerid"]) + " / ");
-
+                        tituloSecundario();
                         const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
                         $(".TitleOceano").text(oceano);
                         queryRegions(map, mapView, [coneActive["geometry"]], "objectid");
