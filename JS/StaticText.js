@@ -108,103 +108,38 @@ $("#SeleccionaEvento").click(function() {
     	
         //Carga del evento
         $.getJSON('JS/info.json',function(data){
-		var output = document.getElementById('NombreEvento');
-		output.innerHTML = data.NombreEvento;
-		
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('sea');
-			output.innerHTML = data.oceano;
-			$('#sea').hide();
+			$("#name").text(data.NombreEvento);
+			$("#sea").text(data.oceano);
+			$("#type").text(data.cat_evento);
+			$("#subtitle").text(data.subtitulo);
+			$("#comentarios").text(data.comentarios);
+			$("#zonas").text(data.zonas);
+			$("#hora").text(data.hora);
+			$("#coords").text(data.coords);
+			$("#loc").text(data.loc);
+			$("#despl").text(data.despl);
+			$("#viento").text(data.viento);
+			$("#racha").text(data.racha);
+			$("#autores").text(data.autores);
 		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('tipo');
-			output.innerHTML = data.cat_evento;
-		});
-
-		//Cargando datos del Subtítulo
-		$.getJSON('JS/info.json',function(data){
-			//var output = document.getElementById('subtitle');
-			//output.innerHTML = data.texto;
-			document.getElementById("subtitle").value = data.subtitulo;
-		});
-
-		/// cargando comentarios
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('comentarios');
-			output.innerHTML = data.comentarios;
-		});
-
-		/// cargando zonas
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('zonas');
-			output.innerHTML = data.zonas;
-		});
-
-		//Cargando datos en zona de Información Gneral
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('hora');
-			output.innerHTML = data.hora;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('coords');
-			output.innerHTML = data.coords;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('loc');
-			output.innerHTML = data.loc;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('despl');
-			output.innerHTML = data.despl;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('viento');
-			output.innerHTML = data.viento;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('racha');
-			output.innerHTML = data.racha;
-		});
-
-		$.getJSON('JS/info.json',function(data){
-			var output = document.getElementById('autores');
-			output.innerHTML = data.autores;
-		});
-
-	});
     }else{
-    	var output = document.getElementById('NombreEvento');
-		output.innerHTML = '';
-		var output = document.getElementById('tipo');
-		output.innerHTML = '';
-		document.getElementById("subtitle").value = '';
-		var output = document.getElementById('comentarios');
-		output.innerHTML = '';
-		var output = document.getElementById('zonas');
-		output.innerHTML = '';
-		var output = document.getElementById('hora');
-		output.innerHTML = '';
-		var output = document.getElementById('coords');
-		output.innerHTML = '';
-		var output = document.getElementById('loc');
-		output.innerHTML = '';
-		var output = document.getElementById('despl');
-		output.innerHTML = '';
-		var output = document.getElementById('viento');
-		output.innerHTML = '';
-		var output = document.getElementById('racha');
-		output.innerHTML = '';
+    	$("#name").text('');
+		$("#sea").text('');
+		$("#type").text('');
+		$("#subtitle").text('');
+		$("#comentarios").text('');
+		$("#zonas").text('');
+		$("#hora").text('');
+		$("#coords").text('');
+		$("#loc").text('');
+		$("#despl").text('');
+		$("#viento").text('');
+		$("#racha").text('');
+		$("#autores").text('');
     }
   });
 
-//Upload 
-
+//Upload
 $('form').on('submit', function(event) {
 
 		event.preventDefault();
