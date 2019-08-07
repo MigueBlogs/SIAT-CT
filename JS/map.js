@@ -74,6 +74,82 @@ $(function() {
            
         });
     }
+    function loadMapEstados(container) {
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/MapImageLayer"
+        ], function(Map, MapView, MapImageLayer) {
+            const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer";
+            const estatesRender = {
+                type: "unique-value", // autocasts as new SimpleRenderer()
+                field: "Regional_2",
+                uniqueValueInfos: [
+                    {
+                        value: "C",
+                        label: "C",
+                        symbol:
+                            {
+                                type:"simple-fill",
+                                style:"solid",
+                                color:"white"
+                            }
+                    },
+                    {
+                        value: "N",
+                        label: "N",
+                        symbol:
+                            {
+                                type:"simple-fill",
+                                style:"solid",
+                                color:"red"
+                            }
+                    }
+                ],
+                label: "Nacional"
+            };
+            const properties = {
+                id: 0,
+                opacity: 0.8,
+                refreshInterval: 10,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: estatesRender
+            };
+
+            const layer = new MapImageLayer({
+                url: "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer",
+                sublayers: [
+                    {
+                        id: 0,
+                        renderer: estatesRender,
+                        opacity: 1.0
+                    },
+                ]
+            });
+
+            const map = new Map({basemap: "hybrid", layers: [layer]});
+
+            let view = new MapView({
+                container: document.getElementById('viewDiv'),
+                map: map,
+                center: [-101.608429, 23.200961],
+                zoom: 4
+            });
+
+            view["ui"]["components"] = ["attributtion"];
+            loadEstados(map, url, properties);
+        });
+    }
+
+    function loadEstados(map, url, properties){
+        require([
+            "esri/layers/FeatureLayer"
+        ], function(FeatureLayer) {
+            const layer = new FeatureLayer(url, properties);
+            map.add(layer);
+        });
+    }
 
     function addFeatureLayer(map, url, properties, renderer = null) {
         require([
@@ -625,4 +701,5 @@ $(function() {
     }
 
     loadMap("map");
+    loadMapEstados("map");
 });
