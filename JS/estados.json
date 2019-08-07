@@ -3,7 +3,7 @@
     { "id": "02", "nombre": "Baja California", "num_reg":3 },
     { "id": "03", "nombre": "Baja California Sur", "num_reg":3 },
     { "id": "04", "nombre": "Campeche", "num_reg":6 },
-    { "id": "05", "nombre": "Coahuila de Zaragoza", "num_reg":5 },
+    { "id": "05", "nombre": "Coahuila", "num_reg":5 },
     { "id": "06", "nombre": "Colima", "num_reg":4 },
     { "id": "07", "nombre": "Chiapas", "num_reg":5 },
     { "id": "08", "nombre": "Chihuahua", "num_reg":8 },
@@ -14,7 +14,7 @@
     { "id": "13", "nombre": "Hidalgo", "num_reg":5 },
     { "id": "14", "nombre": "Jalisco", "num_reg":6 },
     { "id": "15", "nombre": "México", "num_reg":5 },    
-    { "id": "16", "nombre": "Michoacán de Ocampo", "num_reg":8 },
+    { "id": "16", "nombre": "Michoacán", "num_reg":8 },
     { "id": "17", "nombre": "Morelos", "num_reg":5 },
     { "id": "18", "nombre": "Nayarit", "num_reg":5 },
     { "id": "19", "nombre": "Nuevo León", "num_reg":4 },
@@ -28,7 +28,7 @@
     { "id": "27", "nombre": "Tabasco", "num_reg":6 },
     { "id": "28", "nombre": "Tamaulipas", "num_reg": 7},
     { "id": "29", "nombre": "Tlaxcala", "num_reg":5 },
-    { "id": "30", "nombre": "Veracruz de Ignacio de La Llave", "num_reg":3 },
+    { "id": "30", "nombre": "Veracruz", "num_reg":3 },
     { "id": "31", "nombre": "Yucatán", "num_reg":7 },
     { "id": "32", "nombre": "Zacatecas", "num_reg":4 } 
 ]

@@ -27,7 +27,7 @@ $(function() {
             view["ui"]["components"] = ["attributtion"];
             view.when(function() {
                 loadCiclones(map);
-                loadKMLLayer(map, view, "https://www.nhc.noaa.gov/gis/archive/2015/EP202015_011Aadv_CONE.kmz", {id: "willa_cone"});
+                loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_001Aadv_CONE.kmz", {id: "willa_cone"});
 
                 const viewUpdating = view.watch("updating", function(){
                     viewUpdating.remove();
@@ -312,10 +312,25 @@ $(function() {
                     featureResults.forEach(function(featureResult) {
                         featureResult["features"].forEach(function(feature) {
                             const attributes = feature["attributes"];
-                            if(!eventRegions[attributes["Regional_1"]]) eventRegions[attributes["Regional_1"]] = {};
-                            if(!eventRegions[attributes["Regional_1"]][attributes["Regional_2"]]) eventRegions[attributes["Regional_1"]][attributes["Regional_2"]] = 0;
+                            const edosMalos = {
+                                "COAHUILA DE ZARAGOZA": "COAHUILA", 
+                                "DISTRITO FEDERAL": "CIUDAD DE MÉXICO",
+                                "MEXICO": "MÉXICO",
+                                "MICHOACAN DE OCAMPO": "MICHOACÁN",
+                                "NUEVO LEON": "NUEVO LEÓN",
+                                "QUERETARO DE ARTEAGA": "QUERÉTARO",
+                                "SAN LUIS POTOSI": "SAN LUIS POTOSÍ",
+                                "VERACRUZ-LLAVE": "VERACRUZ",
+                                "YUCATAN": "YUCATÁN"
+                            };
+
+                            var edo = attributes["Regional_1"];
+
+                            if(edo in edosMalos) edo = edosMalos[edo];
+                            if(!eventRegions[edo]) eventRegions[edo] = {};
+                            if(!eventRegions[edo][attributes["Regional_2"]]) eventRegions[edo][attributes["Regional_2"]] = 0;
     
-                            eventRegions[attributes["Regional_1"]][attributes["Regional_2"]]++;
+                            eventRegions[edo][attributes["Regional_2"]]++;
                         });
     
                         regionsLocated.push(eventRegions);
