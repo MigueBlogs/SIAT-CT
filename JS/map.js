@@ -16,7 +16,73 @@ $(function() {
             var map = new Map({
                 basemap: "hybrid"
             });
-      
+            const redProp = {
+                id: "statesRed",
+                opacity: 0.8,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: {
+                    type: "simple",
+                    symbol: {type: "simple-fill"},
+                    color: "#FF0000"
+                },
+                definitionExpression: "1 = 0"
+            };
+            const orangeProp = {
+                id: "statesOrange",
+                opacity: 0.8,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: {
+                    type: "simple",
+                    symbol: {type: "simple-fill"},
+                    color: "#FFA500"
+                },
+                definitionExpression: "1 = 0"
+            };
+            const yellowProp = {
+                id: "statesYellow",
+                opacity: 0.8,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: {
+                    type: "simple",
+                    symbol: {type: "simple-fill"},
+                    color: "#FFFF00"
+                },
+                definitionExpression: "1 = 0"
+            };
+            const greenProp = {
+                id: "statesGreen",
+                opacity: 0.8,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: {
+                    type: "simple",
+                    symbol: {type: "simple-fill"},
+                    color: "#38BF34"
+                },
+                definitionExpression: "1 = 0"
+            };
+            const blueProp = {
+                id: "statesBlue",
+                opacity: 0.8,
+                showLabels: true,
+                outFields: ["*"],
+                renderer: {
+                    type: "simple",
+                    symbol: {type: "simple-fill"},
+                    color: "#4F81BC"
+                },
+                definitionExpression: "1 = 0"
+            };
+            $("#GuardaTabla").click(function() { changeColoredRegions(map); });
+            const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+            addFeatureLayer(map, url, redProp);
+            addFeatureLayer(map, url, orangeProp);
+            addFeatureLayer(map, url, yellowProp);
+            addFeatureLayer(map, url, greenProp);
+            addFeatureLayer(map, url, blueProp);
             var view = new MapView({
                 container: container,
                 map: map,
@@ -344,10 +410,6 @@ $(function() {
         });
     }
 
-    function loadSatesColored(map){
-
-    }
-
     function loadCiclones(map) {
         const activeHurricanesEPUrls = [
             {
@@ -602,25 +664,80 @@ $(function() {
                 addFeatureLayer(map, layers[type], properties);
             });
         });
+    }
 
+    function changeColoredRegions(map) {
+        console.log("saca la puriiii!!!!");
         /*
-        MODIFICAR PARA CUANDO GUARDE LOS DATOS DE LA TABLA DE REGIONES
-        const propertiesStates = {
-            id: "states",  
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: estatesRender,
-            definitionExpression: "1 = 0"
-        };
+       const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+       addFeatureLayer(map, url, propertiesStates);
 
-        const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
-        addFeatureLayer(map, url, propertiesStates);
+       const layer = map.findLayerById("states");
+       layer.definitionExpression = '<>':
+       layer.refresh();
+       */
 
-        const layer = map.findLayerById("states");
-        layer.definitionExpression = '<>':
+        const data = get_regiones();
+        let new_data = {};
+        let queries = {};
+        $.each(data, function (estado, obj1) {
+            $.each(obj1, function (tipo, obj2) {
+                $.each(obj2, function (color, list) {
+                    if (!(color in new_data)) new_data[color] = {};
+                    if (!(estado in new_data[color])) new_data[color][estado] = list;
+
+                })
+            })
+        });
+        //console.log(queries);
+
+        $.each(new_data, function (color, obj1) {
+            queries[color] = "";
+            let first = true;
+            $.each(obj1, function (estado, lista) {
+                if (!first){
+                    queries[color] += " OR "
+                }
+                else {
+                    first = false;
+                }
+                queries[color] += "(Regional_1 = '" + estado.toUpperCase() +"'";
+                if (lista[0] === "T"){
+                    queries[color] += ")";
+                }
+                else {
+                    queries[color] += " AND Regional_2 IN ('" + lista.join("', '") + "'))"
+                }
+            })
+        });
+
+
+        let layer;
+        if ("ROJA" in queries) {
+            layer = map.findLayerById("statesRed");
+            layer.definitionExpression = queries['ROJA'];
+            layer.refresh();
+        }
+        if("NARANJA" in queries){
+            layer = map.findLayerById("statesOrange");
+            layer.definitionExpression = queries['NARANJA'];
+            layer.refresh();
+        }
+
+        if("AMARILLA" in queries){}
+        layer = map.findLayerById("statesYellow");
+        layer.definitionExpression = queries['AMARILLA'];
         layer.refresh();
-        */
+
+        if("VERDE" in queries){}
+        layer = map.findLayerById("statesGreen");
+        layer.definitionExpression = queries['VERDE'];
+        layer.refresh();
+
+        if("AZUL" in queries){}
+        layer = map.findLayerById("statesBlue");
+        layer.definitionExpression = queries['AZUL'];
+        layer.refresh();
     }
 
     document.addEventListener("kml-added", function(evt) {
@@ -644,4 +761,5 @@ $(function() {
     }
 
     loadMap("map");
+
 });

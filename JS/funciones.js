@@ -2,9 +2,9 @@
 $(function() {
 	var modified = false;
 	var dt = new Date();
-	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
-	var hora2 = {hour:'2-digit', minute:'2-digit'}
-	var hora = {hour:'2-digit'}
+	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+	var hora2 = {hour:'2-digit', minute:'2-digit'};
+	var hora = {hour:'2-digit'};
 	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
 
 	function generaPdf() {
@@ -87,7 +87,6 @@ $(function() {
 				showButtons();
 				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
-		      	$(".box").removeAttr('style');
 		      	$(".titulo").removeAttr('style');
 		      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
 		      	$(".encabezado").removeAttr('style');
@@ -98,7 +97,6 @@ $(function() {
 		        $("#regiones").css("height", "calc(100% - 43px)");
 				$(".tituloTable").removeAttr('style');
 		        $(".fecha").removeAttr('style');
-		        $(".encabezado").removeAttr('style');
 		        autoExpand(document.getElementById("subtitle"));
 		        $("textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
@@ -121,7 +119,7 @@ $(function() {
 	}
 
 	function hideButtons(){
-		$("#ButtonEvento").hide();
+
 		$("#ButtonFecha").hide();
 		$("#mostrar").hide();
 		$("#mapa_ciclon").hide();
@@ -131,7 +129,6 @@ $(function() {
 	}  
 
 	function showButtons(){
-		$("#ButtonEvento").show();
 		$("#ButtonFecha").show();
 		$("#mostrar").show();
 		$("#capturaMapa").show();
@@ -152,7 +149,6 @@ $(function() {
 							format: 'dd/mm/yyyy',
 							startDate: '-3d',
 							todayBtn: "linked",
-							autoclose: true,
 							todayHighlight: true
 						});
 					});
@@ -195,7 +191,6 @@ $(function() {
 			$("#insertDataEvent").hide();
 			$("#dataOfEvent").show();
 			$("#saveEvent").hide();
-			$("#ButtonEvento").show();
 		}else{
 			alert("Ingresa el nombre y categoría del evento");
 			editarE();
@@ -217,7 +212,7 @@ $(function() {
 		}
 
 		//$(".TitleOceano").text($('#sea').text());
-	}
+	};
 
     function guardaInfo(){
 		document.getElementById("hora").innerHTML = document.getElementById("hour").value;
@@ -242,6 +237,146 @@ $(function() {
 		document.getElementById("max-wind").value = document.getElementById("racha").textContent;
 		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
 	}
+
+    /*function changeColoredRegions() {
+
+       const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+       addFeatureLayer(map, url, propertiesStates);
+
+       const layer = map.findLayerById("states");
+       layer.definitionExpression = '<>':
+       layer.refresh();
+
+
+        const redProp = {
+            id: "statesRed",
+            opacity: 0.8,
+            showLabels: true,
+            outFields: ["*"],
+            renderer: {
+                type: "simple",
+                symbol: {type: "simple-fill"},
+                color: "#FF0000"
+            },
+            definitionExpression: "1 = 0"
+        };
+        const orangeProp = {
+            id: "statesOrange",
+            opacity: 0.8,
+            showLabels: true,
+            outFields: ["*"],
+            renderer: {
+                type: "simple",
+                symbol: {type: "simple-fill"},
+                color: "#FFA500"
+            },
+            definitionExpression: "1 = 0"
+        };
+        const yellowProp = {
+            id: "statesYellow",
+            opacity: 0.8,
+            showLabels: true,
+            outFields: ["*"],
+            renderer: {
+                type: "simple",
+                symbol: {type: "simple-fill"},
+                color: "#FFFF00"
+            },
+            definitionExpression: "1 = 0"
+        };
+        const greenProp = {
+            id: "statesGreen",
+            opacity: 0.8,
+            showLabels: true,
+            outFields: ["*"],
+            renderer: {
+                type: "simple",
+                symbol: {type: "simple-fill"},
+                color: "#38BF34"
+            },
+            definitionExpression: "1 = 0"
+        };
+        const blueProp = {
+            id: "statesBlue",
+            opacity: 0.8,
+            showLabels: true,
+            outFields: ["*"],
+            renderer: {
+                type: "simple",
+                symbol: {type: "simple-fill"},
+                color: "#4F81BC"
+            },
+            definitionExpression: "1 = 0"
+        };
+
+
+        const data = get_regiones();
+        console.log(data);
+        let new_data = {};
+        let queries = {};
+        $.each(data, function (estado, obj1) {
+            $.each(obj1, function (tipo, obj2) {
+                $.each(obj2, function (color, list) {
+                    if (!(color in new_data)) new_data[color] = {};
+                    if (!(estado in new_data[color])) new_data[color][estado] = list;
+
+                })
+            })
+        });
+
+        $.each(new_data, function (color, obj1) {
+            queries[color] = "";
+            let first = true;
+            $.each(obj1, function (estado, lista) {
+                if (!first){
+                    queries[color] += " OR "
+                }
+                else {
+                    first = false;
+                }
+                queries[color] += "(Regional_1 = '" + estado.toUpperCase() +"'";
+                if (lista[0] === "T"){
+                    queries[color] += ")";
+                }
+                else {
+                    queries[color] += " AND Regional_2 IN ('" + lista.join("', '") + "'))"
+                }
+            })
+        });
+        const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+        addFeatureLayer(map, url, redProp);
+        addFeatureLayer(map, url, orangeProp);
+        addFeatureLayer(map, url, yellowProp);
+        addFeatureLayer(map, url, greenProp);
+        addFeatureLayer(map, url, blueProp);
+
+        let layer;
+        if ("ROJA" in queries) {
+            layer = map.findLayerById("statesRed");
+            layer.definitionExpression = '<>';
+            layer.refresh();
+        }
+        if("NARANJA" in queries){
+            layer = map.findLayerById("statesOrange");
+            layer.definitionExpression = '<>';
+            layer.refresh();
+        }
+
+        if("AMARILLA" in queries){}
+        layer = map.findLayerById("statesYellow");
+        layer.definitionExpression = '<>';
+        layer.refresh();
+
+        if("VERDE" in queries){}
+        layer = map.findLayerById("statesGreen");
+        layer.definitionExpression = '<>';
+        layer.refresh();
+
+        if("AZUL" in queries){}
+        layer = map.findLayerById("statesBlue");
+        layer.definitionExpression = '<>';
+        layer.refresh();
+    }*/
 
 	//Función para auto ajustar caja de texto.
 	var autoExpand = function (field) {
@@ -286,6 +421,7 @@ $(function() {
 			$('#regiones').show();
 			$('#tablaEditar').hide();
 			$("#mostrar").show();
+
 		});
 	});
 	//Función para delimitar que ciertos text area sean de más de 3 renglones
@@ -333,7 +469,7 @@ $(function() {
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
 					</th>\
-				</tr>'
+				</tr>';
 
 		$.getJSON('JS/estados.json',function(data){
 		    $.each(data,function(key, value){
@@ -350,12 +486,10 @@ $(function() {
 			event.stopPropagation();
 			event.stopImmediatePropagation();
 			change(this.id)})
-	};
-
-
+	}
 	window.eliminar =function(id_fila){
 		$('#'+id_fila).remove();
-	}
+	};
 
 	window.change = function(id_fila){
 		var filaAct = document.getElementById(id_fila);
@@ -367,7 +501,7 @@ $(function() {
 		if (tablaFilaAct[0].id == 'tablaEdos2'){
 			$('#tablaEdos1').append(filaAct);
 		}
-	}
+	};
 	
 
 	function ImprimeDatos(Param,a,b){
@@ -423,7 +557,7 @@ $(function() {
 	
 
 	function generaArreglo(afectados,size){
-	var lista = new Array();
+	var lista = [];
 	var temp;
 	var contador=0;
 		afectados.forEach(function(item, index, array){
@@ -528,7 +662,7 @@ $(function() {
 			
 			
 			//console.log("Valor retornado: ",afectados);
-			imprimeTabla(afectados,size)
+			imprimeTabla(afectados,size);
 
 		var edo,reg,na;
 		var afecta2 = [];
@@ -562,7 +696,7 @@ $(function() {
 			
 			
 			//console.log("Valor retornado: ",afecta2);
-			imprimeTabla1(afecta2,size)
+			imprimeTabla1(afecta2,size);
 
 		$('#regiones').find('tr').each(function(){
 				$(this).find('th').each(function(){
@@ -575,11 +709,11 @@ $(function() {
 
 	String.prototype.replaceAt=function(index, replacement) {
 		return this.substr(0, index) + replacement + this.substr(index + replacement.length);
-	}
+	};
 	String.prototype.insert_at=function(index, string)
 	{   
 	return this.substr(0, index) + string + this.substr(index);
-	}
+	};
 
 	function imprimeTabla(afectados,size){
 		//imprime y da formato al texto de la tabla
@@ -711,7 +845,6 @@ $(function() {
 	}
 	$("#mostrar").hide();
 	$("#saveDate").hide();
-	$("#ButtonEvento").hide();
 	$("#datePicker").hide();
 	$('#regiones').hide();
 	$('#tablaEditar').hide();
@@ -731,7 +864,6 @@ $(function() {
 										                $('#mapa_ciclon').show();
 										            }});
 	$("#ButtonFecha").click(function() { editarF(); });
-	$("#ButtonEvento").click(function() { editarE(); });
 	$("#saveDate").click(function() { saveDate(); });
 	$("#saveEvent").click(function() { saveEvent(); });
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
@@ -745,7 +877,7 @@ $(function() {
 	//$("#bt_add1").hide();
 	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
-	$("#GuardaInfo").click(function() {guardaInfo()})
+	$("#GuardaInfo").click(function() {guardaInfo()});
 	$("#next").click(function() {tituloSecundario()});
 	
 	$("#enable_on_print").hide();
@@ -786,7 +918,6 @@ $(function() {
         $("#bt_add1").hide();
 		$("#bt_add2").hide();
 		$("#insertDataEvent").hide();
-		$("#ButtonEvento").show();
 		$("#saveEvent").hide();
     }else{
     	$('#Select-Event').hide();
