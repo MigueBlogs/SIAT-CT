@@ -344,6 +344,10 @@ $(function() {
         });
     }
 
+    function loadSatesColored(map){
+
+    }
+
     function loadCiclones(map) {
         const activeHurricanesEPUrls = [
             {
@@ -355,6 +359,7 @@ $(function() {
                     "watchWarnings": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/7",
                     "pastTrack": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/9",
                     "pastPoints": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/8",
+                    "renderMapa": "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0",
                 }
             },{
                 "name": "EP2",
@@ -365,6 +370,7 @@ $(function() {
                     "watchWarnings": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/17",
                     "pastTrack": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/19",
                     "pastPoints": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/18",
+                    "renderMapa": "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0",
                 }
             },{
                 "name": "EP3",
@@ -409,6 +415,7 @@ $(function() {
                     "watchWarnings": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_Atl_trop_cyclones/MapServer/7",
                     "pastTrack": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_Atl_trop_cyclones/MapServer/9",
                     "pastPoints": "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_Atl_trop_cyclones/MapServer/8",
+                    "renderMapa": "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0",
                 }
             },{
                 "name": "AT2",
@@ -452,6 +459,42 @@ $(function() {
                 }
             }
         ];
+
+        var renderer = {
+          type: "unique-value",  // autocasts as new UniqueValueRenderer()
+          field: "Regional_2",
+          defaultSymbol: { type: "simple-fill" },  // autocasts as new SimpleFillSymbol()
+          uniqueValueInfos: [{
+            // All features with value of "North" will be blue
+            value: "C",
+            symbol: {
+              type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+              color: "blue"
+            }
+          }, {
+            // All features with value of "East" will be green
+            value: "CN",
+            symbol: {
+              type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+              color: "green"
+            }
+          }, {
+            // All features with value of "South" will be red
+            value: "E",
+            symbol: {
+              type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+              color: "red"
+            }
+          }, {
+            // All features with value of "West" will be yellow
+            value: "N",
+            symbol: {
+              type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+              color: "yellow"
+            }
+          }]
+        };
+
 
         const forecastPointsLabelClass = {
             symbol: {
@@ -565,6 +608,8 @@ $(function() {
                     properties["renderer"] = pastTrackRenderer;
                 } else if(type == "pastPoints") {
                     properties["renderer"] = pastTrackPointRenderer;
+                } else if(type=="renderMapa") {
+                    properties["renderer"] = render;
                 }
 
                 addFeatureLayer(map, layers[type], properties);
