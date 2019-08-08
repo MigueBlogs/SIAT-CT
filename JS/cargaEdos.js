@@ -65,6 +65,7 @@ function loadEdo(estados){
 					var value = j;
 					//console.log("este es el valor de j en "+i+": "+j); 	
 					j = convierteRegion(j);
+
 					var fila='<tr id="fila'+cont+'">\
 								<th class="solid">\
 										<select id="NivelDeAlerta"> \
@@ -95,9 +96,13 @@ function loadEdo(estados){
 								</th>\
 							</tr>'
 				    $('#tablaEdos1 > tbody').append(fila);
-					$('.regFila'+cont+' option:contains('+j+')').prop({selected: true});
+					//$('.regFila'+cont+' option:contains('+j+')').prop({selected: true});
+					$('.regFila'+cont+' option')
+					    .filter(function(index) { return $(this).text() === j; })
+					    .prop('selected', true);
+					console.log("Este es el valor de i: "+i+" Este es el valor de j: "+j);
 				    $.each(EdosJson,function(key, value){
-				    	//console.log("Este es el valor de i: "+i+" Este es el valor de value: "+value.nombre);
+				    	
 				    	if(value.nombre.toUpperCase() != i){
 				    		$('.edosFila'+cont).append('<option value=' + key.clave + '>' + value.nombre + '</option>');
 							}else{

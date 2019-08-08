@@ -5,11 +5,13 @@ $(function() {
         require([
             "esri/Map",
             "esri/views/MapView",
-            "esri/config"
+            "esri/config",
+            "esri/widgets/Fullscreen"
         ], function(
             Map,
             MapView,
-            esriConfig
+            esriConfig,
+            Fullscreen
         ) {
             esriConfig.request.proxyUrl = "http://rmgir.cenapred.gob.mx/proxy/proxy.php";
 
@@ -135,6 +137,13 @@ $(function() {
                     searchCicloneCones(map, view);
                 });
             });
+            view.ui.add(
+              new Fullscreen({
+                view: view
+                //element: applicationDiv
+              }),
+              "top-right"
+            );
 
             // the button that triggers screen shot
             const screenshotBtn = document.getElementById("capture");
@@ -724,6 +733,17 @@ $(function() {
             })
         });
         
+        const edosBuenos = {
+            "COAHUILA": "COAHUILA DE ZARAGOZA", 
+            "CIUDAD DE MÉXICO": "DISTRITO FEDERAL",
+            "MÉXICO": "MEXICO",
+            "MICHOACÁN": "MICHOACAN DE OCAMPO",
+            "NUEVO LEÓN": "NUEVO LEON",
+            "QUERÉTARO": "QUERETARO DE ARTEAGA",
+            "SAN LUIS POTOSÍ": "SAN LUIS POTOSI",
+            "VERACRUZ": "VERACRUZ-LLAVE",
+            "YUCATÁN": "YUCATAN"
+        };
 
         $.each(new_data, function (color, obj1) {
             queries[color] = "";
@@ -735,7 +755,9 @@ $(function() {
                 else {
                     first = false;
                 }
+                if(estado.toUpperCase() in edosBuenos) estado = edosBuenos[estado.toUpperCase()];
                 queries[color] += "(Regional_1 = '" + estado.toUpperCase() +"'";
+                console.log("Este es el estado en el query", estado.toUpperCase());
                 if (lista[0] === "T"){
                     queries[color] += ")";
                 }
