@@ -757,7 +757,7 @@ $(function() {
                 }
                 if(estado.toUpperCase() in edosBuenos) estado = edosBuenos[estado.toUpperCase()];
                 queries[color] += "(Regional_1 = '" + estado.toUpperCase() +"'";
-                console.log("Este es el estado en el query", estado.toUpperCase());
+                //console.log("Este es el estado en el query", estado.toUpperCase());
                 if (lista[0] === "T"){
                     queries[color] += ")";
                 }

@@ -100,7 +100,7 @@ function loadEdo(estados){
 					$('.regFila'+cont+' option')
 					    .filter(function(index) { return $(this).text() === j; })
 					    .prop('selected', true);
-					console.log("Este es el valor de i: "+i+" Este es el valor de j: "+j);
+					//console.log("Este es el valor de i: "+i+" Este es el valor de j: "+j);
 				    $.each(EdosJson,function(key, value){
 				    	
 				    	if(value.nombre.toUpperCase() != i){

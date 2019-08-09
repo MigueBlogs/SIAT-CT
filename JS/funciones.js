@@ -6,6 +6,23 @@ $(function() {
 	var hora2 = {hour:'2-digit', minute:'2-digit'};
 	var hora = {hour:'2-digit'};
 	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
+	const roja = 3;
+	const naranja = 3;
+	const amarillo = 6;
+	const verde = 12;
+	const azul = 24;
+
+	function validTime(time){
+		var periodoValidez;
+		if( ($("#NearB").text() != '--') || ($("#FarB").text() != '--') )  periodoValidez = azul;
+		if( ($("#NearG").text() != '--') || ($("#FarG").text() != '--') )  periodoValidez = verde;
+		if( ($("#NearY").text() != '--') || ($("#FarY").text() != '--') )  periodoValidez = amarillo;
+		if( ($("#NearO").text() != '--') || ($("#FarO").text() != '--') )  periodoValidez = naranja;
+		if( ($("#NearR").text() != '--') || ($("#FarR").text() != '--') )  periodoValidez = roja;
+
+		time.setHours( time.getHours() + periodoValidez );
+		$("#fechaValidez").text(time.toLocaleString("es-MX",fecha)+' / '+time.toLocaleString("es-MX",hora)+':00 h');
+	}
 
 	function generaPdf() {
 		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible") ){
@@ -177,6 +194,7 @@ $(function() {
 		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
 		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h' + ' / ';
+		dt = newDate;
 		$("#datetime").show();
 		$("#datePicker").hide();
 		$("#ButtonFecha").show();
@@ -494,7 +512,7 @@ $(function() {
 	window.change = function(id_fila){
 		var filaAct = document.getElementById(id_fila);
 		var tablaFilaAct= $('#'+id_fila).parent().parent();
-		console.log("Tabla actual: ",tablaFilaAct[0].id);
+		//console.log("Tabla actual: ",tablaFilaAct[0].id);
 		if(tablaFilaAct[0].id == 'tablaEdos1'){
 			$('#tablaEdos2').append(filaAct);
 		}
@@ -868,6 +886,7 @@ $(function() {
 	$("#saveEvent").click(function() { saveEvent(); });
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
 	$("#pdf").click(function() {generaPdf();});
+	$("#datetime").on("change", function() { validTime(dt) });
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
 
@@ -877,10 +896,12 @@ $(function() {
 	//$("#bt_add1").hide();
 	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
+	$("#GuardaTabla").click(function() { validTime(dt) });
 	$("#GuardaInfo").click(function() {guardaInfo()});
 	$("#next").click(function() {tituloSecundario()});
 	
-	$("#enable_on_print").hide();
+	//El siguiente  elemento oculta el resto del HTML que se muestra en el PDF
+	//$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
 	$("#pdfError").hide();
