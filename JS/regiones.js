@@ -40,11 +40,7 @@ let get_regiones = function () {
         const id_reg = $(this).find('#Region option:selected').val();
 
         let region = id_a_estado(id_reg);
-        // if(id_reg==='-1'){
-        //     region = 'T';
-        // }else{
-        //     region= find3.text();
-        // }
+
         // guardado de datos
         if (!(estado in data)){
             data[estado] = {};
@@ -71,11 +67,7 @@ let get_regiones = function () {
         const id_reg = $(this).find('#Region option:selected').val();
 
         let region = id_a_estado(id_reg);
-        // if(id_reg==='-1'){
-        //     region = 'T';
-        // }else{
-        //     region= find3.text();
-        // }
+
         // guardado de datos
         if (!(estado in data)){
             data[estado] = {};

@@ -59,12 +59,11 @@ $(function() {
 	        	
 	        }
 	        $(".regularTxt").css("font-size", "10px");
-	        $(".QR_box").css("font-size", "12px");
+	        $(".QR_box").css({"font-size": "12px", "border": "solid 3px"});
 	        $(".QR_box2").css("font-size", "12px");
 	        //$('.tableDataL').css("grid-template-rows","auto 30%");
 	        $("#regiones").css("height", "calc(100% - 22px)");
 	        //$(".QR_box").css("background", "#D9D9D9");
-	        $(".QR_box").css("border", "solid 3px");
 	        $("#headerLogos").show();
 	        $("#regiones").css("font-size", "10px");
 			$(".tituloTable").css("font-size", "12px");
@@ -201,7 +200,7 @@ $(function() {
 	}
 
 	function saveEvent(){
-		if($('#textEvent').val() != ''){
+		if($('#textEvent').val() !== ''){
 			$('#NombreEvento').text($('#textEvent').val());
 			$('#tipo').text($('#opt').val());
 			$('#sea').text($('#oceano').val());
@@ -222,10 +221,10 @@ $(function() {
 		if($('#type').text() == 'DT'){
 			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
 		}
-		if($('#type').text() == 'TST'){
+		if($('#type').text() === 'TST'){
 			$(".TitleTipo").text('TORMENTA SUB TROPICAL');
 		}
-		if($('#type').text() == 'Huracán'){		
+		if($('#type').text() === 'Huracán'){
 			$(".TitleTipo").text('HURACÁN');
 		}
 
@@ -255,146 +254,6 @@ $(function() {
 		document.getElementById("max-wind").value = document.getElementById("racha").textContent;
 		document.getElementById("more-info").value = document.getElementById("mas-info").textContent;
 	}
-
-    /*function changeColoredRegions() {
-
-       const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
-       addFeatureLayer(map, url, propertiesStates);
-
-       const layer = map.findLayerById("states");
-       layer.definitionExpression = '<>':
-       layer.refresh();
-
-
-        const redProp = {
-            id: "statesRed",
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: {
-                type: "simple",
-                symbol: {type: "simple-fill"},
-                color: "#FF0000"
-            },
-            definitionExpression: "1 = 0"
-        };
-        const orangeProp = {
-            id: "statesOrange",
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: {
-                type: "simple",
-                symbol: {type: "simple-fill"},
-                color: "#FFA500"
-            },
-            definitionExpression: "1 = 0"
-        };
-        const yellowProp = {
-            id: "statesYellow",
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: {
-                type: "simple",
-                symbol: {type: "simple-fill"},
-                color: "#FFFF00"
-            },
-            definitionExpression: "1 = 0"
-        };
-        const greenProp = {
-            id: "statesGreen",
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: {
-                type: "simple",
-                symbol: {type: "simple-fill"},
-                color: "#38BF34"
-            },
-            definitionExpression: "1 = 0"
-        };
-        const blueProp = {
-            id: "statesBlue",
-            opacity: 0.8,
-            showLabels: true,
-            outFields: ["*"],
-            renderer: {
-                type: "simple",
-                symbol: {type: "simple-fill"},
-                color: "#4F81BC"
-            },
-            definitionExpression: "1 = 0"
-        };
-
-
-        const data = get_regiones();
-        console.log(data);
-        let new_data = {};
-        let queries = {};
-        $.each(data, function (estado, obj1) {
-            $.each(obj1, function (tipo, obj2) {
-                $.each(obj2, function (color, list) {
-                    if (!(color in new_data)) new_data[color] = {};
-                    if (!(estado in new_data[color])) new_data[color][estado] = list;
-
-                })
-            })
-        });
-
-        $.each(new_data, function (color, obj1) {
-            queries[color] = "";
-            let first = true;
-            $.each(obj1, function (estado, lista) {
-                if (!first){
-                    queries[color] += " OR "
-                }
-                else {
-                    first = false;
-                }
-                queries[color] += "(Regional_1 = '" + estado.toUpperCase() +"'";
-                if (lista[0] === "T"){
-                    queries[color] += ")";
-                }
-                else {
-                    queries[color] += " AND Regional_2 IN ('" + lista.join("', '") + "'))"
-                }
-            })
-        });
-        const url = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
-        addFeatureLayer(map, url, redProp);
-        addFeatureLayer(map, url, orangeProp);
-        addFeatureLayer(map, url, yellowProp);
-        addFeatureLayer(map, url, greenProp);
-        addFeatureLayer(map, url, blueProp);
-
-        let layer;
-        if ("ROJA" in queries) {
-            layer = map.findLayerById("statesRed");
-            layer.definitionExpression = '<>';
-            layer.refresh();
-        }
-        if("NARANJA" in queries){
-            layer = map.findLayerById("statesOrange");
-            layer.definitionExpression = '<>';
-            layer.refresh();
-        }
-
-        if("AMARILLA" in queries){}
-        layer = map.findLayerById("statesYellow");
-        layer.definitionExpression = '<>';
-        layer.refresh();
-
-        if("VERDE" in queries){}
-        layer = map.findLayerById("statesGreen");
-        layer.definitionExpression = '<>';
-        layer.refresh();
-
-        if("AZUL" in queries){}
-        layer = map.findLayerById("statesBlue");
-        layer.definitionExpression = '<>';
-        layer.refresh();
-    }*/
 
 	//Función para auto ajustar caja de texto.
 	var autoExpand = function (field) {
@@ -512,13 +371,15 @@ $(function() {
 	window.change = function(id_fila){
 		var filaAct = document.getElementById(id_fila);
 		var tablaFilaAct= $('#'+id_fila).parent().parent();
-		//console.log("Tabla actual: ",tablaFilaAct[0].id);
-		if(tablaFilaAct[0].id == 'tablaEdos1'){
+		console.log("Tabla actual: ",tablaFilaAct[0].id);
+
+		if(tablaFilaAct[0].id === 'tablaEdos1'){
 			$('#tablaEdos2').append(filaAct);
 		}
-		if (tablaFilaAct[0].id == 'tablaEdos2'){
+		if (tablaFilaAct[0].id === 'tablaEdos2'){
 			$('#tablaEdos1').append(filaAct);
 		}
+
 	};
 	
 
@@ -542,7 +403,7 @@ $(function() {
 	var elementos = $('#tablaEdos1').find('tr').length - 1;
 
 	console.log("PRIMERA CUENTA: "+elementos);
-	if(elementos == 0){
+	if(elementos === 0){
 		var unico = true;
 	}
 	// limpieza de campos
@@ -558,8 +419,8 @@ $(function() {
 				//console.log($('option:selected',this).text());
 				b = $('option:selected',this).text();
 				/* En esta sección se aplica el formato de texto*/
-				if(elementos == 0 && !unico){
-					if(b=='Todo el Edo'){
+				if(elementos === 0 && !unico){
+					if(b==='Todo el Edo'){
 						
 					}else{
 						
@@ -572,48 +433,6 @@ $(function() {
 			elementos--;
 		});
 	}
-	
-
-	function generaArreglo(afectados,size){
-	var lista = [];
-	var temp;
-	var contador=0;
-		afectados.forEach(function(item, index, array){
-			console.log(item.reg, index);
-			console.log("Valor a copiar: ",afectados[index].reg);
-			temp = afectados[index].reg;
-			console.log("Valor copiado: ",temp);
-			//lista.splice(0,1);
-			//con esto si funciona 
-			lista[index] = temp;
-			//lista.push(temp);
-			console.log("Tamaño de lista: ",lista.length);
-			console.log("Valor guardado a la lista[0]: ",lista);
-			afectados[index].reg = lista;
-			lista.shift();
-			lista.pop();
-			//afectados[index].reg.splice(1);
-			console.log("Result hasta el momento---> ",afectados);
-		});
-	/*
-		for (var k=0; k<size; k++){
-			//afectados[0].reg.splice(1,0);
-			console.log("Valor a copiar: ",afectados[k].reg);
-			temp = afectados[k].reg;
-			console.log("Valor copiado: ",temp);
-			lista[0] = temp;
-			console.log("Valor guardado a la lista[0]: ",lista);
-			afectados[k].reg = lista;
-			console.log("Valor hasta el final ",afectados[k].reg);
-			console.log("Result hasta el momento---> ",afectados[k]);
-			console.log("A ver si dice lo mismo :v ",afectados[k].reg);
-			if(k==2){
-				break;
-			}
-		}*/
-		console.log("Resultado de la funcion: ",afectados);
-		return afectados;
-	}
 
 	function busquedaRecursiva(afectados,size){
 	var res;
@@ -625,7 +444,7 @@ $(function() {
 				//console.log("Edo Actual: ",edoAct);
 				for (var j=0; j<size; j++){
 					//console.log("Edo a comparar: ",afectados[j].edo);
-					if(i!=j && afectados[j].edo == edoAct && afectados[j].na == colorAct){
+					if(i!==j && afectados[j].edo === edoAct && afectados[j].na === colorAct){
 						//console.log("hay un repetido: "+afectados[j].edo+" (J:"+j+") con: "+edoAct+" (I: "+i+") Con las regiones siguientes: "+afectados[i].reg+" y "+afectados[j].reg);
 						afectados[i].reg = afectados[j].reg.concat(", "+afectados[i].reg);
 						res = afectados[i].reg.split(", ");
@@ -638,7 +457,7 @@ $(function() {
 					}
 				}
 			}
-		if(i==size){
+		if(i===size){
 			return afectados;
 		}
 	}
@@ -698,7 +517,7 @@ $(function() {
 
 				var find = $(this).find('#Region');
 					//console.log($('option:selected',find).text());
-					if($('option:selected',find).text() != ''){
+					if($('option:selected',find).text() !== ''){
 					reg = $('option:selected',find).text();
 					}
 				var regArray=[];
@@ -718,7 +537,7 @@ $(function() {
 
 		$('#regiones').find('tr').each(function(){
 				$(this).find('th').each(function(){
-				if(this.textContent == ''){
+				if(this.textContent === ''){
 					this.innerHTML = '--';
 				}
 				});
@@ -931,7 +750,7 @@ $(function() {
 	});
 
 	$(".form-check-input").click(function() {
-    if(this.checked && this.value=="option2") {
+    if(this.checked && this.value==="option2") {
         $('#Select-Event').show();
         $("#lastOne").show();
         guardadoGlobal = true;
@@ -940,11 +759,13 @@ $(function() {
 		$("#bt_add2").hide();
 		$("#insertDataEvent").hide();
 		$("#saveEvent").hide();
-    }else{
+        }
+    else
+        {
     	$('#Select-Event').hide();
     	$("#lastOne").hide();
         $("#pdf").hide();
-    }
-});
+        }
+    });
    
 });
