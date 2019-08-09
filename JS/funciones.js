@@ -13,15 +13,22 @@ $(function() {
 	const azul = 24;
 
 	function validTime(time){
-		var periodoValidez;
+		var periodoValidez = 0;
+		var timeModified = new Date();
+		timeModified.setDate(time.getDate());
 		if( ($("#NearB").text() != '--') || ($("#FarB").text() != '--') )  periodoValidez = azul;
 		if( ($("#NearG").text() != '--') || ($("#FarG").text() != '--') )  periodoValidez = verde;
 		if( ($("#NearY").text() != '--') || ($("#FarY").text() != '--') )  periodoValidez = amarillo;
 		if( ($("#NearO").text() != '--') || ($("#FarO").text() != '--') )  periodoValidez = naranja;
 		if( ($("#NearR").text() != '--') || ($("#FarR").text() != '--') )  periodoValidez = roja;
+		if(periodoValidez === 0) {
+			$("#fechaValidez").text("Último Boletín único informativo");
+			return;
+		}
+		//timeModified = time;
+		timeModified.setHours( time.getHours() + periodoValidez );
+		$("#fechaValidez").text(timeModified.toLocaleString("es-MX",fecha)+' / '+timeModified.toLocaleString("es-MX",hora)+':00 h');
 
-		time.setHours( time.getHours() + periodoValidez );
-		$("#fechaValidez").text(time.toLocaleString("es-MX",fecha)+' / '+time.toLocaleString("es-MX",hora)+':00 h');
 	}
 
 	function generaPdf() {
@@ -180,7 +187,6 @@ $(function() {
 	}
 
 	function saveDate(){
-		modified = true;
 		var newDate = new Date();
 		newDate= $(".datepicker").datepicker("getDate");
 		if(newDate == null){
@@ -193,7 +199,8 @@ $(function() {
 		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
 		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h' + ' / ';
-		dt = newDate;
+		dt.setDate(newDate.getDate());
+		dt.setHours(newDate.getHours());
 		$("#datetime").show();
 		$("#datePicker").hide();
 		$("#ButtonFecha").show();
@@ -705,6 +712,7 @@ $(function() {
 	$("#saveEvent").click(function() { saveEvent(); });
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
 	$("#pdf").click(function() {generaPdf();});
+	$("#saveDate").click(function() { validTime(dt) });
 	$("#datetime").on("change", function() { validTime(dt) });
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
