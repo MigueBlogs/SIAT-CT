@@ -728,7 +728,12 @@ $(function() {
                 $.each(obj2, function (color, list) {
                     if (!(color in new_data)) new_data[color] = {};
                     if (!(estado in new_data[color])) new_data[color][estado] = list;
-
+                    else {
+                        $.each(list, function (index, region) {
+                            new_data[color][estado].push(region);
+                            }
+                        );
+                    }
                 })
             })
         });
@@ -769,65 +774,57 @@ $(function() {
         console.log(queries);
 
         let layer;
+        layer = map.findLayerById("statesRed");
         if ("ROJA" in queries) {
-            layer = map.findLayerById("statesRed");
             layer.definitionExpression = queries['ROJA'];
             layer.opacity = 0.6;
-            layer.refresh();
+
         }else{
-            layer = map.findLayerById("statesRed");
             layer.definitionExpression = "1=0";
             layer.opacity = 0;
-            layer.refresh();
         }
+        layer.refresh();
 
+        layer = map.findLayerById("statesOrange");
         if("NARANJA" in queries){
-            layer = map.findLayerById("statesOrange");
             layer.definitionExpression = queries['NARANJA'];
             layer.opacity = 0.6;
-            layer.refresh();
+
         }else{
-            layer = map.findLayerById("statesOrange");
             layer.definitionExpression = "1=0";
             layer.opacity = 0;
-            layer.refresh();
         }
+        layer.refresh();
 
+        layer = map.findLayerById("statesYellow");
         if("AMARILLA" in queries){
-            layer = map.findLayerById("statesYellow");
             layer.definitionExpression = queries['AMARILLA'];
             layer.opacity = 0.6;
-            layer.refresh();
         }else{
-            layer = map.findLayerById("statesYellow");
             layer.definitionExpression = "1=0";
             layer.opacity = 0;
-            layer.refresh();
         }
+        layer.refresh();
 
+        layer = map.findLayerById("statesGreen");
         if("VERDE" in queries){
-            layer = map.findLayerById("statesGreen");
             layer.definitionExpression = queries['VERDE'];
             layer.opacity = 0.6;
-            layer.refresh();
         }else{
-            layer = map.findLayerById("statesGreen");
             layer.definitionExpression = "1=0";
             layer.opacity = 0;
-            layer.refresh();
         }
+        layer.refresh();
 
+        layer = map.findLayerById("statesBlue");
         if("AZUL" in queries){
-            layer = map.findLayerById("statesBlue");
             layer.definitionExpression = queries['AZUL'];
             layer.opacity = 0.6;
-            layer.refresh();
         }else{
-            layer = map.findLayerById("statesBlue");
             layer.definitionExpression = "1=0";
             layer.opacity = 0;
-            layer.refresh();
         }
+        layer.refresh();
     }
 
     document.addEventListener("kml-added", function(evt) {
