@@ -720,7 +720,7 @@ $(function() {
        layer.refresh();
        */
 
-        const data = get_regiones();
+        const data = get_regions();
         let new_data = {};
         let queries = {};
         $.each(data, function (estado, obj1) {
@@ -771,7 +771,7 @@ $(function() {
                 }
             })
         });
-        console.log(queries);
+        //console.log(queries);
 
         let layer;
         layer = map.findLayerById("statesRed");

@@ -14,11 +14,11 @@ $(function() {
 
 	function validTime(time){
 		var periodoValidez;
-		if( ($("#NearB").text() != '--') || ($("#FarB").text() != '--') )  periodoValidez = azul;
-		if( ($("#NearG").text() != '--') || ($("#FarG").text() != '--') )  periodoValidez = verde;
-		if( ($("#NearY").text() != '--') || ($("#FarY").text() != '--') )  periodoValidez = amarillo;
-		if( ($("#NearO").text() != '--') || ($("#FarO").text() != '--') )  periodoValidez = naranja;
-		if( ($("#NearR").text() != '--') || ($("#FarR").text() != '--') )  periodoValidez = roja;
+		if( ($("#NearB").text() !== '--') || ($("#FarB").text() !== '--') )  periodoValidez = azul;
+		if( ($("#NearG").text() !== '--') || ($("#FarG").text() !== '--') )  periodoValidez = verde;
+		if( ($("#NearY").text() !== '--') || ($("#FarY").text() !== '--') )  periodoValidez = amarillo;
+		if( ($("#NearO").text() !== '--') || ($("#FarO").text() !== '--') )  periodoValidez = naranja;
+		if( ($("#NearR").text() !== '--') || ($("#FarR").text() !== '--') )  periodoValidez = roja;
 
 		time.setHours( time.getHours() + periodoValidez );
 		$("#fechaValidez").text(time.toLocaleString("es-MX",fecha)+' / '+time.toLocaleString("es-MX",hora)+':00 h');
@@ -37,11 +37,9 @@ $(function() {
 	      	parseInt(ancho, 10);
 	      	$("#map-container").css("height", ancho);
 	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
-	      	$("#imagen").css("width", "400px");
-	      	$("#imagen").css("height", "100%");
+	      	$("#imagen").css({"width": "400px", "height": "100%"});
 	      	$(".comentarios").css("font-size","12px");
-	      	$(".box").css("padding", "0px");
-	      	$(".box").css("margin", "0px auto");
+	      	$(".box").css({"padding": "0px", "margin": "0px auto"});
 	      	$(".titulo").css("font-size", "15px");
 	      	$(".tituloEfectos").css("font-size", "14px");
 	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
@@ -62,13 +60,13 @@ $(function() {
 	        $(".QR_box").css({"font-size": "12px", "border": "solid 3px"});
 	        $(".QR_box2").css("font-size", "12px");
 	        //$('.tableDataL').css("grid-template-rows","auto 30%");
-	        $("#regiones").css("height", "calc(100% - 22px)");
+	        $("#regiones").css({"height": "calc(100% - 22px)", "font-size": "10px"});
 	        //$(".QR_box").css("background", "#D9D9D9");
 	        $("#headerLogos").show();
-	        $("#regiones").css("font-size", "10px");
 			$(".tituloTable").css("font-size", "12px");
 	        $(".fecha").css("font-size", "14px");
-	        $(".encabezado").css("font-size", "15px");
+	        // noinspection JSJQueryEfficiency
+			$(".encabezado").css("font-size", "15px");
 	        autoExpand(document.getElementById("subtitle"));
 	        //reajusta a cada text area
 	        $('textarea').each(function(){
@@ -150,33 +148,28 @@ $(function() {
 		$("#capturaMapa").show();
 		$('#mapa_ciclon').show();
 		$('#ButtonInfo').show();
-	}  
+	}
 
+	$('#time').timepicker({
+		timeFormat: 'HH:mm',
+		interval: 60,
+		scrollbar: true,
+	});
 	function editarF(){
 		$("#ButtonFecha").hide();
 		$("#datetime").hide();
 		$("#saveDate").show();			
 		$("#datePicker").show();
-			$(function(){
-						newDate=$('.datepicker').datepicker({
-							language: "es",
-							days: true,
-							autoclose: true,
-							format: 'dd/mm/yyyy',
-							startDate: '-3d',
-							todayBtn: "linked",
-							todayHighlight: true
-						});
-					});
-			
-			var nerHour;
-			$(document).ready(function(){
-						$('#time').timepicker({
-							timeFormat: 'HH:mm',
-							interval: 60,
-							scrollbar: true,
-						});
-					});
+		// Estaba dentro de $(function())
+		$('.datepicker').datepicker({
+			language: "es",
+			days: true,
+			autoclose: true,
+			format: 'dd/mm/yyyy',
+			startDate: '-3d',
+			todayBtn: "linked",
+			todayHighlight: true
+		});
 	}
 
 	function saveDate(){
@@ -215,10 +208,10 @@ $(function() {
 	}
 
 	window.tituloSecundario =function(){
-		if($('#type').text() == 'TT'){
+		if($('#type').text() === 'TT'){
 			$(".TitleTipo").text('TORMENTA TROPICAL');
 		}
-		if($('#type').text() == 'DT'){
+		if($('#type').text() === 'DT'){
 			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
 		}
 		if($('#type').text() === 'TST'){
@@ -288,32 +281,29 @@ $(function() {
 	}, false);
 
 	//funciones para agregar y eliminar elementos de la tabla de Regiones Afectadas
-	$(document).ready(function(){
-		$('#mostrar').click(function(){
-			$('#regiones').hide();
-			$('#tablaEditar').show();
-			$("#mostrar").hide();
-		});
-		$('#GuardaTabla').click(function(){
-			$('#regiones').show();
-			$('#tablaEditar').hide();
-			$("#mostrar").show();
-
-		});
+	$('#mostrar').click(function(){
+		$('#regiones').hide();
+		$('#tablaEditar').show();
+		$("#mostrar").hide();
 	});
-	//Función para delimitar que ciertos text area sean de más de 3 renglones
-	$(document).ready(function () {
-	  $('textarea[data-limit-rows=true]')
-	    .on('keypress', function (event) {
-	        var textarea = $(this),
-	            text = textarea.val(),
-	            numberOfLines = (text.match(/\n/g) || []).length + 1,
-	            maxRows = parseInt(textarea.attr('max-rows'));
+	$('#GuardaTabla').click(function(){
+		$('#regiones').show();
+		$('#tablaEditar').hide();
+		$("#mostrar").show();
 
-	        if (event.which === 13 && numberOfLines === maxRows ) {
-	        	return false;
-	        }
-	    });
+	});
+
+	//Función para delimitar que ciertos text area sean de más de 3 renglones
+	$('textarea[data-limit-rows=true]').on('keypress', function (event)
+	{
+			var textarea = $(this),
+				text = textarea.val(),
+				numberOfLines = (text.match(/\n/g) || []).length + 1,
+				maxRows = parseInt(textarea.attr('max-rows'));
+
+			if (event.which === 13 && numberOfLines === maxRows ) {
+				return false;
+			}
 	});
 
 	function agregar(nameTable){
@@ -381,7 +371,6 @@ $(function() {
 		}
 
 	};
-	
 
 	function ImprimeDatos(Param,a,b){
 				$(Param).find('#NivelDeAlerta').each(function(){
@@ -396,7 +385,6 @@ $(function() {
 				}
 			});
 	}
-
 
 	var a,b;
 	function guardarDatos(){
