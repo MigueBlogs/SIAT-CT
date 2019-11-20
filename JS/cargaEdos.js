@@ -6,6 +6,7 @@ $.getJSON('JS/estados.json', function(data){
 });
 
 function loadEdo(estados){
+	debugger
 	$('#tablaEdos1 > tbody').html("");
 	$('#tablaEdos2 > tbody').html("");
 	for(var i in estados){
@@ -37,14 +38,17 @@ function loadEdo(estados){
 										<select id="Region" class="regFila'+cont+'">\
 											<option data-arrayEdos="'+datosEdos+'" select="" value="-1">Todo el Edo</option>\
 											<option value="0">Centro</option>\
-											<option value="1">Norte</option>\
-											<option value="2">Noreste</option>\
-											<option value="3">Este</option>\
-											<option value="4">Sureste</option>\
-											<option value="5">Sur</option>\
-											<option value="6">Suroeste</option>\
-											<option value="7">Oeste</option>\
-											<option value="8">Noroeste</option>\
+											<option value="1">Centro-Norte</option>\
+											<option value="2">Centro-Sur</option>\
+											<option value="3">Centro-Oeste</option>\
+											<option value="4">Noroeste</option>\
+											<option value="5">Norte</option>\
+											<option value="6">Noreste</option>\
+											<option value="7">Este</option>\
+											<option value="8">Sureste</option>\
+											<option value="9">Sur</option>\
+											<option value="10">Suroeste</option>\
+											<option value="11">Oeste</option>\
 										</select>\
 										<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
 										<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
@@ -82,14 +86,17 @@ function loadEdo(estados){
 									<select id="Region" class="regFila'+cont+'">\
 										<option value="-1">Todo el Edo</option>\
 										<option value="0">Centro</option>\
-										<option value="1">Norte</option>\
-										<option value="2">Noreste</option>\
-										<option value="3">Este</option>\
-										<option value="4">Sureste</option>\
-										<option value="5">Sur</option>\
-										<option value="6">Suroeste</option>\
-										<option value="7">Oeste</option>\
-										<option value="8">Noroeste</option>\
+										<option value="1">Centro-Norte</option>\
+										<option value="2">Centro-Sur</option>\
+										<option value="3">Centro-Oeste</option>\
+										<option value="4">Noroeste</option>\
+										<option value="5">Norte</option>\
+										<option value="6">Noreste</option>\
+										<option value="7">Este</option>\
+										<option value="8">Sureste</option>\
+										<option value="9">Sur</option>\
+										<option value="10">Suroeste</option>\
+										<option value="11">Oeste</option>\
 									</select>\
 									<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
 									<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
@@ -182,6 +189,15 @@ function convierteRegion(regAct){
 		case "C":
 				newRegion = 'Centro';
 			break;
+		case "CN":
+				newRegion = 'Centro-Norte';
+			break;
+		case "CS":
+				newRegion = 'Centro-Sur';
+			break;
+		case "CW":
+				newRegion = 'Centro-Oeste';
+			break;
 		case "N":
 				newRegion = 'Norte';
 			break;
@@ -211,3 +227,6 @@ function convierteRegion(regAct){
 	}
 	return newRegion;
 }
+
+$(function() {
+})

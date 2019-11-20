@@ -1,0 +1,84 @@
+@import "./colors.scss";
+
+.plus-sign{
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid $lightGray;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 0.5em;
+
+    &:before,
+    &:after{
+        content: "";
+        position: absolute;
+        background-color: $lightGray;
+        transition: all 0.25s ease-out;
+    }
+
+    /* Vertical line */
+    &:before{
+        top: 20%;
+        left: 50%;
+        width: 4px;
+        height: 60%;
+        margin-left: -2px;
+    }
+
+    /* horizontal line */
+    &:after{
+        top: 50%;
+        left: 20%;
+        width: 60%;
+        height: 4px;
+        margin-top: -2px;
+    }
+    
+    &:hover{
+        cursor: pointer;
+        border: 2px solid $red;
+        
+        &:before,
+        &:after{
+            background-color: $red;
+        }
+    }
+}
+
+.minus-sign{
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid $lightGray;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 0.5em;
+
+    &:before,
+    &:after{
+        content: "";
+        position: absolute;
+        background-color: $lightGray;
+        transition: all 0.25s ease-out;
+    }
+
+    /* horizontal line */
+    &:after{
+        top: 50%;
+        left: 20%;
+        width: 60%;
+        height: 4px;
+        margin-top: -2px;
+    }
+    
+    &:hover{
+        cursor: pointer;
+        border: 2px solid $red;
+        
+        &:before,
+        &:after{
+            background-color: $red;
+        }
+    }
+}

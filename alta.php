@@ -1,3 +1,15 @@
+<?php
+	session_start();
+	require_once("pagina_fns.php");
+
+	/* if(!isset($_SESSION["username"])) {
+		$_SESSION['username'] = $ar["username"];
+		$host  = $_SERVER['HTTP_HOST'];
+		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+		$extra = 'index.php';
+		header("Location: http://$host$uri/$extra");
+	} */
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +22,7 @@
 	<!--CSS BOOTSTRAP-->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<!--JS BOOTSTRAP & JQUERY-->
-	<script  src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<!--DATE PICKER AND TIME PICKER-->
@@ -27,12 +39,13 @@
 	<link rel="stylesheet" href="https://js.arcgis.com/4.11/esri/css/main.css">
 	<script src="https://js.arcgis.com/4.11/"></script>
 	<!-- Styles -->
-	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="./css/styles.css">
 
 	
 	<title>SIAT-CT</title>
 </head>
 <body>
+	<?php includeNav(); ?>
 	<div class="box" id="root">
 		<!-- Menú del Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -53,27 +66,13 @@
 				  </label>
 				</div>
 				<div class="form-check">
-				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-				  <label class="form-check-label" for="exampleRadios2">
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="seguimientoOption" value="seguimiento">
+				  <label class="form-check-label" for="seguimientoOption">
 				    Dar continuidad a un evento
 				  </label>
 				</div>
 				<br>
-				<center>
-				<div id="Select-Event">
-					<div>
-						Selecciona uno de los eventos actuales:
-						<br>
-						<select id="SeleccionaEvento">
-							<option> -- </option>
-							<option value="1">Huracán-Andrea</option>
-							<option>TT-Edson</option>
-							<option>DT-01</option>
-							<option>DT-02</option>
-						</select>
-					</div>
-				</div>
-				</center>
+				<div id="activeEvents"></div>
 		      	</div>
 		      <div class="modal-footer">
 		        <button id="next" type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
@@ -97,7 +96,6 @@
 		        	<button id="yes" type="button" class="btn btn-success" data-dismiss="modal">SI</button>
 					<button id="no" type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
 		        </center>
-		        
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -133,8 +131,8 @@
 		<div align="center" class="fecha" >Generado el <span id="datetime"></span>
 						<span class="card border-info mb-3" id="datePicker">
 							<div class="well">
-								Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha"/>
-								Hora: <input type="text" id="time" placeholder="Selecciona la Hora"/>
+								Fecha: <input type="text" name="date" class="datepicker" placeholder="Selecciona la fecha" autocomplete="off"/>
+								Hora: <input type="text" id="time" placeholder="Selecciona la Hora" autocomplete="off"/>
 								<button  type="button" id="saveDate" class="btn btn-outline-success  btn-sm">Guardar</button>
 							</div>
 						</span>
@@ -148,7 +146,35 @@
 								<span id="name"></span>
 								<span id="sea"></span>
 						</span>
-						</span>No. <element id="Number"></element>
+						<div id="EditPreviousEvent">
+							<span id="insertDataEvent">
+								<select id="opt">
+									<option>CTP</option>	
+									<option>TT</option>
+									<option>DT</option>
+									<option>H1</option>
+									<option>H2</option>
+									<option>H3</option>
+									<option>H4</option>
+									<option>H5</option>
+									<option>BP</option>
+									<option>BPR</option>
+									<option>CPT</option>
+								</select>
+								<select id="oceano">			
+										<option data-ocean="P" value="EP">PACÍFICO</option>			
+										<option data-ocean="A" value="AT">ATLÁNTICO</option>	
+								</select> 
+								<input type="Text" id="textEvent" name="nameEvent" size="15" placeholder="Nombre del evento">
+								<span id="saveEvent"><button type="button" class="btn btn-outline-success">Guardar</button></span>
+								<span id="CancelSaveEvent"><button type="button" class="btn btn-outline-danger">Cancelar</button></span>
+							</span>
+					    </div>
+						</span>No. <span id="Number"></span>
+						<button id="ButtonEvento" type="button" class="btn btn-primary">
+								<span class="glyphicon glyphicon-edit"></span> 
+								<ion-icon name="create"></ion-icon> Editar Evento
+						</button>
 			<!--<input type="Number" name="numberOfPublish" size="0.5" min="1" max="100" value="1" >-->
 		</div>
 		<div>
@@ -314,7 +340,7 @@
 								<div class="dataH"> DESPLAZAMIENTO: <element class="regularTxt" id="despl"></element> </div>
 								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="regularTxt" id="viento"></element> </div>
 								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="regularTxt" id="racha"></element> </div>
-								<div id="mas-info" style="white-space: pre-line;"></div>
+								<div id="mas-info" >Para más información consulte el aviso más reciente del Servicio Meteorológico Nacional.</div>
 							</div>
 							<div id="entradaInfo">
 								<div class="dataH"> HORA:  <input id="hour" class="InputInfo" type="Text" name="nameEvent" size="15" placeholder="Hora del evento" > </div>
@@ -323,7 +349,7 @@
 								<div class="dataH"> DESPLAZAMIENTO: <input id="displacement" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Desplazamiento del evento" > </div>
 								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS:  <input id="max-winds-s" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Vientos máximos del evento" > </div>
 								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS:  <input id="max-wind" class="InputInfo"type="Text" name="nameEvent" size="15" placeholder="Viento del evento" > </div>
-								<textarea  id="more-info" class='autoExpand comentarios regularTxt' placeholder='Información adicional'></textarea>
+								<textarea  id="more-info" class='autoExpand comentarios regularTxt' placeholder='Información adicional'>Para más información consulte el aviso más reciente del Servicio Meteorológico Nacional.</textarea>
 								<center>
 									<button class="btn btn-outline-success" id="GuardaInfo">Guardar Información</button>
 								</center>	
@@ -334,6 +360,7 @@
 				<div class="solid">
 					<div class="tituloTable">ZONAS DE VIGILANCIA NHC-SMN</div>
 						<textarea id="zonas" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí las zonas establecidas para este sistema'></textarea>
+						<p id="zonasp"  class='comentarios regularTxt'></p>
 				</div>
 			</div> 
 			<div class="tableDataR">
@@ -360,26 +387,27 @@
 
 				<div class="solid">
 				<div class="tituloTable">COMENTARIOS</div>
-				<textarea id="comentarios" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí los comentarios'>
-&#9679 Recomendación 1
-&#9679 Recomendación 2
-&#9679 Recomendación 3
-&#9679 Recomendación 4
-				</textarea>
+				<textarea id="comments" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí los comentarios'></textarea>
+				<p id="commentsp"  class='comentarios regularTxt'></p>
 				</div>
 			</div>
 		</div>
 		<div class="disable_on_print" align="center">
-			<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
-			    <input type=file id="media" name=media >
-			    <input type="submit">
-			</form>
+			<div class="finalSIAT">
+				<input type="checkbox" name="finalSIAT" id="finalSIAT">
+				<label for="finalSIAT">Boletín Final</label>
+			</div>
+			<div>
+			    <input type=file id="media" name="media" multiple>
+			</div>
 
 			<div class="progress">
 			  <div id="progressBar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
 			    0%
 			  </div>
 			</div>
+
+			<div id="filesUploaded"></div>
 		</div>
 		
 			<div class="tituloEfectos">
@@ -388,13 +416,17 @@
 			<br class="disable_on_print" >
 			<div id="efectos" class="solid">
 					<div class="tituloTable solido">Viento</div>
-					<textarea id="efectoViento" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '>&#9679 Recomendación 1</textarea>
+						<textarea id="efectoViento" data-efectoId="1" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<p id="efectoVientop"  class='comentarios regularTxt'></p>
 					<div class="tituloTable solido">Lluvia</div>
-					<textarea id="efectoLluvia" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<textarea id="efectoLluvia" data-efectoId="2" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<p id="efectoLluviap"  class='comentarios regularTxt'></p>
 					<div class="tituloTable solido">Oleaje elevado</div>
-					<textarea id="efectoOleaje" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<textarea id="efectoOleaje" data-efectoId="3" data-limit-rows="true" max-rows="3" rows="1" class='autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<p id="efectoOleajep"  class='comentarios regularTxt'></p>
 					<div class="tituloTable solido">Marea de tormenta</div>
-					<textarea id="efectoMarea" data-limit-rows="true" max-rows="3" rows="1" class=' autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<textarea id="efectoMarea" data-efectoId="4" data-limit-rows="true" max-rows="3" rows="1" class=' autoExpand comentarios regularTxt' placeholder='Escribe aquí '></textarea>
+						<p id="efectoMareap"  class='comentarios regularTxt'></p>
 			</div>
 		<br>
 		<div id="enable_on_print">
@@ -526,7 +558,7 @@
 				<table class="regularTxt tablaAutores">
 					<!--18:00 h del 03 de junio del 2019-->
 					<td>Validez del boletín: <span id="fechaValidez"></span></td>
-					<td>ELABORÓ: <element id="autores" ></element> </td>
+					<td>ELABORÓ: <div id="autores"></div> </td>
 				</table>
 			</div>
 			<hr style="height:5px; visibility:hidden; margin:0px" />
@@ -557,7 +589,10 @@
 			<div class="textFooter">
 				<center>
 					DIRECCIÓN DE ADMINISTRACIÓN DE EMERGENCIAS / SUBDIRECCIÓN DE METEOROLOGÍA<br>
-					<u><a href="https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019">https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019</a></u><br>
+					<u>
+						<a id="link" href="https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019">https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019</a>
+					</u>
+					<br>
 					Tel: 01 55 5128-0000 ext. 36346
 				</center>
 			</div>
@@ -585,12 +620,43 @@
 		{{/each}}
 	</script>
 
-	<script src="JS/cargaEdos.js"></script>
-	<script src="JS/regiones.js"></script>
-	<script src="JS/funciones.js"></script>
-	<script type="module" src="JS/StaticText.js"></script>
-	<script src="JS/map.js"></script>	
+	<script id="autoresDefault-template" type="text/x-handlebars-template">
+		{{#each autores as |autor|}}
+			{{#if @last}}
+				<span class="autor" data-autorId={{autor.idAutor}}>{{autor.nombre}}</span>
+			{{else}}
+				<span class="autor" data-autorId={{autor.idAutor}}>{{autor.nombre}}</span>,<br/>
+			{{/if}}
+		{{/each}}
+	</script>
 
+	<script id="activeEvents-template" type="text/x-handlebars-template">
+		<select id="activeEventsOptions">
+			{{#each activeEvents as |event|}}
+				{{#if @first}}
+					<option value="">Selecciona</option>
+				{{/if}}
+				<option value="{{event.idBoletin}}">{{event.nombre}}</option>
+			{{else}}
+				<option value="">Sin eventos</option>
+			{{/each}}
+		</select>
+	</script>
 
+	<script id="filesUploaded-template" type="text/x-handlebars-template">
+		<ul id="filesUploadedList" class="filesList">
+			{{#each files as |file|}}
+			<li class="file-item"><span data-fileUrl="{{file.url}}" data-fileExt="{{file.ext}}">{{file.name}}</span><button data-fileUrl="{{file.url}}" class="deleteFile">Borrar</button></li>
+			{{/each}}
+		</ul>
+	</script>	
+
+	<script src="./JS/cargaEdos.js"></script>
+	<script src="./JS/regiones.js"></script>
+	<script src="./JS/funciones.js"></script>
+	<script src="./JS/fileUpload.js"></script>
+	<script type="module" src="./JS/StaticText.js"></script>
+	<script src="./JS/map.js"></script>	
+	<script src="./JS/seguimiento.js"></script>
 </body>
 </html>

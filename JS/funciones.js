@@ -5,14 +5,20 @@ $(function() {
 	var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 	var hora2 = {hour:'2-digit', minute:'2-digit'};
 	var hora = {hour:'2-digit'};
-	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX",fecha)+' / '+dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
+	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX", fecha)+' / '+ dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
+	$("#datetime").attr("data-date", ('' + dt.getFullYear()).substr(2,2) + ('' + (dt.getMonth()+1)).padStart(2,'0') + ('' + dt.getDate()).padStart(2,'0') + ('' + dt.getHours()).padStart(2,'0'));
+	$("#datetime").attr("data-dateParse", dt.getFullYear() + "/" + ('' + (dt.getMonth()+1)).padStart(2,'0') + "/" + ('' + dt.getDate()).padStart(2,'0'));
 	const roja = 3;
 	const naranja = 3;
 	const amarillo = 6;
 	const verde = 12;
 	const azul = 24;
+	const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+	generaLink(dt);
+	
 
 	function validTime(time){
+		debugger
 		var periodoValidez = 0;
 		var timeModified = new Date();
 		timeModified.setDate(time.getDate());
@@ -21,14 +27,19 @@ $(function() {
 		if( ($("#NearY").text() !== '--') || ($("#FarY").text() !== '--') )  periodoValidez = amarillo;
 		if( ($("#NearO").text() !== '--') || ($("#FarO").text() !== '--') )  periodoValidez = naranja;
 		if( ($("#NearR").text() !== '--') || ($("#FarR").text() !== '--') )  periodoValidez = roja;
-		if(periodoValidez === 0) {
-			$("#fechaValidez").text("Último Boletín único informativo");
+		if(periodoValidez === 0 && $("#Number").text()==="1" && $("#finalSIAT").is(":checked")) {
+			$("#fechaValidez").text("Último boletín único informativo");
 			return;
 		}
 		//timeModified = time;
 		timeModified.setHours( time.getHours() + periodoValidez );
 		$("#fechaValidez").text(timeModified.toLocaleString("es-MX",fecha)+' / '+timeModified.toLocaleString("es-MX",hora)+':00 h');
+	}
 
+	function generaLink(time){
+		var mes = time.getMonth();
+		$("#link").attr("href", "https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-2019");
+		$("#link").text("https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-2019");
 	}
 
 	function generaPdf() {
@@ -44,11 +55,12 @@ $(function() {
 	      	parseInt(ancho, 10);
 	      	$("#map-container").css("height", ancho);
 	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
-	      	$("#imagen").css({"width": "400px", "height": "100%"});
+			$("#imagen").css({"width": "400px", "height": "100%"});
 	      	$(".comentarios").css("font-size","12px");
 	      	$(".box").css({"padding": "0px", "margin": "0px auto"});
 	      	$(".titulo").css("font-size", "15px");
-	      	$(".tituloEfectos").css("font-size", "14px");
+			$(".tituloEfectos").css("font-size", "14px");
+			$("#mas-info").css("font-size", "12px");  
 	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
 	      	$(".encabezado").css("font-size", "30px");
 	      	autoExpand(document.getElementById("subtitle"));
@@ -74,11 +86,22 @@ $(function() {
 	        $(".fecha").css("font-size", "14px");
 	        // noinspection JSJQueryEfficiency
 			$(".encabezado").css("font-size", "15px");
-	        autoExpand(document.getElementById("subtitle"));
-	        //reajusta a cada text area
+			autoExpand(document.getElementById("subtitle"));
+	        /*//reajusta a cada text area
 	        $('textarea').each(function(){
 	        	autoExpand(document.getElementById(this.id));
-	        });
+			});*/
+			//Pasando de text areas a párrafos
+			$('p').each(function(){
+				$("#"+this.id).show();
+			});
+			$('textarea').each(function(){
+				$("#"+this.id+"p").text($("#"+this.id).val());
+				$("#"+this.id).hide();
+			});
+			$("#subtitle").show();
+			
+
 	        $("textarea").css( "border", "none");
 	        $(".dataH").css("font-size", "11px");
 			$(".disable_on_print").hide();
@@ -104,10 +127,11 @@ $(function() {
 				//pdf.text(5, 5, 'new text here');
 				}
 
-				//regresando el html a su versión original
+				/* /regresando el html a su versión original */
 				showButtons();
 				$(".disable_on_print").show();
 				$(".box").removeAttr('style');
+				$(".tableDataR").removeAttr('style');
 		      	$(".titulo").removeAttr('style');
 		      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
 		      	$(".encabezado").removeAttr('style');
@@ -124,7 +148,10 @@ $(function() {
 		        $(".tituloEfectos").removeAttr('style');
 				$("#imagen").removeAttr('style');
 				$("#map-container").removeAttr('style');
-				$("#map-container").hide();								
+				$("#map-container").hide();	
+				$('p').each(function(){
+					$("#"+this.id).hide();
+				});					
 	          }).save().then( function(){
 		          	//oculta modal de espera
 			        setTimeout(function(){
@@ -140,7 +167,7 @@ $(function() {
 	}
 
 	function hideButtons(){
-
+		$("#ButtonEvento").hide();
 		$("#ButtonFecha").hide();
 		$("#mostrar").hide();
 		$("#mapa_ciclon").hide();
@@ -150,6 +177,7 @@ $(function() {
 	}  
 
 	function showButtons(){
+		$("#ButtonEvento").show();
 		$("#ButtonFecha").show();
 		$("#mostrar").show();
 		$("#capturaMapa").show();
@@ -173,15 +201,16 @@ $(function() {
 			days: true,
 			autoclose: true,
 			format: 'dd/mm/yyyy',
-			startDate: '-3d',
 			todayBtn: "linked",
 			todayHighlight: true
 		});
+		generaLink(dt);
 	}
 
 	function saveDate(){
 		var newDate = new Date();
 		newDate= $(".datepicker").datepicker("getDate");
+		dt = newDate;
 		if(newDate == null){
 			alert("Selecciona una fecha");
 			return;
@@ -191,9 +220,11 @@ $(function() {
 			return;
 		}
 		newDate.setHours($('#time').timepicker("getTime").getHours());
-		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX",fecha)+' / '+newDate.toLocaleString("es-MX",hora2)+' h' + ' / ';
-		dt.setDate(newDate.getDate());
-		dt.setHours(newDate.getHours());
+		var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+		var hora = {hour:'2-digit'};
+		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX", fecha)+' / '+ newDate.toLocaleString("es-MX", hora)+':00 h' + ' / ';
+		$("#datetime").attr("data-date", ('' + newDate.getFullYear()).substr(2,2) + ('' + (newDate.getMonth()+1)).padStart(2,'0') + ('' + newDate.getDate()).padStart(2,'0') + ('' + newDate.getHours()).padStart(2,'0'));
+		$("#datetime").attr("data-dateParse", newDate.getFullYear() + "/" + ('' + (newDate.getMonth()+1)).padStart(2,'0') + "/" + ('' + newDate.getDate()).padStart(2,'0'));
 		$("#datetime").show();
 		$("#datePicker").hide();
 		$("#ButtonFecha").show();
@@ -201,34 +232,62 @@ $(function() {
 
 	function saveEvent(){
 		if($('#textEvent').val() !== ''){
-			$('#NombreEvento').text($('#textEvent').val());
-			$('#tipo').text($('#opt').val());
+			$('#name').text($('#textEvent').val());
+			$('#type').text($('#opt').val());
+			$("#type").attr("data-typeId", getIdCicloneType($('#opt').val()));
 			$('#sea').text($('#oceano').val());
+			$('#sea').attr("data-ocean",$('#oceano option:selected').attr("data-ocean"));
 			tituloSecundario();
-			$("#insertDataEvent").hide();
-			$("#dataOfEvent").show();
-			$("#saveEvent").hide();
+			$("#EditPreviousEvent").hide();
+			$("#cicloneDescription").show();
+			$("#ButtonEvento").show();
 		}else{
 			alert("Ingresa el nombre y categoría del evento");
-			editarE();
 		}
 	}
 
-	window.tituloSecundario =function(){
+	window.getIdCicloneType = function(cicloneType) {
+		if(cicloneType == "CTP") return "00";
+        else if(cicloneType == "DT") return "01";
+        else if(cicloneType == "TT") return "02";
+        else if(cicloneType == "H1") return "03";
+        else if(cicloneType == "H2") return "04";
+        else if(cicloneType == "H3") return "05";
+        else if(cicloneType == "H4") return "06";
+        else if(cicloneType == "H5") return "07";
+        else if(cicloneType == "BP") return "08";
+        else if(cicloneType == "BPR") return "09";
+        else if(cicloneType == "CPT") return "10";
+    }
+
+	window.tituloSecundario = function(){
+		var tipo = ""
 		if($('#type').text() === 'TT'){
-			$(".TitleTipo").text('TORMENTA TROPICAL');
-		}
-		if($('#type').text() === 'DT'){
-			$(".TitleTipo").text('DEPRESIÓN TROPICAL');
-		}
-		if($('#type').text() === 'TST'){
-			$(".TitleTipo").text('TORMENTA SUB TROPICAL');
-		}
-		if($('#type').text() === 'Huracán'){
-			$(".TitleTipo").text('HURACÁN');
+			tipo = 'TORMENTA TROPICAL';
+		} else if($('#type').text() === 'DT'){
+			tipo = 'DEPRESIÓN TROPICAL';
+		} else if($('#type').text() === 'BP'){
+			tipo = 'BAJA PRESIÓN';
+		} else if($('#type').text() === 'BPR'){
+			tipo = 'BAJA PRESIÓN REMANENTE';
+		} else if($('#type').text() === 'H1'){
+			tipo = 'HURACÁN CAT. 1';
+		} else if($('#type').text() === 'H2'){
+			tipo = 'HURACÁN CAT. 2';
+		} else if($('#type').text() === 'H3'){
+			tipo = 'HURACÁN CAT. 3';
+		} else if($('#type').text() === 'H4'){
+			tipo = 'HURACÁN CAT. 4';
+		} else if($('#type').text() === 'H5'){
+			tipo = 'HURACÁN CAT. 5';
+		} else if($('#type').text() === 'CTP'){
+			tipo = 'CICLÓN TROPICAL POTENCIAL';
+		} else if($('#type').text() === 'CPT'){
+			tipo = 'CICLÓN POST TROPICAL';
 		}
 
-		//$(".TitleOceano").text($('#sea').text());
+		$(".TitleTipo").text(tipo);
+		$(".TitleOceano").text(($("#sea").attr("data-ocean") == "A" ? "ATLÁNTICO" : "PACÍFICO"));
 	};
 
     function guardaInfo(){
@@ -331,14 +390,17 @@ $(function() {
 							<select id="Region">\
 								<option value="-1">Todo el Edo</option>\
 								<option value="0">Centro</option>\
-								<option value="1">Norte</option>\
-								<option value="2">Noreste</option>\
-								<option value="3">Este</option>\
-								<option value="4">Sureste</option>\
-								<option value="5">Sur</option>\
-								<option value="6">Suroeste</option>\
-								<option value="7">Oeste</option>\
-								<option value="8">Noroeste</option>\
+								<option value="1">Centro-Norte</option>\
+								<option value="2">Centro-Sur</option>\
+								<option value="3">Centro-Oeste</option>\
+								<option value="4">Noroeste</option>\
+								<option value="5">Norte</option>\
+								<option value="6">Noreste</option>\
+								<option value="7">Este</option>\
+								<option value="8">Sureste</option>\
+								<option value="9">Sur</option>\
+								<option value="10">Suroeste</option>\
+								<option value="11">Oeste</option>\
 							</select>\
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-danger btn-sm botoncito" title="Elimina una por una las filas"><ion-icon name="close"></ion-icon></button>\
 							<button id="fila'+cont+'" type="button" class="btn btn-outline-info btn-sm rotate-90 switch"><ion-icon name="swap"></ion-icon></button>\
@@ -677,6 +739,7 @@ $(function() {
 	}
 	$("#mostrar").hide();
 	$("#saveDate").hide();
+	$("#EditPreviousEvent").hide();
 	$("#datePicker").hide();
 	$('#regiones').hide();
 	$('#tablaEditar').hide();
@@ -695,12 +758,28 @@ $(function() {
 										                $('#capture').hide();
 										                $('#mapa_ciclon').show();
 										            }});
-	$("#ButtonFecha").click(function() { editarF(); });
+	$("#ButtonFecha").click(function() { 
+		editarF();
+		generaLink(dt); 
+	});
 	$("#saveDate").click(function() { saveDate(); });
-	$("#saveEvent").click(function() { saveEvent(); });
+	$("#ButtonEvento").click(function() {
+		$("#ButtonEvento").hide();
+		$("#EditPreviousEvent").show();
+		$("#cicloneDescription").hide();
+	});
+	$("#saveEvent").click(function() { saveEvent();	});
+	$("#CancelSaveEvent").click(function() { 
+		$("#ButtonEvento").show();
+		$("#EditPreviousEvent").hide();
+		$("#cicloneDescription").show();
+	});
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
 	$("#pdf").click(function() {generaPdf();});
-	$("#saveDate").click(function() { validTime(dt) });
+	$("#saveDate").click(function() { 
+		validTime(dt); 
+		generaLink(dt); 
+	});
 	$("#datetime").on("change", function() { validTime(dt) });
 	//autoExpand(document.getElementsByClassName("autoExpand"));
 	
@@ -711,9 +790,10 @@ $(function() {
 	//$("#bt_add1").hide();
 	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
-	$("#GuardaTabla").click(function() { validTime(dt) });
+	$("#GuardaTabla").click(function() { debugger; validTime(dt) });
 	$("#GuardaInfo").click(function() {guardaInfo()});
 	$("#next").click(function() {tituloSecundario()});
+	$("#finalSIAT").click(function(){ validTime(dt); });
 	
 	//El siguiente  elemento oculta el resto del HTML que se muestra en el PDF
 	//$("#enable_on_print").hide();

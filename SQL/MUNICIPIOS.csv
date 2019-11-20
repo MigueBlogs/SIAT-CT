@@ -1,0 +1,2458 @@
+ID_ESTADO,ID_MUNICIPIO,MUNICIPIO,ID_REGION
+1,01002,Asientos,E
+1,01009,San Francisco de los Romo,C
+1,01008,RincSn de Romos,N
+1,01010,San JosL de Gracia,W
+1,01006,Jes,C
+1,01011,TepezalL,N
+1,01001,Aguascalientes,S
+1,01007,PabellAn de Arteaga,C
+1,01005,El Llano,E
+1,01003,Calvillo,W
+1,01004,Cos,N
+2,02003,Playas de Rosarito,NW
+2,02004,Tecate,N
+2,02005,Tijuana,NW
+2,02002,Mexicali,NE
+2,02001,Ensenada,NW
+3,03003,Loreto BAJA CALIFORNIA SUR,C
+3,03002,La Paz BAJA CALIFORNIA SUR,S
+3,03001,ComondA,C
+3,03009,MulegC,N
+3,03008,Los Cabos,S
+4,04010,Palizada,SW
+4,04003,Campeche,C
+4,04001,Calakmul,SE
+4,04005,Carmen,SW
+4,04006,ChampotEn,C
+4,04004,Candelaria,S
+4,04002,CalkinH,N
+4,04011,Tenabo,N
+4,04007,Esc,S
+4,04009,HopelchEn,E
+4,04008,Hecelchak,N
+5,05014,Jim,N
+5,05027,Ramos Arizpe,SE
+5,05030,Saltillo,SE
+5,05035,TorreIn,SW
+5,05022,Nava,N
+5,05020,M2zquiz,CN
+5,05010,Frontera,C
+5,05026,Progreso COAHUILA,CN
+5,05009,Francisco I. Madero COAHUILA,SW
+5,05033,San Pedro,SW
+5,05012,Guerrero COAHUILA,N
+5,05017,Matamoros COAHUILA,SW
+5,05001,Abasolo COAHUILA,C
+5,05038,Zaragoza COAHUILA,N
+5,05016,Lamadrid,C
+5,05031,San Buenaventura,C
+5,05029,Sacramento,C
+5,05013,Hidalgo COAHUILA,N
+5,05036,Viesca,SW
+5,05021,Nadadores,C
+5,05025,Piedras Negras,N
+5,05011,General Cepeda,SE
+5,05008,Escobedo,C
+5,05024,Parras,SE
+5,05006,CastaIos,C
+5,05023,Ocampo COAHUILA,C
+5,05019,Morelos COAHUILA,N
+5,05028,Sabinas,CN
+5,05002,Acu,N
+5,05003,Allende COAHUILA,N
+5,05005,Candela,C
+5,05004,Arteaga COAHUILA,SE
+5,05015,Ju5rez COAHUILA,CN
+5,05037,Villa UniDn,N
+5,05032,San Juan de Sabinas,CN
+5,05018,Monclova,C
+5,05034,Sierra Mojada,C
+5,05007,Cuatro CiDnegas,C
+6,06010,Villa de 쿯lvarez,N
+6,06005,Cuauht,N
+6,06002,Colima,N
+6,06003,Comala,N
+6,06001,ArmerAa,S
+6,06006,Ixtlahuaccn,S
+6,06004,Coquimatlcn,C
+6,06008,Minatitlln COLIMA,W
+6,06007,Manzanillo,W
+6,06009,TecomAn,S
+7,07098,Sunuapa,N
+7,07022,Chenalh,C
+7,07007,Amatenango de la Frontera,S
+7,07034,Escuintla,S
+7,07114,Venustiano Carranza CHIAPAS,C
+7,07086,San Juan Cancuc,C
+7,07013,BenemArito de las AmCricas,E
+7,07054,LarrPinzar,C
+7,07049,La Concordia,S
+7,07084,San Cristdbal de las Casas,C
+7,07085,San Fernando CHIAPAS,C
+7,07087,San Lucas CHIAPAS,C
+7,07090,Simojovel,C
+7,07040,HuixtAn,C
+7,07113,Uni,S
+7,07063,Mitontic,C
+7,07078,Pueblo Nuevo Solistahuacan,C
+7,07044,Ixtapa,C
+7,07080,Reforma,N
+7,07099,Tapachula,S
+7,07048,Ju8rez CHIAPAS,N
+7,07001,Acacoyagua,S
+7,07118,YajalAn,N
+7,07010,Arriaga,W
+7,07055,Las Margaritas,E
+7,07082,Salto de Agua,N
+7,07032,El Bosque,C
+7,07069,Ocozocoautla de Espinosa,W
+7,07035,Francisco Le n,N
+7,07110,Tuxtla Gutierrez,C
+7,07056,Las Rosas,C
+7,07015,Bochil,C
+7,07030,ComitAn de Domenguez,C
+7,07089,Siltepec,S
+7,07092,Socoltenango,C
+7,07116,Villa Corzo,W
+7,07102,TecpatSn,W
+7,07006,AmatPn,N
+7,07094,SoyalA,C
+7,07062,Metapa,S
+7,07026,Chicomuselo,S
+7,07016,Cacahoaten,S
+7,07096,Suchiapa,C
+7,07043,Ixtacomitnn,N
+7,07029,Coapilla,C
+7,07003,Acapetahua,S
+7,07101,Tapilula,C
+7,07004,Aldama,C
+7,07081,Sabanilla,N
+7,07111,TuzantSn,S
+7,07075,Pantepec,C
+7,07115,Villa Comaltitlnn,S
+7,07036,Frontera Comalapa,S
+7,07071,Osumacinta,C
+7,07021,Chapultenango,N
+7,07037,Frontera Hidalgo,S
+7,07112,Tzimol,C
+7,07050,La Grandeza,S
+7,07091,SitalA,C
+7,07020,Chanal,C
+7,07038,Huehuet,S
+7,07041,Huixtla,S
+7,07108,TumbalS,N
+7,07023,Chiapa de Corzo,C
+7,07093,Solosuchiapa,N
+7,07017,Catazaj,N
+7,07076,Pichucalco,N
+7,07019,Chamula,C
+7,07097,Suchiate,S
+7,07027,ChilPn,N
+7,07106,TonalA CHIAPAS,W
+7,07005,Altamirano,E
+7,07100,Tapalapa,C
+7,07052,La Libertad,N
+7,07053,La Trinitaria,E
+7,07105,Tila,N
+7,07117,Villaflores,W
+7,07066,NicolAs Rusz,C
+7,07025,Chicoas,C
+7,07028,Cintalapa,W
+7,07046,Jiquipilas,W
+7,07008,Amatenango del Valle,C
+7,07103,Tenejapa,C
+7,07068,Ocotepec,C
+7,07057,Mapastepec,S
+7,07018,Chalchihuitdn,C
+7,07073,Palenque,N
+7,07011,Bejucal de Ocampo,S
+7,07104,Teopisca,C
+7,07079,Ray,C
+7,07083,San AndrIs Duraznal,C
+7,07060,Mazapa de Madero,S
+7,07014,Berrioz,C
+7,07024,Chiapilla,C
+7,07045,Ixtapangajoya,N
+7,07077,Pijijiapan,S
+7,07051,La Independencia,E
+7,07119,Zinacanten,C
+7,07107,Totolapa,C
+7,07012,Bella Vista,S
+7,07009,Angel Albino Corzo,S
+7,07031,Copainalb,C
+7,07058,Maravilla Tenejapa,E
+7,07033,El Porvenir,S
+7,07061,MazatAn CHIAPAS,S
+7,07047,Jitotol,C
+7,07059,MarquAs de Comillas,E
+7,07070,OstuacSn,N
+7,07109,Tuxtla Chico,S
+7,07042,IxhuatSn,N
+7,07067,Ocosingo,E
+7,07064,Montecristo de Guerrero,S
+7,07039,Huitiup,N
+7,07072,Oxchuc,C
+7,07002,Acala,C
+7,07065,Motozintla,S
+7,07088,Santiago el Pinar,C
+7,07074,Pantelh,C
+8,08050,Nuevo Casas Grandes,W
+8,08017,Coyame del Sotol,NE
+8,08048,Namiquipa,W
+8,08063,Saucillo,E
+8,08052,Ojinaga,NE
+8,08065,Urique,SW
+8,08003,Allende CHIHUAHUA,SE
+8,08056,Rosario CHIHUAHUA,SE
+8,08034,Janos,W
+8,08035,Jim,SE
+8,08046,Morelos CHIHUAHUA,S
+8,08031,Hidalgo del Parral,SE
+8,08010,Buenaventura,W
+8,08029,Guazapares,SW
+8,08047,Moris,SW
+8,08041,Maguarichi,SW
+8,08014,Chihuahua,C
+8,08049,Nonoava,S
+8,08028,Guadalupe y Calvo,S
+8,08038,La Cruz,E
+8,08067,Valle de Zaragoza,SE
+8,08016,Coronado,SE
+8,08027,Guadalupe CHIHUAHUA,N
+8,08013,Casas Grandes,W
+8,08007,Balleza,S
+8,08001,Ahumada,N
+8,08033,Ignacio Zaragoza,W
+8,08066,Uruachi,SW
+8,08058,San Francisco de Conchos,SE
+8,08022,El Tule,SE
+8,08011,Camargo CHIHUAHUA,E
+8,08054,Riva Palacio,C
+8,08037,Julimes,C
+8,08055,Rosales,C
+8,08012,CarichH,SW
+8,08020,Delicias,C
+8,08043,MatachH,W
+8,08004,Aquiles Serd,C
+8,08026,Guachochi,S
+8,08021,Dr. Belisario Dom,C
+8,08008,Batopilas,S
+8,08009,Bocoyna,SW
+8,08064,Tem,W
+8,08030,Guerrero CHIHUAHUA,SW
+8,08018,CuauhtHmoc CHIHUAHUA,C
+8,08051,Ocampo CHIHUAHUA,SW
+8,08015,Ch0nipas,SW
+8,08032,HuejotitAn,SE
+8,08053,Praxedis G. Guerrero,N
+8,08060,Santa BUrbara,SE
+8,08057,San Francisco de Borja,C
+8,08045,Meoqui,C
+8,08023,Galeana CHIHUAHUA,W
+8,08024,G2mez Far,W
+8,08042,Manuel Benavides,NE
+8,08005,AscensiUn,N
+8,08059,San Francisco del Oro,SE
+8,08036,Ju7rez CHIHUAHUA,N
+8,08040,Madera,W
+8,08025,Gran Morelos,C
+8,08039,L3pez,SE
+8,08061,Santa Isabel,C
+8,08006,BachUniva,W
+8,08019,Cusihuiriachi,C
+8,08062,SatevA,C
+8,08044,Matamoros CHIHUAHUA,SE
+8,08002,Aldama CHIHUAHUA,C
+9,09017,Xochimilco,S
+9,09006,Cuajimalpa de Morelos,W
+9,09012,Miguel Hidalgo,N
+9,09008,Gustavo A. Madero,N
+9,09011,La Magdalena Contreras,W
+9,09010,Iztapalapa,E
+9,09009,Iztacalco,E
+9,09013,Milpa Alta,S
+9,09004,Benito JuFrez DISTRITO FEDERAL,C
+9,09002,0lvaro ObregEn,W
+9,09015,Tlalpan,S
+9,09007,CuauhtTmoc,N
+9,09016,Venustiano Carranza,N
+9,09014,Tl1huac,E
+9,09003,Azcapotzalco,N
+9,09005,CoyoacTn,C
+10,10006,El Oro DURANGO,N
+10,10024,Pueblo Nuevo DURANGO,S
+10,10038,Topia,W
+10,10010,Guanacevu,NW
+10,10015,Mezquital,S
+10,10005,Durango,C
+10,10035,Tamazula,W
+10,10037,Tlahualilo,NE
+10,10019,Ocampo DURANGO,NW
+10,10033,Santiago Papasquiaro,W
+10,10039,Vicente Guerrero DURANGO,S
+10,10026,San Bernardo,NW
+10,10011,Hidalgo DURANGO,N
+10,10020,Ot9ez,W
+10,10007,General SimAn BolDvar,E
+10,10027,San Dimas,W
+10,10034,S3chil,S
+10,10036,Tepehuanes,NW
+10,10017,Nombre de Dios,C
+10,10021,P2nuco de Coronado,C
+10,10012,Ind,N
+10,10025,Rodeo,N
+10,10009,Guadalupe Victoria DURANGO,C
+10,10014,MapimG,NE
+10,10013,Lerdo,NE
+10,10032,Santa Clara,E
+10,10030,San Luis del Cordero,N
+10,10004,Cuencam,E
+10,10022,Pe1,C
+10,10029,San Juan del Roo DURANGO,C
+10,10031,San Pedro del Gallo,N
+10,10016,Nazas,N
+10,10002,Canelas,W
+10,10008,G0mez Palacio,NE
+10,10028,San Juan de Guadalupe,E
+10,10023,Poanas,C
+10,10018,Nuevo Ideal,C
+10,10001,CanatlOn,C
+10,10003,Coneto de Comonfort,C
+11,11041,Uriangato,S
+11,11019,Jer,SE
+11,11045,XichA,NE
+11,11005,Apaseo el Grande,E
+11,11025,Pur,W
+11,11006,Atarjea,NE
+11,11018,Jaral del Progreso,S
+11,11009,Comonfort,C
+11,11038,Tarandacuao,SE
+11,11036,Santiago Maravatso,S
+11,11017,Irapuato,C
+11,11020,Le0n,W
+11,11004,Apaseo el Alto,E
+11,11047,San Felipe GUANAJUATO,NW
+11,11007,Celaya,C
+11,11032,San JosA Iturbide,NE
+11,11012,CuerAmaro,SW
+11,11046,Yuriria,S
+11,11048,Ocampo GUANAJUATO,NW
+11,11042,Valle de Santiago,S
+11,11021,MoroleUn,S
+11,11008,Manuel Doblado,W
+11,11013,Doctor Mora,NE
+11,11010,Coroneo,SE
+11,11033,San Luis de la Paz,NE
+11,11029,San Diego de la UniTn,N
+11,11044,VillagrAn,C
+11,11003,San Miguel de Allende,C
+11,11043,Victoria GUANAJUATO,NE
+11,11001,Abasolo GUANAJUATO,S
+11,11015,Guanajuato,C
+11,11027,Salamanca,C
+11,11031,San Francisco del RincAn,W
+11,11040,Tierra Blanca,NE
+11,11014,Dolores Hidalgo Cuna de la Independencia Nacional,C
+11,11011,Cortazar,S
+11,11024,Pueblo Nuevo,C
+11,11028,Salvatierra,S
+11,11037,Silao de la Victoria,C
+11,11016,HuanAmaro,S
+11,11023,P2njamo,SW
+11,11002,Ac2mbaro,S
+11,11035,Santa Cruz de Juventino Rosas,C
+11,11049,Santa Catarina GUANAJUATO,NE
+11,11039,Tarimoro,SE
+11,11026,Romita,C
+12,12023,Copalillo,N
+12,12077,Xochistlahuaca,SE
+12,12050,MetlatRnoc,E
+12,12061,San Miguel Totolapan,NW
+12,12064,T5cpan de Galeana,SW
+12,12070,Tlacoapa,E
+12,12076,Xochihuehuetlen,E
+12,12017,Chilapa de tlvarez,C
+12,12006,Alpoyeca,E
+12,12044,JuchitRn,SE
+12,12074,Tlapehuala,NW
+12,12028,CualRc,E
+12,12072,Tlalixtaquilla de Maldonado,E
+12,12036,Huamuxtitlin,E
+12,12013,Ayutla de los Libres,SE
+12,12007,Apaxtla,N
+12,12005,Alcozauca de Guerrero,E
+12,12018,Chilpancingo de los Bravo,C
+12,12035,General Heliodoro Castillo,C
+12,12030,Cuetzala del Progreso,N
+12,12037,Huitzuco de los Figueroa,N
+12,12057,Pungarabato,NW
+12,12032,Eduardo Neri,C
+12,12058,Quechultenango,C
+12,12071,Tlalchapa,NW
+12,12010,Atlamajalcingo del Monte,E
+12,12019,Coahuayutla de Jos  Marea Izazaga,SW
+12,12011,Atlixtac,E
+12,12049,M4rtir de Cuilapan,C
+12,12068,Tixtla de Guerrero,C
+12,12014,AzoyR,SE
+12,12067,Tetipac,N
+12,12048,Marquelia,SE
+12,12043,Juan R. Escudero,C
+12,12041,Ixcateopan de CuauhtMmoc,N
+12,12012,Atoyac de  lvarez,SW
+12,12027,Cuajinicuilapa,SE
+12,12024,Copanatoyac,E
+12,12039,Igualapa,SE
+12,12040,Iliatenco,E
+12,12015,Benito Ju,SW
+12,12051,MochitlOn,C
+12,12034,General Canuto A. Neri,N
+12,12063,Tecoanapa,SE
+12,12029,Cuautepec,SE
+12,12020,Cochoapa el Grande,E
+12,12022,Copala,SE
+12,12056,Pilcaya,N
+12,12042,Jos,C
+12,12053,Ometepec,SE
+12,12060,San Marcos GUERRERO,SE
+12,12062,Taxco de AlarcRn,N
+12,12001,Acapulco de JuRrez,S
+12,12079,Zihuatanejo de Azueta,SW
+12,12025,Coyuca de Benetez,SW
+12,12065,Teloloapan,N
+12,12033,Florencio Villarreal,SE
+12,12038,Iguala de la Independencia,N
+12,12016,Buenavista de Cuellar,N
+12,12004,Ajuchitl,NW
+12,12078,Zapotitl,E
+12,12066,Tepecoacuilco de Trujano,N
+12,12026,Coyuca de Catalen,NW
+12,12081,Zitlala,C
+12,12080,Zir,NW
+12,12046,Leonardo Bravo,C
+12,12002,Acatepec,E
+12,12073,Tlapa de Comonfort,E
+12,12054,Pedro Ascencio Alquisiras,N
+12,12059,San Luis Acatl n,SE
+12,12021,Cocula GUERRERO,N
+12,12008,Arcelia,NW
+12,12075,XalpatlOhuac,E
+12,12047,Malinaltepec,E
+12,12055,PetatlRn,SW
+12,12052,OlinalR,E
+12,12045,La UniRn de Isidoro Montes de Oca,SW
+12,12009,Atenango del Rio,N
+12,12031,Cutzamala de Pinzrn,NW
+12,12003,Ahuacuotzingo,E
+12,12069,Tlacoachistlahuaca,SE
+13,13019,El Arenal HIDALGO,C
+13,13023,Francisco I. Madero,C
+13,13046,Pachuca de Soto,S
+13,13071,Tlanalapa,S
+13,13066,Tezontepec de Aldama,S
+13,13078,Xochiatipan,N
+13,13077,Villa de Tezontepec,S
+13,13083,Zempoala,S
+13,13005,Ajacuba,S
+13,13042,Molango de Escamilla,N
+13,13012,Atotonilco el Grande,C
+13,13072,Tlanchinol,N
+13,13029,Huichapan,W
+13,13050,San Agust,C
+13,13003,Actopan HIDALGO,C
+13,13058,Tasquillo,W
+13,13076,Tulancingo de Bravo,E
+13,13052,San Bartolo Tutotepec,E
+13,13002,Acaxochitlon,E
+13,13024,Huasca de Ocampo,E
+13,13081,Zacualtip n de ongeles,C
+13,13006,Alfajayucan,W
+13,13015,Chapantongo,W
+13,13031,Jacala de Ledezma,N
+13,13051,San Agust n Tlaxiaca,S
+13,13060,Tenango de Doria,E
+13,13067,Tianguistengo,N
+13,13055,Santiago de Anaya,C
+13,13075,Tula de Allende,S
+13,13053,San Felipe Orizatlcn,N
+13,13084,ZimapGn,W
+13,13017,Chilcuautla,C
+13,13034,La Misi,N
+13,13043,NicolGs Flores,N
+13,13063,Tepeji del Reo de Ocampo,S
+13,13008,Apan,E
+13,13028,Huejutla de Reyes,N
+13,13010,Atlapexco,N
+13,13039,Mineral del Chico,C
+13,13018,Cuautepec de Hinojosa,E
+13,13027,Huehuetla PUEBLA,E
+13,13059,Tecozautla,W
+13,13020,Eloxochitl,N
+13,13030,Ixmiquilpan,C
+13,13069,Tlahuelilpan,S
+13,13044,Nopala de VillagrLn,W
+13,13047,Pacula,N
+13,13014,Cardonal,C
+13,13025,Huautla,N
+13,13057,Singuilucan,E
+13,13054,San Salvador,C
+13,13079,Xochicoatlon,N
+13,13037,Metztitltn,C
+13,13068,Tizayuca,S
+13,13062,Tepehuac,N
+13,13070,Tlahuiltepa,N
+13,13065,Tetepango,S
+13,13013,Calnali,N
+13,13035,Lolotla,N
+13,13007,Almoloya,E
+13,13073,Tlaxcoapan,S
+13,13033,Ju3rez Hidalgo,N
+13,13001,AcatlGn HIDALGO,E
+13,13082,ZapotlOn de JuOrez,S
+13,13048,Pisaflores,N
+13,13004,Agua Blanca de Iturbide,E
+13,13040,Mineral del Monte,S
+13,13021,Emiliano Zapata HIDALGO,E
+13,13016,Chapulhuacan,N
+13,13032,JaltocOn,N
+13,13064,Tepetitl,S
+13,13026,Huazalingo,N
+13,13038,Mineral de la Reforma,S
+13,13061,Tepeapulco,E
+13,13074,Tolcayuca,S
+13,13041,Mixquiahuala de Jurrez,S
+13,13045,OmitlGn de Judrez,C
+13,13056,Santiago Tulantepec de Lugo Guerrero,E
+13,13080,Yahualica,N
+13,13011,Atotonilco de Tula,S
+13,13049,Progreso de Obregan,C
+13,13022,Epazoyucan,S
+13,13036,Metepec HIDALGO,E
+13,13009,Atitalaquia,S
+14,14054,La Huerta,SW
+14,14065,Pihuamo,SE
+14,14101,TomatlOn JALISCO,SW
+14,14039,Guachinango,NW
+14,14079,San Miguel el Alto,NE
+14,14024,Cocula,C
+14,14099,Tlajomulco de Zltiga,C
+14,14109,Tuxpan,SE
+14,14036,Encarnacion de Dtaz,NE
+14,14031,Ejutla,C
+14,14037,EtzatlOn,C
+14,14083,Santa Maroa del Oro JALISCO,SE
+14,14066,Poncitl,C
+14,14090,Techaluta de Montenegro,C
+14,14117,Villa Purificacitn,SW
+14,14032,El Arenal,C
+14,14030,Degollado,NE
+14,14096,Tequila JALISCO,C
+14,14114,Villa Corona,C
+14,14095,Tepatitlrn de Morelos,NE
+14,14068,Quitupan,SE
+14,14077,San Mart,N
+14,14049,JilotlOn de los Dolores,SE
+14,14100,TolimCn JALISCO,SW
+14,14050,Jocotepec,C
+14,14010,Atenguillo,NW
+14,14041,Hostotipaquillo,C
+14,14046,Jalostotitlin,NE
+14,14001,Acatic,C
+14,14014,AyotlCn,NE
+14,14048,Jes,NE
+14,14088,Tapalpa,C
+14,14043,Huejuquilla el Alto,N
+14,14018,Ca7adas de Obregln,NE
+14,14085,Tala,C
+14,14110,Uni,NE
+14,14060,Mexticac n,NE
+14,14061,Mezquitic,N
+14,14081,San Sebastinn del Oeste,NW
+14,14013,AutlSn de Navarro,SW
+14,14112,Valle de Guadalupe,NE
+14,14091,Tecolotl n,C
+14,14105,Totatiche,N
+14,14093,Teocaltiche,NE
+14,14042,HuejScar,N
+14,14076,San Marcos,C
+14,14078,San Marton Hidalgo,C
+14,14121,Zapotiltic,SE
+14,14082,Santa Marca de los engeles,N
+14,14045,Ixtlahuaccn del Rso,C
+14,14057,Magdalena JALISCO,C
+14,14122,Zapotitlan de Vadillo,SE
+14,14025,ColotlOn,N
+14,14056,Lagos de Moreno,NE
+14,14103,Tonaya,C
+14,14028,Cuautla JALISCO,NW
+14,14020,Chapala,C
+14,14071,San Gabriel,C
+14,14021,Chimaltiten,N
+14,14038,G7mez Fareas JALISCO,SE
+14,14113,Valle de Jusrez,SE
+14,14017,Cabo Corrientes,NW
+14,14115,Villa Guerrero JALISCO,N
+14,14092,Tenamaxtlrn,C
+14,14006,Ameca,C
+14,14002,AcatlCn de Juorez,C
+14,14034,El LimOn,SW
+14,14119,Zacoalco de Torres,C
+14,14107,Tuxcacuesco,SW
+14,14047,Jamay,C
+14,14084,Sayula,C
+14,14007,Arandas,NE
+14,14069,San Cristcbal de la Barranca,C
+14,14023,Cihuatl,SW
+14,14062,MixtlCn,NW
+14,14123,ZapotlOn del Rey,C
+14,14027,Cuautitl n de Garcaa Barragan,SW
+14,14106,TototlOn,C
+14,14073,San Juan de los Lagos,NE
+14,14019,Casimiro Castillo,SW
+14,14089,Tecalitl n,SE
+14,14015,Ayutla,SW
+14,14029,CuquSo,C
+14,14064,Ojuelos de Jalisco,NE
+14,14087,Tamazula de Gordiano,SE
+14,14116,Villa Hidalgo JALISCO,NE
+14,14111,Uni,C
+14,14004,Amacueca,C
+14,14009,Atengo,NW
+14,14011,Atotonilco el Alto,NE
+14,14075,San Julicn,NE
+14,14016,BolaSos,N
+14,14086,Talpa de Allende,NW
+14,14118,Yahualica de Gonzolez Gallo,C
+14,14058,Mascota,NW
+14,14033,El Grullo,SW
+14,14044,Ixtlahuac,C
+14,14035,El Salto,C
+14,14051,Juanacatl,C
+14,14072,San Ignacio Cerro Gordo,NE
+14,14012,Atoyac JALISCO,C
+14,14108,Tuxcueca,C
+14,14059,Mazamitla,SE
+14,14063,OcotlCn,C
+14,14026,Concepcian de Buenos Aires,SE
+14,14124,ZapotlOn el Grande,C
+14,14008,Atemajac de Brizuela,C
+14,14097,Teuchitl n,C
+14,14104,Tonila,SE
+14,14053,La Barca,NE
+14,14022,Chiquilistl n,C
+14,14005,AmatitOn JALISCO,C
+14,14094,TeocuitatlAn de Corona,C
+14,14098,TizapCn el Alto,SE
+14,14052,Juchitl,C
+14,14003,Ahualulco de Mercado,C
+14,14074,San Juanito de Escobedo,C
+14,14055,La Manzanilla de la Paz,SE
+14,14070,San Diego de Alejandraa,NE
+14,14125,Zapotlanejo,C
+14,14102,TonalC,C
+14,14040,Guadalajara,C
+14,14080,San Pedro Tlaquepaque,C
+14,14120,Zapopan,C
+14,14067,Puerto Vallarta,NW
+15,15002,Acolman,E
+15,15094,Teotihuac쿯n,E
+15,15053,Lerma,C
+15,15111,Tultepec,E
+15,15008,Amatepec,S
+15,15088,Temascaltepec,C
+15,15093,Teoloyucan,E
+15,15018,Calimaya,C
+15,15075,San Felipe del Progreso,W
+15,15089,Temoaya,C
+15,15082,Sultepec,S
+15,15101,Texcoco,E
+15,15046,Jilotepec MEXICO,N
+15,15020,Chalco,E
+15,15107,Tlatlaya,S
+15,15118,Villa Victoria,W
+15,15123,Zinacantepec,C
+15,15033,Donato Guerra,W
+15,15016,Axapusco,E
+15,15071,Papalotla,E
+15,15060,Naucalpan de JuOrez,C
+15,15090,Tenancingo MEXICO,S
+15,15001,Acambay de RuXz Castaseda,N
+15,15054,Luvianos,W
+15,15063,NicolOs Romero,C
+15,15113,Valle de Bravo,W
+15,15015,Atlautla,E
+15,15084,Tejupilco,S
+15,15005,Almoloya de Ju,C
+15,15024,Chicoloapan,E
+15,15115,Villa de Allende,W
+15,15003,Aculco,N
+15,15087,Temascalcingo,N
+15,15049,Jocotitlcn,C
+15,15108,Toluca,C
+15,15097,Tepotzotlnn,N
+15,15103,Tianguistenco,C
+15,15116,Villa del Carbdn,N
+15,15012,Atizap,C
+15,15122,Zacualpan MEXICO,S
+15,15048,Jiquipilco,C
+15,15104,Timilpan,N
+15,15078,San Mateo Atenco,C
+15,15047,Jilotzingo,C
+15,15025,Chiconcuac,E
+15,15045,Jaltenco,E
+15,15038,Hueypoxtla,E
+15,15056,Melchor Ocampo,E
+15,15081,Soyaniquilpan de Jutrez,N
+15,15073,Ray,C
+15,15068,Otzoloapan,W
+15,15102,Tezoyuca,E
+15,15040,Isidro Fabela,C
+15,15031,Cuautitlan,E
+15,15028,Coatepec Harinas,S
+15,15032,Cuautitl n Izcalli,E
+15,15006,Almoloya del Rao,C
+15,15076,San Josa del Rincin,W
+15,15065,Ocoyoacac,C
+15,15120,Xonacatlcn,C
+15,15086,Temascalapa,E
+15,15074,San Antonio la Isla,C
+15,15057,Metepec,C
+15,15119,Xalatlaco,C
+15,15044,Ixtlahuaca,C
+15,15010,Apaxco,E
+15,15114,Valle de Chalco Solidaridad,E
+15,15096,Tepetlixpa,E
+15,15051,Juchitepec,E
+15,15100,Texcalyacac,C
+15,15011,Atenco,E
+15,15027,Coacalco de Berriozibal,E
+15,15061,Nextlalpan,E
+15,15058,Mexicaltzingo,C
+15,15030,Coyotepec,E
+15,15036,El Oro,W
+15,15023,Chiautla,E
+15,15034,Ecatepec de Morelos,E
+15,15017,Ayapango,E
+15,15095,Tepetlaoxtoc,E
+15,15085,Temamatla,E
+15,15110,Tonatico,S
+15,15066,Ocuilan,S
+15,15026,Chimalhuacon,E
+15,15007,Amanalco,W
+15,15052,La Paz,E
+15,15099,Texcaltitlon,S
+15,15098,Tequixquiac,E
+15,15121,Zacazonapan,W
+15,15112,Tultitlan,E
+15,15109,Tonanitla,E
+15,15022,Chapultepec,C
+15,15064,Nopaltepec,E
+15,15062,Nezahualccyotl,E
+15,15029,Cocotitlcn,E
+15,15080,Santo Tomns,W
+15,15070,Ozumba,E
+15,15004,Almoloya de Alquisiras,S
+15,15083,Tec,E
+15,15091,Tenango del Aire,E
+15,15039,Huixquilucan,C
+15,15019,Capulhuac,C
+15,15043,Ixtapan del Oro,W
+15,15013,Atizap,C
+15,15067,Otumba,E
+15,15125,Zumpango,E
+15,15124,Zumpahuacdn,S
+15,15021,Chapa de Mota,N
+15,15041,Ixtapaluca,E
+15,15117,Villa Guerrero,S
+15,15055,Malinalco,S
+15,15014,Atlacomulco,N
+15,15059,Morelos MEXICO,N
+15,15106,Tlalnepantla de Baz,E
+15,15077,San Martnn de las Pirsmides,E
+15,15072,Polotitlnn,N
+15,15042,Ixtapan de la Sal,S
+15,15037,Huehuetoca,E
+15,15105,Tlalmanalco,E
+15,15069,Otzolotepec,C
+15,15092,Tenango del Valle,C
+15,15009,Amecameca,E
+15,15050,Joquicingo,C
+15,15035,Ecatzingo,E
+15,15079,San Simgn de Guerrero,C
+16,16080,Santa Ana Maya,N
+16,16074,PuruOndiro,N
+16,16092,TingOindNn,NW
+16,16039,Huiramba,C
+16,16023,Coahuayana,SW
+16,16086,TangancAcuaro,NW
+16,16025,Coeneo,N
+16,16042,IxtlOn,NW
+16,16020,ChucOndiro,N
+16,16095,Tlazazalca,NW
+16,16013,Car,SE
+16,16083,Tac,C
+16,16088,Taretan,W
+16,16107,Yur,N
+16,16112,Ziracuaretiro,W
+16,16097,Tumbiscat o,S
+16,16052,L5zaro CNrdenas MICHOACAN,S
+16,16066,PajacuarNn,NW
+16,16016,Chavinda,NW
+16,16101,Tzintzuntzan,C
+16,16045,Jiquilpan,NW
+16,16001,Acuitzio,N
+16,16060,Nahuatzen,W
+16,16010,Arteaga,S
+16,16082,Susupuato,E
+16,16030,Cuitzeo,N
+16,16090,Tepalcatepec,SE
+16,16040,Indaparapeo,N
+16,16046,Jos,N
+16,16038,Huetamo,SE
+16,16106,Vista Hermosa,N
+16,16048,Jungapeo,E
+16,16102,Tzitzio,N
+16,16061,NocupAtaro,SE
+16,16004,Angamacutiro,N
+16,16002,Aguililla,SE
+16,16024,CoalcomAn de VCzquez Pallares,SE
+16,16027,Contepec,E
+16,16044,Jim,N
+16,16065,Ocampo MICHOACAN,E
+16,16041,Irimbo,E
+16,16033,ErongarAcuaro,C
+16,16014,Charapan,W
+16,16049,La Huacana,SE
+16,16026,CojumatlNn de RAgules,NW
+16,16056,Marcos Castellanos,NW
+16,16075,QuerOndaro,N
+16,16100,Tuzantla,E
+16,16054,Madero,C
+16,16047,Ju6rez MICHOACAN,E
+16,16110,Zin,N
+16,16078,Salvador Escalante,C
+16,16113,Zit,E
+16,16098,Turicato,C
+16,16067,PanindCcuaro,N
+16,16012,Buenavista,SE
+16,16036,Huandacareo,N
+16,16051,Lagunillas MICHOACAN DE OCAMPO,N
+16,16028,Cop,N
+16,16003,0lvaro Obreg n MICHOACAN,N
+16,16035,Hidalgo MICHOACAN,E
+16,16093,Tiquicheo de NicolOs Romero,SE
+16,16072,PeribAn,W
+16,16068,Paracho,W
+16,16058,Morelos MICHOACAN,N
+16,16089,Tar,N
+16,16007,Aporo,E
+16,16005,Angangueo,E
+16,16077,Sahuayo,NW
+16,16111,ZinapAcuaro,N
+16,16081,Senguio,E
+16,16006,ApatzingNn,SE
+16,16105,Villamar,NW
+16,16019,Chinicuila,SW
+16,16059,M5gica,SE
+16,16008,Aquila MICHOACAN,SW
+16,16108,Zacapu,N
+16,16071,Penjamillo,N
+16,16063,Nuevo Urecho,W
+16,16037,Huaniqueo,N
+16,16057,Morelia,N
+16,16064,NumarAn,N
+16,16032,Epitacio Huerta,E
+16,16087,Tanhuato,N
+16,16043,Jacona,NW
+16,16062,Nuevo Parangaricutiro,W
+16,16021,Churintzio,N
+16,16009,Ario,C
+16,16034,Gabriel Zamora,W
+16,16073,Pur,N
+16,16011,BriseAas,NW
+16,16104,Venustiano Carranza MICHOACAN,NW
+16,16099,Tuxpan MICHOACAN,E
+16,16029,Cotija,NW
+16,16015,Charo,N
+16,16018,Chilchota,W
+16,16070,P6tzcuaro,C
+16,16055,MaravatAo,E
+16,16031,Ecuandureo,NW
+16,16109,Zamora,NW
+16,16079,San Lucas,SE
+16,16103,Uruapan,W
+16,16050,La Piedad,N
+16,16076,Quiroga,C
+16,16069,Par,SE
+16,16084,TancOtaro,W
+16,16022,Churumuco,SE
+16,16091,Tingambato,W
+16,16085,Tangamandapio,NW
+16,16053,Los Reyes MICHOACAN,W
+16,16094,Tlalpujahua,E
+16,16096,Tocumbo,NW
+16,16017,CherOn,W
+17,17018,Temixco,W
+17,17032,Zacatepec,C
+17,17005,CoatlOn del Rﾫo,W
+17,17006,Cuautla,C
+17,17026,Tlaquiltenango,S
+17,17031,Yecapixtla,E
+17,17004,Ayala,C
+17,17022,Tetecala,W
+17,17029,Xochitepec,C
+17,17002,Atlatlahucan,N
+17,17021,Tepoztl,N
+17,17009,Huitzilac,N
+17,17014,Mazatepec,W
+17,17024,Tlalnepantla,N
+17,17001,Amacuzac,W
+17,17019,Temoac,E
+17,17015,Miacatl,W
+17,17013,Jonacatepec,E
+17,17027,Tlayacapan,N
+17,17028,Totolapan,N
+17,17033,Zacualpan de Amilpas,E
+17,17020,Tepalcingo,S
+17,17003,Axochiapan,E
+17,17008,Emiliano Zapata MORELOS,C
+17,17007,Cuernavaca,N
+17,17025,Tlaltizapan de Zapata,C
+17,17012,Jojutla,S
+17,17017,Puente de Ixtla,W
+17,17010,Jantetelco,E
+17,17011,Jiutepec,C
+17,17016,Ocuituco,E
+17,17023,Tetela del Volc,E
+17,17030,Yautepec,C
+18,18010,La Yesca,E
+18,18011,Rosamorada,W
+18,18007,Huajicori,N
+18,18003,AmatlIn de Caﾫas,S
+18,18002,Ahuacatldn NAYARIT,S
+18,18006,Del Nayar,E
+18,18015,Santa Mar,C
+18,18017,Tecuala,N
+18,18004,Bah,S
+18,18008,IxtlRn del Rdo,S
+18,18001,Acaponeta,N
+18,18020,Xalisco,C
+18,18014,San Pedro Lagunillas,S
+18,18019,Tuxpan NAYARIT,W
+18,18012,Ru1z,C
+18,18018,Tepic,C
+18,18009,Jala,S
+18,18013,San Blas,W
+18,18005,Compostela,S
+18,18016,Santiago Ixcuintla,W
+19,19039,Montemorelos,C
+19,19009,Cerralvo,C
+19,19030,Lampazos de Naranjo,N
+19,19050,Vallecillo,N
+19,19031,Linares,S
+19,19013,Doctor Coss,E
+19,19004,An5huac,N
+19,19032,Los Aldamas,C
+19,19028,Iturbide,S
+19,19010,China,E
+19,19014,Doctor Gonz,C
+19,19020,General Ter,C
+19,19047,San Pedro Garza Garc濑a,C
+19,19019,General Escobedo,C
+19,19040,Monterrey,C
+19,19041,Par,N
+19,19036,Melchor Ocampo NUEVO LEON,C
+19,19051,Villaldama,N
+19,19034,Los Ramones,C
+19,19017,GarcOa,C
+19,19048,Santa Catarina NUEVO LEON,C
+19,19027,Hualahuises,S
+19,19022,General Zaragoza,S
+19,19012,Doctor Arroyo,S
+19,19023,General Zuazua,C
+19,19042,PesquerEa,C
+19,19008,Cadereyta Jimanez,C
+19,19035,Mar,C
+19,19011,Ci2nega de Flores,C
+19,19038,Mina,C
+19,19046,San NicolNs de los Garza,C
+19,19044,Sabinas Hidalgo,N
+19,19026,Higueras,C
+19,19015,El Carmen,C
+19,19001,Abasolo,C
+19,19025,Hidalgo NUEVO LEON,C
+19,19016,Galeana,S
+19,19021,General Trevi o,C
+19,19007,Bustamante NUEVO LEON,N
+19,19002,Agualeguas,N
+19,19037,Mier y Noriega,S
+19,19003,Allende,C
+19,19029,Ju1rez,C
+19,19006,Aramberri,S
+19,19049,Santiago,C
+19,19033,Los Herreras,C
+19,19018,General Bravo,E
+19,19043,Rayones,C
+19,19005,Apodaca,C
+19,19024,Guadalupe NUEVO LEON,C
+19,19045,Salinas Victoria,C
+20,20325,San Pedro Ocotepec,C
+20,20100,San Andros Teotilclpam,N
+20,20098,San Andros Sinaxtla,NW
+20,20230,San Lorenzo Albarradas,C
+20,20013,Candelaria Loxicha,S
+20,20370,Santa Catarina Mechoac,SW
+20,20192,San Juan Cieneguilla,NW
+20,20403,Santa MarCa Camotlln,NW
+20,20224,San Juan Tepeuxila,N
+20,20228,San Juan Yucuita,NW
+20,20518,Santo Domingo Teojomulco,SW
+20,20104,San Andrms Zautla,C
+20,20236,San Lucas Ojitlln,N
+20,20481,Santiago Nacaltepec,C
+20,20191,San Juan Chilateca,C
+20,20503,Santiago Yosondea,SW
+20,20123,San Bartolomo Yucua,NW
+20,20211,San Juan Mazatlun,E
+20,20097,San Andr s Paxtlnn,S
+20,20172,San Josr Estancia Grande,SW
+20,20189,San Juan Cacahuatepec,SW
+20,20321,San Pedro Mixtepec - Distr. 26 -,S
+20,20356,Santa Ana,S
+20,20079,Reyes Etla,C
+20,20520,Santo Domingo Tlatay pam,NW
+20,20061,Mariscala de Julrez,NW
+20,20073,Oaxaca de Ju rez,C
+20,20143,San Francisco del Mar,E
+20,20465,Santiago Huajolotitlrn,NW
+20,20555,Villa de Chilapa de Dnaz,NW
+20,20058,Magdalena Tlacotepec,E
+20,20469,Santiago Ixtayutla,SW
+20,20101,San Andr s Tepetlapa,NW
+20,20505,Santiago Zacatepec,C
+20,20183,San Juan Bautista Lo de Soto,SW
+20,20384,Santa Cruz Papalutla,C
+20,20373,Santa Catarina Quioquitani,S
+20,20232,San Lorenzo Cuaunecuiltitla,N
+20,20357,Santa Ana Ateixtlahuaca,N
+20,20541,Taniche,C
+20,20252,San Mateo Etlatongo,NW
+20,20521,Santo Domingo Tomaltepec,C
+20,20446,Santa Maria Yavesaa,C
+20,20342,San Raymundo Jalpan,C
+20,20243,San Martun Huamelalpam,NW
+20,20299,San Pablo Tijaltepec,NW
+20,20494,Santiago Textitlen,SW
+20,20091,San Andr s Dinicuiti,NW
+20,20466,Santiago Huauclilla,C
+20,20376,Santa Catarina Yosonot,SW
+20,20533,Santos Reyes P palo,N
+20,20435,Santa Marya Temaxcalapa,C
+20,20159,San Jacinto Amilpas,C
+20,20127,San Carlos Yautepec,S
+20,20084,San Agustsn Chayuco,SW
+20,20345,San Sebasti n Ixcapa,SW
+20,20030,El Espinal,E
+20,20051,Magdalena Apasco,C
+20,20247,San Martan Tilcajete,C
+20,20014,CapulAlpam de Mandez,C
+20,20023,Concepcian Pepalo,N
+20,20467,Santiago Ihuitlln Plumas,NW
+20,20088,San AgustIn Tlacotepec,NW
+20,20314,San Pedro Jicaycn,SW
+20,20054,Magdalena Ocotlcn,C
+20,20272,San Miguel Ejutla,C
+20,20147,San Francisco Lachigol,C
+20,20122,San Bartolomo Quialana,C
+20,20086,San Agustln Etla,C
+20,20109,San Antonio de la Cal,C
+20,20281,San Miguel Soyaltepec,N
+20,20206,San Juan Juquila Vijanos,C
+20,20408,Santa MarJa Cortijo,SW
+20,20168,San Josa Ayuquila,NW
+20,20175,San Josa Tenango,N
+20,20060,Magdalena Zahuatl,C
+20,20393,Santa Inas del Monte,C
+20,20401,Santa Marsa Apazco,N
+20,20412,Santa Marsa Ecatepec,S
+20,20554,Valerio Trujano,N
+20,20432,Santa Marra Sola,S
+20,20528,Santo Tomrs Jalieza,C
+20,20365,Santa Catarina Cuixtla,S
+20,20263,San Miguel Ahuehuetitl,NW
+20,20406,Santa Marla Chimalapa,E
+20,20212,San Juan Mixtepec - Distr. 08 -,S
+20,20455,Santiago Apxstol,C
+20,20004,Asunci,C
+20,20478,Santiago Matatltn,C
+20,20402,Santa MarMa Atzompa,C
+20,20201,San Juan Evangelista Analco,C
+20,20430,Santa MarEa Petapa,E
+20,20066,Miahuatlrn de Porfirio Dlaz,S
+20,20502,Santiago YolomPcatl,NW
+20,20343,San Sebastiln Abasolo,C
+20,20330,San Pedro Taviche,C
+20,20477,Santiago Llano Grande,SW
+20,20394,Santa In s Yatzeche,C
+20,20047,La Pe,C
+20,20102,San Andr s Yat,C
+20,20363,Santa Ana Zegache,C
+20,20361,Santa Ana Tlapacoyan,C
+20,20564,Villa Tej pam de la UniDn,NW
+20,20008,Asunci,C
+20,20002,AcatlAn de Ptrez Figueroa,N
+20,20114,San Baltazar Chichicupam,C
+20,20507,Santo Domingo Albarradas,C
+20,20190,San Juan Chicomezachil,C
+20,20226,San Juan Yaec,C
+20,20231,San Lorenzo Cacaotepec,C
+20,20223,San Juan Teitipac,C
+20,20133,San Dionisio Ocotepec,C
+20,20399,Santa Magdalena Jicotl,NW
+20,20035,Guelatao de Juarez,C
+20,20057,Magdalena Tequisistltn,S
+20,20386,Santa Cruz Tacahua,NW
+20,20275,San Miguel Mixtepec,C
+20,20145,San Francisco Ixhuattn,E
+20,20276,San Miguel Panixtlahuaca,SW
+20,20173,San Josu Independencia,N
+20,20317,San Pedro Mdrtir,C
+20,20379,Santa Cruz Amilpas,C
+20,20292,San Nicolzs Hidalgo,NW
+20,20567,Yutanduchi de Guerrero,C
+20,20375,Santa Catarina Ticue,NW
+20,20092,San Andrts Huaxpaltepec,SW
+20,20550,Tlalixtac de Cabrera,C
+20,20495,Santiago Tilantongo,NW
+20,20220,San Juan Taban,C
+20,20222,San Juan Teita,NW
+20,20454,Santiago Apoala,N
+20,20285,San Miguel Tequixtepec,N
+20,20078,Reforma de Pineda,E
+20,20385,Santa Cruz Tacache de Mina,NW
+20,20300,San Pablo Villa de Mitla,C
+20,20286,San Miguel Tilquiepam,C
+20,20234,San Lorenzo Victoria,NW
+20,20398,Santa Lucza Ocotlrn,C
+20,20062,M5rtires de Tacubaya,SW
+20,20439,Santa Marda Texcatitl,N
+20,20349,San Sebasti n Teitipac,C
+20,20148,San Francisco Logueche,S
+20,20096,San Andrcs Nuxioo,C
+20,20511,Santo Domingo Ingenio,E
+20,20267,San Miguel Chicahua,N
+20,20318,San Pedro MCrtir Quiechapa,S
+20,20249,San Marton Zacatepec,NW
+20,20552,Trinidad Zaachila,C
+20,20491,Santiago Tepetlapa,NW
+20,20105,San Antonino Castillo Velasco,C
+20,20436,Santa Maria Temaxcaltepec,S
+20,20508,Santo Domingo Armenta,SW
+20,20111,San Antonio Nanahuatapam,N
+20,20280,San Miguel Santa Flor,N
+20,20338,San Pedro y San Pablo Tequixtepec,NW
+20,20278,San Miguel Piedras,C
+20,20129,San Cristlbal Amoltepec,NW
+20,20438,Santa Marla Tepantlali,C
+20,20095,San Andrrs Lagunas,NW
+20,20504,Santiago Yucuyachi,NW
+20,20075,Pinotepa de Don Luis,SW
+20,20019,Ciudad Ixtepec,E
+20,20423,Santa Marta Lachixio,C
+20,20344,San Sebasti n Coatlon,S
+20,20525,Santo Domingo Yanhuitl,NW
+20,20411,Santa Maria del Tule,C
+20,20377,Santa Catarina Zapoquila,NW
+20,20200,San Juan Diuxi,NW
+20,20042,Huautepec,N
+20,20093,San Andrcs HuayZpam,C
+20,20346,San SebastiHn Nicananduta,NW
+20,20291,San Nicolts,S
+20,20135,San Esteban Atatlahuca,NW
+20,20392,Santa Inbs de Zaragoza,C
+20,20196,San Juan Cotzocan,E
+20,20559,Villa de Zaachila,C
+20,20371,Santa Catarina Minas,C
+20,20150,San Francisco Ozolotepec,S
+20,20083,San Agustin Atenango,NW
+20,20140,San Francisco Cajonos,C
+20,20425,Santa Maria Nativitas,NW
+20,20037,Heroica Ciudad de Ejutla de Crespo,C
+20,20312,San Pedro Ixtlahuaca,C
+20,20182,San Juan Bautista Jayacatlen,C
+20,20424,Santa MarBa Mixtequilla,E
+20,20164,San Jeranimo Taviche,C
+20,20546,Teotongo,NW
+20,20184,San Juan Bautista Suchitepec,NW
+20,20048,La Reforma,SW
+20,20496,Santiago Tillo,NW
+20,20512,Santo Domingo Ixcatlcn,SW
+20,20352,San Simon Zahuatlan,NW
+20,20405,Santa Mar a Chilchotla,N
+20,20179,San Juan Bautista Coixtlahuaca,N
+20,20391,Santa Gertrudis,C
+20,20457,Santiago Atitlsn,C
+20,20107,San Antonino Monte Verde,NW
+20,20283,San Miguel TecomatlVn,NW
+20,20409,Santa Marla Coyotepec,C
+20,20103,San Andrrs Zabache,C
+20,20250,San Mateo Cajonos,C
+20,20131,San Crist bal Suchixtlahuaca,NW
+20,20251,San Mateo del Mar,E
+20,20303,San Pedro Aplstol,C
+20,20320,San Pedro Mixtepec - Distr. 22 -,S
+20,20433,Santa Mar a Tataltepec,NW
+20,20553,Uni,E
+20,20233,San Lorenzo Texmelecan,SW
+20,20524,Santo Domingo Xagacca,C
+20,20339,San Pedro Yaneri,C
+20,20202,San Juan Guelavia,C
+20,20059,Magdalena Yodocono de Porfirio D,NW
+20,20531,Santo Tom s Tamazulapan,S
+20,20324,San Pedro Ocopetatillo,N
+20,20499,Santiago Xiacue,C
+20,20219,San Juan Sayultepec,NW
+20,20238,San Lucas Zoquiepam,N
+20,20137,San Felipe Tejalppam,C
+20,20244,San Martpn Itunyoso,NW
+20,20149,San Francisco Nuxaoo,NW
+20,20556,Villa de Etla,C
+20,20488,Santiago Tamazola,NW
+20,20297,San Pablo Huixtepec,C
+20,20044,Ixpantepec Nieves,NW
+20,20245,San Marten Lachil,C
+20,20414,Santa Marna Guienagati,E
+20,20453,Santiago Amoltepec,SW
+20,20053,Magdalena Mixtepec,C
+20,20144,San Francisco Huehuetl,N
+20,20447,Santa Maria Yolotepec,SW
+20,20001,Abejones,C
+20,20355,San Vicente Nulo,NW
+20,20479,Santiago Miltepec,NW
+20,20428,Santa MarMa Pepalo,N
+20,20566,Yogana,S
+20,20033,Guadalupe de Ramlrez,NW
+20,20296,San Pablo Huitzo,C
+20,20368,Santa Catarina Lachatao,C
+20,20378,Santa Cruz Acatepec,N
+20,20334,San Pedro Topiltepec,NW
+20,20335,San Pedro Totoltpam,C
+20,20209,San Juan Lajarcia,S
+20,20310,San Pedro Huilotepec,E
+20,20459,Santiago Cacaloxtepec,NW
+20,20108,San Antonio Acutla,NW
+20,20124,San BartolomA Zoogocho,C
+20,20421,Santa Marla Jaltianguis,C
+20,20068,Monjas,S
+20,20080,Rojas de Cuauhttmoc,C
+20,20031,Eloxochitlun de Flores Magin,N
+20,20026,Cosoltepec,NW
+20,20187,San Juan Bautista Tuxtepec,N
+20,20452,Santa MarBa Zoquitlun,S
+20,20306,San Pedro Comitancillo,E
+20,20301,San Pablo Yaganiza,C
+20,20353,San Vicente Coatlan,S
+20,20012,Calihualn,NW
+20,20501,Santiago Yaveo,E
+20,20358,Santa Ana Cuauhtlmoc,N
+20,20323,San Pedro Nopala,NW
+20,20427,Santa Mar a Ozolotepec,S
+20,20290,San Miguel Yotao,C
+20,20270,San Miguel del Puerto,S
+20,20526,Santo Domingo Yodohino,NW
+20,20266,San Miguel Amatldn,C
+20,20347,San SebastiAn Rlo Hondo,S
+20,20258,San Mateo Tlapiltepec,NW
+20,20176,San Juan Achiutla,NW
+20,20484,Santiago Nundiche,NW
+20,20337,San Pedro y San Pablo Teposcolula,NW
+20,20551,Totontepec Villa de Morelos,C
+20,20106,San Antonino el Alto,C
+20,20535,Santos Reyes Yucunt,NW
+20,20205,San Juan Juquila Mixes,C
+20,20468,Santiago Ixcuintepec,E
+20,20229,San Lorenzo,SW
+20,20214,San Juan zumu,NW
+20,20070,Nazareno Etla,C
+20,20128,San CristEbal Amatlcn,S
+20,20082,San AgustEn Amatengo,C
+20,20309,San Pedro Huamelula,S
+20,20449,Santa Mar a Yucuhiti,SW
+20,20514,Santo Domingo Ozolotepec,S
+20,20500,Santiago Yaitepec,S
+20,20569,Zapotitl n Palmas,NW
+20,20009,Asunci,S
+20,20305,San Pedro Cajonos,C
+20,20040,Heroica Ciudad de Tlaxiaco,NW
+20,20420,Santa Maria Jalapa del Marquos,E
+20,20180,San Juan Bautista Cuicatlrn,N
+20,20130,San CristBbal Lachirioag,C
+20,20497,Santiago Tlazoyaltepec,C
+20,20120,San Bartolomz Ayautla,N
+20,20081,Salina Cruz,E
+20,20360,Santa Ana Tavela,S
+20,20253,San Mateo Nejepam,NW
+20,20382,Santa Cruz Mixtepec,C
+20,20383,Santa Cruz Nundaco,NW
+20,20269,San Miguel Coatlcn,S
+20,20322,San Pedro Molinos,NW
+20,20261,San Melchor Betaza,C
+20,20134,San Dionisio Ocotl,C
+20,20242,San Martin de los Cansecos,C
+20,20003,1nimas Trujano,C
+20,20316,San Pedro Juchatengo,S
+20,20396,Santa Luc a Miahuatl,S
+20,20262,San Miguel Achiutla,NW
+20,20522,Santo Domingo Tonal,NW
+20,20119,San Bartolo Yautepec,S
+20,20170,San Jost del Petasco,S
+20,20381,Santa Cruz Itundujia,SW
+20,20216,San Juan Petlapa,C
+20,20493,Santiago Texcalcingo,N
+20,20027,CuilCpam de Guerrero,C
+20,20422,Santa Marda la Asuncinn,N
+20,20328,San Pedro SochiApam,N
+20,20246,San Marton Peras,NW
+20,20273,San Miguel el Grande,NW
+20,20160,San Jacinto Tlacotepec,SW
+20,20476,Santiago Laxopa,C
+20,20274,San Miguel Huautla,N
+20,20186,San Juan Bautista Tlacoatzintepec,N
+20,20295,San Pablo Etla,C
+20,20380,Santa Cruz de Bravo,NW
+20,20410,Santa Marza del Rosario,NW
+20,20437,Santa Marza Teopoxco,N
+20,20464,Santiago del Roo,NW
+20,20307,San Pedro Coxcaltepec C,C
+20,20265,San Miguel Amatitlpn,NW
+20,20348,San SebastiAn Tecomaxtlahuaca,NW
+20,20530,Santo Tomts Ocotepec,NW
+20,20151,San Francisco Sola,S
+20,20311,San Pedro Ixcatlln,N
+20,20529,Santo Tom s Mazaltepec,C
+20,20028,Cuyamecalco Villa de Zaragoza,N
+20,20461,Santiago Chazumba,NW
+20,20287,San Miguel Tlacamama,SW
+20,20362,Santa Ana Yareni,C
+20,20441,Santa Mar a Tlalixtac,N
+20,20482,Santiago Nejapilla,NW
+20,20197,San Juan de los Cu,N
+20,20112,San Antonio Sinicahua,NW
+20,20475,Santiago Laollaga,E
+20,20510,Santo Domingo de Morelos,S
+20,20313,San Pedro Jaltepetongo,N
+20,20288,San Miguel Tlacotepec,NW
+20,20333,San Pedro Tidac,NW
+20,20015,Chahuites,E
+20,20255,San Mateo Pidas,S
+20,20156,San Ildefonso Amatlen,S
+20,20032,Fresnillo de Trujano,NW
+20,20029,El Barrio de la Soledad,E
+20,20115,San Baltazar Loxicha,S
+20,20547,Tepelmeme Villa de Morelos,N
+20,20218,San Juan Quiotepec,N
+20,20067,Mixistlnn de la Reforma,C
+20,20460,Santiago Camotl n,C
+20,20419,Santa MarCa Jacatepec,N
+20,20158,San Ildefonso Villa Alta,C
+20,20195,San Juan Comaltepec,C
+20,20480,Santiago Minas,SW
+20,20213,San Juan Mixtepec - Distr. 26 -,NW
+20,20110,San Antonio Huitepec,C
+20,20116,San Baltazar Yatzachi el Bajo,C
+20,20085,San Agustzn de las Juntas,C
+20,20087,San Agustzn Loxicha,S
+20,20308,San Pedro el Alto,S
+20,20241,San Marcos Arteaga,NW
+20,20366,Santa Catarina Ixtepeji,C
+20,20076,Pluma Hidalgo,S
+20,20125,San Bernardo Mixtepec,C
+20,20458,Santiago Ayuquililla,NW
+20,20284,San Miguel Tenango,E
+20,20193,San Juan Coatzaspam,N
+20,20429,Santa MarCa Peaoles,C
+20,20260,San Mateo Yucutindoo,SW
+20,20039,Heroica Ciudad de Juchitsn de Zaragoza,E
+20,20257,San Mateo Sindihui,NW
+20,20020,Coatecas Altas,C
+20,20167,San Jorge Nuchita,NW
+20,20298,San Pablo Macuiltianguis,C
+20,20162,San Jerlnimo Silacayoapilla,NW
+20,20451,Santa Maria Zaniza,SW
+20,20332,San Pedro Teutila,N
+20,20336,San Pedro y San Pablo Ayutla,C
+20,20544,Teotitlrn de Flores Magyn,N
+20,20055,Magdalena Pe asco,NW
+20,20540,Tanetze de Zaragoza,C
+20,20259,San Mateo Yoloxochitlan,N
+20,20490,Santiago Tenango,C
+20,20448,Santa MarTa Yosoyha,NW
+20,20271,San Miguel del Ryo,C
+20,20516,Santo Domingo Roayaga,C
+20,20565,Yaxe,C
+20,20562,Villa Sola de Vega,S
+20,20177,San Juan Atepec,C
+20,20293,San Pablo Coatl,S
+20,20519,Santo Domingo Tepuxtepec,C
+20,20237,San Lucas Quiavinu,C
+20,20319,San Pedro Murtir Yucuxaco,NW
+20,20142,San Francisco Chindca,NW
+20,20132,San Dionisio del Mar,E
+20,20018,Ci3nega de ZimatlMn,C
+20,20188,San Juan Bautista Valle Nacional,N
+20,20542,Tataltepec de ValdVs,SW
+20,20390,Santa Cruz Zenzontepec,SW
+20,20043,Huautla de Jimznez,N
+20,20483,Santiago Niltepec,E
+20,20017,Chiquihuitlln de Benito Jucrez,N
+20,20364,Santa Catalina Quieri,S
+20,20515,Santo Domingo Petapa,E
+20,20327,San Pedro Quiatoni,C
+20,20351,San Simrn Almolongas,S
+20,20543,Teococuilco de Marcos P rez,C
+20,20561,Villa Hidalgo OAXACA,C
+20,20563,Villa Talea de Castro,C
+20,20294,San Pablo Cuatro Venados,C
+20,20369,Santa Catarina Loxicha,S
+20,20434,Santa Maraa Tecomavaca,N
+20,20509,Santo Domingo Chihuitan,E
+20,20340,San Pedro Yglox,N
+20,20527,Santo Domingo Zanatepec,E
+20,20485,Santiago Nuyo,SW
+20,20568,Zapotitl n Lagunas,NW
+20,20169,San Josl Chiltepec,N
+20,20163,San Jerlnimo Sosola,C
+20,20011,Ayotzintepec,N
+20,20155,San Gabriel Mixtepec,S
+20,20166,San Jerrnimo Tlacochahuaya,C
+20,20157,San Ildefonso Sola,S
+20,20450,Santa Maroa Zacatepec,SW
+20,20404,Santa Maroa Chachoppam,NW
+20,20440,Santa Maroa Tlahuitoltepec,C
+20,20277,San Miguel Peras,C
+20,20302,San Pedro Amuzgos,SW
+20,20489,Santiago Tapextla,SW
+20,20138,San Felipe Usila,N
+20,20118,San Bartolo Soyaltepec,NW
+20,20400,Santa Marla Alotepec,C
+20,20139,San Francisco Cahuacuc,SW
+20,20165,San Jernnimo Techatl,N
+20,20282,San Miguel Suchixtepec,S
+20,20254,San Mateo Peuasco,NW
+20,20513,Santo Domingo Nuxae,C
+20,20442,Santa Maria Tonameca,S
+20,20016,Chalcatongo de Hidalgo,NW
+20,20174,San Joso Lachiguiri,S
+20,20463,Santiago Comaltepec,N
+20,20199,San Juan del Rto,C
+20,20194,San Juan Colorado,SW
+20,20041,"Heroica Villa Tezoatlon de Segura y Luna, Cuna de la Independencia de Oaxaca",NW
+20,20178,San Juan Bautista Atatlahuca,C
+20,20207,San Juan Lachao,S
+20,20240,San Marcial Ozolotepec,S
+20,20217,San Juan Quiahije,SW
+20,20407,Santa MarQa Colotepec,S
+20,20418,Santa MarQa Ixcatlpn,N
+20,20221,San Juan Tamazola,C
+20,20279,San Miguel Quetzaltepec,C
+20,20227,San Juan Yatzona,C
+20,20052,Magdalena Jaltepec,C
+20,20006,Asunci,E
+20,20010,Ayoquezco de Aldama,C
+20,20444,Santa Mar a Xadani,E
+20,20090,San Andrrs Cabecera Nueva,SW
+20,20099,San Andrrs Solaga,C
+20,20417,Santa Marsa Ipalapa,SW
+20,20331,San Pedro Teozacoalco,C
+20,20046,La Compao a,C
+20,20126,San Blas Atempa,E
+20,20121,San Bartolomm Loxicha,S
+20,20389,Santa Cruz Xoxocotlhn,C
+20,20268,San Miguel Chimalapa,E
+20,20239,San Luis Amatlmn,S
+20,20416,Santa MarAa Huazolotitlvn,SW
+20,20538,Soledad Etla,C
+20,20397,Santa Lucta Monteverde,SW
+20,20136,San Felipe Jalapa de D,N
+20,20413,Santa Marea Guelacd,C
+20,20005,Asunci,NW
+20,20065,Mesones Hidalgo,SW
+20,20235,San Lucas Camotlen,C
+20,20474,Santiago Lalopa,C
+20,20387,Santa Cruz Tayata,NW
+20,20388,Santa Cruz Xitla,S
+20,20152,San Francisco Telixtlahuaca,C
+20,20204,San Juan Ihualtepec,NW
+20,20445,Santa MarIa Yalina,C
+20,20094,San Andrrs Ixtlahuaca,C
+20,20181,San Juan Bautista Guelache,C
+20,20372,Santa Catarina Quiane,C
+20,20146,San Francisco Jaltepetongo,NW
+20,20426,Santa Maria Nduayaco,NW
+20,20539,Tamazulapam del Esporitu Santo,C
+20,20492,Santiago Tetepec,SW
+20,20486,Santiago Pinotepa Nacional,SW
+20,20472,Santiago Juxtlahuaca,NW
+20,20532,Santos Reyes Nopala,S
+20,20022,Concepcien Buenavista,NW
+20,20064,Mazatl,N
+20,20326,San Pedro Pochutla,S
+20,20498,Santiago Xanica,S
+20,20256,San Mateo Rno Hondo,S
+20,20074,OcotlAn de Morelos,C
+20,20470,Santiago Jamiltepec,SW
+20,20161,San Jeronimo Coatlcn,S
+20,20025,Cosolapa,N
+20,20487,Santiago Suchilquitongo,C
+20,20069,Natividad,C
+20,20198,San Juan del Estado,C
+20,20534,Santos Reyes Tepejillo,NW
+20,20203,San Juan Guichicovi,E
+20,20536,Silacayo pam,NW
+20,20548,Tlacolula de Matamoros,C
+20,20063,Mat,E
+20,20117,San Bartolo Coyotepec,C
+20,20415,Santa Marla Huatulco,S
+20,20570,Zimatl,C
+20,20210,San Juan Lalana,N
+20,20045,IxtlCn de Juarez,C
+20,20050,Loma Bonita,N
+20,20558,Villa de Tututepec de Melchor Ocampo,SW
+20,20071,Nejapa de Madero,S
+20,20395,Santa Luc a del Camino,C
+20,20329,San Pedro Tapanatepec,E
+20,20473,Santiago Lachiguiri,E
+20,20038,Heroica Ciudad de Huajuapan de Lemn,NW
+20,20036,Guevea de Humboldt,E
+20,20215,San Juan Ozolotepec,S
+20,20185,San Juan Bautista Tlachichilco,NW
+20,20007,Asunci,C
+20,20024,Constancia del Rosario,SW
+20,20350,San Sebastidn Tutla,C
+20,20456,Santiago Astata,S
+20,20462,Santiago Choapam,N
+20,20077,Putla Villa de Guerrero,SW
+20,20517,Santo Domingo Tehuantepec,E
+20,20443,Santa Maria Totolapilla,E
+20,20506,Santiago Zoochila,C
+20,20341,San Pedro Yucunama,NW
+20,20557,Villa de Tamazulmpam del Progreso,NW
+20,20359,Santa Ana del Valle,C
+20,20523,Santo Domingo Tonaltepec,NW
+20,20072,Nuevo Zoquigpam,C
+20,20248,San Martqn Toxpalan,N
+20,20354,San Vicente Lachixno,S
+20,20153,San Francisco Teopan,NW
+20,20537,Sitio de Xitlapehua,S
+20,20549,Tlacotepec Plumas,NW
+20,20154,San Francisco Tlapancingo,NW
+20,20304,San Pedro Atoyac,SW
+20,20471,Santiago Jocotepec,N
+20,20056,Magdalena Teitipac,C
+20,20374,Santa Catarina Tayata,NW
+20,20049,La Trinidad Vista Hermosa,NW
+20,20113,San Antonio Tepetlapa,SW
+20,20171,San Joso del Progreso,C
+20,20367,Santa Catarina Juquila,SW
+20,20560,Villa Daaz Ordaz,C
+20,20545,Teotitlan del Valle,C
+20,20034,Guadalupe Etla,C
+20,20141,San Francisco Chapulapa,N
+20,20315,San Pedro Jocotipac,N
+20,20208,San Juan Lachigalla,C
+20,20089,San AgustLn Yatareni,C
+20,20264,San Miguel Alotpam,C
+20,20431,Santa Marla Quiegolani,S
+20,20225,San Juan Teposcolula,NW
+20,20289,San Miguel Tulancingo,NW
+20,20021,Coicoy,NW
+21,21126,San Jervnimo Tecuanipan,C
+21,21154,Tecamachalco,C
+21,21189,Tochtepec,C
+21,21035,Coxcatlen,C
+21,21191,Tulcingo,C
+21,21117,Rafael Lara Grajales,C
+21,21102,Nealtican,C
+21,21173,Teteles de Avila Castillo,C
+21,21120,San Antonio Calada,C
+21,21119,San Andrns Cholula,C
+21,21137,San Nicolss Buenos Aires,C
+21,21109,Pahuatlon,C
+21,21207,Zacapoaxtla,C
+21,21062,Epatlon,C
+21,21185,Tlapanalt,C
+21,21082,Ixcaquixtla,C
+21,21083,Ixtacamaxtitlun,C
+21,21132,San Martxn Texmelucan,C
+21,21215,Zongozotla,C
+21,21026,Calpan,C
+21,21205,Yehualtepec,C
+21,21200,Xochiapulco,C
+21,21176,Tilapa,C
+21,21060,Domingo Arenas,C
+21,21118,Los Reyes de Juerez,C
+21,21167,Tepetzintla,C
+21,21203,Xochitlnn Todos Santos,C
+21,21017,Atempan,C
+21,21054,Chignautla,C
+21,21177,Tlacotepec de Benito Jusrez,C
+21,21163,Tepatlaxco de Hidalgo,C
+21,21048,Chiautzingo,C
+21,21124,San Gabriel Chilac,C
+21,21079,Huitziltepec,C
+21,21001,Acajete PUEBLA,C
+21,21065,General Felipe lngeles,C
+21,21139,San Pablo Anicano,C
+21,21068,Hermenegildo Galeana,C
+21,21006,Ahuacatlin,C
+21,21140,San Pedro Cholula,C
+21,21108,Oriental,C
+21,21161,Tepanco de Lopez,C
+21,21008,Ahuazotepec,C
+21,21075,Hueyapan,C
+21,21142,San Salvador el Seco,C
+21,21131,San Juan Atzompa,C
+21,21088,Jonotla,C
+21,21204,Yaonthuac,C
+21,21194,Venustiano Carranza PUEBLA,C
+21,21022,AtzitzihuacCn,C
+21,21197,Xicotepec,C
+21,21031,Coatzingo,C
+21,21070,Huatlatlauca,C
+21,21180,Tlahuapan,C
+21,21066,Guadalupe,C
+21,21111,Pantepec PUEBLA,C
+21,21201,Xochiltepec,C
+21,21087,Jolalpan,C
+21,21105,Ocotepec PUEBLA,C
+21,21125,San Gregorio Atzompa,C
+21,21115,Quecholac,C
+21,21074,Huejotzingo,C
+21,21046,Chapulco,C
+21,21164,Tepeaca,C
+21,21024,Axutla,C
+21,21089,Jopala,C
+21,21210,Zapotitl,C
+21,21036,Coyomeapan,C
+21,21112,Petlalcingo,C
+21,21153,Tecali de Herrera,C
+21,21150,Huehuetlen el Grande,C
+21,21093,Lafragua,C
+21,21044,Cuyoaco,C
+21,21202,Xochitl,C
+21,21209,Zapotitlnn,C
+21,21181,Tlaltenango,C
+21,21040,Cuautinchgn,C
+21,21032,Cohetzala,C
+21,21157,Tehuitzingo,C
+21,21097,Mixtla,C
+21,21208,Zacatl,C
+21,21016,Aquixtla,C
+21,21113,Piaxtla,C
+21,21195,Vicente Guerrero,C
+21,21127,San Jer nimo XayacatlSn,C
+21,21019,Atlixco,C
+21,21190,Totoltepec de Guerrero,C
+21,21004,Acatzingo,C
+21,21064,Francisco Z. Mena,C
+21,21071,Huauchinango,C
+21,21050,Chichiquila,C
+21,21198,Xicotlqn,C
+21,21043,Cuetzalan del Progreso,C
+21,21183,Tlaola,C
+21,21015,Amozoc,C
+21,21081,Ixcamilpa de Guerrero,C
+21,21155,Tecomatlan,C
+21,21196,Xayacatlan de Bravo,C
+21,21199,Xiutetelco,C
+21,21141,San Pedro Yeloixtlahuaca,C
+21,21107,Olintla,C
+21,21138,San Nicol s de los Ranchos,C
+21,21086,Jalpan,C
+21,21067,Guadalupe Victoria,C
+21,21023,Atzitzintla,C
+21,21165,Tepemaxalco,C
+21,21172,Tetela de Ocampo,C
+21,21053,Chignahuapan,C
+21,21169,Tepexi de Rodrpguez,C
+21,21168,Tepexco,C
+21,21099,Ca9ada Morelos,C
+21,21188,Tochimilco,C
+21,21129,San Josl Miahuatlen,C
+21,21106,Ocoyucan,C
+21,21047,Chiautla PUEBLA,C
+21,21094,Libres,C
+21,21213,Zihuateutla,C
+21,21007,Ahuatlen,C
+21,21121,San Diego la Mesa Tochimiltzingo,C
+21,21058,Chilchotla,C
+21,21216,Zoquiapan,C
+21,21110,Palmar de Bravo,C
+21,21149,Santiago Miahuatl n,C
+21,21085,Iz5car de Matamoros,C
+21,21186,Tlatlauquitepec,C
+21,21192,Tuzamapan de Galeana,C
+21,21100,Naupan,C
+21,21005,Acteopan,C
+21,21045,Chalchicomula de Sesma,C
+21,21056,Chila de la Sal,C
+21,21206,Zacapala,C
+21,21214,Zinacatepec,C
+21,21211,Zaragoza PUEBLA,C
+21,21184,Tlapacoya,C
+21,21027,Caltepec,C
+21,21166,Tepeojuma,C
+21,21159,Teopantlan,C
+21,21193,Tzicatlacoyan,C
+21,21114,Puebla,C
+21,21090,Juan C. Bonilla,C
+21,21034,Coronango,C
+21,21012,Aljojuca,C
+21,21135,San Miguel Ixitl n,C
+21,21160,Teotlalco,C
+21,21152,Soltepec,C
+21,21025,Ayotoxco de Guerrero,C
+21,21122,San Felipe Teotlalcingo,C
+21,21029,Caxhuacan,C
+21,21179,Tlachichuca,C
+21,21144,San Salvador Huixcolotla,C
+21,21178,Tlacuilotepec,C
+21,21143,San Salvador el Verde,C
+21,21076,Hueytamalco,C
+21,21128,San Josa Chiapa,C
+21,21021,Atzala,C
+21,21028,Camocuautla,C
+21,21092,Juan N. Mlndez,C
+21,21151,Santo Tomls Hueyotlipan,C
+21,21212,Zautla,C
+21,21095,La Magdalena Tlatlauquitepec,C
+21,21002,Acateno,C
+21,21010,Ajalpan,C
+21,21018,Atexcal,C
+21,21147,Santa Inls Ahuatempan,C
+21,21217,Zoquitlnn,C
+21,21170,Tepeyahualco,C
+21,21171,Tepeyahualco de Cuauhtimoc,C
+21,21136,San Miguel Xoxtla,C
+21,21098,Molcaxac,C
+21,21091,Juan Galindo,C
+21,21069,Huaquechula,C
+21,21158,Tenampulco,C
+21,21174,Teziutlln,C
+21,21038,Cuapiaxtla de Madero,C
+21,21078,Huitzilan de Serden,C
+21,21073,Huehuetlnn el Chico,C
+21,21084,Ixtepec,C
+21,21055,Chila,C
+21,21096,Mazapiltepec de Juorez,C
+21,21063,Esperanza,C
+21,21130,San Juan Atenco,C
+21,21049,Chiconcuautla,C
+21,21072,Huehuetla,C
+21,21146,Santa Catarina Tlaltempan,C
+21,21052,Chigmecatitlnn,C
+21,21187,Tlaxco,C
+21,21057,Honey,C
+21,21175,Tianguismanalco,C
+21,21104,Nopalucan,C
+21,21103,Nicolus Bravo,C
+21,21123,San Felipe Tepatlan,C
+21,21134,San Matias Tlalancaleca,C
+21,21039,Cuautempan,C
+21,21014,Amixtlmn,C
+21,21077,Hueytlalpan,C
+21,21162,Tepango de Rodraguez,C
+21,21059,Chinantla,C
+21,21041,Cuautlancingo,C
+21,21051,Chietla,C
+21,21133,San Martcn Totoltepec,C
+21,21101,Nauzontla,C
+21,21080,Atlequizayan,C
+21,21009,Ahuehuetitla,C
+21,21037,Coyotepec PUEBLA,C
+21,21020,Atoyatempan,C
+21,21182,Tlanepantla,C
+21,21030,Coatepec,C
+21,21042,Cuayuca de Andrade,C
+21,21003,Acatlcn PUEBLA,C
+21,21156,Tehuacnn,C
+21,21033,Cohuecan,C
+21,21011,Albino Zertuche,C
+21,21013,Altepexi,C
+21,21061,Eloxochitltn,C
+21,21148,Santa Isabel Cholula,C
+21,21116,Quimixtlan,C
+21,21145,San Sebastiln Tlacotepec,C
+22,22003,Cadereyta de Montes,C
+22,22015,San Joaqu n,N
+22,22001,Amealco de Bonfil,S
+22,22016,San Juan del RRo QUERETARO,S
+22,22009,Jalpan de Serra,NE
+22,22010,Landa de Matamoros,NE
+22,22012,Pe3amiller,N
+22,22005,Corregidora,W
+22,22013,Pinal de Amoles,N
+22,22008,Huimilpan,S
+22,22017,Tequisquiapan,C
+22,22004,Col,C
+22,22006,El MarquOs,W
+22,22007,Ezequiel Montes,C
+22,22011,Pedro Escobedo,S
+22,22002,Arroyo Seco,N
+22,22014,QuerEtaro,W
+22,22018,TolimTn,C
+23,23001,Bacalar,S
+23,23002,Benito JuRrez QUINTANA ROO,N
+23,23003,Cozumel,E
+23,23004,Felipe Carrillo Puerto,C
+23,23005,Isla Mujeres,N
+23,23006,Jos,W
+23,23007,L0zaro C rdenas QUINTANA ROO,N
+23,23008,Oth,S
+23,23009,Solidaridad,N
+23,23010,Tulum,N
+24,24001,Ahualulco,SW
+24,24002,Alaquines,C
+24,24003,AquismIn,E
+24,24004,Armadillo de los Infante,SW
+24,24005,Axtla de Terrazas,E
+24,24006,C0rdenas SAN LUIS POTOSI,C
+24,24007,Catorce,NW
+24,24008,Cedral,NW
+24,24009,Cerritos,C
+24,24010,Cerro de San Pedro,SW
+24,24011,Charcas,W
+24,24012,Ciudad del MaSz,C
+24,24013,Ciudad FernTndez,C
+24,24014,Ciudad Valles,E
+24,24015,CoxcatlSn,E
+24,24016,Ebano,E
+24,24017,El Naranjo,C
+24,24018,GuadalcSzar,C
+24,24019,Huehuetl n,E
+24,24020,Lagunillas,C
+24,24021,Matehuala,NW
+24,24022,Matlapa,E
+24,24023,Mexquitic de Carmona,SW
+24,24024,Moctezuma SAN LUIS POTOSI,W
+24,24025,Ray,C
+24,24026,Rioverde,C
+24,24027,Salinas,W
+24,24028,San Antonio,E
+24,24029,San Ciro de Acosta,C
+24,24030,San Luis PotosI,SW
+24,24031,San Mart n Chalchicuautla,E
+24,24032,San NicolPs Tolentino,C
+24,24033,San Vicente Tancuayalab,E
+24,24034,Santa Catarina,C
+24,24035,Santa MarPa del Rio,SW
+24,24036,Santo Domingo,W
+24,24037,Soledad de Graciano Snnchez,SW
+24,24038,Tamasopo,C
+24,24039,Tamazunchale,E
+24,24040,TampacIn,E
+24,24041,Tampamol n Corona,E
+24,24042,TamuLn,E
+24,24043,Tancanhuitz,E
+24,24044,TanlajIs,E
+24,24045,TanquiIn de Escobedo,E
+24,24046,Tierra Nueva,SW
+24,24047,Vanegas,NW
+24,24048,Venado,W
+24,24049,Villa de Arista,C
+24,24050,Villa de Arriaga,SW
+24,24051,Villa de Guadalupe,NW
+24,24052,Villa de la Paz,NW
+24,24053,Villa de Ramos,W
+24,24054,Villa de Reyes,SW
+24,24055,Villa Hidalgo SAN LUIS POTOSI,C
+24,24056,Villa Ju rez,C
+24,24057,Xilitla,E
+24,24058,Zaragoza SAN LUIS POTOSI,SW
+25,25014,Navolato,C
+25,25012,MazatlAn,S
+25,25002,Angostura,NW
+25,25010,Escuinapa,S
+25,25018,Sinaloa,NE
+25,25009,Elota,C
+25,25008,El Fuerte,NW
+25,25017,San Ignacio,C
+25,25005,Concordia,S
+25,25013,Mocorito,NE
+25,25007,CuliacAn,C
+25,25003,Badiraguato,NE
+25,25015,Rosario SINALOA,S
+25,25004,Choix,NE
+25,25006,CosalO,C
+25,25016,Salvador Alvarado,NW
+25,25001,Ahome,NW
+25,25011,Guasave,NW
+26,26007,Atil,N
+26,26057,San Javier,C
+26,26040,Moctezuma,C
+26,26032,Huachinera,NE
+26,26047,Opodepe,C
+26,26054,Sahuaripa,E
+26,26002,Agua Prieta,NE
+26,26016,Benito Jutrez SONORA,S
+26,26009,Bacanora,C
+26,26042,N4cori Chico,E
+26,26004,Altar,N
+26,26067,Trincheras,C
+26,26050,Puerto Pesasco,NW
+26,26018,Caborca,NW
+26,26019,Cajeme,S
+26,26001,Aconchi,C
+26,26049,Pitiquito,W
+26,26021,CarbR,C
+26,26048,Oquitoa,N
+26,26035,Hu4pac,C
+26,26027,Fronteras,NE
+26,26041,Naco,NE
+26,26036,Imuris,N
+26,26005,Arivechi,E
+26,26069,Ures,C
+26,26039,MazatAn,C
+26,26014,BaviRcora,C
+26,26052,Ray,C
+26,26064,Soyopa,C
+26,26038,Magdalena SONORA,N
+26,26060,San Pedro de la Cueva,C
+26,26046,Onavas,C
+26,26066,Tepache,E
+26,26034,Huatabampo,S
+26,26025,Empalme,W
+26,26063,S6ric,N
+26,26028,General Plutarco Elvas Calles,NW
+26,26012,B1cum,S
+26,26026,Etchojoa,S
+26,26023,Cumpas,C
+26,26011,Bacoachi,N
+26,26015,Bavispe,NE
+26,26044,Navojoa,S
+26,26010,Bacerac,NE
+26,26043,Nacozari de Garc a,NE
+26,26059,San Miguel de Horcasitas,C
+26,26072,Y6cora,E
+26,26051,Quiriego,S
+26,26062,Santa Cruz,N
+26,26053,Rosario,S
+26,26008,BacadAhuachi,E
+26,26003,Alamos,S
+26,26070,Villa Hidalgo SONORA,NE
+26,26029,Granados,E
+26,26022,Cucurpe,C
+26,26033,Hu2sabas,E
+26,26013,Ban,C
+26,26006,Arizpe,C
+26,26020,Cananea,N
+26,26065,Suaqui Grande,C
+26,26017,Benjam,C
+26,26037,La Colorada,C
+26,26045,Nogales SONORA,N
+26,26056,San Ignacio RAo Muerto,S
+26,26024,Divisaderos,E
+26,26061,Santa Ana SONORA,C
+26,26068,Tubutama,N
+26,26071,Villa Pesqueira,C
+26,26055,San Felipe de Jesus,C
+26,26031,Hermosillo,W
+26,26058,San Luis R,NW
+26,26030,Guaymas,W
+27,27005,Comalcalco,N
+27,27003,Centla,N
+27,27011,Jonuta,E
+27,27016,Teapa,S
+27,27001,BalancOn,SE
+27,27002,C0rdenas,W
+27,27008,Huimanguillo,W
+27,27012,Macuspana,S
+27,27009,Jalapa,S
+27,27013,Nacajuca,C
+27,27006,Cunduac,C
+27,27017,Tenosique,SE
+27,27007,Emiliano Zapata TABASCO,SE
+27,27010,Jalpa de Mandez,C
+27,27015,Tacotalpa,S
+27,27014,ParaSso,N
+27,27004,Centro,C
+28,28019,Jim,C
+28,28010,Cruillas,C
+28,28004,Antiguo Morelos,SW
+28,28024,Mier,NW
+28,28017,Hidalgo,W
+28,28029,Ocampo,SW
+28,28026,Miquihuana,SW
+28,28023,M2ndez,C
+28,28013,GonzUlez,SE
+28,28043,XicotLncatl,SE
+28,28027,Nuevo Laredo,NW
+28,28035,San Fernando,E
+28,28032,Reynosa,N
+28,28031,Palmillas,SW
+28,28002,Aldama TAMAULIPAS,SE
+28,28005,Burgos,C
+28,28014,G13mez,C
+28,28042,VillagrPn TAMAULIPAS,W
+28,28025,Miguel AlemAn,NW
+28,28040,Valle Hermoso,N
+28,28034,San Carlos,C
+28,28039,Tula,SW
+28,28036,San NicolSs TAMAULIPAS,C
+28,28030,Padilla,C
+28,28022,Matamoros,N
+28,28011,El Mante,SE
+28,28021,Mainero,W
+28,28015,Guerrero,NW
+28,28009,Ciudad Madero,SE
+28,28020,Llera,C
+28,28006,Bustamante,SW
+28,28018,Jaumave,SW
+28,28033,R3o Bravo,N
+28,28041,Victoria,C
+28,28003,Altamira,SE
+28,28012,G1mez FarSas,SW
+28,28038,Tampico,SE
+28,28007,Camargo,NW
+28,28001,Abasolo TAMAULIPAS,C
+28,28016,Gustavo DSaz Ordaz,NW
+28,28037,Soto la Marina,E
+28,28028,Nuevo Morelos,SW
+28,28008,Casas,C
+29,29017,Hueyotlipan,C
+29,29050,Tlaxcala,C
+29,29005,Atlangatepec,N
+29,29011,Cuapiaxtla,E
+29,29008,Calpulalpan,W
+29,29037,Santa Ana Nopalucan,W
+29,29030,San JerAnimo Zacualpan,S
+29,29025,Nat,S
+29,29032,San Juan Huactzinco,S
+29,29007,Benito JuHrez TLAXCALA,W
+29,29055,Xaloztoc,C
+29,29046,Tepeyanco,S
+29,29059,Zacatelco,S
+29,29029,San Francisco Tetlanohcan,C
+29,29023,Mu1oz de Domingo Arenas,C
+29,29012,Cuaxomulco,C
+29,29027,Papalotla de Xicohtencatl,S
+29,29034,San Lucas Tecopilco,C
+29,29018,Ixtacuixtla de Mariano Matamoros,W
+29,29033,San Lorenzo Axocomanitla,S
+29,29056,Xaltocan,C
+29,29016,Huamantla,E
+29,29047,Terrenate,E
+29,29044,Teolocholco,S
+29,29015,EspaCita,W
+29,29009,Chiautempan,C
+29,29051,Tlaxco TLAXCALA,N
+29,29001,Acuamanala de Miguel Hidalgo,S
+29,29031,San JosA Teacalco,C
+29,29019,Ixtenco,E
+29,29021,L4zaro C,E
+29,29036,SanctArum de Lszaro CHrdenas,W
+29,29052,TocatlLn,C
+29,29020,La Magdalena Tlaltelulco,C
+29,29043,Tenancingo,S
+29,29045,Tepetitla de Lardizlbal,S
+29,29053,Totolac,C
+29,29057,Xicohtzinco,S
+29,29004,Apizaco,C
+29,29010,Contla de Juan Cuamatzi,C
+29,29040,Santa Cruz Quilehtla,S
+29,29003,Apetatitlzn de Antonio Carvajal,C
+29,29041,Santa Cruz Tlaxcala,C
+29,29013,El Carmen Tequexquitla,E
+29,29042,Santa Isabel Xiloxoxtla,S
+29,29014,Emiliano Zapata,E
+29,29024,Nanacamilpa de Mariano Arista,W
+29,29054,Tzompantepec,C
+29,29058,Yauhquemehcan,C
+29,29002,Amaxac de Guerrero,C
+29,29022,Mazatecochco de Josa Marra Morelos,S
+29,29028,San Dami,S
+29,29039,Santa Catarina Ayometla,S
+29,29035,San Pablo del Monte,S
+29,29049,Tetlatlahuca,S
+29,29026,Panotla,C
+29,29048,Tetla de la Solidaridad,C
+29,29060,Ziltlalt,E
+29,29038,Santa Apolonia Teacalco,S
+29,29006,Atltzayanca,E
+30,30059,Chinameca,S
+30,30018,Aquila,C
+30,30208,Carlos A. Carrillo,S
+30,30136,Rafael Lucio,C
+30,30073,Hueyapan de Ocampo,S
+30,30196,Yanga,C
+30,30182,Tlalnelhuayocan,C
+30,30171,TexhuacZn,C
+30,30061,Las Choapas,S
+30,30095,Juchique de Ferrer,C
+30,30031,Carrillo Puerto,C
+30,30154,Tantima,N
+30,30144,Sayula de Alem,S
+30,30142,San Juan Evangelista,S
+30,30149,Soteapan,S
+30,30107,Las Minas,C
+30,30156,Tatatila,C
+30,30168,Tequila,C
+30,30117,Omealca,C
+30,30163,TenochtitlLn,C
+30,30184,Tlaquilpa,C
+30,30072,Huayacocotla,N
+30,30081,Ixhuatlancillo,C
+30,30138,R3o Blanco,C
+30,30199,Zaragoza,S
+30,30140,San Andr-s Tenejapan,C
+30,30054,Chacaltianguis,S
+30,30074,Huiloapan de Cuauhtnmoc,C
+30,30120,Oteapan,S
+30,30210,Uxpanapa,S
+30,30190,Tuxtilla,S
+30,30127,La Perla,C
+30,30002,AcatlRn,C
+30,30100,Manlio Fabio Altamirano,C
+30,30145,Soconusco,S
+30,30118,Orizaba,C
+30,30007,CamarRn de Tejeda,C
+30,30042,Colipa,C
+30,30008,AlpatlUhuac,C
+30,30162,Tenampa,C
+30,30005,Acula,S
+30,30088,Jalcomulco,C
+30,30101,Mariano Escobedo,C
+30,30047,Coscomatepec,C
+30,30004,Actopan,C
+30,30170,Texcatepec,N
+30,30189,T8xpam,N
+30,30015,Angel R. Cabada,S
+30,30116,Oluta,S
+30,30112,Naolinco,C
+30,30057,Chiconquiaco,C
+30,30143,Santiago Tuxtla,S
+30,30087,Xalapa,C
+30,30055,Chalma,N
+30,30051,Coyutla,N
+30,30063,Chontla,N
+30,30043,Comapa,C
+30,30029,Calcahualco,C
+30,30155,Tantoyuca,N
+30,30202,ZontecomatlAn de Lipez y Fuentes,N
+30,30211,San Rafael,N
+30,30060,Chinampa de Gorostiza,N
+30,30158,Tecolutla,N
+30,30180,Tlachichilco,N
+30,30010,Altotonga,C
+30,30175,TihuatlZn,N
+30,30102,MartCnez de la Torre,N
+30,30181,Tlalixcoyan,S
+30,30036,Coacoatzintla,C
+30,30188,Totutla,C
+30,30150,TamalRn,N
+30,30079,IxhuacUn de los Reyes,C
+30,30161,Tempoal,N
+30,30027,Benito JuLrez,N
+30,30048,Cosoleacaque,S
+30,30094,Juan RodrLguez Clara,S
+30,30201,Zongolica,C
+30,30113,Naranjal,C
+30,30037,Coahuitl-n,N
+30,30147,Soledad Atzompa,C
+30,30198,Zacualpan,N
+30,30134,Puente Nacional,C
+30,30108,Minatitl-n,S
+30,30124,Papantla,N
+30,30125,Paso del Macho,C
+30,30148,Soledad de Doblado,C
+30,30058,Chicontepec,N
+30,30091,Jes,S
+30,30013,Naranjos Amatl,N
+30,30169,Jos,S
+30,30014,AmatlRn de los Reyes,C
+30,30178,Tlacotalpan,S
+30,30038,Coatepec VERACRUZ-LLAVE,C
+30,30212,Santiago Sochiapan,S
+30,30141,San Andr-s Tuxtla,S
+30,30083,IxhuatlZn de Madero,N
+30,30105,MedellUn de Bravo,C
+30,30032,Catemaco,S
+30,30173,Tezonapa,C
+30,30123,P2nuco VERACRUZ,N
+30,30023,Atzalan,C
+30,30121,Ozuluama de Mascare,N
+30,30172,Texistepec,S
+30,30071,Huatusco,C
+30,30157,Castillo de Teayo,N
+30,30122,Pajapan,S
+30,30183,Tlapacoyan,N
+30,30077,Isla,S
+30,30152,Tampico Alto,N
+30,30033,Cazones de Herrera,N
+30,30089,J8ltipan,S
+30,30070,HidalgotitlAn,S
+30,30056,Chiconamel,N
+30,30130,Playa Vicente,S
+30,30128,Perote,C
+30,30174,Tierra Blanca VERACRUZ,S
+30,30066,Espinal,N
+30,30011,Alvarado,S
+30,30040,Coatzintla,N
+30,30045,Cosamaloapan de Carpio,S
+30,30053,CuitlRhuac,C
+30,30200,Zentla,C
+30,30024,Tlaltetela,C
+30,30209,Tatahuicapan de Jurrez,S
+30,30160,1lamo Temapache,N
+30,30129,PlatCn S-nchez,N
+30,30098,Magdalena,C
+30,30030,Camerino Z. Mendoza,C
+30,30192,Vega de Alatorre,C
+30,30049,Cotaxtla,C
+30,30019,Astacinga,C
+30,30206,Nanchital de L,S
+30,30093,Jilotepec VERACRUZ,C
+30,30082,IxhuatlZn del Sureste,S
+30,30069,GutiCrrez Zamora,N
+30,30110,Mixtla de Altamirano,C
+30,30111,MoloacUn,S
+30,30191,Ursulo GalvAn,C
+30,30114,Nautla,C
+30,30065,Emiliano Zapata VERACRUZ-LLAVE,C
+30,30012,AmatitlZn,S
+30,30197,Yecuatla,C
+30,30115,Nogales,C
+30,30195,Xoxocotla,C
+30,30186,TomatlUn,C
+30,30022,Atzacan,C
+30,30119,OtatitlZn,S
+30,30137,Los Reyes,C
+30,30097,Lerdo de Tejada,S
+30,30146,Sochiapa,C
+30,30026,Banderilla,C
+30,30187,TonayRn,C
+30,30006,Acultzingo,C
+30,30046,CosautlZn de Carvajal,C
+30,30017,Apazapan,C
+30,30153,Tancoco,N
+30,30001,Acajete,C
+30,30165,Tepatlaxco,C
+30,30103,MecatlUn,N
+30,30159,Tehuipango,C
+30,30106,Miahuatl-n,C
+30,30203,Zozocolco de Hidalgo,N
+30,30035,CitlaltZpetl,N
+30,30064,ChumatlZn,N
+30,30044,C4rdoba,C
+30,30025,Ayahualulco,C
+30,30078,Ixcatepec,N
+30,30109,Misantla,C
+30,30133,Pueblo Viejo,N
+30,30090,Jamapa,C
+30,30062,ChocamUn,C
+30,30099,Maltrata,C
+30,30028,Boca del RLo,C
+30,30194,Villa Aldama,C
+30,30034,Cerro Azul,N
+30,30132,Las Vigas de Ramarez,C
+30,30185,Tlilapan,C
+30,30096,Landero y Coss,C
+30,30139,Saltabarranca,S
+30,30135,Rafael Delgado,C
+30,30009,Alto Lucero de Gutizrrez Barrios,C
+30,30086,Jalacingo,C
+30,30039,Coatzacoalcos,S
+30,30207,Tres Valles,S
+30,30052,Cuichapa,C
+30,30167,Tepetzintla VERACRUZ,N
+30,30131,Poza Rica de Hidalgo,N
+30,30076,IlamatlZn,N
+30,30104,Mecayapan,S
+30,30003,Acayucan,S
+30,30126,Paso de Ovejas,C
+30,30080,IxhuatlZn del Cafl,C
+30,30041,Coetzala,C
+30,30164,Teocelo,C
+30,30021,Atoyac,C
+30,30179,Tlacotepec de Mejla,C
+30,30067,Filomeno Mata,N
+30,30177,Tlacolulan,C
+30,30205,El Higo,N
+30,30050,Coxquihui,N
+30,30084,Ixmatlahuacan,S
+30,30204,Agua Dulce,S
+30,30166,TepetlUn,C
+30,30092,Xico,C
+30,30075,Ignacio de la Llave,S
+30,30176,Tlacojalpan,S
+30,30085,IxtaczoquitlVn,C
+30,30016,La Antigua,C
+30,30068,FortCn Veracruz,C
+30,30020,Atlahuilco,C
+30,30193,Veracruz,C
+30,30151,Tamiahua,N
+31,31005,Bokob,N
+31,31035,HoctLn,C
+31,31004,Baca,NW
+31,31070,SucilO,NE
+31,31056,Oxkutzcab,S
+31,31098,Tzucacab,S
+31,31065,Sanahcat,C
+31,31083,Telchac Puerto,N
+31,31084,Temax,N
+31,31055,OpichIn,W
+31,31026,Dzemul,N
+31,31080,Tekit,S
+31,31018,Chicxulub Pueblo,NW
+31,31046,Mama,S
+31,31053,Muna,S
+31,31066,Santa Elena,S
+31,31020,ChocholR,W
+31,31078,TekantI,C
+31,31037,Huh,C
+31,31027,DzidzantTn,N
+31,31095,TixpLhual,NW
+31,31033,HalachR,W
+31,31025,Dz5n,S
+31,31038,HunucmU,W
+31,31022,Conkal,NW
+31,31090,Timucuy,NW
+31,31062,Sacalum,S
+31,31010,Cantamayec,E
+31,31001,AbalO,NW
+31,31047,Man,S
+31,31068,SinanchR,N
+31,31061,R6o Lagartos,NE
+31,31096,TizimRn,NE
+31,31050,M5rida,NW
+31,31102,Valladolid,E
+31,31088,Teya,C
+31,31106,Yoba n,N
+31,31103,Xocchel,C
+31,31031,Dzoncauich,N
+31,31097,TunkLs,C
+31,31059,Progreso,NW
+31,31011,CelestRn,W
+31,31057,PanabN,NE
+31,31019,Chikindzonot,E
+31,31060,Quintana Roo,E
+31,31044,Kinchil,W
+31,31071,Sudzal,C
+31,31052,Motul,N
+31,31089,Ticul,S
+31,31036,Hom,C
+31,31028,Dzilam de Bravo,N
+31,31015,Chapab,S
+31,31073,TahdziU,E
+31,31017,ChichimilT,E
+31,31100,Uc0,NW
+31,31077,Tekal de Venegas,C
+31,31003,Akil,S
+31,31063,Samahil,W
+31,31024,CuzamN,C
+31,31086,TepakCn,C
+31,31045,KopomC,W
+31,31009,Cansahcab,N
+31,31079,Tekax,S
+31,31058,Peto,E
+31,31023,Cuncunul,E
+31,31081,Tekom,E
+31,31029,Dzilam Gonz,N
+31,31040,Izamal,C
+31,31049,MayapCn,S
+31,31104,YaxcabU,E
+31,31074,Tahmek,NW
+31,31101,Um1n,NW
+31,31007,CacalchOn,N
+31,31008,Calotmul,NE
+31,31021,Chumayel,S
+31,31105,Yaxkukul,NW
+31,31064,San Felipe,NE
+31,31099,Uayma,E
+31,31016,Chemax,E
+31,31076,Tecoh,NW
+31,31085,TemozOn,E
+31,31091,Tinum,E
+31,31032,Espita,NE
+31,31042,Kantunil,C
+31,31002,Acanceh,NW
+31,31094,Tixmehuac,S
+31,31087,Tetiz,W
+31,31054,Muxupip,N
+31,31014,Chankom,E
+31,31093,Tixkokob,NW
+31,31034,HocabO,C
+31,31043,Kaua,E
+31,31092,Tixcacalcupul,E
+31,31048,MaxcanI,W
+31,31012,Cenotillo,C
+31,31067,Sey,NW
+31,31075,Teabo,S
+31,31069,Sotuta,E
+31,31041,KanasRn,NW
+31,31039,Ixil,NW
+31,31006,Buctzotz,NE
+31,31013,ChacsinkTn,S
+31,31030,DzitOs,E
+31,31051,MocochI,NW
+31,31072,Suma,N
+31,31082,Telchac Pueblo,N
+32,32036,P3nuco,C
+32,32045,Tepechitl,S
+32,32016,General P,SE
+32,32055,Villa Gonznlez Ortega,SE
+32,32042,Sombrerete,C
+32,32053,Villa de Cos,C
+32,32014,General Enrique Estrada,C
+32,32035,Ojocaliente,SE
+32,32025,Luis Moya,SE
+32,32001,Apozol,S
+32,32006,Ca6itas de Felipe Pescador,C
+32,32003,Atolinga,S
+32,32038,Puerto Morelos,C
+32,32011,El Salvador,N
+32,32005,Calera,C
+32,32024,Loreto ZACATECAS,SE
+32,32054,Villa GarcAa,SE
+32,32052,Vetagrande,C
+32,32028,Mezquital del Oro,S
+32,32040,Sain Alto,C
+32,32033,NochistlSn de Mej,S
+32,32010,El Plateado de Joaqusn Amaro,S
+32,32015,General Francisco R. Murgura,N
+32,32047,Te7l de Gonzclez Ortega,S
+32,32051,ValparaAso,C
+32,32007,Chalchihuites,C
+32,32018,Huanusco,S
+32,32037,Pinos,SE
+32,32039,R3o Grande,C
+32,32050,Trinidad Garc,S
+32,32017,Guadalupe ZACATECAS,C
+32,32044,Tabasco,S
+32,32048,Tlaltenango de SCnchez Romnn,S
+32,32026,Mazapil,N
+32,32021,Jim,C
+32,32031,Monte Escobedo,S
+32,32012,Fresnillo,C
+32,32046,Tepetongo,S
+32,32032,Moyahua de Estrada,S
+32,32057,Villanueva,S
+32,32013,Genaro Codina,S
+32,32020,Jerez,C
+32,32004,Benito Ju,S
+32,32049,Trancoso,C
+32,32019,Jalpa,S
+32,32041,Santa Mar,S
+32,32009,CuauhtCmoc ZACATECAS,SE
+32,32027,Melchor Ocampo ZACATECAS,N
+32,32023,Juchipila,S
+32,32030,Momax,S
+32,32029,Miguel Auza,N
+32,32002,Apulco,S
+32,32008,ConcepciSn del Oro,N
+32,32058,Zacatecas,C
+32,32022,Juan Aldama,N
+32,32056,Villa Hidalgo,SE
+32,32043,SusticacSn,C
+32,32034,Noria de,SE

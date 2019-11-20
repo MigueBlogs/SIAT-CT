@@ -1,13 +1,28 @@
+@import "normalize.css";
+@import "./modules/fonts";
+@import "./modules/breakpoints";
+@import "./modules/colors";
+@import "./modules/nav";
 @import "./modules/map";
 
-@font-face {
-	font-family: Montserrat-Bold;
-	src: url(../font/Montserrat-Bold.otf);
+body {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
 }
-  
-@font-face {
-	font-family: Montserrat-Regular;
-	src: url(../font/Montserrat-Regular.otf);
+
+#root {
+	margin-top: 70px;
+
+    h1 { text-align: center; }
+
+    @include breakpoint(phablet) {
+        margin-top: 75px;
+    }
+    @include breakpoint(tablet) {
+        margin-top: 75px;
+    }
+    @include breakpoint(desktop) {
+        margin-top: 75px;
+    }
 }
 
 .regularTxt {
@@ -74,8 +89,12 @@
 	font-size: 19px;
 	text-align: center; }
   
+  p{
+	margin-bottom: 0px !important;
+	white-space: pre-line;
+  }	
   .comentarios {
-	height: 90%;
+	height: 100%;
 	background: transparent;
 	font-size: 14px; }
   
@@ -189,6 +208,26 @@
 
 .logos img {
 	height: 60px;
+}
+
+
+
+#autores {
+	text-transform: uppercase;
+	font-size: 0.7em;
+}
+
+#filesUploaded {
+	text-align: left;
+
+	.deleteFile {
+		border: 0;
+		background: red;
+		color: white;
+		display: inline-block;
+		padding: 0.25em;
+		border-radius: 3px;
+	}
 }
   
 @media print {

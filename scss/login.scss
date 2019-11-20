@@ -1,0 +1,93 @@
+@import "normalize.css";
+@import "./modules/fonts";
+@import "./modules/breakpoints";
+@import "./modules/colors";
+@import "./modules/nav";
+
+body {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.main-container {
+    width: 100%;
+    margin-top: 70px;
+
+    .login-form {
+        width: 100%;
+    }
+
+    .form-header {
+        text-align: center;
+
+        h3 {
+            font-style: italic;
+            text-decoration: underline;
+            color: $dorado;
+        }
+    }
+
+    .form-control {
+        width: 90%;
+        margin: 1em auto;
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+        input {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            border: unset;
+            border-bottom: 1px solid black;
+
+            &::placeholder {
+                color: lightgray;
+            }
+        }
+
+        button[type='submit'] {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 1em;
+            text-align: center;
+            background: $guinda;
+            color: white;
+            border: unset;
+            box-shadow: unset;
+        }
+    }
+
+    @include breakpoint(phablet) {
+        margin-top: 75px;
+    }
+    @include breakpoint(tablet) {
+        margin-top: 75px;
+        height: calc(100vh - 75px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .login-form {
+            box-sizing: border-box;
+            padding: 1em;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 50%;
+        }
+    }
+    @include breakpoint(desktop) {
+        margin-top: 75px;
+        height: calc(100vh - 75px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .login-form {
+            max-width: 50%;
+        }
+    }
+}

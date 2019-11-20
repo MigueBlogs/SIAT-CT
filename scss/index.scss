@@ -1,0 +1,209 @@
+@import "normalize.css";
+@import "./modules/fonts";
+@import "./modules/breakpoints";
+@import "./modules/colors";
+@import "./modules/nav";
+@import "./modules/footer";
+
+body {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+.main-container {
+    margin-top: 68px;
+
+    h1 {
+        position: absolute;
+        color: rgba(0,0,0,0);
+        text-align: center;
+        z-index: -1;
+    }
+
+    #image-bg {
+        img {
+            width: 100%;
+        }
+    }
+    @include breakpoint(tablet) {
+        margin-top: 73px;
+    }
+    @include breakpoint(laptop) {
+        margin-top: 73px;
+    }
+    @include breakpoint(desktop) {
+        margin-top: 73px;
+    }
+}
+
+.news-container {
+    margin: 0 auto;
+    padding: 0 1em;
+
+    .title {
+        span { border-bottom: 3px solid $dorado; }
+    }
+
+    .cards {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        
+        .card {
+            border: 1px dotted $lightGray;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+
+            .text {
+                height: 80px;
+                text-align: center;
+
+                a {
+                    align-items: center;
+                    box-sizing: border-box;
+                    color: black;
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    padding: 0.5em;
+                    text-decoration: none;
+                }
+            }
+
+            &:hover {
+                background: $verde;
+                color: white;
+
+                a { color: white; }
+            }
+
+            @include breakpoint(tablet) {
+                width: 20%;
+            }
+    
+            @include breakpoint(laptop) {
+                width: 20%;
+            }
+    
+            @include breakpoint(desktop) {
+                width: 20%;
+            }
+        }
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 1em;
+
+    .title {
+        span { border-bottom: 3px solid $dorado; }
+    }
+
+    .text {
+        margin: 1em 0; 
+        text-align: justify;
+    }
+
+    .simbologia {
+        ul {
+            list-style: none;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 1em;
+
+            li {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                margin-right: 1em;
+
+                span {
+                    border-radius: 50%;
+                    display: inline-block;
+                    height: 1em;
+                    margin-right: 0.5em;
+                    width: 1em;
+
+                    &.blue { background: #4F81BC; }
+                    &.green { background: #38BF34; }
+                    &.yellow { background: #FFFF00; }
+                    &.orange { background: #FFA500; }
+                    &.red { background: #FF0000; }
+                }
+            }
+        }
+    }
+
+    .table-container {
+        overflow: auto;
+
+        .table {
+            min-width: 970px;
+            table-layout: fixed;
+    
+            td {
+                border-bottom: 1px dotted $lightGray;
+                border-left: 0px;
+                border-right: 1px dotted $lightGray;
+                text-align: center;
+    
+                &:first-child {
+                    border-left: 1px dotted $lightGray;
+                    width: 10%;
+                    text-align: center;
+                }
+    
+                .background {
+                    display: inline-block;
+                    border-radius: 50%;
+                    text-align: center;
+                    height: 1em;
+                    width: 1em;
+    
+                    &.blue { background: #4F81BC; }
+                    &.green { background: #38BF34; }
+                    &.yellow { background: #FFFF00; }
+                    &.orange { background: #FFA500; }
+                    &.red { background: #FF0000; }
+                }
+            }
+    
+            th {
+                border-bottom: 1px dotted $lightGray;
+                border-top: 1px dotted $lightGray;
+                &:first-child { border-left: 1px dotted $lightGray; }
+            }
+    
+            th, td:first-child {
+                border-right: 1px dotted $lightGray;
+            }
+    
+            tr {
+                &:last-child {
+                    td {
+                        border-bottom: 1px dotted $lightGray;
+                    }
+                }
+            }
+    
+            @include breakpoint(tablet) {
+                margin: 0 auto;
+                width: 80%;
+            }
+    
+            @include breakpoint(laptop) {
+                margin: 0 auto;
+                width: 80%;
+            }
+    
+            @include breakpoint(desktop) {
+                margin: 0 auto;
+                width: 80%;
+            }
+        }
+    }
+}

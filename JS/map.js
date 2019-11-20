@@ -129,7 +129,7 @@ $(function() {
             view["ui"]["components"] = ["attributtion"];
             view.when(function() {
                 loadCiclones(map);
-                loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_002Aadv_CONE.kmz", {id: "willa_cone"});
+                //loadKMLLayer(map, view, "https://www.nhc.noaa.gov/storm_graphics/api/AL072017_002Aadv_CONE.kmz", {id: "willa_cone"});
 
                 const viewUpdating = view.watch("updating", function(){
                     viewUpdating.remove();
@@ -284,19 +284,30 @@ $(function() {
             return item["id"].indexOf("Cone") != -1;
         });
 
+        const forecastPointsLayers = map.layers["items"].filter(function(item) {
+            return item["id"].indexOf("forecastPoints") != -1;
+        });
+
         var activeConesPromises = [];
         var activeCones = [];
         conesLayers.forEach(function(layer) {
             activeConesPromises.push(layer.queryFeatures());
         });
 
+        forecastPointsLayers.forEach(function(layer) {
+            activeConesPromises.push(layer.queryFeatures());
+        });
+
         Promise.all(activeConesPromises).then(function(results) {
             results.forEach(function(result, resultIdx) {
-                if(result["features"].length) {
+                if(resultIdx < conesLayers.length && result["features"].length) {
+                    // debugger;
+                    var eventActive = result["features"][0]["layer"]["id"].split("_")[0];
                     activeCones.push({
                         stormname: result["features"][0]["attributes"]["stormname"],
-                        stormtype: result["features"][0]["attributes"]["stormtype"],
+                        stormtype: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["stormtype"],
                         geometry: result["features"][0]["geometry"],
+                        maxwind: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["maxwind"],
                         layerid: conesLayers[resultIdx]["id"]
                     });
                 }
@@ -306,6 +317,10 @@ $(function() {
             var template = Handlebars.compile(templateSource);
             var outputHTML = template({storms: activeCones});
             $("#stormsActive").html(outputHTML);
+
+            $('#tablaEditar').show();
+            $('#loading_table').hide();
+            loadEdo([]);
 
             $("#stormsActive").on("change", function() {
                 require([
@@ -337,6 +352,13 @@ $(function() {
                     }
 
                     var layer = map.findLayerById(layerid);
+                    var event = layerid.split("_")[0];
+
+                    map.allLayers.map(function(layer) {
+                        if(layer["id"].indexOf(event) != -1) layer.visible = true;
+                        else if(layer["id"].indexOf("AT") != -1 || layer["id"].indexOf("EP") != -1) layer.visible = false;
+                    });
+
                     var coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
 
                     var geometryService = new GeometryService({ url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer" });
@@ -348,24 +370,53 @@ $(function() {
                     geometryService.project(params).then(function(result) {
                         mapView.goTo(result[0]);
 
-                        $("#type").text(getCicloneType(coneActive["stormtype"]));
+                        var tipoHuracan = getCicloneType(coneActive["stormtype"], coneActive["maxwind"]);
+                        $("#type").text(tipoHuracan);
+                        $("#type").attr("data-typeId", getIdCicloneTypeId(tipoHuracan));
                         $("#name").text(coneActive["stormname"]);
                         $("#sea").text(getSea(coneActive["layerid"]) + " / ");
+                        $("#sea").attr("data-ocean", (getSea(coneActive["layerid"]) == "EP" ? "P" : "A"));
                         tituloSecundario();
                         const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
                         $(".TitleOceano").text(oceano);
-                        queryRegions(map, mapView, [coneActive["geometry"]], "objectid");
+                        //queryRegions(map, mapView, [coneActive["geometry"]], "FID");
+                        var zoomComplete = new Event("eventSelected");
+                        document.dispatchEvent(zoomComplete);
                     });
                 })
             });
         });
     }
 
-    function getCicloneType(type) {
+    function getCicloneType(type, maxwind) {
+        //  Velocidad dada en mps
         if(type == "TS") return "TT";
         else if(type == "TD") return "DT";
-        else if(type == "H") return "Huracán";
+        else if(type == "HU") {
+            if(maxwind < 95) return "H1";
+            else if(maxwind < 110) return "H2";
+        } else if(type == "MH") {
+            if(maxwind < 130) return "H3";
+            else if(maxwind < 157) return "H4";
+            else if(maxwind >= 157) return "H5";
+        } else if(type == "STD") return "BP"
+        else if(type == "STS") return "CTP"
+        else if(type == "PTC") return "CPT"
         else return "NA";
+    }
+
+    function getIdCicloneTypeId(cicloneType) {
+        if(cicloneType == "CTP") return "00";
+        else if(cicloneType == "DT") return "01";
+        else if(cicloneType == "TT") return "02";
+        else if(cicloneType == "H1") return "03";
+        else if(cicloneType == "H2") return "04";
+        else if(cicloneType == "H3") return "05";
+        else if(cicloneType == "H4") return "06";
+        else if(cicloneType == "H5") return "07";
+        else if(cicloneType == "BP") return "08";
+        else if(cicloneType == "BPR") return "09";
+        else if(cicloneType == "CPT") return "10";
     }
 
     function getSea(layerId) {
@@ -573,7 +624,7 @@ $(function() {
                     weight: "bold"
                 }
             },
-            labelPlacement: "above-center",
+            labelPlacement: "center-right",
             labelExpressionInfo: {
                 expression: "$feature.STORMNAME + IIF($feature.SSNUM != 0, ' ,Cat ' + $feature.SSNUM, '') + ' ,' + $feature.DATELBL"
             }
@@ -660,9 +711,10 @@ $(function() {
                 var properties = {
                     id: layerId,  
                     opacity: 0.8,
-                    refreshInterval: 10,
+                    refreshInterval: 60,
                     showLabels: true,
-                    outFields: ["*"]
+                    outFields: ["*"],
+                    visible: false
                 };
 
                 if(type == "forecastPoints") {
@@ -688,9 +740,10 @@ $(function() {
                 const properties = {
                     id: layerId,  
                     opacity: 0.8,
-                    refreshInterval: 10,
+                    refreshInterval: 60,
                     showLabels: true,
-                    outFields: ["*"]
+                    outFields: ["*"],
+                    visible: false
                 };
 
                 if(type == "forecastPoints") {
@@ -828,7 +881,6 @@ $(function() {
     }
 
     document.addEventListener("kml-added", function(evt) {
-        //debugger
         const layerDetail = evt["detail"];
         const geometries = layerDetail["geometries"]["polygons"].map(function(polygon){ return polygon["geometry"]; });
 
@@ -847,6 +899,68 @@ $(function() {
         $('#map-container').hide();
     }
 
-    loadMap("map");
+    function getRegiones() {
+        $.ajax({
+            type: "GET",
+            url: "./siat_fns.php",
+            data: { getRegions: true },
+            dataType: "json",
+            success: function(result) {
 
+            },
+            error: function(error) {
+
+            }
+        });
+    }
+
+    function getAutoresDefault() {
+        $.ajax({
+            type: "GET",
+            url: "./siat_fns.php",
+            data: { getAutoresDefault: true },
+            dataType: "json",
+            success: function(result) {
+                var templateSource = $("#autoresDefault-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template({autores: result});
+                $("#autores").html(outputHTML);
+            },
+            error: function(error) {
+
+            }
+        });
+    }
+
+    function getActiveEvents() {
+        $.ajax({
+            type: "GET",
+            url: "./siat_fns.php",
+            data: { 
+                eventos: true,
+                active: true
+            },
+            dataType: "json",
+            success: function(result) {
+                var templateSource = $("#activeEvents-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template({activeEvents: result});
+                $("#activeEvents").html(outputHTML);
+            },
+            error: function(error) {
+
+            }
+        });
+    }
+
+    $("#seguimientoOption").on("change", function() {
+        if($(this).prop('checked')) {
+            getActiveEvents();
+        } else {
+            $("#activeEvents").html('');
+        }
+    });
+
+    loadMap("map");
+    getAutoresDefault();
 });

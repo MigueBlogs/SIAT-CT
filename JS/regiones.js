@@ -3,21 +3,27 @@ function id_a_estado(id_option){
         case "0":
             return 'C';
         case "1":
-            return 'N';
+            return 'CN';
         case "2":
-            return 'NE';
+            return 'CS';
         case "3":
-            return 'E';
+            return 'CW';
         case "4":
-            return 'SE';
-        case "5":
-            return 'S';
-        case "6":
-            return 'SW';
-        case "7":
-            return 'W';
-        case "8":
             return 'NW';
+        case "5":
+            return 'N';
+        case "6":
+            return 'NE';
+        case "7":
+            return 'E';
+        case "8":
+            return 'SE';
+        case "9":
+            return 'S';
+        case "10":
+            return 'SW';
+        case "11":
+            return 'W';
         default:
             return 'T';
     }
@@ -56,9 +62,9 @@ function get_regions() {
         const tipo = 'acercándose';
 
         const estado = $(this).find('#Estado option:selected').text();
-
         const id_reg = $(this).find('#Region option:selected').val();
 
+        debugger
         let region = id_a_estado(id_reg);
 
         // guardado de datos
@@ -73,6 +79,7 @@ function get_regions() {
         }
         data[estado][tipo][nivel_alerta].push(region);
 
+        console.log(data);
     });
     $('#tablaEdos2 > tbody > tr').each(function(){
         // si es el encabezado, saltarlo

@@ -1,0 +1,72 @@
+@import "./breakpoints";
+
+footer {
+    background-image: url(https://framework-gb.cdn.gob.mx/landing/img/fondofooter.svg);
+    background-size: cover!important;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 3em;
+
+    .footer-container {
+        color: rgba(255,255,255,0.65);
+        padding: 1em;
+
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        .section {
+            padding-top: 3em;
+            width: 100%;
+            text-align: justify;
+
+            h4 {
+                border-bottom: 1px solid rgba(255,255,255,0.65);
+            }
+
+            &:first-child {
+                h4 { border: none; }
+            }
+
+            &.logo {
+                text-align: right;
+                padding-right: 1em;
+
+                img { height: 45px; }
+            }
+
+            @include breakpoint(tablet) {
+                width: 30%;
+            }
+
+            @include breakpoint(laptop) {
+                width: 30%;
+            }
+
+            @include breakpoint(desktop) {
+                width: 30%;
+            }
+        }
+    }
+
+    .list {
+        .list-item {
+            margin-top: 0.5em;
+
+            a { 
+                color: rgba(255,255,255,0.65);
+                border-bottom: 1px solid rgba(255,255,255,0.65);
+                padding: 0.25em;
+                display: inline-block;
+                text-decoration: none;
+                
+                &:hover {
+                    background: lighten($verde, 0.5);
+                }
+            }
+        }
+    }
+}

@@ -2,74 +2,88 @@
 var texto = {"numero":"1"};
 //var autores = [{"nombre":"Alí","id_autor":"1"},{"nombre":"Beto","id_autor":"2"}]
 
-var ultimo = 'falso';
+var ultimo = '0';
 var guardadoGlobal;
 window.guardadoGlobal=false;
 
 $('#no').click(function(){
-	ultimo = 'falso';
+	ultimo = '0';
 });
 
 $('#yes').click(function(){
-	ultimo = 'verdadero';
+	ultimo = '1';
 });
 
 var output = document.getElementById('Number');
 output.innerHTML = texto.numero;
 
 var dataArr = [];
-	$("#guardarInfo").click(function(){
-		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible")  ){
-			alert("Completa los datos antes de guardar el reporte.");
-			return;
-		}
-		const reg = get_regiones();  // devuelve un objeto con los estados, tipo de alerta, nivel de alerta y regiones del estado por nivel de alerta
-		var efectos = readEfects();
-		var data = JSON.stringify({
-			NombreEvento : $('#NombreEvento').text(),
-			cat_evento : $('#tipo').text(),
-			fecha : $('#datetime').text(),
-			oceano : $('#sea').text(),
-			hora : $('#hora').text(),
-			coords : $('#coords').text(),
-			loc : $('#loc').text(),
-			despl : $('#despl').text(),
-			viento : $('#viento').text(),
-			racha : $('#racha').text(),
-			subtitulo : $('#subtitle').val(),
-			comentarios : $('#comentarios').text(),
-			zonas : $('#zonas').text(),
-			autores : autores,
-			archivos : $('#media').val(),
-			regiones: reg,
-			efectos : efectos,
-			ultimo_boletin : ultimo
-		});
-		dataArr.push(data);
-        
-        console.log(dataArr);
+$("#guardarInfo").click(function(){
+	if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible")  ){
+		alert("Completa los datos antes de guardar el reporte.");
+		return;
+	}
 
-        $.ajax({
-        	type: 'POST',
-        	headers: {
-	          "Content-Type": "application/json",
-	        },
-        	url:'http://rest.learncode.academy/api/SIAT-CT/boletines',
-        	data: data,
-        	success: function(nuevoDato){
-        		alert("Se han guardado los datos de: "+nuevoDato.NombreEvento);
-        	}
-        });
-        window.guardadoGlobal=true;
-        console.log(captured);
-        $("#lastOne").show();
-        if(captured){
- 			$("#pdf").show();
-        }else{
-        	$("#pdfError").show();
-        }
-       
+	const reg = get_regiones();  // devuelve un objeto con los estados, tipo de alerta, nivel de alerta y regiones del estado por nivel de alerta
+	var efectos = readEfects();
+	var autores = readAutores();
+	var archivos = readFiles();
+
+	var data = {
+		nombreEvento : $('#name').text(),
+		idCategoriaEvento : parseInt($('#type').attr("data-typeId")),
+		fecha: $('#datetime').attr("data-date"),
+		fechaParse: $('#datetime').attr("data-dateParse"),
+		oceano : $('#sea').attr("data-ocean"),
+		latitud : $('#coords').text().split(",")[0].trim(),
+		longitud: $('#coords').text().split(",")[1].trim(),
+		zonasVigilancia : $('#zonas').val(),
+		final : $("#finalSIAT").is(":checked") ? '1' : '0',
+		comentarios: $("#comments").val(),
+		infoGeneral: $('#subtitle').val() + " | " + 
+			$('#hora').text() + " | " + 
+			$('#coords').text() + " | " +
+			$('#loc').text() + " | " +
+			$('#despl').text() + " | " +
+			$('#viento').text() + " | " +
+			$('#racha').text() + " | " + 
+			$("#more-info").text(),
+		autores : autores,
+		regiones: reg,
+		efectos : efectos,
+		archivos: archivos
+	};
+
+	var idBoletin = data["nombreEvento"].substr(0,3).toUpperCase() + data["fecha"] + $('#type').attr("data-typeId") + data["oceano"];
+	if(idBoletinSeguimiento) data["idSeguimiento"] = idBoletinSeguimiento;
+	dataArr.push(data);
+        
+	$.ajax({
+		type: 'POST',
+		url:'./siat_fns.php',
+		data: {
+			idBoletin: idBoletin,
+			propiedades: JSON.stringify(data)
+		},
+		dataType: "json",
+		success: function(nuevoDato) {
+			alert("Se han guardado los datos de: "+nuevoDato.NombreEvento);
+		},
+		error: function(error) {
+			console.log(error);
+		}
 	});
+
+	window.guardadoGlobal=true;
+	console.log(captured);
+
+	$("#lastOne").show();
+	if(captured){
+		$("#pdf").show();
+	} else{
+		$("#pdfError").show();
+	}   
+});
 /*
 function loadJSON(callback) {   
 
@@ -105,7 +119,6 @@ function readJSON(path) {
 $("#SeleccionaEvento").click(function() {
 	//console.log(this);
     if(this.value=="1") {
-    	
         //Carga del evento
         $.getJSON('JS/info.json',function(data){
 			$("#name").text(data.NombreEvento);
@@ -136,58 +149,40 @@ $("#SeleccionaEvento").click(function() {
 		$("#viento").text('');
 		$("#racha").text('');
 		$("#autores").text('');
+		$("#filesUploaded").html('');
+		$("#media").val('');
     }
-  });
-
-//Upload
-$('form').on('submit', function(event) {
-
-		event.preventDefault();
-
-		var formData = new FormData($('form')[0]);
-
-		$.ajax({
-			xhr : function() {
-				var xhr = new window.XMLHttpRequest();
-
-				xhr.upload.addEventListener('progress', function(e) {
-
-					if (e.lengthComputable) {
-
-						console.log('Bytes Loaded: ' + e.loaded);
-						console.log('Total Size: ' + e.total);
-						console.log('Percentage Uploaded: ' + (e.loaded / e.total))
-
-						var percent = Math.round((e.loaded / e.total) * 100);
-
-						$('#progressBar').attr('aria-valuenow', percent).css('width', percent + '%').text(percent + '%');
-
-					}
-
-				});
-
-				return xhr;
-			},
-			type : 'POST',
-			//este post falla en la URL
-			url : '/upload',
-			data : formData,
-			processData : false,
-			contentType : false,
-			success : function() {
-				alert('File uploaded!');
-			}
-		});
-
-	});
+});
 
 function readEfects(){
 	var id_efecto=1, coment;
 	var efectos=[];
 	$('#efectos').find('textarea').each(function(){
-		id_efecto = $(this).attr('id');
+		id_efecto = $(this).attr('data-efectoId');
 		coment = $(this).val();
-		efectos.push({id_efecto,coment});
+		efectos.push({
+			idEfecto: id_efecto,
+			detalle: coment
+		});
 	});
 	return efectos;
+}
+
+function readAutores() {
+	var autores = [];
+	$("#autores .autor").each(function(idx, elm){ autores.push($(elm).attr("data-autorId")); });
+
+	return autores;
+}
+
+function readFiles() {
+	var files = [];
+	$("#filesUploaded .file-item span").each(function(idx, elm) { 
+		files.push({
+			url: $(elm).attr("data-fileUrl"),
+			tipo: $(elm).attr("data-fileExt")
+		});
+	});
+
+	return files;
 }
