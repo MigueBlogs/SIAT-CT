@@ -140,7 +140,7 @@
 
         if( $startDate ) {
             $queryStr .= "AND FECHA BETWEEN TO_DATE(:startDate, 'DD/MM/YYYY') AND ";
-            $queryParams[":startDate"] = $startDate;
+            $paramsArray[":startDate"] = $startDate;
         } else
             $queryStr .= "AND FECHA BETWEEN TO_DATE('01/01/2013', 'DD/MM/YYYY') AND ";         
         

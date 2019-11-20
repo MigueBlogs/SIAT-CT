@@ -256,7 +256,7 @@
 
     <script id="noexposition-template" type="text/x-handlebars-template">
         <h3>{{this.nivel}}</h3>
-        <div>Sin datos de exposición</div>
+        <div class="novalue">Sin datos de exposición</div>
 	</script>
 
     <script id="exposition-template" type="text/x-handlebars-template">
