@@ -38,8 +38,9 @@ $(function() {
 
 	function generaLink(time){
 		var mes = time.getMonth();
-		$("#link").attr("href", "https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-2019");
-		$("#link").text("https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-2019");
+		let year = time.getFullYear();
+		$("#link").attr("href", "https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-"+year);
+		$("#link").text("https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-"+meses[mes]+"-"+year);
 	}
 
 	function generaPdf() {
