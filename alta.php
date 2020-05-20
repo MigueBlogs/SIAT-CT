@@ -340,6 +340,7 @@
 								<div class="dataH"> DESPLAZAMIENTO: <element class="regularTxt" id="despl"></element> </div>
 								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS: <element class="regularTxt" id="viento"></element> </div>
 								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS: <element class="regularTxt" id="racha"></element> </div>
+								<div class="dataH"> PRESIÓN BAROMÉTRICA: <element class="regularTxt" id="presion"></element> </div>
 								<div id="mas-info" >Para más información consulte el aviso más reciente del Servicio Meteorológico Nacional.</div>
 							</div>
 							<div id="entradaInfo">
@@ -349,6 +350,7 @@
 								<div class="dataH"> DESPLAZAMIENTO: <input id="displacement" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Desplazamiento del evento" > </div>
 								<div class="dataH"> VIENTOS MÁXIMOS SOSTENIDOS:  <input id="max-winds-s" class="InputInfo"type="Text" name="nameEvent" size="20" placeholder="Vientos máximos del evento" > </div>
 								<div class="dataH"> RACHAS DE VIENTO MÁXIMAS:  <input id="max-wind" class="InputInfo"type="Text" name="nameEvent" size="15" placeholder="Viento del evento" > </div>
+								<div class="dataH"> PRESIÓN BAROMÉTRICA: <input id="pressure" class="InputInfo" type="Text" name="nameEvent" size="15" placeholder="Presión barométrica alcanzada" > </div>
 								<textarea  id="more-info" class='autoExpand comentarios regularTxt' placeholder='Información adicional'>Para más información consulte el aviso más reciente del Servicio Meteorológico Nacional.</textarea>
 								<center>
 									<button class="btn btn-outline-success" id="GuardaInfo">Guardar Información</button>
@@ -368,8 +370,13 @@
 					<div id="capturaMapa" class="tituloTable">PRONÓSTICO DE TRAYECTORIA 
 						<button id="capture" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="camera"></ion-icon> Obtener captura</button> 
 						<button id="mapa_ciclon" type="button" class="btn btn-danger"><ion-icon name="map"></ion-icon> Vista mapa</button>
+						<button id="uploadImg" type="button" class="btn btn-primary"> <ion-icon name="image"></ion-icon> Subir trayectoria</button> 
+						<div id="customFileLangDiv" style="display:none;" class="custom-file">
+							<input type="file" class="custom-file-input" id="customFileLang">
+							<label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+						</div>	
 					</div>
-					<center>
+					<div id="mapaDiv">
 						<div id="map-container">
 							<div id="stormSelection">
 								<div class="title">Ciclón tropical</div>
@@ -382,7 +389,8 @@
 							<div id="map"></div>
 						</div>
 						<img id="imagen" class="js-screenshot-image"/>
-					</center>		
+						<img id="mapaTemp" src="#"  alt="nuevo mapa" style="width:100%; height:100%;display:none;">				
+					</div>		
 				</div>
 
 				<div class="solid">
@@ -429,7 +437,7 @@
 						<p id="efectoMareap"  class='comentarios regularTxt'></p>
 			</div>
 		<br>
-		<div id="enable_on_print">
+		<div id="enable_on_print" style="display:none;">
 			<div class="titulo">
 				ALERTA DE <element  class="TitleTipo"></element> EN EL OCÉANO <element  class="TitleOceano"></element>
 			</div>

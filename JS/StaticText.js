@@ -47,6 +47,7 @@ $("#guardarInfo").click(function(){
 			$('#despl').text() + " | " +
 			$('#viento').text() + " | " +
 			$('#racha').text() + " | " + 
+			$('#presion').text() + " | " +
 			$("#more-info").text(),
 		autores : autores,
 		regiones: reg,

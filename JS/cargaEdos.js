@@ -6,7 +6,7 @@ $.getJSON('JS/estados.json', function(data){
 });
 
 function loadEdo(estados){
-	debugger
+	//debugger
 	$('#tablaEdos1 > tbody').html("");
 	$('#tablaEdos2 > tbody').html("");
 	for(var i in estados){

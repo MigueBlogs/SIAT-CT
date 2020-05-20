@@ -18,7 +18,7 @@ $(function() {
 	
 
 	function validTime(time){
-		debugger
+		//debugger
 		var periodoValidez = 0;
 		var timeModified = new Date();
 		timeModified.setDate(time.getDate());
@@ -54,9 +54,13 @@ $(function() {
 	      	//Esto genera un mapa cuadrado
 	      	var ancho = $("#map-container").css("width");
 	      	parseInt(ancho, 10);
-	      	$("#map-container").css("height", ancho);
-	      	//la captura del mapa debe tener estas proporciones para imprimir correctamente
-			$("#imagen").css({"width": "400px", "height": "100%"});
+			  $("#map-container").css("height", ancho);
+			//repara tamaño de div del mapa
+			$("#mapaDiv").css({"height": "calc(100% - 19px)"});
+			//la captura del mapa debe tener estas proporciones para imprimir correctamente
+			if($("#imagen").is(':visible')){
+				$("#imagen").css({"width": "400px", "height": "100%"});
+			}
 	      	$(".comentarios").css("font-size","12px");
 	      	$(".box").css({"padding": "0px", "margin": "0px auto"});
 	      	$(".titulo").css("font-size", "15px");
@@ -65,7 +69,6 @@ $(function() {
 	      	//30 px es el tamaño final del letrero (el pdf duplica el Pixelaje del texto)
 	      	$(".encabezado").css("font-size", "30px");
 	      	autoExpand(document.getElementById("subtitle"));
-	        
 	        if(parseInt(document.getElementById("subtitle").style.height) > 0 && parseInt(document.getElementById("subtitle").style.height) <=55 ){
 	        	document.getElementById("subtitle").rows = 1;
 	        	
@@ -74,7 +77,6 @@ $(function() {
 	        	
 	        }if(parseInt(document.getElementById("subtitle").style.height) > 100 && parseInt(document.getElementById("subtitle").style.height) <=235 ){
 	        	document.getElementById("subtitle").rows = 3;
-	        	
 	        }
 	        $(".regularTxt").css("font-size", "10px");
 	        $(".QR_box").css({"font-size": "12px", "border": "solid 3px"});
@@ -85,7 +87,6 @@ $(function() {
 	        $("#headerLogos").show();
 			$(".tituloTable").css("font-size", "12px");
 	        $(".fecha").css("font-size", "14px");
-	        // noinspection JSJQueryEfficiency
 			$(".encabezado").css("font-size", "15px");
 			autoExpand(document.getElementById("subtitle"));
 	        /*//reajusta a cada text area
@@ -106,6 +107,14 @@ $(function() {
 	        $("textarea").css( "border", "none");
 	        $(".dataH").css("font-size", "11px");
 			$(".disable_on_print").hide();
+			//imprimo valores de W & H del div.
+			console.log($("#mapaDiv").width());
+			console.log($("#mapaDiv").height());
+			debugger
+			//imprimo valores de la imagen dentro
+			console.log($("#mapaTemp").width());
+			console.log($("#mapaTemp").height());
+			debugger
 	        /* Get the element.*/
 	        var element = document.getElementById('root');
 	        // Generate the PDF.
@@ -146,8 +155,12 @@ $(function() {
 		        autoExpand(document.getElementById("subtitle"));
 		        $("textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
-		        $(".tituloEfectos").removeAttr('style');
-				$("#imagen").removeAttr('style');
+				$(".tituloEfectos").removeAttr('style');
+				//$("#mapaTemp").css({"width": "100%"});
+				$("#mapaDiv").removeAttr('style');
+				if($("#imagen").is(':visible')){
+					$("#imagen").removeAttr('style');
+				}
 				$("#map-container").removeAttr('style');
 				$("#map-container").hide();	
 				$('p').each(function(){
@@ -175,6 +188,7 @@ $(function() {
 		$('#capture').hide();
 		$('#mapa_ciclon').hide();
 		$('#ButtonInfo').hide();
+		$('#uploadImg').hide();
 	}  
 
 	function showButtons(){
@@ -298,6 +312,7 @@ $(function() {
 		document.getElementById("despl").innerHTML = document.getElementById("displacement").value;
 		document.getElementById("viento").innerHTML = document.getElementById("max-winds-s").value;
 		document.getElementById("racha").innerHTML = document.getElementById("max-wind").value;
+		document.getElementById("presion").innerHTML = document.getElementById("pressure").value;
 		document.getElementById("mas-info").innerHTML = document.getElementById("more-info").value;
 		$('#entradaInfo').hide();
 		$('#cargaInfo').show();
@@ -744,21 +759,26 @@ $(function() {
 	$("#datePicker").hide();
 	$('#regiones').hide();
 	$('#tablaEditar').hide();
-	$("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible")){
-										                $('#mapa_ciclon').show();
-										                $('#capture').hide();
-										            }else{
-										                $('#capture').show();
-										                $('#mapa_ciclon').hide();
-										            } 
-										        });
-	$("#capturaMapa").on("mouseleave", function() {if($('#map-container').is(":visible")){
-										                $('#mapa_ciclon').hide();
-										                $('#capture').show();
-										            }else{
-										                $('#capture').hide();
-										                $('#mapa_ciclon').show();
-										            }});
+	// $("#capturaMapa").on("mouseenter", function() {  if($('#imagen').is(":visible") || $('#mapaTemp').is(":visible") ){
+	// 									                $('#mapa_ciclon').show();
+	// 									                $('#capture').hide();
+	// 									            }else{
+	// 									                $('#capture').show();
+	// 									                $('#mapa_ciclon').hide();
+	// 									            } 
+	// 									        });
+	// $("#capturaMapa").on("mouseleave", function() {if($('#map-container').is(":visible") ){
+	// 									                $('#mapa_ciclon').hide();
+	// 									                $('#capture').show();
+	// 									            }else{
+	// 									                $('#capture').hide();
+	// 									                $('#mapa_ciclon').show();
+	// 												}});
+	// $("#capturaMapa").on("mouseleave", function() {if($('#mapaTemp').is(":visible") ){
+	// 									                $('#mapa_ciclon').show();
+	// 									            }else{
+										                
+	// 									            }});
 	$("#ButtonFecha").click(function() { 
 		editarF();
 		generaLink(dt); 
@@ -791,7 +811,7 @@ $(function() {
 	//$("#bt_add1").hide();
 	//$("#bt_add2").hide();
 	$("#GuardaTabla").click(function() { guardaData(); });
-	$("#GuardaTabla").click(function() { debugger; validTime(dt) });
+	$("#GuardaTabla").click(function() { validTime(dt) });
 	$("#GuardaInfo").click(function() {guardaInfo()});
 	$("#next").click(function() {tituloSecundario()});
 	$("#finalSIAT").click(function(){ validTime(dt); });
@@ -845,4 +865,35 @@ $(function() {
         }
     });
    
+});
+//this section let the user upload an image to map, just (in the front-end)
+$(function(){
+	$('#uploadImg').click(function(){
+		$('#capture').hide();
+		$('#mapa_ciclon').hide();
+		$('#customFileLangDiv').show();
+		$('#uploadImg').hide();
+		$("#customFileLang").val("");
+	});
+
+	$('#customFileLang').on('change', function() {
+		if (this.files && this.files[0]) {
+			var img = document.querySelector('img');  // $('img')[0]
+			img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+			img.onload = imageIsLoaded;
+		}
+	});
+
+
+	function imageIsLoaded() {
+		window.captured=true;
+		$('.js-screenshot-image').hide();
+		$('#map-container').hide();
+		$('#capture').hide();
+		$('#mapa_ciclon').show();
+		//alert(this.src);  // blob url
+		$('#mapaTemp').attr('src', this.src);
+		$('#mapaTemp').show();
+		$('#customFileLangDiv').hide();
+	  }
 });

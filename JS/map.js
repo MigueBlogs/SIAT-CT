@@ -156,7 +156,8 @@ $(function() {
               };
            
             screenshotBtn.addEventListener("click", function() {    
-               
+                $('#capture').hide();
+                $('#mapa_ciclon').show();
                 view
                     .takeScreenshot({ format: "png", quality:100 })
                     .then(function(screenshot) {
@@ -173,6 +174,11 @@ $(function() {
 
             $('#mapa_ciclon').click(function() {
                 $('.js-screenshot-image').hide();
+                $('#uploadImg').show();
+                $('#capture').show();
+                $('#mapa_ciclon').hide();
+                $('#mapaTemp').hide();
+                $('#customFileLangDiv').hide();
                 $('#map-container').show();
                 if(guardadoGlobal){
                     $("#pdfError").show();
