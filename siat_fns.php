@@ -7,8 +7,6 @@
 
         if(isset($_GET["active"])) getEvents($startDate, $endDate, true);
         else getEvents($startDate, $endDate);
-    } else if(isset($_GET["years"])) {
-        getAnios();
     } else if(isset($_POST["idBoletin"]) && isset($_POST["propiedades"])) {
         $idBoletin = $_POST["idBoletin"];
         $propiedades = json_decode($_POST["propiedades"]);
@@ -96,34 +94,6 @@
         echo json_encode($ar);
     }
 
-    function getAnios() {
-        require_once("db_global.php");
-
-        $conn = dbConnect(user, pass, server);
-
-        $paramsArray = Array();
-
-        $queryStr = "SELECT DISTINCT(EXTRACT(YEAR FROM FECHA)) AS ANIO FROM BOLETIN ".
-            "ORDER BY ANIO DESC ";
-
-        $query = oci_parse($conn, $queryStr);
-
-        foreach ($paramsArray as $key => $value) {
-            oci_bind_by_name($query, $key, $paramsArray[$key]);
-        }
-
-        oci_execute($query);
-        $ar = Array();
-
-        while ( ($row = oci_fetch_assoc($query)) != false ) {
-            $anio = $row['ANIO'];
-            $ar[] = $anio;
-        }
-        
-        dbClose($conn, $query);
-        echo json_encode($ar);
-    }
-
     function getEvents($startDate, $endDate, $active = false) {
         require_once("db_global.php");
 
@@ -140,12 +110,12 @@
 
         if( $startDate ) {
             $queryStr .= "AND FECHA BETWEEN TO_DATE(:startDate, 'DD/MM/YYYY') AND ";
-            $paramsArray[":startDate"] = $startDate;
+            $queryParams[":startDate"] = $startDate;
         } else
             $queryStr .= "AND FECHA BETWEEN TO_DATE('01/01/2013', 'DD/MM/YYYY') AND ";         
         
         if( $endDate ) {
-            $queryStr .= "TO_DATE(:endDate, 'DD/MM/YYYY') ";
+            $queryStr .= "TO_DATE(:endDate, 'DD/MM/YYYY) ";
             $paramsArray[":endDate"] = $endDate;
         } else 
             $queryStr .= "(SELECT SYSDATE FROM DUAL) ";

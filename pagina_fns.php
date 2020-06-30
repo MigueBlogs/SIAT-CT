@@ -4,9 +4,9 @@
         <header>
             <nav id="mainNavHeader">
                 <input class="trigger" type="checkbox" id="mainNavButton">
-                <label for="mainNavButton"><a href="http://preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></label>
+                <label for="mainNavButton"><a href="http://www.preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></label>
                 <ul>
-                    <li><a href="http://preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></li>
+                    <li><a href="http://www.preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></li>
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="consulta.php">Consulta</a></li>
                     <?php

@@ -8,11 +8,8 @@ $(function() {
         allIds: []
     };
 
-    var analisisRealizado;
-    var analisisSistemasExpuestos = {};
-
     initMap();
-    getYears()
+    getTropicalCiclones();
 
     var queryParams = getAllUrlParams();
     if(queryParams.hasOwnProperty("idBoletin")) getSeguimiento(queryParams["idBoletin"]);
@@ -21,12 +18,10 @@ $(function() {
         require([
             "esri/Map",
             "esri/views/MapView",
-            "esri/geometry/geometryEngineAsync",
             "esri/config"
         ], function(
             Map,
             MapView,
-            geometryEngineAsync,
             esriConfig
         ) {
             esriConfig.request.proxyUrl = "http://rmgir.cenapred.gob.mx/proxy/proxy.php";
@@ -142,56 +137,10 @@ $(function() {
             addFeatureLayer(map, urlMunicipios, orangeProp);
             addFeatureLayer(map, urlMunicipios, yellowProp);
             addFeatureLayer(map, urlMunicipios, greenProp);
-            addFeatureLayer(map, urlMunicipios, blueProp);
-
-            document.addEventListener("analisis", function(e) {
-                var nivel = e.detail;
-                var layer;
-
-                $("#exposition").html("<div class='loading'><img class='loader' src='./img/loadingAnalisis.gif'/><div class='text'>Cargando Región...</div></div>");
-
-                switch(nivel) {
-                    case "AZUL":
-                        layer = map.findLayerById("statesBlue");
-                        break;
-                    case "VERDE":
-                        layer = map.findLayerById("statesGreen");
-                        break;
-                    case "AMARILLA":
-                        layer = map.findLayerById("statesYellow");                        
-                        break;
-                    case "NARANJA":
-                        layer = map.findLayerById("statesOrange");
-                        break;
-                    case "ROJA":
-                        layer = map.findLayerById("statesRed");
-                        break;
-                }
-
-                layer.queryFeatures().then(function(result) {
-                    var geometries = result["features"].map(function(feature) { return feature["geometry"]; });
-                    geometryEngineAsync.union(geometries).then(function(unionResult) {
-                        if(!unionResult) {
-                            var niveles = {
-                                "AZUL": "Peligro mínimo",
-                                "VERDE": "Peligro bajo",
-                                "AMARILLA": "Peligro medio",
-                                "NARANJA": "Peligro alto",
-                                "ROJA": "Peligro máximo"
-                            };
-                            var templateSource = $("#noexposition-template").html();
-                            var template = Handlebars.compile(templateSource);
-                            var outputHTML = template({nivel: niveles[nivel]});
-                            $("#exposition").html(outputHTML);
-                        } else {
-                            $("#exposition").html("<div class='loading'><img class='loader' src='./img/loadingAnalisis.gif'/><div class='text'>Realizando análisis...</div></div>");
-                            realizarAnalisis(unionResult, [], nivel);
-                        }
-                    });
-                });
-            });
+            addFeatureLayer(map, urlMunicipios, blueProp)
 
             document.addEventListener("alerts", function(e){
+                debugger
                 var alerts = e.detail;
                 var query;
 
@@ -214,6 +163,7 @@ $(function() {
                             layer = map.findLayerById("statesRed");
                             break;
                     }
+                    debugger
 
                     if(alerts[alert][0] == "" && alerts[alert][1] == "") query = "1=0";
                     else if(alerts[alert][0] != "" && alerts[alert][1] != "") query = alerts[alert][0] + " OR " + alerts[alert][1];
@@ -282,8 +232,6 @@ $(function() {
                 $(".arrow").on("click", function() {
                     var idBoletin = $(this).attr("data-idBoletin");
                     clearTimeout(activeEvents["chartDrawing"]);
-                    $("#exposition").html("");
-                    analisisSistemasExpuestos = {};
 
                     getEventInfo(idBoletin);
                 });
@@ -299,6 +247,7 @@ $(function() {
     }
 
     function getAlertamiento(obj) {
+        debugger
         if(!obj.hasOwnProperty("alertas")) return "";
 
         const alertas = obj["alertas"];
@@ -388,10 +337,6 @@ $(function() {
             success: function(result) {
                 eventoActual["allIds"] = result;
                 eventoActual["currentId"] = result[0];
-                
-                $("#exposition").html("");
-                analisisSistemasExpuestos = {};
-
                 getEventInfo(idBoletin);
             }, error: function(result) {
 
@@ -399,15 +344,13 @@ $(function() {
         });
     }
 
-    function getTropicalCiclones(fechaInicio = "", fechaFin = "") {
-        var parameters = { eventos: true };
-        if(fechaInicio) parameters["startDate"] = fechaInicio;
-        if(fechaFin) parameters["endDate"] = fechaFin;
-
+    function getTropicalCiclones() {
         $.ajax({
             type: "GET",
             url: "./siat_fns.php",
-            data: parameters,
+            data: { 
+                eventos: true
+            },
             dataType: "json",
             success: function(result) {
                 var templateSource = $("#storms-template").html();
@@ -426,62 +369,4 @@ $(function() {
             }
         });
     }
-
-    function getYears() {
-        $.ajax({
-            type: "GET",
-            url: "./siat_fns.php",
-            data: { 
-                years: true
-            },
-            dataType: "json",
-            success: function(result) {
-                var templateSource = $("#years-template").html();
-                var template = Handlebars.compile(templateSource);
-                var outputHTML = template(result);
-                $("#years").html(outputHTML);
-
-                $("#aniosDisponibles").on("change", function() {
-                    debugger
-                    var fechaInicio = "01/01/" + $(this).val();
-                    var fechaFin = "01/01/" + (parseInt($(this).val()) + 1);
-                    getTropicalCiclones(fechaInicio, fechaFin);
-                });
-            }, error: function(result) {
-
-            }
-        });
-    }
-
-    $("#table-analysis .button").on("click", function(e) {
-        var nivel = $(this).attr("data-nivel");
-
-        if(!analisisSistemasExpuestos.hasOwnProperty(nivel)) {
-            var event = new CustomEvent('analisis', { detail: nivel });
-            document.dispatchEvent(event);
-        } else {
-            var event = new CustomEvent('analisis-completo', { detail: {resultados: analisisSistemasExpuestos[nivel], nivel: nivel} });
-            document.dispatchEvent(event);
-        }
-        
-    });
-
-    document.addEventListener("analisis-completo", function(e) {
-        var resultados = e["detail"]["resultados"];
-        var nivel = e["detail"]["nivel"];
-        var niveles = {
-            "AZUL": "Peligro mínimo",
-            "VERDE": "Peligro bajo",
-            "AMARILLA": "Peligro medio",
-            "NARANJA": "Peligro alto",
-            "ROJA": "Peligro máximo"
-        }
-
-        analisisSistemasExpuestos[nivel] = resultados;
-
-        var templateSource = $("#exposition-template").html();
-        var template = Handlebars.compile(templateSource);
-        var outputHTML = template({resultados: resultados, nivel: niveles[nivel]});
-        $("#exposition").html(outputHTML);
-    });
 });

@@ -27,7 +27,6 @@
     <div class="mainContainer">
         <h1>Boletín SIAT-CT</h1>
 
-        <div id="years"></div>
         <div id="storms"></div>
         <section id="tropicalCicloneInfo"></section>
 
@@ -42,32 +41,6 @@
         </section>
 
         <section class="section" id="eventInfo"></section>
-        <section class="section" id="sistemasExpuestos">
-            <h3>Análisis de sistemas expuestos</h3>
-            <div class="infoSection" id="table-analysis">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Peligro mínimo</th>
-                            <th>Peligro bajo</th>
-                            <th>Peligro medio</th>
-                            <th>Peligro alto</th>
-                            <th>Peligro máximo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><div data-nivel="AZUL" class="button">Calcular</div></td>
-                            <td><div data-nivel="VERDE" class="button">Calcular</div></td>
-                            <td><div data-nivel="AMARILLA" class="button">Calcular</div></td>
-                            <td><div data-nivel="NARANJA" class="button">Calcular</div></td>
-                            <td><div data-nivel="ROJA" class="button">Calcular</div></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="exposition"></div>
-        </section>
         <section class="section" id="comments"></section>
         <section class="section" id="effects"></section>
 
@@ -172,8 +145,8 @@
         <!-- <div class="infoSection">
             <div class="infoElement">Población expuesta: <span id="population"></span></div>
             <div class="infoElement"></div>
-        </div> -->
-        <!-- <div class="infoSection">
+        </div>
+        <div class="infoSection">
             <div class="infoElement">Vivienda expuesta: <span id="houses"></span></div>
             <div class="infoElement"></div>
         </div> -->
@@ -240,117 +213,9 @@
             {{/each}}
         </select>
 	</script>
-
-    <script id="years-template" type="text/x-handlebars-template">
-        <select name="" id="aniosDisponibles">
-            {{#each this}}
-                {{#if @first}}
-                    <option value="">Selecciona año</option>
-                {{/if}}
-                <option value="{{this}}">{{this}}</option>
-            {{else}}
-                <option value="">Sin años disponibles</option>
-            {{/each}}
-        </select>
-	</script>
-
-    <script id="noexposition-template" type="text/x-handlebars-template">
-        <h3>{{this.nivel}}</h3>
-        <div class="novalue">Sin datos de exposición</div>
-	</script>
-
-    <script id="exposition-template" type="text/x-handlebars-template">
-        <h3>{{this.nivel}}</h3>
-        {{#with this.resultados}}
-            <ul class="exposition-list">
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-people"></div>
-                            <div class="text">Población</div>
-                        </div>
-                        <div class="value">{{#agregarComas Poblacion}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-vivienda"></div>
-                            <div class="text">Viviendas</div>
-                        </div>
-                        <div class="value">{{#agregarComas Viviendas}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-hospital"></div>
-                            <div class="text">Establecimientos de salud</div>
-                        </div>
-                        <div class="value">{{#agregarComas Hospitales}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-escuela"></div>
-                            <div class="text">Centros Educativos</div>
-                        </div>
-                        <div class="value">{{#agregarComas Escuelas}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-hotel"></div>
-                            <div class="text">Hoteles</div>
-                        </div>
-                        <div class="value">{{#agregarComas Hoteles}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-banco"></div>
-                            <div class="text">Bancos</div>
-                        </div>
-                        <div class="value">{{#agregarComas Bancos}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-gasolina"></div>
-                            <div class="text">Gasolineras</div>
-                        </div>
-                        <div class="value">{{#agregarComas Gasolineras}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-presa"></div>
-                            <div class="text">Presas</div>
-                        </div>
-                        <div class="value">{{#agregarComas Presas}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-                <li class="exposition-element">
-                    <div>
-                        <div class="description">
-                            <div class="image icon-ganado"></div>
-                            <div class="text">Unidades Pecuarias</div>
-                        </div>
-                        <div class="value">{{#agregarComas Ganaderias}}{{/agregarComas}}</div>
-                    </div>
-                </li>
-            </ul>           
-        {{/with}}
-	</script>
     
     <script src="./JS/mapConsulta.js"></script>
     <script src="./JS/chartConsulta.js"></script>
-    <script src="./JS/analisis.js"></script>
     <script src="./JS/hbHelpers.js"></script>
 </body>
 </html>

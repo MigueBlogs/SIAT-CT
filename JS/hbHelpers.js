@@ -32,6 +32,7 @@ Handlebars.registerHelper("elementIndex", function(array, index) {
 });
 
 Handlebars.registerHelper("fechaLarga", function(dateString) {
+    debugger
     var date = new Date((dateString + " (CDT)").replace(/-/g, '/'));
     var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     return date.toLocaleString("es-MX", fecha);
@@ -231,22 +232,4 @@ Handlebars.registerHelper("getMunicipios", function(statesDictionary) {
     }, 1000);
 
     return municipios;
-});
-
-Handlebars.registerHelper("agregarComas", function (nStr) {
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-
-    return x1 + x2;
-});
-
-Handlebars.registerHelper("getValueFromKey", function(key, object) {
-    if(object.hasOwnProperty(ket)) return object[key];
-    return "";
 });

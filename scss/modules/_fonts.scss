@@ -10,11 +10,11 @@
 
 @font-face {
 	font-family: 'icomoon';
-	src:  url('../font/icomoon.eot?6iw5s4');
-	src:  url('../font/icomoon.eot?6iw5s4#iefix') format('embedded-opentype'),
-	  url('../font/icomoon.ttf?6iw5s4') format('truetype'),
-	  url('../font/icomoon.woff?6iw5s4') format('woff'),
-	  url('../font/icomoon.svg?6iw5s4#icomoon') format('svg');
+	src:  url('../font/icomoon.eot?c9ssel');
+	src:  url('../font/icomoon.eot?c9ssel#iefix') format('embedded-opentype'),
+	  url('../font/icomoon.ttf?c9ssel') format('truetype'),
+	  url('../font/icomoon.woff?c9ssel') format('woff'),
+	  url('../font/icomoon.svg?c9ssel#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -35,53 +35,32 @@
 	-moz-osx-font-smoothing: grayscale;
 }
   
-.icon-aeropuerto:before {
-	content: "\e900";
-}
-.icon-banco:before {
-	content: "\e901";
-}
-.icon-colonias:before {
-	content: "\e902";
-}
-.icon-ganado:before {
-	content: "\e903";
-}
-.icon-gasolina:before {
-	content: "\e904";
-}
-.icon-hospital:before {
+.icon-world:before {
 	content: "\e905";
 }
-.icon-hotel:before {
-	content: "\e906";
-}
-.icon-people:before {
-	content: "\e907";
-}
-.icon-presa:before {
-	content: "\e908";
-}
-.icon-supermercado:before {
-	content: "\e909";
-}
 .icon-bar-chart:before {
-	content: "\e90a";
+	content: "\e900";
 }
 .icon-pie-chart:before {
-	content: "\e90b";
+	content: "\e901";
 }
 .icon-circle-right:before {
-	content: "\e90c";
+	content: "\e902";
 }
 .icon-circle-left:before {
-	content: "\e90d";
+	content: "\e903";
 }
 .icon-mexico:before {
-	content: "\e90e";
+	content: "\e904";
 }
-.icon-world:before {
-	content: "\e90f";
+.icon-file-picture:before {
+	content: "\e927";
+}
+.icon-file-zip:before {
+	content: "\e92b";
+}
+.icon-file-pdf:before {
+	content: "\eadf";
 }
 .icon-file-empty:before {
 	content: "\e924";
@@ -95,9 +74,4 @@
 .icon-file-pdf:before {
 	content: "\eadf";
 }
-.icon-escuela:before {
-	content: "\f19d";
-}
-.icon-vivienda:before {
-	content: "\e910";
-}
+  
