@@ -1,4 +1,5 @@
 var captured=false;
+var map;
 window.captured;
 $(function() {
     function loadMap(container) {
@@ -15,7 +16,7 @@ $(function() {
         ) {
             esriConfig.request.proxyUrl = "http://rmgir.cenapred.gob.mx/proxy/proxy.php";
 
-            var map = new Map({
+            map = new Map({
                 basemap: "hybrid"
             });
             const redProp = {
@@ -312,13 +313,28 @@ $(function() {
                 if(resultIdx < conesLayers.length && result["features"].length) {
                     // debugger;
                     var eventActive = result["features"][0]["layer"]["id"].split("_")[0];
-                    activeCones.push({
-                        stormname: result["features"][0]["attributes"]["stormname"],
-                        stormtype: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["stormtype"],
-                        geometry: result["features"][0]["geometry"],
-                        maxwind: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["maxwind"],
-                        layerid: conesLayers[resultIdx]["id"]
-                    });
+                    if (result["features"][0]["attributes"]["stormname"] == undefined){
+                        // la capa de esri tiene los atributos en mayúsculas
+                        activeCones.push({
+                            stormname: result["features"][0]["attributes"]["STORMNAME"],
+                            service: "ESRI",
+                            stormtype: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["STORMTYPE"],
+                            geometry: result["features"][0]["geometry"],
+                            // maxwind no esta en esta misma capa
+                            maxwind: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["maxwind"],
+                            layerid: conesLayers[resultIdx]["id"]
+                        });
+                    }
+                    else {
+                        activeCones.push({
+                            stormname: result["features"][0]["attributes"]["stormname"],
+                            service: "NHC",
+                            stormtype: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["stormtype"],
+                            geometry: result["features"][0]["geometry"],
+                            maxwind: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["maxwind"],
+                            layerid: conesLayers[resultIdx]["id"]
+                        });
+                    }
                 }
             });
 
@@ -514,6 +530,19 @@ $(function() {
     }
 
     function loadCiclones(map) {
+        const activeHurricanesBothUrls = [
+            {
+                "name": "EPAT",
+                "layers": {
+                    "forecastCone": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/4",
+                    "forecastPoints": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/0",
+                    "forecastTrack": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/2",
+                    "watchWarnings": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/5",
+                    "pastTrack": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/3",
+                    "pastPoints": "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/Active_Hurricanes_v1/FeatureServer/1"
+                }
+            }
+        ]
         const activeHurricanesEPUrls = [
             {
                 "name": "EP1",
@@ -711,6 +740,35 @@ $(function() {
             type: "simple",
             symbol: pastTrackPointSymbol
         }
+
+        activeHurricanesBothUrls.forEach(function(hurricaneEvent) {
+            const name = hurricaneEvent["name"];
+            const layers = hurricaneEvent["layers"];
+            Object.keys(layers).forEach(function(type) {
+                const layerId = name + "_" + type;
+                var properties = {
+                    id: layerId,  
+                    opacity: 0.8,
+                    refreshInterval: 60,
+                    showLabels: true,
+                    outFields: ["*"],
+                    visible: false
+                };
+
+                if(type == "forecastPoints") {
+                    properties["labelingInfo"] = [forecastPointsLabelClass];
+                    properties["renderer"] = forecastPointsRenderer;
+                } else if(type == "forecastTrack") {
+                    properties["renderer"] = forecastTrackRenderer;
+                } else if(type == "pastTrack") {
+                    properties["renderer"] = pastTrackRenderer;
+                } else if(type == "pastPoints") {
+                    properties["renderer"] = pastTrackPointRenderer;
+                }
+
+                addFeatureLayer(map, layers[type], properties);
+            });
+        });
 
         activeHurricanesEPUrls.forEach(function(hurricaneEvent) {
             const name = hurricaneEvent["name"];

@@ -622,7 +622,7 @@
 			{{#if @first}}
 				<option value="">Selecciona</option>
 			{{/if}}
-			<option value="{{storm.stormname}}" data-layerid="{{storm.layerid}}">{{storm.stormname}}</option>
+			<option value="{{storm.stormname}}" data-layerid="{{storm.layerid}}">{{storm.stormname}} ({{storm.service}})</option>
 		{{else}}
 			<option value="">Sin ciclones</option>
 		{{/each}}
