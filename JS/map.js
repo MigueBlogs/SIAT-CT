@@ -123,7 +123,10 @@ $(function() {
                 container: container,
                 map: map,
                 center: [-101.608429, 23.200961],
-                zoom: 5
+                zoom: 5,
+                constraints: {
+                    rotationEnabled: false
+                }
             });
 
             view["ui"]["components"] = ["attributtion"];
