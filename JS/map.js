@@ -1,6 +1,9 @@
 var captured=false;
 var map;
 window.captured;
+
+var Query;
+
 $(function() {
     function loadMap(container) {
         require([
@@ -307,23 +310,33 @@ $(function() {
         forecastPointsLayers.forEach(function(layer) {
             activeConesPromises.push(layer.queryFeatures());
         });
-
+        let to_resolve =[]
         Promise.all(activeConesPromises).then(function(results) {
             results.forEach(function(result, resultIdx) {
                 if(resultIdx < conesLayers.length && result["features"].length) {
                     // debugger;
                     var eventActive = result["features"][0]["layer"]["id"].split("_")[0];
+                    // la capa de esri tiene los atributos en mayúsculas
                     if (result["features"][0]["attributes"]["stormname"] == undefined){
-                        // la capa de esri tiene los atributos en mayúsculas
-                        activeCones.push({
-                            stormname: result["features"][0]["attributes"]["STORMNAME"],
-                            service: "ESRI",
-                            stormtype: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["STORMTYPE"],
-                            geometry: result["features"][0]["geometry"],
-                            // maxwind no esta en esta misma capa
-                            maxwind: results[conesLayers.length + resultIdx]["features"][0]["attributes"]["maxwind"],
-                            layerid: conesLayers[resultIdx]["id"]
-                        });
+                        // los CT están en la misma capa, hay que iterar para añadir cada uno
+                        result["features"].forEach(function(value, index){                            
+                            let query = new Query();
+                            query.where = "STORMNAME = '"+ value["attributes"]["STORMNAME"] + "'";
+                            query.outFields = [ "*" ];
+
+                            activeCones.push({
+                                stormname: value["attributes"]["STORMNAME"],
+                                service: "ESRI",
+                                stormtype: value["attributes"]["STORMTYPE"],
+                                geometry: value["geometry"],
+                                // maxwind no esta en la misma capa, por eso el query
+                                maxwind: 0,
+                                layerid: value["layer"]["id"]
+                            });
+
+                            let other_layer = map.findLayerById("EPAT_forecastPoints");
+                            to_resolve.push(other_layer.queryFeatures(query))
+                        })
                     }
                     else {
                         activeCones.push({
@@ -338,78 +351,96 @@ $(function() {
                 }
             });
 
-            var templateSource = $("#stormsActive-template").html();
-            var template = Handlebars.compile(templateSource);
-            var outputHTML = template({storms: activeCones});
-            $("#stormsActive").html(outputHTML);
-
-            $('#tablaEditar').show();
-            $('#loading_table').hide();
-            loadEdo([]);
-
-            $("#stormsActive").on("change", function() {
-                require([
-                    "esri/tasks/GeometryService",
-                    "esri/tasks/support/ProjectParameters"
-                ], function(
-                    GeometryService,
-                    ProjectParameters
-                ) {
-                    var layerid = $("#stormsActive option:selected").attr("data-layerid");
-
-                    //si no hay Evento en la selección
-                    if(!layerid) {
-                        $("#type").text("");
-                        $("#sea").text("");
-                        $("#name").text("");
-                        $(".TitleOceano").text("");
-                        $(".TitleTipo").text('');
-                        $('#tablaEdos1 > tbody').html("");
-	                    $('#tablaEdos2 > tbody').html("");
-                        $("#regiones").hide();
-                        $("#mostrar").hide();
-                        $('#tablaEditar').show();
-                        return;
-                    }else{//si existe el evento muestra la tabla correspondiente
-                        $("#regiones").hide();
-                        $("#mostrar").hide();
-                        $('#tablaEditar').show();
-                    }
-
-                    var layer = map.findLayerById(layerid);
-                    var event = layerid.split("_")[0];
-
-                    map.allLayers.map(function(layer) {
-                        if(layer["id"].indexOf(event) != -1) layer.visible = true;
-                        else if(layer["id"].indexOf("AT") != -1 || layer["id"].indexOf("EP") != -1) layer.visible = false;
-                    });
-
-                    var coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
-
-                    var geometryService = new GeometryService({ url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer" });
-                    var params = new ProjectParameters({
-                        geometries: [coneActive["geometry"]["extent"]],
-                        outSpatialReference: mapView["spatialReference"]
-                    });
-
-                    geometryService.project(params).then(function(result) {
-                        mapView.goTo(result[0]);
-
-                        var tipoHuracan = getCicloneType(coneActive["stormtype"], coneActive["maxwind"]);
-                        $("#type").text(tipoHuracan);
-                        $("#type").attr("data-typeId", getIdCicloneTypeId(tipoHuracan));
-                        $("#name").text(coneActive["stormname"]);
-                        $("#sea").text(getSea(coneActive["layerid"]) + " / ");
-                        $("#sea").attr("data-ocean", (getSea(coneActive["layerid"]) == "EP" ? "P" : "A"));
-                        tituloSecundario();
-                        const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
-                        $(".TitleOceano").text(oceano);
-                        //queryRegions(map, mapView, [coneActive["geometry"]], "FID");
-                        var zoomComplete = new Event("eventSelected");
-                        document.dispatchEvent(zoomComplete);
-                    });
+            Promise.all(to_resolve).then(function(r){
+                //debugger
+                r.forEach(function(val, ind){
+                    val["features"].forEach(function(mylayer, ind2) {
+                        activeCones.forEach(function(value, ind3){
+                            // los atributos de mylayer estan en mayusculas
+                            if (value["stormname"] == mylayer["attributes"]["STORMNAME"]) {
+                                value["maxwind"] = Math.max(value["maxwind"], mylayer["attributes"]["MAXWIND"])
+                            }
+                        })
+                    })
                 })
-            });
+                
+                //console.log(activeCones);
+                
+                var templateSource = $("#stormsActive-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template({storms: activeCones});
+                $("#stormsActive").html(outputHTML);
+    
+                $('#tablaEditar').show();
+                $('#loading_table').hide();
+                loadEdo([]);
+    
+                $("#stormsActive").on("change", function() {
+                    require([
+                        "esri/tasks/GeometryService",
+                        "esri/tasks/support/ProjectParameters"
+                    ], function(
+                        GeometryService,
+                        ProjectParameters
+                    ) {
+                        var layerid = $("#stormsActive option:selected").attr("data-layerid");
+    
+                        //si no hay Evento en la selección
+                        if(!layerid) {
+                            $("#type").text("");
+                            $("#sea").text("");
+                            $("#name").text("");
+                            $(".TitleOceano").text("");
+                            $(".TitleTipo").text('');
+                            $('#tablaEdos1 > tbody').html("");
+                            $('#tablaEdos2 > tbody').html("");
+                            $("#regiones").hide();
+                            $("#mostrar").hide();
+                            $('#tablaEditar').show();
+                            map.findLayerById("area_34KtWinds").visible=false;
+                            return;
+                        }else{//si existe el evento muestra la tabla correspondiente
+                            $("#regiones").hide();
+                            $("#mostrar").hide();
+                            $('#tablaEditar').show();
+                            map.findLayerById("area_34KtWinds").visible=true;
+                        }
+    
+                        var layer = map.findLayerById(layerid);
+                        var event = layerid.split("_")[0];
+    
+                        map.allLayers.map(function(layer) {
+                            if(layer["id"].indexOf(event) != -1) layer.visible = true;
+                            else if(layer["id"].indexOf("AT") != -1 || layer["id"].indexOf("EP") != -1) layer.visible = false;
+                        });
+    
+                        var coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
+    
+                        var geometryService = new GeometryService({ url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer" });
+                        var params = new ProjectParameters({
+                            geometries: [coneActive["geometry"]["extent"]],
+                            outSpatialReference: mapView["spatialReference"]
+                        });
+    
+                        geometryService.project(params).then(function(result) {
+                            mapView.goTo(result[0]);
+    
+                            var tipoHuracan = getCicloneType(coneActive["stormtype"], coneActive["maxwind"]);
+                            $("#type").text(tipoHuracan);
+                            $("#type").attr("data-typeId", getIdCicloneTypeId(tipoHuracan));
+                            $("#name").text(coneActive["stormname"]);
+                            $("#sea").text(getSea(coneActive["layerid"]) + " / ");
+                            $("#sea").attr("data-ocean", (getSea(coneActive["layerid"]) == "EP" ? "P" : "A"));
+                            tituloSecundario();
+                            const oceano = getSea(coneActive["layerid"]) == "EP" ? "PACÍFICO" : "ATLÁNTICO"; 
+                            $(".TitleOceano").text(oceano);
+                            //queryRegions(map, mapView, [coneActive["geometry"]], "FID");
+                            var zoomComplete = new Event("eventSelected");
+                            document.dispatchEvent(zoomComplete);
+                        });
+                    })
+                });
+            })
         });
     }
 
@@ -543,6 +574,20 @@ $(function() {
                 }
             }
         ]
+        
+        // capa de probabilidad de vientos de 34+ nudos
+        let properties_vientos = {
+            id: "area_34KtWinds",  
+            opacity: 0.5,
+            refreshInterval: 60,
+            showLabels: true,
+            outFields: ["*"],
+            visible: false,
+            url: "https://idpgis.ncep.noaa.gov/arcgis/rest/services/NWS_Forecasts_Guidance_Warnings/NHC_E_Pac_trop_cyclones/MapServer/54"
+        };
+        addFeatureLayer(map, properties_vientos["url"], properties_vientos);
+
+
         const activeHurricanesEPUrls = [
             {
                 "name": "EP1",
@@ -1028,6 +1073,14 @@ $(function() {
         }
     });
 
-    loadMap("map");
-    getAutoresDefault();
+    require([
+        "esri/tasks/support/Query"
+    ], function(
+        QueryClass
+    ){
+        Query = QueryClass;
+        loadMap("map");
+        getAutoresDefault();
+    })
+
 });
