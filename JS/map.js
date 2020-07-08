@@ -398,12 +398,14 @@ $(function() {
                             $("#mostrar").hide();
                             $('#tablaEditar').show();
                             map.findLayerById("area_34KtWinds").visible=false;
+                            $('#toggleWinds').addClass('btn-secondary').removeClass('btn-success');
                             return;
                         }else{//si existe el evento muestra la tabla correspondiente
                             $("#regiones").hide();
                             $("#mostrar").hide();
                             $('#tablaEditar').show();
                             map.findLayerById("area_34KtWinds").visible=true;
+                            $('#toggleWinds').removeClass('btn-secondary').addClass('btn-success');
                         }
     
                         var layer = map.findLayerById(layerid);
@@ -1072,6 +1074,19 @@ $(function() {
             $("#activeEvents").html('');
         }
     });
+
+    $('#toggleWinds').on('click', function(){
+        let layer = map.findLayerById("area_34KtWinds");
+        if (layer){
+            layer.visible = !layer.visible;
+            if (layer.visible) {
+                $('#toggleWinds').removeClass('btn-secondary').addClass('btn-success');
+            }
+            else {
+                $('#toggleWinds').addClass('btn-secondary').removeClass('btn-success')
+            }
+        }
+    })
 
     require([
         "esri/tasks/support/Query"

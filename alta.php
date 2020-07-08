@@ -385,6 +385,12 @@
 										<option value="">Cargando</option>
 									</select>
 								</div>
+								<div style="display: grid;grid-template-columns:auto auto;margin-top:3px;">
+									<button id="toggleWinds" class="btn btn-secondary" style="padding: 1px;">
+										<img src="img/wind.png" alt="vientos" width="25px" height="25px">
+									</button>
+									<p style="font-size: 0.75em; padding:5px 0 5px 2px;">Vientos de 34Kt</p>
+								</div>
 							</div>
 							<div id="map"></div>
 						</div>
