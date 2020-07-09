@@ -412,11 +412,23 @@ $(function() {
                         var event = layerid.split("_")[0];
     
                         map.allLayers.map(function(layer) {
-                            if(layer["id"].indexOf(event) != -1) layer.visible = true;
+                            if(layer["id"].indexOf(event) != -1) {
+                                layer.visible = true;
+                                if (layer["id"].indexOf("EPAT") != -1){
+                                    let tmp = $("#stormsActive option:selected").text().replace("(ESRI)", "").trim();
+                                    layer.definitionExpression = "STORMNAME = '" + tmp + "'";
+                                    
+                                }
+                            }
                             else if(layer["id"].indexOf("AT") != -1 || layer["id"].indexOf("EP") != -1) layer.visible = false;
                         });
-    
-                        var coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
+                        var coneActive;
+                        if (layerid.indexOf("EPAT") != -1){
+                            coneActive = activeCones.filter(function(activeCone) { if(activeCone["stormname"] == $("#stormsActive option:selected").text().replace("(ESRI)", "").trim()) return activeCone; })[0];
+                        }
+                        else {
+                            coneActive = activeCones.filter(function(activeCone) { if(activeCone["layerid"] == layerid) return activeCone; })[0];
+                        }
     
                         var geometryService = new GeometryService({ url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer" });
                         var params = new ProjectParameters({
