@@ -1,0 +1,87 @@
+@font-face {
+    font-family: Montserrat-Bold;
+    src: url("./fonts/Montserrat-Bold.ttf");
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("./fonts/Montserrat-Regular.ttf");
+}
+p, div, label, span {
+    font-family: Montserrat,sans-serif;
+}
+h1, h2, h3, h4, h5, strong {
+    font-family: Montserrat-Bold,sans-serif;
+}
+body, p {
+    margin: 0;
+}
+body {
+    width:149.3mm;height:244.5mm;
+    background-color:#F5F5F5;
+}
+.row {
+    background-color:#235C4E;
+    height:22.12mm;
+    
+    /* display:grid;
+    grid-template-columns:82mm 67.3mm; */
+}
+/* .row:after {
+    content: "";
+    display: block;
+    clear: both;
+} */
+.column {
+    float: left;
+    box-sizing: border-box;
+}
+.column.left {
+    width: 55%;
+    padding: 10px;
+}
+.column.right {
+    width: 45%;
+    padding: 10px;
+}
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    height: 56mm;
+}
+tr {
+    height: 1em;
+}
+table th:nth-of-type(even), table td:nth-of-type(even) {
+    width: 5%;
+}
+table th:nth-of-type(odd) {
+    font-size:2.25mm;
+    border:1px solid black;
+    max-height: 2mm;
+    width: 47.5%;
+}
+table td:nth-of-type(odd) {
+    font-size: 2mm;
+    border:1px solid black;
+    width: 47.5%;
+}
+.rotate {
+    color:black;
+    font-size:3mm;
+    /* width: 13.2em; */
+    transform: translateX(2%) translateY(0%) rotate(-90deg);
+}
+.texto {
+    font-size: 2.75mm;
+}
+.titulo {
+    font-size: 3.25mm;
+    color: #235C4E;
+    text-align: center;
+}
+.titulo-principal{
+    color:white;font-size:3.5mm;
+}
+.dorado {
+    color:#CA9E67;
+}
