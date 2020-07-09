@@ -389,7 +389,7 @@
 									<button id="toggleWinds" class="btn btn-secondary" style="padding: 1px;">
 										<img src="img/wind.png" alt="vientos" width="25px" height="25px">
 									</button>
-									<p style="font-size: 0.75em; padding:5px 0 5px 2px;">Vientos de 34Kt</p>
+									<span style="font-size: 0.75em; padding:5px 0 5px 2px;">Vientos de 34Kt</span>
 								</div>
 							</div>
 							<div id="map"></div>
