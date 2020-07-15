@@ -41,7 +41,8 @@
 	<!-- Styles -->
 	<link rel="stylesheet" href="./css/styles.css">
 
-	
+	<link rel="stylesheet" href="./pdf/styles.css">
+
 	<title>SIAT-CT</title>
 </head>
 <body>
@@ -618,10 +619,16 @@
 	<center>
 	<button class="btn btn-success" id="guardarInfo" >Guardar Boletín</button>
 	
-	<button type="button" data-toggle="modal" data-target="#printing"  class="btn btn-outline-success" id="pdf">Generar PDF</button>
-	<button type="button"  class="btn btn-outline-success disabled" id="pdfError">Generar PDF</button>	
+	<button type="button" class="btn btn-outline-success" id="vistaPrevia" style="display: none;">Generar Vista previa del PDF</button>
+
+	<button type="button" class="btn btn-outline-success" id="pdf">Generar PDF</button>
+	<button type="button" class="btn btn-outline-success disabled" id="pdfError">Generar PDF</button>	
 	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>
+
+	<div style="margin: 0 25%;">
+	<?php include("pdf/plantilla.html"); ?>
+	</div>
 
 	<script id="stormsActive-template" type="text/x-handlebars-template">
 		{{#each storms as |storm|}}

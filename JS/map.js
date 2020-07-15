@@ -173,6 +173,7 @@ $(function() {
                     if(guardadoGlobal){
                         $("#pdfError").hide();
                         $("#pdf").show();
+                        $('#vistaPrevia').show();
                     }
                     window.captured=true;
             });

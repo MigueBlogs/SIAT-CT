@@ -81,7 +81,9 @@ $("#guardarInfo").click(function(){
 	$("#lastOne").show();
 	if(captured){
 		$("#pdf").show();
+		$('#vistaPrevia').show();
 	} else{
+		$('#vistaPrevia').show();
 		$("#pdfError").show();
 	}   
 });

@@ -27,6 +27,13 @@ $(function() {
 		if( ($("#NearY").text() !== '--') || ($("#FarY").text() !== '--') )  periodoValidez = amarillo;
 		if( ($("#NearO").text() !== '--') || ($("#FarO").text() !== '--') )  periodoValidez = naranja;
 		if( ($("#NearR").text() !== '--') || ($("#FarR").text() !== '--') )  periodoValidez = roja;
+		if (periodoValidez == 0) {
+			$('#-hora_boletin_sig').parent().html('El próximo boletín será emitido <p class="re" id="-hora_boletin_sig"></p> en caso de ser necesario.');
+		}
+		else {
+			$('#-hora_boletin_sig').parent().html('El próximo boletín será emitido en <p class="re" id="-hora_boletin_sig"></p> horas o antes de ser necesario.');
+			$('#-hora_boletin_sig').text(periodoValidez);
+		}
 		if(periodoValidez === 0 && $("#Number").text()==="1" && $("#finalSIAT").is(":checked")) {
 			$("#fechaValidez").text("Último boletín único informativo");
 			return;
@@ -178,6 +185,54 @@ $(function() {
 					 	autoExpand(this);
 					});
 	          });
+	}
+
+	function recursivo(ancho, altura, veces) {
+        // Generate the PDF.
+        html2pdf().from(document.getElementById('plantilla')).set({
+			margin: [0, 0, 0, 0],
+			filename: 'boletin.pdf',
+			html2canvas: { scale: 5 }, // entre más alto mejor calidad tiene
+			pagebreak: {mode:  ['avoid-all', 'css']}, //previene saltos de línea raros
+			letterRendering: true,
+			jsPDF: {orientation: 'portrait', unit: 'mm', format: [ancho, altura], compressPDF: false}
+		}).toPdf().get('pdf').then(function (pdf) {
+			if (veces >= 10) {
+				alert("El PDF no se ha generado correctamente. Haz clic de nuevo en el botón para generar el PDF.");
+				$("#printing").modal('hide');
+				return;
+			}
+			if (pdf.internal.getNumberOfPages() > 1) {
+				recursivo(ancho, altura+1, veces+1);
+			}
+			else {
+				pdf.save("boletin.pdf");
+				$("#printing").modal('hide');
+			}
+		})
+    }
+
+	function nuevoGeneraPdf() {
+		if($('#textEvent').is(":visible") || $('#time').is(":visible") || $('#tablaEditar').is(":visible") || $('#GuardaInfo').is(":visible") ){
+			alert("Guarda datos antes de generar el reporte");
+			return;
+		}
+		if (!$('#plantilla').is(":visible")){
+			alert("Primero genera una vista previa del PDF");
+			return;
+		}
+
+		$('#printing').modal("show");
+		
+        let altura1 = $('#plantilla').height();
+        const mm = 0.2645833333;
+        var altura = altura1 * mm;
+        //var altura = altura1;
+        // altura += 0.56;//mm
+        //altura += 35; //px
+        let ancho = $('#plantilla').width() * mm;
+        //let ancho = $('#main').width();
+        recursivo(ancho, altura, 1);
 	}
 
 	function hideButtons(){
@@ -796,7 +851,87 @@ $(function() {
 		$("#cicloneDescription").show();
 	});
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
-	$("#pdf").click(function() {generaPdf();});
+	//$("#pdf").click(function() {generaPdf();});
+	$("#pdf").click(function() {nuevoGeneraPdf();});
+	$('#vistaPrevia').click(function() { 
+		$('#plantilla').show();
+		$('html').animate({
+			scrollTop: $('#plantilla').offset().top - 40
+		}, 'fast');
+		// header verde
+		$('#-tipo_fenomeno').text($('.TitleTipo:first').text());
+		$('#-oceano').text($('.TitleOceano:first').text());
+		$('#-numero_boletin').text($('#Number').text());
+
+		// texto descriptivo
+		// convertir texto a como titluo (Casa en vez de CASA o casa)
+		let tipo = $('#-tipo_fenomeno').text().replace(/\w\S*/g,function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		let nombre = $('#name').text();
+		$('#-texto_descriptivo').text($('#subtitle').val().replace(/(\n|\s{2,})/g,' '));
+		$('#-texto_descriptivo').html($('#-texto_descriptivo').html().replace(new RegExp('('+tipo+')', 'i'),'<b>$1</b>'));
+		$('#-texto_descriptivo').html($('#-texto_descriptivo').html().replace(new RegExp('(["“]'+nombre+'["”])', 'i'),'<b>$1</b>'));
+		$('#-descripcion_fenomeno').text($('#comments').val().replace(/(\n|\s{2,})/g,' '));
+		//$('#-fecha_fenomeno').text($('#datetime').text());
+		//$('#-nombre_fenomeno').text($('#name').text());
+		
+		//descripcion del fenomeno
+		$('#-coordenanas').text($('#coords').text().replace(/(\n|\s{2,})/g,' '));
+		$('#-localización').text($('#loc').text().replace(/(\n|\s{2,})/g,' '));
+		$('#-desplazamiento').text($('#despl').text().replace(/(\n|\s{2,})/g,' '));
+		$('#-vientos_maximos').text($('#viento').text().replace(/(\n|\s{2,})/g,' '));
+		$('#-rachas_vientos').text($('#racha').text().replace(/(\n|\s{2,})/g,' '));
+
+		// efectos
+		$('#-viento').text($('#efectoViento').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
+
+		let tmp = $('#efectoLluvia').val().replace(/(\n|\s{2,})/g,' ');
+		let tmp1 = /Puntuales torrenciales\s*(.+)Puntuales intensas\s*(.+)$/g;
+		let match = tmp1.exec(tmp);
+		if (match) {
+			let torrenciales = match[1];
+			let intensas = match[2];
+			$('#-puntuales_torrenciales').text(torrenciales.trim().replace(/\.\s*$/,''));
+			$('#-puntuales_intensas').text(intensas.trim().replace(/\.\s*$/,''));
+		}
+		else {
+			alert("¿Falta el texto de efecto de lluvias?")
+		}
+
+		$('#-oleaje_elevado').text($('#efectoOleaje').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
+
+		$('#-marea_tormenta').text($('#efectoMarea').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
+		// mapa
+		$('#plantilla-mapa').attr('src', document.getElementsByClassName("js-screenshot-image")[0].src);
+
+		// tabla
+		$('#-roja_acercandose').text($('#NearR').text());
+		$('#-roja_alejandose').text($('#FarR').text());
+		$('#-naranja_acercandose').text($('#NearO').text());
+		$('#-naranja_alejandose').text($('#FarO').text());
+		$('#-amarilla_acercandose').text($('#NearY').text());
+		$('#-amarilla_alejandose').text($('#FarY').text());
+		$('#-verde_acercandose').text($('#NearG').text());
+		$('#-verde_alejandose').text($('#FarG').text());
+		$('#-azul_acercandose').text($('#NearB').text());
+		$('#-azul_alejandose').text($('#FarB').text());
+
+		//texto volteado de la tabla
+		$('#ciclon_acercandose').attr('src', 'pdf/images/ciclon_acercandose.png').css('max-height', $('#plantilla table').height());
+		$('#ciclon_alejandose').attr('src', 'pdf/images/ciclon_alejandose.png').css('max-height', $('#plantilla table').height());
+		// esto corrige la rotación del texto de ciclon acercandose/alejandose
+		/* var rotates = document.getElementsByClassName('rotate');
+		
+		for (var i = 0; i < rotates.length; i++) {
+			var parent = rotates[i].parentElement;            
+			rotates[i].style.width = parent.offsetHeight + 'px';
+		} */
+		// validez
+		$('#-validez_boletin').text($("#fechaValidez").text());
+		// logos
+		$('#plantilla-logos').attr("src", "pdf/images/SSyPC_CNPC_SINAPROC.png");
+		
+		
+	})
 	$("#saveDate").click(function() { 
 		validTime(dt); 
 		generaLink(dt); 
