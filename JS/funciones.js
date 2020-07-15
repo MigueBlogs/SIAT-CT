@@ -866,11 +866,18 @@ $(function() {
 		// texto descriptivo
 		// convertir texto a como titluo (Casa en vez de CASA o casa)
 		let tipo = $('#-tipo_fenomeno').text().replace(/\w\S*/g,function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-		let nombre = $('#name').text();
+		let nombre = $('#name').text().trim();
+		let fecha = $('#datetime').text().replace(/\/\s+$/,'');
 		$('#-texto_descriptivo').text($('#subtitle').val().replace(/(\n|\s{2,})/g,' '));
+		if (!$('#-texto_descriptivo').text().trim().endsWith(".")){
+			$('#-texto_descriptivo').text($('#-texto_descriptivo').text().trim()+".");
+		}
 		$('#-texto_descriptivo').html($('#-texto_descriptivo').html().replace(new RegExp('('+tipo+')', 'i'),'<b>$1</b>'));
-		$('#-texto_descriptivo').html($('#-texto_descriptivo').html().replace(new RegExp('(["“]'+nombre+'["”])', 'i'),'<b>$1</b>'));
+		$('#-texto_descriptivo').html($('#-texto_descriptivo').html().replace(new RegExp('["“]?('+nombre+')["”]?', 'i'),'<b>“$1”</b> el día '+fecha));
 		$('#-descripcion_fenomeno').text($('#comments').val().replace(/(\n|\s{2,})/g,' '));
+		if (!$('#-descripcion_fenomeno').text().trim().endsWith(".")){
+			$('#-descripcion_fenomeno').text($('#-descripcion_fenomeno').text().trim()+".");
+		}
 		//$('#-fecha_fenomeno').text($('#datetime').text());
 		//$('#-nombre_fenomeno').text($('#name').text());
 		
@@ -884,16 +891,24 @@ $(function() {
 		// efectos
 		$('#-viento').text($('#efectoViento').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
 
-		let tmp = $('#efectoLluvia').val().replace(/(\n|\s{2,})/g,' ');
-		let tmp1 = /Puntuales torrenciales\s*(.+)Puntuales intensas\s*(.+)$/g;
-		let match = tmp1.exec(tmp);
-		if (match) {
-			let torrenciales = match[1];
-			let intensas = match[2];
-			$('#-puntuales_torrenciales').text(torrenciales.trim().replace(/\.\s*$/,''));
-			$('#-puntuales_intensas').text(intensas.trim().replace(/\.\s*$/,''));
-		}
-		else {
+		let lineas = $('#efectoLluvia').val().split("\n");
+		let out = "";
+		lineas.forEach(function(value, index){
+			let tmp1 = /^([^\(]+)(\(.+)$/g;
+			let match = tmp1.exec(value);
+			if (match) {
+				let negritas = match[1];
+				let normal = match[2].trim();
+				if (!normal.endsWith(".")){
+					normal += ".";
+				}
+				out += "<b>"+negritas+"</b>"+normal+" ";
+			}
+
+		})
+		$('#-lluvias').html(out);
+		if (!out) {
+			$('#-lluvias').text($('#efectoLluvia').val());
 			alert("¿Falta el texto de efecto de lluvias?")
 		}
 
