@@ -173,6 +173,7 @@ $(function() {
                     if(guardadoGlobal){
                         $("#pdfError").hide();
                         $("#pdf").show();
+                        $('#old-pdf').show();
                         $('#vistaPrevia').show();
                     }
                     window.captured=true;
@@ -191,6 +192,7 @@ $(function() {
                 if(guardadoGlobal){
                     $("#pdfError").show();
                     $("#pdf").hide();
+                    $('#old-pdf').hide();
                 }  
                  window.captured=false;
             });

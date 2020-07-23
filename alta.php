@@ -621,7 +621,9 @@
 	
 	<button type="button" class="btn btn-outline-success" id="vistaPrevia" style="display: none;">Generar Vista previa del PDF</button>
 
-	<button type="button" class="btn btn-outline-success" id="pdf">Generar PDF</button>
+	
+	<button type="button" class="btn btn-outline-success" id="old-pdf">Generar PDF viejo</button>
+	<button type="button" class="btn btn-outline-success" id="pdf">Generar PDF nuevo</button>
 	<button type="button" class="btn btn-outline-success disabled" id="pdfError">Generar PDF</button>	
 	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>

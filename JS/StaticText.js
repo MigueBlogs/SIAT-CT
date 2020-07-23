@@ -81,6 +81,7 @@ $("#guardarInfo").click(function(){
 	$("#lastOne").show();
 	if(captured){
 		$("#pdf").show();
+		$('#old-pdf').show();
 		$('#vistaPrevia').show();
 	} else{
 		$('#vistaPrevia').show();

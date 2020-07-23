@@ -101,17 +101,17 @@ $(function() {
 	        	autoExpand(document.getElementById(this.id));
 			});*/
 			//Pasando de text areas a párrafos
-			$('p').each(function(){
-				$("#"+this.id).show();
+			$('#root p').each(function(){
+				$(this).show();
 			});
-			$('textarea').each(function(){
+			$('#root textarea').each(function(){
 				$("#"+this.id+"p").text($("#"+this.id).val());
 				$("#"+this.id).hide();
 			});
 			$("#subtitle").show();
 			
 
-	        $("textarea").css( "border", "none");
+	        $("#root textarea").css( "border", "none");
 	        $(".dataH").css("font-size", "11px");
 			$(".disable_on_print").hide();
 			//imprimo valores de W & H del div.
@@ -160,7 +160,7 @@ $(function() {
 				$(".tituloTable").removeAttr('style');
 		        $(".fecha").removeAttr('style');
 		        autoExpand(document.getElementById("subtitle"));
-		        $("textarea").removeAttr('style');
+		        $("#root textarea").removeAttr('style');
 		        $(".dataH").removeAttr('style');
 				$(".tituloEfectos").removeAttr('style');
 				//$("#mapaTemp").css({"width": "100%"});
@@ -170,8 +170,8 @@ $(function() {
 				}
 				$("#map-container").removeAttr('style');
 				$("#map-container").hide();	
-				$('p').each(function(){
-					$("#"+this.id).hide();
+				$('#root p').each(function(){
+					$(this).hide();
 				});					
 	          }).save().then( function(){
 		          	//oculta modal de espera
@@ -181,7 +181,7 @@ $(function() {
 					}, 3000);
 		          	$("#printing").modal('hide');
 					//reajuste de texareas
-					$('textarea').each(function(){
+					$('#root textarea').each(function(){
 					 	autoExpand(this);
 					});
 	          });
@@ -851,7 +851,7 @@ $(function() {
 		$("#cicloneDescription").show();
 	});
 	$("#pdfError").click(function(){ alert("Genera una captura del mapa antes de imprimir") });
-	//$("#pdf").click(function() {generaPdf();});
+	$("#old-pdf").click(function() {generaPdf();});
 	$("#pdf").click(function() {nuevoGeneraPdf();});
 	$('#vistaPrevia').click(function() { 
 		$('#plantilla').show();
@@ -970,6 +970,7 @@ $(function() {
 	//$("#enable_on_print").hide();
 	$("#lastOne").hide();
 	$("#pdf").hide();
+	$('#old-pdf').hide();
 	$("#pdfError").hide();
 	$("#headerLogos").hide();
 	//$('#capture').hide();
@@ -1011,7 +1012,8 @@ $(function() {
         {
     	$('#Select-Event').hide();
     	$("#lastOne").hide();
-        $("#pdf").hide();
+		$("#pdf").hide();
+		$('#old-pdf').hide();
         }
     });
    
