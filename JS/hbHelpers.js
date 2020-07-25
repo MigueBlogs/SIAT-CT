@@ -32,7 +32,7 @@ Handlebars.registerHelper("elementIndex", function(array, index) {
 });
 
 Handlebars.registerHelper("fechaLarga", function(dateString) {
-    debugger
+    
     var date = new Date((dateString + " (CDT)").replace(/-/g, '/'));
     var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     return date.toLocaleString("es-MX", fecha);
