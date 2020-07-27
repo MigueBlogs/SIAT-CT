@@ -916,7 +916,12 @@ $(function() {
 
 		$('#-marea_tormenta').text($('#efectoMarea').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
 		// mapa
-		$('#plantilla-mapa').attr('src', document.getElementsByClassName("js-screenshot-image")[0].src);
+		if ($('#mapaTemp').attr("src") != "") {
+			$('#plantilla-mapa').attr("src", $('#mapaTemp').attr("src"));
+		}
+		else {
+			$('#plantilla-mapa').attr('src', document.getElementsByClassName("js-screenshot-image")[0].src);
+		}
 
 		// tabla
 		$('#-roja_acercandose').text($('#NearR').text());
