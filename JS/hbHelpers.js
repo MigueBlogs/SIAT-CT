@@ -27,12 +27,16 @@ Handlebars.registerHelper('compare', function(lvalue, rvalue, options) {
 	}
 });
 
+Handlebars.registerHelper("addInt", function(elOne, elTwo) {
+    if(isNaN(elOne) || isNaN(elTwo)) return 0
+    return parseInt(elOne) + parseInt(elTwo);
+});
+
 Handlebars.registerHelper("elementIndex", function(array, index) {
     return array[index];
 });
 
 Handlebars.registerHelper("fechaLarga", function(dateString) {
-    
     var date = new Date((dateString + " (CDT)").replace(/-/g, '/'));
     var fecha = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
     return date.toLocaleString("es-MX", fecha);

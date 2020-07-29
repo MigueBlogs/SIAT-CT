@@ -9,7 +9,7 @@ $(function() {
     };
 
     initMap();
-    getTropicalCiclones();
+    getYears();
 
     var queryParams = getAllUrlParams();
     if(queryParams.hasOwnProperty("idBoletin")) getSeguimiento(queryParams["idBoletin"]);
@@ -140,7 +140,6 @@ $(function() {
             addFeatureLayer(map, urlMunicipios, blueProp)
 
             document.addEventListener("alerts", function(e){
-                debugger
                 var alerts = e.detail;
                 var query;
 
@@ -163,7 +162,6 @@ $(function() {
                             layer = map.findLayerById("statesRed");
                             break;
                     }
-                    debugger
 
                     if(alerts[alert][0] == "" && alerts[alert][1] == "") query = "1=0";
                     else if(alerts[alert][0] != "" && alerts[alert][1] != "") query = alerts[alert][0] + " OR " + alerts[alert][1];
@@ -201,9 +199,14 @@ $(function() {
             success: function(result) {
                 result["current"] = idBoletin;
                 var idsBoletin = eventoActual["allIds"].map(function(boletin) { return boletin.idBoletin });
-                result["next"] = idsBoletin.indexOf(idBoletin) < idsBoletin.length - 1 ? eventoActual["allIds"][idsBoletin.indexOf(idBoletin) + 1] : "";
-                result["previous"] = idsBoletin.indexOf(idBoletin) > 0 ? eventoActual["allIds"][idsBoletin.indexOf(idBoletin) - 1] : "";
+                result["previous"] = idsBoletin.indexOf(idBoletin) < idsBoletin.length - 1 ? eventoActual["allIds"][idsBoletin.indexOf(idBoletin) + 1] : "";
+                result["next"] = idsBoletin.indexOf(idBoletin) > 0 ? eventoActual["allIds"][idsBoletin.indexOf(idBoletin) - 1] : "";
                 
+                var templateSource = $("#cycloneName-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template(result);
+                $("#cycloneNameContainer").html(outputHTML);
+
                 var templateSource = $("#tropicalCicloneInfo-template").html();
                 var template = Handlebars.compile(templateSource);
                 var outputHTML = template(result);
@@ -214,10 +217,21 @@ $(function() {
                 var outputHTML = template(result);
                 $("#regionsTable").html(outputHTML);
 
-                var templateSource = $("#eventInfo-template").html();
-                var template = Handlebars.compile(templateSource);
-                var outputHTML = template(result);
-                $("#eventInfo").html(outputHTML);
+                var municipiosAlertados = false;
+                var colors = Object.keys(result["alertas"]["ACERCÁNDOSE"]);
+                colors.forEach(color => {
+                    if(Object.keys(result["alertas"]["ACERCÁNDOSE"][color]).length > 0 || Object.keys(result["alertas"]["ALEJANDOSE"][color]).length > 0) {
+                        municipiosAlertados = true;
+                        return;
+                    }
+                });
+
+                if(municipiosAlertados) {
+                    var templateSource = $("#eventInfo-template").html();
+                    var template = Handlebars.compile(templateSource);
+                    var outputHTML = template(result);
+                    $("#eventInfo").html(outputHTML);
+                }
 
                 var templateSource = $("#effects-template").html();
                 var template = Handlebars.compile(templateSource);
@@ -247,7 +261,6 @@ $(function() {
     }
 
     function getAlertamiento(obj) {
-        debugger
         if(!obj.hasOwnProperty("alertas")) return "";
 
         const alertas = obj["alertas"];
@@ -344,18 +357,47 @@ $(function() {
         });
     }
 
-    function getTropicalCiclones() {
+    function getYears() {
         $.ajax({
             type: "GET",
             url: "./siat_fns.php",
             data: { 
-                eventos: true
+                anios: true
+            },
+            dataType: "json",
+            success: function(result) {
+                var templateSource = $("#years-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template(result);
+                $("#years").html(outputHTML);
+
+                $("#aniosEventos").on("change", function() {
+                    var fechaInicio = "01/01/" + $(this).val();
+                    var fechaFin = "01/01/" + (parseInt($(this).val()) + 1);
+
+                    getTropicalCyclones(fechaInicio, fechaFin);
+                });
+            }, error: function(result) {
+
+            }
+        });
+    }
+
+    function getTropicalCyclones(startDate, endDate) {
+        $.ajax({
+            type: "GET",
+            url: "./siat_fns.php",
+            data: { 
+                eventos: true,
+                startDate: startDate,
+                endDate: endDate
             },
             dataType: "json",
             success: function(result) {
                 var templateSource = $("#storms-template").html();
                 var template = Handlebars.compile(templateSource);
-                var outputHTML = template({storms: result});
+                var storms = result.map(r => r[0]);
+                var outputHTML = template({storms: storms});
                 $("#storms").html(outputHTML);
 
                 $("#ciclonesTropicales").on("change", function() {

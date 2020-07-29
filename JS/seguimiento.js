@@ -11,11 +11,11 @@ $(function() {
             },
             dataType: "json",
             success: function(data) {
+                debugger
                 var noAlertamiento = data.length + 1;
                 $("#Number").text(noAlertamiento);
 
-                var ultimoBoletin = data[data.length - 1];
-                debugger
+                var ultimoBoletin = data[0];
                 idBoletinSeguimiento = ultimoBoletin["idBoletin"];
             },
             error: function(error) {

@@ -1,7 +1,10 @@
 <?php
+    session_start();
     require_once("db_fns.php");
 
-    if(isset($_GET["eventos"])) {
+    if(isset($_GET['anios'])) {
+        getYears();
+    } else if(isset($_GET["eventos"])) {
         $startDate = isset($_GET["startDate"]) ? $_GET["startDate"] : "";
         $endDate = isset($_GET["endDate"]) ? $_GET["endDate"] : "";
 
@@ -94,6 +97,33 @@
         echo json_encode($ar);
     }
 
+    function getYears() {
+        require_once("db_global.php");
+
+        $conn = dbConnect(user, pass, server);
+
+        $paramsArray = Array();
+
+        $queryStr = "SELECT DISTINCT(EXTRACT(YEAR FROM FECHA)) ANIO FROM BOLETIN ".
+            "ORDER BY ANIO DESC";
+
+        $query = oci_parse($conn, $queryStr);
+
+        foreach ($paramsArray as $key => $value) {
+            oci_bind_by_name($query, $key, $paramsArray[$key]);
+        }
+
+        oci_execute($query);
+        $ar = Array();
+
+        while ( ($row = oci_fetch_assoc($query)) != false ) {
+            $ar[] = $row["ANIO"];
+        }
+        
+        dbClose($conn, $query);
+        echo json_encode($ar);
+    }
+
     function getEvents($startDate, $endDate, $active = false) {
         require_once("db_global.php");
 
@@ -101,21 +131,20 @@
 
         $paramsArray = Array();
 
-        $queryStr = "SELECT ID_BOLETIN, NOMBRE_EVENTO, TO_CHAR(FECHA, 'YYYY/MM/DD') FECHA, C.NOMBRE CATEGORIA ".
-        "FROM BOLETIN B, CATEGORIA_EVENTO C ".
-        "WHERE B.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
-        "AND BOL_ID_BOLETIN IS NULL ";
+        $queryStr = "SELECT ID_BOLETIN ".
+        "FROM BOLETIN B ".
+        "WHERE BOL_ID_BOLETIN IS NULL ";
         
         if($active) $queryStr .= "AND FINAL = '0' ";
 
         if( $startDate ) {
             $queryStr .= "AND FECHA BETWEEN TO_DATE(:startDate, 'DD/MM/YYYY') AND ";
-            $queryParams[":startDate"] = $startDate;
+            $paramsArray[":startDate"] = $startDate;
         } else
             $queryStr .= "AND FECHA BETWEEN TO_DATE('01/01/2013', 'DD/MM/YYYY') AND ";         
         
         if( $endDate ) {
-            $queryStr .= "TO_DATE(:endDate, 'DD/MM/YYYY) ";
+            $queryStr .= "TO_DATE(:endDate, 'DD/MM/YYYY') ";
             $paramsArray[":endDate"] = $endDate;
         } else 
             $queryStr .= "(SELECT SYSDATE FROM DUAL) ";
@@ -133,25 +162,20 @@
 
         while ( ($row = oci_fetch_assoc($query)) != false ) {
             $idBoletin = $row['ID_BOLETIN'];
-            $nombre = $row['NOMBRE_EVENTO'];
-            $fecha = $row['FECHA'];
-            $categoria = $row['CATEGORIA'];
-
-            $result = [
-                'idBoletin' => $idBoletin,
-                'nombre' => $nombre,
-                'fecha' => $fecha,
-                'categoria' => $categoria
-            ];
-
-            $ar[] = $result;
+            $ar[] = $idBoletin;
         }
         
         dbClose($conn, $query);
-        echo json_encode($ar);
+        $boletines = Array();
+        
+        foreach($ar as $idBoletin) {
+            $boletines[] = getSeguimientoCompleto($idBoletin);
+        }
+
+        echo json_encode($boletines);
     }
 
-    function getSeguimiento($idBoletin) {
+    function getSeguimientoCompleto($idBoletin) {
         require_once("db_global.php");
 
         $conn = dbConnect(user, pass, server);
@@ -160,9 +184,13 @@
             ":idBoletin" => $idBoletin
         );
 
-        $queryStr = "SELECT ID_BOLETIN, NOMBRE_EVENTO, TO_CHAR(FECHA, 'DDMMYYYY') FECHA FROM BOLETIN ".
+        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, H.FECHA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
+            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, TO_CHAR(FECHA, 'MM/DD/YYYY') FECHA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
             "START WITH ID_BOLETIN = :idBoletin ".
-            "CONNECT BY PRIOR ID_BOLETIN = BOL_ID_BOLETIN ";
+            "CONNECT BY PRIOR ID_BOLETIN = BOL_ID_BOLETIN) H ".
+            "INNER JOIN CATEGORIA_EVENTO C ".
+            "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
+            "ORDER BY H.FECHA DESC";
 
         $query = oci_parse($conn, $queryStr);
 
@@ -177,11 +205,63 @@
             $idBoletin = $row['ID_BOLETIN'];
             $nombre = $row['NOMBRE_EVENTO'];
             $fecha = $row['FECHA'];
+            $categoria = $row['CATEGORIA'];
+            $oceano = $row['OCEANO'] == 'A' ? 'Atlántico' : 'Pacífico';
 
             $result = [
                 'idBoletin' => $idBoletin,
                 'nombre' => $nombre,
-                'fecha' => $fecha
+                'fecha' => $fecha,
+                'categoria' => $categoria,
+                'oceano' => $oceano
+            ];
+
+            $ar[] = $result;
+        }
+        
+        dbClose($conn, $query);
+        return $ar;
+    }
+
+    function getSeguimiento($idBoletin) {
+        require_once("db_global.php");
+
+        $conn = dbConnect(user, pass, server);
+
+        $paramsArray = Array(
+            ":idBoletin" => $idBoletin
+        );
+
+        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, H.FECHA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
+            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, TO_CHAR(FECHA, 'MM/DD/YYYY') FECHA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
+            "START WITH ID_BOLETIN = :idBoletin ".
+            "CONNECT BY PRIOR BOL_ID_BOLETIN = ID_BOLETIN) H ".
+            "INNER JOIN CATEGORIA_EVENTO C ".
+            "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
+            "ORDER BY FECHA DESC";
+
+        $query = oci_parse($conn, $queryStr);
+
+        foreach ($paramsArray as $key => $value) {
+            oci_bind_by_name($query, $key, $paramsArray[$key]);
+        }
+
+        oci_execute($query);
+        $ar = Array();
+
+        while ( ($row = oci_fetch_assoc($query)) != false ) {
+            $idBoletin = $row['ID_BOLETIN'];
+            $nombre = $row['NOMBRE_EVENTO'];
+            $fecha = $row['FECHA'];
+            $categoria = $row['CATEGORIA'];
+            $oceano = $row['OCEANO'] == 'A' ? 'Atlántico' : 'Pacífico';
+
+            $result = [
+                'idBoletin' => $idBoletin,
+                'nombre' => $nombre,
+                'fecha' => $fecha,
+                'categoria' => $categoria,
+                'oceano' => $oceano
             ];
 
             $ar[] = $result;

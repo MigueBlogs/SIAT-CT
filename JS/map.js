@@ -1061,19 +1061,21 @@ $(function() {
         });
     }
 
-    function getActiveEvents() {
+    function getActiveEvents(startDate, endDate) {
         $.ajax({
             type: "GET",
             url: "./siat_fns.php",
             data: { 
                 eventos: true,
-                active: true
+                active: true,
+                startDate: startDate,
+                endDate: endDate
             },
             dataType: "json",
             success: function(result) {
                 var templateSource = $("#activeEvents-template").html();
                 var template = Handlebars.compile(templateSource);
-                var outputHTML = template({activeEvents: result});
+                var outputHTML = template({activeEvents: result.map(r => r[0])});
                 $("#activeEvents").html(outputHTML);
             },
             error: function(error) {
@@ -1082,9 +1084,35 @@ $(function() {
         });
     }
 
+    function getYears() {
+        $.ajax({
+            type: "GET",
+            url: "./siat_fns.php",
+            data: { 
+                anios: true
+            },
+            dataType: "json",
+            success: function(result) {
+                var templateSource = $("#years-template").html();
+                var template = Handlebars.compile(templateSource);
+                var outputHTML = template(result);
+                $("#years").html(outputHTML);
+
+                $("#aniosEventos").on("change", function() {
+                    var fechaInicio = "01/01/" + $(this).val();
+                    var fechaFin = "01/01/" + (parseInt($(this).val()) + 1);
+
+                    getActiveEvents(fechaInicio, fechaFin);
+                });
+            }, error: function(result) {
+
+            }
+        });
+    }
+
     $("#seguimientoOption").on("change", function() {
         if($(this).prop('checked')) {
-            getActiveEvents();
+            getYears();
         } else {
             $("#activeEvents").html('');
         }

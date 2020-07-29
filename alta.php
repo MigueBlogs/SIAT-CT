@@ -73,6 +73,7 @@
 				  </label>
 				</div>
 				<br>
+				<div id="years"></div>
 				<div id="activeEvents"></div>
 		      	</div>
 		      <div class="modal-footer">
@@ -653,6 +654,19 @@
 		{{/each}}
 	</script>
 
+	<script id="years-template" type="text/x-handlebars-template">
+        <select name="" id="aniosEventos">
+            {{#each this as |year|}}
+                {{#if @first}}
+                    <option value="">Selecciona</option>
+                {{/if}}
+                <option value="{{year}}" data-start="01/01/{{year}}" data-end="01/01/{{#addInt year 1}}{{/addInt}}">Temporada {{year}}</option>
+            {{else}}
+                <option value="">Sin años disponibles para consulta</option>
+            {{/each}}
+        </select>
+	</script>
+
 	<script id="activeEvents-template" type="text/x-handlebars-template">
 		<select id="activeEventsOptions">
 			{{#each activeEvents as |event|}}
@@ -680,6 +694,7 @@
 	<script src="./JS/fileUpload.js"></script>
 	<script type="module" src="./JS/StaticText.js"></script>
 	<script src="./JS/map.js"></script>	
+	<script src="./JS/hbHelpers.js"></script>
 	<script src="./JS/seguimiento.js"></script>
 </body>
 </html>

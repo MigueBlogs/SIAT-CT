@@ -10,7 +10,8 @@ $(function() {
             success: function(result) {
                 var templateSource = $("#storms-template").html();
                 var template = Handlebars.compile(templateSource);
-                var outputHTML = template({storms: result.splice(0,4)});
+                var storms = result.map(r => r[0]);
+                var outputHTML = template({storms: storms.splice(0,4)});
                 $("#latest-events-container").html(outputHTML);
             }, error: function(result) {
 

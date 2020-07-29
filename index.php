@@ -76,7 +76,7 @@
                         <li><span class="dot red"></span>Peligro Máximo</li>
                     </ul>
                 </div>
-                <div>
+                <div class="semaforos">
                     <h3>Tabla de acercamiento</h3>
                     <div class="table-container">
                         <table class="table" cellpadding="0" cellspacing="0">
@@ -187,80 +187,87 @@
                                     <th>350km a 400km</th>
                                     <th>400km a 500km</th>
                                     <th>500km a 750km</th>
+                                    <th>Más de 750 km</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>0 a 0.99</td>
-                                    <td><span class="background blue"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
                                     <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                                 <tr>
                                     <td>1 a 1.99</td>
-                                    <td><span class="background blue"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
                                     <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                                 <tr>
                                     <td>2 a 2.99</td>
-                                    <td><span class="background blue"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
                                     <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                                 <tr>
                                     <td>3 a 3.99</td>
-                                    <td><span class="background blue"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
                                     <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background green"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                                 <tr>
                                     <td>4 a 4.99</td>
-                                    <td><span class="background blue"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
+                                    <td><span class="background yellow"></span></td>
                                     <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background red"></span></td>
-                                    <td><span class="background red"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td><span class="background blue"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background red"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background orange"></span></td>
+                                    <td><span class="background yellow"></span></td>
                                     <td><span class="background green"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background yellow"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background orange"></span></td>
-                                    <td><span class="background red"></span></td>
-                                    <td><span class="background red"></span></td>
-                                    <td><span class="background red"></span></td>
+                                    <td><span class="background blue"></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -276,7 +283,12 @@
     <script id="storms-template" type="text/x-handlebars-template">
 		{{#each storms as |evento|}}
 			<div class="card">
-                <div class="text"><a href="http://preparados.gob.mx/SIAT-CT/consulta.php?idBoletin={{evento.idBoletin}}">{{evento.categoria}} {{evento.nombre}}</a></div>
+                <div class="text">
+                    <a href="http://preparados.gob.mx/SIAT-CT/consulta.php?idBoletin={{evento.idBoletin}}">
+                        <div>{{evento.categoria}} {{evento.nombre}}</div>
+                        <div>Océano {{evento.oceano}}</div>
+                    </a>
+                </div>
             </div>
 		{{/each}}
 	</script>

@@ -21,128 +21,36 @@
     <script src="https://js.arcgis.com/4.13/"></script>
 
     <link rel="stylesheet" href="./css/consulta.css">
-
-    <style>
-        .collapsible {
-            background-color: lightgray;
-            color: black;
-            cursor: pointer;
-            padding: 0.75em;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 0.75em;
-        }
-
-        .active, .collapsible:hover {
-            background-color: #555;
-            color: white;
-        }
-
-        .content {
-            padding: 0 18px;
-            display: none;
-            overflow: hidden;
-            background-color: #f1f1f1;
-        }
-        .content img {
-            width: 60%;
-        }
-        .content.img {
-            text-align: center;
-        }
-        .content a {
-            display: block;
-            background-color: teal;
-            width: 60%;
-            margin: 0 auto;
-            color: white;
-        }
-        .tituloEfectos {
-            color: wheat;
-            font-family: Montserrat-Bold;
-            font-size: 1em;
-            text-align: center;
-            box-shadow: 0px 10px 10px 1px gray;
-            background-color: #9D2449;
-            text-decoration: none;
-            padding: 0.5em 0.25em;
-        }
-        .regularTxt {
-            font-size: 0.8em;
-            margin: 1em 0.5em;
-        }
-        .tituloTable {
-            font-weight: bold;
-            font-size: 1em;
-            text-align: center;
-            background-color: teal;
-            color: wheat;
-            padding: 0.25em;
-        }
-        .footer_box {
-            color: black;
-            font-family: Montserrat-Bold;
-            font-size: 0.75em;
-            text-align: center;
-        }
-        .textFooter {
-            font-family: Montserrat-Bold;
-            color: black;
-            font-size: 0.6em;
-            text-align: center;
-        }
-        .enlaces-img {
-            border: none; width:100%; height: 100%; text-align: center;
-        }
-        .enlaces-img img {
-            width: 50%;
-        }
-        .niveles {
-            background-color: lightgray;padding: 0.5em;font-size: 1.2em;
-        }
-        @media(max-width: 500px) {
-            .content img {
-                width: 100%;
-            }
-            .enlaces-img img {
-                width: 100%;
-            }
-            .footer_box {
-                font-size: 0.45em;
-            }
-            .niveles {
-                font-size: 1em;
-            }
-        }
-    </style>
 </head>
 <body>
     <?php includeNav(); ?>
     <div class="mainContainer">
         <h1>Boletín SIAT-CT</h1>
 
-        <div id="storms"></div>
-        <section id="tropicalCicloneInfo"></section>
+        <div class="filters">
+            <div id="years"></div>
+            <div id="storms"></div>
+        </div>
+        <div class="tropicalCyclone">
+            <div id="cycloneNameContainer"></div>
+            <div class="cycloneBody">
+                <section id="tropicalCicloneInfo"></section>
 
-        <section class="section" id="alertZones">
-            <div class="zones">
-                <div id="regionsTable" class="tableContainer"></div>
-                <div class="mapContainer">
-                    <div class="activationButton"><span class="icon-mexico"></span> Mostrar regiones en el mapa</div>
-                    <div id="map"></div>
-                </div>
+                <section class="section" id="alertZones">
+                    <div class="zones">
+                        <div id="regionsTable" class="tableContainer"></div>
+                        <div class="mapContainer">
+                            <div class="activationButton"><span class="icon-mexico"></span> Mostrar regiones en el mapa</div>
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" id="eventInfo"></section>
+                <section class="section" id="comments"></section>
+                <section class="section" id="effects"></section>
             </div>
-        </section>
-
-        <section class="section" id="eventInfo"></section>
-        <section class="section" id="comments"></section>
-        <section class="section" id="effects"></section>
-
-        <!-- <section class="section" id="recomendations">
-            <h3>Recomendaciones</h3>
-        </section> -->
+        </div>
         <div id="enable_on_print">
 			
             <div class="tituloEfectos">
@@ -359,8 +267,8 @@
         })
     </script>
 
-    <script id="tropicalCicloneInfo-template" type="text/x-handlebars-template">
-        <h2>
+    <script id="cycloneName-template" type="text/x-handlebars-template">
+        <h2 id="cycloneName">
             <div class="titleContainer">
                 {{#if this.previous}}
                     <span class="icon-circle-left arrow" data-idBoletin="{{this.previous.idBoletin}}"></span>
@@ -376,6 +284,9 @@
             </div>
         </h2>
         <h3 id="tcDateHour"><span id="tcDate">{{#fechaLarga this.fecha}}{{/fechaLarga}}</span>, <span id="tcHour">{{this.hora}}</span></h3>
+    </script>
+
+    <script id="tropicalCicloneInfo-template" type="text/x-handlebars-template">
         <div class="tcInfo">
             <div><strong>Localización:</strong> <span id="tcPosition">{{this.localizacion}}</span></div>
             <div><strong>Desplazamiento:</strong> <span id="tcMovement">{{this.desplazamiento}}</span></div>
@@ -520,6 +431,19 @@
                 <option value="{{storm.nombre}}" data-idBoletin="{{storm.idBoletin}}">{{storm.nombre}} ( {{#fechaLarga this.fecha}}{{/fechaLarga}} )</option>
             {{else}}
                 <option value="">Sin ciclones</option>
+            {{/each}}
+        </select>
+    </script>
+    
+    <script id="years-template" type="text/x-handlebars-template">
+        <select name="" id="aniosEventos">
+            {{#each this as |year|}}
+                {{#if @first}}
+                    <option value="">Selecciona</option>
+                {{/if}}
+                <option value="{{year}}" data-start="01/01/{{year}}" data-end="01/01/{{#addInt year 1}}{{/addInt}}">Temporada {{year}}</option>
+            {{else}}
+                <option value="">Sin años disponibles para consulta</option>
             {{/each}}
         </select>
 	</script>

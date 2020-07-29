@@ -16,38 +16,156 @@ body {
 
     h1 { text-align: center; }
 
-    #tropicalCicloneInfo {
-        h2, h3 {
-            margin: 0;
-            text-align: center;
-        }
+    .tropicalCyclone {
+        position: relative;
 
-        h2 {
-            .titleContainer {
-                align-items: center;
-                display: flex;
-                justify-content: space-around;
-
-                .icon-circle-left, .icon-circle-right {
-                    cursor: pointer;
-                    &:hover { color: $guinda; }
-                }
-
-                .arrow.disable {
-                    color: $lightGray;
-                    &:hover { color: $lightGray; }
+        #cycloneNameContainer {
+            h2, h3 {
+                margin: 0;
+                text-align: center;
+            }
+    
+            h2 {
+                .titleContainer {
+                    align-items: center;
+                    display: flex;
+                    justify-content: space-around;
+    
+                    .icon-circle-left, .icon-circle-right {
+                        cursor: pointer;
+                        &:hover { color: $guinda; }
+                    }
+    
+                    .arrow.disable {
+                        color: $lightGray;
+                        &:hover { color: $lightGray; }
+                    }
                 }
             }
+    
+            h3 { 
+                color: $lightGray;
+                font-size: 0.75em;
+            }
         }
+    }
 
-        h3 { 
-            color: $lightGray;
-            font-size: 0.75em;
-        }
-
+    #tropicalCicloneInfo {
         .tcInfo {
             margin: 1em 0;
             text-align: justify;
+        }
+    }
+
+    .collapsible {
+        background-color: lightgray;
+        color: black;
+        cursor: pointer;
+        padding: 0.75em;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 0.75em;
+    }
+
+    .active, .collapsible:hover {
+        background-color: #555;
+        color: white;
+    }
+
+    .content {
+        padding: 2em;
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+    }
+
+    .content img {
+        width: 60%;
+    }
+
+    .content.img {
+        text-align: center;
+    }
+    
+    .content a {
+        display: block;
+        background-color: teal;
+        width: 60%;
+        margin: 0 auto;
+        color: white;
+    }
+
+    .tituloEfectos {
+        color: wheat;
+        font-family: Montserrat-Bold;
+        font-size: 1em;
+        text-align: center;
+        box-shadow: 0px 10px 10px 1px gray;
+        background-color: #9D2449;
+        text-decoration: none;
+        padding: 0.5em 0.25em;
+    }
+
+    .regularTxt {
+        font-size: 0.8em;
+        margin: 1em 0.5em;
+    }
+
+    .tituloTable {
+        font-weight: bold;
+        font-size: 1em;
+        text-align: center;
+        background-color: teal;
+        color: wheat;
+        padding: 0.25em;
+    }
+
+    .footer_box {
+        color: black;
+        font-family: Montserrat-Bold;
+        font-size: 0.75em;
+        text-align: center;
+    }
+
+    .textFooter {
+        font-family: Montserrat-Bold;
+        color: black;
+        font-size: 0.6em;
+        text-align: center;
+    }
+
+    .enlaces-img {
+        border: none; 
+        width:100%; 
+        height: 100%; 
+        text-align: center;
+    }
+
+    .enlaces-img img { 
+        width: 50%; 
+    }
+
+    .niveles {
+        background-color: lightgray;padding: 0.5em;font-size: 1.2em;
+    }
+
+    @media(max-width: 500px) {
+        .content img {
+            width: 100%;
+        }
+
+        .enlaces-img img {
+            width: 100%;
+        }
+
+        .footer_box {
+            font-size: 0.45em;
+        }
+
+        .niveles {
+            font-size: 1em;
         }
     }
 
@@ -205,7 +323,7 @@ body {
     }
 }
 
-#ciclonesTropicales {
+#ciclonesTropicales, #aniosEventos {
     display: block;
     margin: 2em 0;
     width: 100%;
