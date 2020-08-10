@@ -916,11 +916,11 @@ $(function() {
 
 		$('#-marea_tormenta').text($('#efectoMarea').val().replace(/(\n|\s{2,})/g,' ').replace(/\.\s*$/,''));
 		// mapa
-		if ($('#mapaTemp').attr("src") != "") {
+		if ($('#mapaTemp').attr("src") != "#" || $('#mapaTemp').attr("src").length > 1) {
 			$('#plantilla-mapa').attr("src", $('#mapaTemp').attr("src"));
 		}
 		else {
-			$('#plantilla-mapa').attr('src', document.getElementsByClassName("js-screenshot-image")[0].src);
+			$('#plantilla-mapa').attr('src', $("#imagen").attr("src"));
 		}
 
 		// tabla
