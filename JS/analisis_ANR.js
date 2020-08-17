@@ -1,16 +1,3 @@
-
-/*
-**********************************************************
-	funciones de outStatistics
-
-  Análisis  con Ageb y Puntual
-
-  Última Actualización 17/06/2020
-  Por: Miguel Vargas y Luis Pinto
-**********************************************************
-*/
-
-/////////////////////////////////////////////////////////
 //Variables
 // Población
 var pobTotal;
@@ -31,6 +18,7 @@ var TotalMayor60M = 0;
 var TotalLenguasIndigenas = 0;
 
 var resultados = {};
+var nivelAnalisis;
 
 var resultadosAnalisis = 0;
 var conteoLenguas = 0;
@@ -39,12 +27,6 @@ var queryPromises = [];
 var queryTaskPobArray = [];
 
 var maxFeaturesReturned = 20000;
-
-//Other variables from "principal.js"
-var randomTextInterval;
-var delay = 50;
-
-var id_anim_mun_cargando;
 /*
   Los nombres a buscar deben ser a nivel de capas
   TODO:
@@ -58,8 +40,8 @@ var tiposAnalisisEspecial = {
 }
 
 var nombresCapas = {
-  //"http://rmgir.proyectomesoamerica.org/server/rest/services/analysis/Analisis/MapServer": [
-  "http://servicios1.cenapred.unam.mx:6080/arcgis/rest/services/Analysis/Analisis/MapServer": [
+  "http://rmgir.proyectomesoamerica.org/server/rest/services/analysis/Analisis/MapServer": [
+  //"http://servicios1.cenapred.unam.mx:6080/arcgis/rest/services/Analysis/Analisis/MapServer": [
     {
       "name": "Área geoestadística básica urbana 2010",
       "parent": "Censo 2010 (INEGI, 2010)",
@@ -87,7 +69,7 @@ var nombresCapas = {
     },
     {
       "name": "Centros de Trabajo Educativo",
-      "parent": "Infraestructura Educativa (SEP, 2014-2015)",
+      "parent": "Infraestructura Educativa  (SEP, 2014-2015)",
       "tipo": "Escuelas"
     },
     {
@@ -317,86 +299,77 @@ var queryParams = {
 }
 
 var urls = {}
-var QueryTask;
-var Query;
-require(["esri/tasks/QueryTask", "esri/tasks/support/Query"], function(QueryTaski, Queryi) {
-    QueryTask = QueryTaski;
-    Query = Queryi;
-});
+
 function obtenerURLServicios(serviciosObj, geo, exceptLayers){
-    //console.log(serviciosObj);
-    require(["esri/request"], function(esriRequest) { 
+    require([
+        "esri/request"
+    ], function(
+        esriRequest
+    ) {
         var promises = [];
         var layersNames = [];
         var layersNamesCopy = [];
         var serviceUrls = [];
         Object.keys(serviciosObj).forEach(function(serviceUrl, idx){
             serviceUrls.push(serviceUrl);
-            var options = {
-                query: {
-                  f: 'json'
-                },
-                responseType: 'json'
-              };
-            var serviceRequest = esriRequest(serviceUrl,options);
-            //console.log(serviceRequest);
+            var serviceRequest = esriRequest(serviceUrl, {
+                query: { f: "json" },
+                responseType: "json"
+            });
             promises.push(serviceRequest);
             layersNames.push([]);
             layersNamesCopy.push([]);
-            Object.keys(serviciosObj[serviceUrl]).forEach(function(layerDataIdx){
-            layersNames[idx].push(serviciosObj[serviceUrl][layerDataIdx]["name"]);
-            layersNamesCopy[idx].push(serviciosObj[serviceUrl][layerDataIdx]["name"]);
+                Object.keys(serviciosObj[serviceUrl]).forEach(function(layerDataIdx){
+                layersNames[idx].push(serviciosObj[serviceUrl][layerDataIdx]["name"]);
+                layersNamesCopy[idx].push(serviciosObj[serviceUrl][layerDataIdx]["name"]);
             })
         });
-        //console.log('promesas',promises);
+
         Promise.all(promises).then(function(data){
-            //console.log('este es data',data);
-            data[0]=data[0].data; //esto extrae data del promise que debería ser un deferred
-            //console.log('este es nuevo data',data);
             data.forEach(function(serviceInfo, serviceInfoIdx){
-            // console.log('Este es service info',serviceInfo);
-            // console.log(serviceInfoIdx);
-            serviceInfo.layers.forEach(function(layer, layerIdx){
-                var indexOfLayer = layersNames[serviceInfoIdx].indexOf(layer.name);
-                if(indexOfLayer !== -1){
-                layersNames[serviceInfoIdx][indexOfLayer] = "";
-                var matchLayerInfo = serviciosObj[serviceUrls[serviceInfoIdx]][indexOfLayer];
-                var layerInfo = layer;
-                if(matchLayerInfo["parent"] === "" && layerInfo.parentLayerId === -1){
-                    urls[matchLayerInfo["tipo"]] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
-                } else {
-                    var parentLayerInfo = serviceInfo.layers[layerInfo.parentLayerId];
-                    if(parentLayerInfo.name === matchLayerInfo["parent"]){
-                    if(typeof matchLayerInfo["tipo"] === "string"){
-                        urls[matchLayerInfo["tipo"]] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
-                    } else{
-                        matchLayerInfo["tipo"].forEach(function(el){
-                        urls[el] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
-                        })
+                serviceInfo["data"]["layers"].forEach(function(layer, layerIdx){
+                    var indexOfLayer = layersNames[serviceInfoIdx].indexOf(layer.name);
+                    if(indexOfLayer !== -1){
+                        layersNames[serviceInfoIdx][indexOfLayer] = "";
+                        var matchLayerInfo = serviciosObj[serviceUrls[serviceInfoIdx]][indexOfLayer];
+                        var layerInfo = layer;
+                        if(matchLayerInfo["parent"] === "" && layerInfo.parentLayerId === -1){
+                            urls[matchLayerInfo["tipo"]] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
+                        } else {
+                            var parentLayerInfo = serviceInfo["data"]["layers"][layerInfo.parentLayerId];
+                            if(parentLayerInfo.name === matchLayerInfo["parent"]){
+                                if(typeof matchLayerInfo["tipo"] === "string"){
+                                    urls[matchLayerInfo["tipo"]] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
+                                } else{
+                                    matchLayerInfo["tipo"].forEach(function(el){
+                                    urls[el] = serviceUrls[serviceInfoIdx] + "/" + layerInfo.id;
+                                    })
+                                }
+                            } else {
+                                console.log("No se encontró: (servicio)" + parentLayerInfo.name + ", (proporcionado)" + matchLayerInfo["parent"])
+                            } 
+                        }
+
+                        layersNamesCopy[serviceInfoIdx].splice(indexOfLayer, 1);
+                        if(layersNamesCopy[serviceInfoIdx].length === 0) return;
                     }
-                    } else {
-                        console.log("No se encontró: (servicio)" + parentLayerInfo.name + ", (proporcionado)" + matchLayerInfo["parent"])
-                    } 
-                }
-                layersNamesCopy[serviceInfoIdx].splice(indexOfLayer, 1);
-                if(layersNamesCopy[serviceInfoIdx].length === 0) return;
-                }
-            });
+                });
             });
             
             var evt = new CustomEvent('urls-listas', {detail: {geometry: geo, exceptLayers: exceptLayers}});
             document.dispatchEvent(evt);
         }, function(reason){
             console.log("Ocurrió un error", reason);
-        });
+        })
     });
 }
 
-function realizarAnalisis(geo, exceptLayers = []){
+function realizarAnalisis(geo, exceptLayers = [], nivel){
     pobTotal = [];
     pobTotalAjustada = {};
     pobTotalXEstado = [];
     estados = [];
+    nivelAnalisis = nivel;
 
     //TOTALES
     TotalPobFinal = 0;
@@ -414,149 +387,49 @@ function realizarAnalisis(geo, exceptLayers = []){
     resultadosAnalisis = 0;
     conteoLenguas = 0;
 
-    obtenMunicipios(geo);
-
     if(Object.keys(urls) == 0) obtenerURLServicios(nombresCapas, geo, exceptLayers);
     else {
         if(queryPromises.length > 0){
             queryPromises.forEach(function(query){
-                //console.log("cancelando", query);
-                query=null;
+                console.log("cancelando", query);
+                query.cancel();
             })
         }
         if(queryTaskPobArray.length > 0){
             queryTaskPobArray.forEach(function(query){
-                //console.log("cancelando Pob", query);
-                query=null;
+                console.log("cancelando Pob", query);
+                query.cancel();
             })
         }
-        var evt = new CustomEvent('urls-listas', {detail: {geometry: geo, exceptLayers: exceptLayers}});
+        var evt = new CustomEvent('urls-listas', {detail: {geometry: geo, exceptLayers: exceptLayers, nivel: nivelAnalisis}});
         document.dispatchEvent(evt);
     }
 }
-function anima_mun_carga(){
-    let current = $('#table-municipios label').text();
-    let after = current + ".";
-    $('#table-municipios label').text(after);    
-    if (after == "Cargando...."){
-        $('#table-municipios label').text("Cargando");
-    }
-}
-function obtenMunicipios(geometry) {
-    require([
-        "esri/tasks/support/Query",
-        "esri/tasks/GeometryService",
-        "esri/tasks/support/ProjectParameters"
-    ], function(
-        Query,
-        GeometryService,
-        ProjectParameters
-    ) {
-        $('#table-municipios table').remove();
-        $('#table-municipios label').text("Cargando").show();
-        $('.loading-gif img').show();
-        id_anim_mun_cargando = setInterval(anima_mun_carga, 1000);
-
-        var geometryService = new GeometryService({url: "http://rmgir.proyectomesoamerica.org/server/rest/services/Utilities/Geometry/GeometryServer"});
-        
-        let layer = map.findLayerById("municipios");
-        
-        let query = new Query();
-        query.geometry = geometry;
-        query.returnGeometry = true;
-        query.outFields = [ "*" ];
-        query.outSpatialReference = view["spatialReference"];
-        //query.where = "admin1Name_es = 'Tabasco'";
-
-        
-        //layer.refresh();
-
-        //console.log(query.where);
-
-        layer.queryFeatures(query).then(function(result) {
-            var tabla = {};
-            var geometries = result["features"].map(function(feature) { return feature["geometry"]; });
-            var ids = result["features"].map(function(feature) {
-                const estado = feature["attributes"].admin1Name_es;
-                const municipio = feature["attributes"].admin2Name_es
-                if (!(estado in tabla)){
-                    tabla[estado] = [];
-                }
-                tabla[estado].push(municipio);
-                return feature["attributes"].OBJECTID; 
-            });
-            
-            creaTablaMunicipios(tabla);
-            var params = new ProjectParameters({
-                geometries: geometries,
-                outSpatialReference: view["spatialReference"]
-            });
-            geometryService.project(params).then(function(r) {
-                layer.definitionExpression = "OBJECTID in ("+ids.join()+")";
-                layer.opacity = 0.5;
-                //Vulve a funcionar el sketch
-                $(".esri-sketch__button").removeClass("sketchDisabled");
-                $(".esri-sketch__button").removeAttr("disabled","");
-                $(".esri-icon-trash").removeClass("sketchDisabled")
-                $(".esri-icon-trash").removeAttr("disabled","");
-                $('.loading-gif img').hide();
-            });
-        }).catch(function(error){
-            clearInterval(id_anim_mun_cargando);
-            $('#table-municipios label').text("El área es demasiado grande").show();
-            //Vulve a funcionar el sketch
-            $(".esri-sketch__button").removeClass("sketchDisabled");
-            $(".esri-sketch__button").removeAttr("disabled","");
-            $('.loading-gif img').hide();
-        });
-    });
-}
-function creaTablaMunicipios(datos) {
-    $('#table-municipios table').remove();
-    $('#table-municipios label').hide();
-    clearInterval(id_anim_mun_cargando);
-    if (Object.keys(datos).length > 0) {
-        $('#table-municipios').append("<table><thead><tr><td>Estado</td><td>Municipio(s)</td></tr></thead><tbody></tbody></table>")
-        estd = Object.keys(datos)
-        estd.sort();
-        for (const estado in estd) {
-            datos[estd[estado]].sort();
-            $('#table-municipios tbody').append("<tr><td>"+estd[estado]+"</td><td>"+datos[estd[estado]].join(", ")+"</td></tr>");
-        }
-    }
-    else {
-        $('#table-municipios label').text("No hay municipios").show();
-    }
-}
-function agregasComas(nStr) {
-    nStr += '';
-    x = nStr.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-    }
-    return x1 + x2;
-}
 
 document.addEventListener('urls-listas', function(response){
+    require([
+        "esri/tasks/QueryTask",
+        "esri/tasks/support/Query"
+    ], function(
+        QueryTask,
+        Query
+    ) {
         var geo = response.detail.geometry;
         var exceptLayers = response.detail.exceptLayers;
+        
         queryPromises = [];
         resultados = {};
         if(exceptLayers.length > 0){
             removeLayers(exceptLayers);
         }
-        //console.log(queryParams);
         Object.keys(queryParams).forEach(function(key){
-            var queryTask = new QueryTask(urls[key]);
+            var queryTask = new QueryTask({ url: urls[key] });
             var query = new Query();
             query.returnGeometry = false;
             query.geometry = geo;
             query.outFields = queryParams[key].outFields;
             query.where = queryParams[key].where;
-            query.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
+            query.spatialRelationship = "intersects";
             if(tiposAnalisisEspecial["Poblacion"] && tiposAnalisisEspecial["Poblacion"].includes(key)){
                 queryPromises.push(queryTask.executeForIds(query));
             } else if(tiposAnalisisEspecial["GradoVulnerabilidadSocial"] && tiposAnalisisEspecial["GradoVulnerabilidadSocial"].includes(key)){
@@ -568,16 +441,15 @@ document.addEventListener('urls-listas', function(response){
             }
             
         })
-        //console.log('this is query promises',queryPromises);
-        Promise.all(queryPromises).then(function(result){ 
-            //console.log('este es result',result);
+
+        Promise.all(queryPromises).then(function(result){  
             Object.keys(queryParams).forEach(function(key, idx){
                 if(tiposAnalisisEspecial["Poblacion"] && tiposAnalisisEspecial["Poblacion"].includes(key)){       
                     var tipo;
                     if(key == "PoblacionAgeb") tipo = "ageb";
                     else if(key == "PoblacionRural") tipo = "rural";
                     else if(key == "PoblacionITER") tipo = "iter";
-                    //console.log("la cosa rara", result[idx]);
+                    
                     processResultPob(tipo, urls[key], queryParams[key].outFields, result[idx], 0);
                 } else if(tiposAnalisisEspecial["GradoVulnerabilidadSocial"] && tiposAnalisisEspecial["GradoVulnerabilidadSocial"].includes(key)){
                     var gradoVulnerabilidadSocial = {
@@ -592,7 +464,6 @@ document.addEventListener('urls-listas', function(response){
                     });
                     resultados[key] = JSON.stringify(gradoVulnerabilidadSocial);
                     resultadosAnalisis++;
-                    //t Analisis: ",resultadosAnalisis);
                 } else if(tiposAnalisisEspecial["LenguasIndigenas"] && tiposAnalisisEspecial["LenguasIndigenas"].includes(key)){
                     processResultLenguas(result[idx], urls[key], queryParams[key].outFields);
                 } else {
@@ -600,29 +471,24 @@ document.addEventListener('urls-listas', function(response){
                 }
             })
             if(resultadosAnalisis === Object.keys(tiposAnalisisEspecial).length){
-                
-                var evt = new CustomEvent('analisis-completo', { 'detail': resultados });
+                var evt = new CustomEvent('analisis-completo', { 'detail': { resultados: resultados, nivel: nivelAnalisis} });
                 document.dispatchEvent(evt);
             }       
         }, function(error){
             console.log(err);
-        });
-    
+        })
+    });
 });
 
 document.addEventListener('lenguas-obtenidas', function(){
-    //console.log("Lenguas obtenidas. ESCUCHADO")
     resultadosAnalisis++;
-    //console.log("esto es result Analisis: ",resultadosAnalisis);
     if(resultadosAnalisis === Object.keys(tiposAnalisisEspecial).length){
-        
-        var evt = new CustomEvent('analisis-completo', { 'detail': resultados });
+        var evt = new CustomEvent('analisis-completo', { 'detail': { resultados: resultados, nivel: nivelAnalisis} });
         document.dispatchEvent(evt);
     }   
 })
 
 document.addEventListener('poblacion-obtenida', function(){
-   // console.log("Poblacion obtenida ESCUCHADO!!!!");
     sumaPoblacion();
     resultados["Poblacion"] = TotalPobFinal;
     resultados["Viviendas"] = TotalVivFinal;
@@ -635,59 +501,14 @@ document.addEventListener('poblacion-obtenida', function(){
     resultados["TotalMayor60F"] = TotalMayor60F;
     resultados["TotalMayor60M"] = TotalMayor60M;
     resultadosAnalisis++;
-    //console.log("esto es result Analisis: ",resultadosAnalisis);
 
     if(resultadosAnalisis === Object.keys(tiposAnalisisEspecial).length){
-        
-        var evt = new CustomEvent('analisis-completo', { 'detail': resultados });
+        var evt = new CustomEvent('analisis-completo', { 'detail': { resultados: resultados, nivel: nivelAnalisis} });
         document.dispatchEvent(evt);
     }
 })
-document.addEventListener('analisis-completo', function(result){
-    //console.log(result);
-    clearInterval(randomTextInterval);
-    $("#Poblacion .resultNumber").text(agregasComas(result.detail["Poblacion"]));
-    $("#Viviendas .resultNumber").text(agregasComas(result.detail["Viviendas"]));
-    $("#Hospitales .resultNumber").text(agregasComas(result.detail["Hospitales"]));
-    $("#Escuelas .resultNumber").text(agregasComas(result.detail["Escuelas"]));
-    $("#Supermercados .resultNumber").text(agregasComas(result.detail["Supermercados"]));
-    $("#Aeropuertos .resultNumber").text(agregasComas(result.detail["Aeropuertos"]));
-    $("#Hoteles .resultNumber").text(agregasComas(result.detail["Hoteles"]));
-    $("#Bancos .resultNumber").text(agregasComas(result.detail["Bancos"]));
-    $("#Gasolineras .resultNumber").text(agregasComas(result.detail["Gasolineras"]));
-    $("#Presas .resultNumber").text(agregasComas(result.detail["Presas"]));
-    $("#Ganadero .resultNumber").text(agregasComas(result.detail["Ganaderias"]));
-    $("#Colonias .resultNumber").text(agregasComas(result.detail["Colonias"]));
-    $("#AntropologiaINAH .resultNumber").text(agregasComas(result.detail["BibliotecaINAH"] + result.detail["MonumentoHistorico"] + result.detail["MuseoINAH"] + result.detail["PatrimonioMundial"] + result.detail["ZonasArqueologicas"]));
-  
-    var gvs = JSON.parse(result.detail["GradoVulnerabilidadSocial"]);
-    $("#gvsMuyBajo").text(agregasComas(gvs["Muy Bajo"]));
-    $("#gvsBajo").text(agregasComas(gvs["Bajo"]));
-    $("#gvsMedio").text(agregasComas(gvs["Medio"]));
-    $("#gvsAlto").text(agregasComas(gvs["Alto"]));
-    $("#gvsMuyAlto").text(agregasComas(gvs["Muy Alto"]));
-  
-    //
-    $("#pob_m_t .resultNumber").text(agregasComas(result.detail["TotalPobMas"]));
-    $("#pob_f_t .resultNumber").text(agregasComas(result.detail["TotalPobFem"]));
-    $("#pob_menor_12").text(agregasComas(result.detail["TotalMenor12"]));
-    $("#pob_m_menor_12").text(agregasComas(result.detail["TotalMenor12M"]));
-    $("#pob_f_menor_12").text(agregasComas(result.detail["TotalMenor12F"]));
-    $("#pob_mayor_60").text(agregasComas(result.detail["TotalMayor60"]));
-    $("#pob_m_mayor_60").text(agregasComas(result.detail["TotalMayor60M"]));
-    $("#pob_f_mayor_60").text(agregasComas(result.detail["TotalMayor60F"]));
-    $("#LenguasIndigenas .resultNumber").text(agregasComas(result.detail["TotalLenguasIndigenas"]));
-  
-    /*Abrir el panel al hacer un análisis*/
-    // if($(".ui-panel").hasClass("ui-panel-closed"))
-    //   $("#ui-settings-button")[0].click();
-    // if($("#analisis-container div")[0].attributes[1].value == "true")
-    //       $("#analisis-container h4")[0].click();
-    
-    generaTabla(pobTotalXEstado);
-});
+
 function removeLayers(layerNames){
-    //
     var index;
     layerNames.forEach(function(name){
         index = Object.keys(queryParams).indexOf(name);
@@ -712,120 +533,257 @@ function getQuery(array, objectidName = "OBJECTID"){
 }
 
 function processResultLenguas(idsArray, serviceUrl, outFields){
-    
-    if(idsArray){
-        var queryTask = new QueryTask(serviceUrl);
-        var query = new Query();
-        query.returnGeometry = false;
-        query.outFields = outFields;
-        query.where = getQuery(idsArray);
-        query.returnDistinctValues = true;
-        queryTask.execute(query).then(function(results){
-            TotalLenguasIndigenas += results.features.length;
-            conteoLenguas++;
-            if(conteoLenguas === tiposAnalisisEspecial["LenguasIndigenas"].length) {
-                resultados["TotalLenguasIndigenas"] = TotalLenguasIndigenas;
-                var evt = new CustomEvent('lenguas-obtenidas');
-                document.dispatchEvent(evt);
-            }
-        });
-    } else {
-        conteoLenguas++;
-            if(conteoLenguas === tiposAnalisisEspecial["LenguasIndigenas"].length) {
-                resultados["TotalLenguasIndigenas"] = TotalLenguasIndigenas;
-                var evt = new CustomEvent('lenguas-obtenidas');
-                document.dispatchEvent(evt);
-            }
-    }
-}
-
-function processResultPob(type, url, outFields, idsArray, suma, pobResult = []){
-    //console.log("estos son los queryparams outfields",outFields);
-    //console.log("esto es idarray: ",idsArray)
-    if(!idsArray){
-         pobTotalAjustada[type] = [];
-         if(Object.keys(pobTotalAjustada).length === tiposAnalisisEspecial["Poblacion"].length){
-            var evt = new CustomEvent('poblacion-obtenida');
-            document.dispatchEvent(evt);
-        }
-    } else {
-            var objId = type == "ageb" ? "OBJECTID_1" : "OBJECTID";
-            var ids = idsArray.splice(0, maxFeaturesReturned);
-            var queryTask = new QueryTask(url);
+    require([
+        "esri/tasks/QueryTask",
+        "esri/tasks/support/Query"
+    ], function(
+        QueryTask,
+        Query
+    ) {
+        if(idsArray){
+            var queryTask = new QueryTask({ url: serviceUrl });
             var query = new Query();
             query.returnGeometry = false;
             query.outFields = outFields;
-            query.spatialRelationship = "esriSpatialRelIntersects";
-            query.where = objId + " IN (" + ids.join(",") + ")";
-            
-            // console.log('este es el query: ',query);
-            // console.log('este es el queryTask: ',queryTask);
-            var queryPob = queryTask.execute(query).then(function(result){ //el then aregló todo
-                
-                //console.log("este es result del query de pob",result);
-                for (var idx in result.features) {
-                    if(!pobResult.hasOwnProperty(result.features[idx].attributes.NOM_ENT)){
-                        if(!estados.includes(result.features[idx].attributes.NOM_ENT)) estados.push(result.features[idx].attributes.NOM_ENT);
-                        
-                        pobResult[result.features[idx].attributes.NOM_ENT] = {
-                            "Estado": result.features[idx].attributes.NOM_ENT,
-                            "TotPob": result.features[idx].attributes.POBTOT,
-                            "TotViv": result.features[idx].attributes.VIVTOT,
-                            "PobMas": result.features[idx].attributes.POBMAS,
-                            "PobFem": result.features[idx].attributes.POBFEM,
-                            "Menor12": result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
-                            "Menor12M": result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
-                            "Menor12F": result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
-                            "Mas60": result.features[idx].attributes.P_60YMAS,
-                            "Mas60M": result.features[idx].attributes.P_60YMAS_M,
-                            "Mas60F": result.features[idx].attributes.P_60YMAS_F
-                        }
-                    } else {
-                        pobResult[result.features[idx].attributes.NOM_ENT] = {
-                            "Estado": result.features[idx].attributes.NOM_ENT,
-                            "TotPob": pobResult[result.features[idx].attributes.NOM_ENT]["TotPob"] + result.features[idx].attributes.POBTOT,
-                            "TotViv": pobResult[result.features[idx].attributes.NOM_ENT]["TotViv"] + result.features[idx].attributes.VIVTOT,
-                            "PobMas": pobResult[result.features[idx].attributes.NOM_ENT]["PobMas"] + result.features[idx].attributes.POBMAS,
-                            "PobFem": pobResult[result.features[idx].attributes.NOM_ENT]["PobFem"] + result.features[idx].attributes.POBFEM,
-                            "Menor12": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12"] + result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
-                            "Menor12M": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12M"] + result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
-                            "Menor12F": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12F"] + result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
-                            "Mas60": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60"] + result.features[idx].attributes.P_60YMAS,
-                            "Mas60M": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60M"] + result.features[idx].attributes.P_60YMAS_M,
-                            "Mas60F": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60F"] + result.features[idx].attributes.P_60YMAS_F
-                        }
-                    }
-                    suma += result.features[idx].attributes.POBTOT;
+            query.where = getQuery(idsArray);
+            query.returnDistinctValues = true;
+            queryTask.execute(query).then(function(results){
+                TotalLenguasIndigenas += results.features.length;
+                conteoLenguas++;
+                if(conteoLenguas === tiposAnalisisEspecial["LenguasIndigenas"].length) {
+                    resultados["TotalLenguasIndigenas"] = TotalLenguasIndigenas;
+                    var evt = new CustomEvent('lenguas-obtenidas');
+                    document.dispatchEvent(evt);
                 }
-
-                if(idsArray.length > 0) {
-                    processResultPob(type, url, outFields, idsArray, suma, pobResult);
-                    console.log("Restantes: " + type + ":" + idsArray.length)
-                } else {
-                    pobTotal.push(pobResult);
-
-                    //console.log(type, suma);
-                    
-                    Object.keys(pobResult).forEach(function(d){
-                        ajustaDatosObjPob(pobResult[d]);
-                    });
-
-                    pobTotalAjustada[type] = pobResult;
-                    //console.log(Object.keys(pobTotalAjustada).length == tiposAnalisisEspecial["Poblacion"].length);
-                    if(Object.keys(pobTotalAjustada).length === tiposAnalisisEspecial["Poblacion"].length){
-                        var evt = new CustomEvent('poblacion-obtenida');
-                        document.dispatchEvent(evt);
-                    }
+            });
+        } else {
+            conteoLenguas++;
+                if(conteoLenguas === tiposAnalisisEspecial["LenguasIndigenas"].length) {
+                    resultados["TotalLenguasIndigenas"] = TotalLenguasIndigenas;
+                    var evt = new CustomEvent('lenguas-obtenidas');
+                    document.dispatchEvent(evt);
                 }
-            }).then(function(value) {
-                //console.log("exito!",value); // Success!
-              }, function(reason) {
-                console.log("error",reason); // Error!
-              });;
-            queryTaskPobArray.push(queryPob);
-    }
+        }
+    });
 }
 
+function processResultPob(type, url, outFields, idsArray, suma, pobResult = []){
+    require([
+        "esri/tasks/QueryTask",
+        "esri/tasks/support/Query"
+    ], function(
+        QueryTask,
+        Query
+    ) {
+        if(!idsArray){
+            pobTotalAjustada[type] = [];
+            if(Object.keys(pobTotalAjustada).length === tiposAnalisisEspecial["Poblacion"].length){
+               var evt = new CustomEvent('poblacion-obtenida');
+               document.dispatchEvent(evt);
+           }
+       } else {
+           var objId = type == "ageb" ? "OBJECTID_1" : "OBJECTID";
+           var ids = idsArray.splice(0, maxFeaturesReturned);
+           var queryTask = new QueryTask({ url: url });
+           var query = new Query();
+           query.returnGeometry = false;
+           query.outFields = outFields;
+           query.where = objId + " IN (" + ids.join(",") + ")";
+   
+           var queryPob = queryTask.execute(query).then(function(result){
+               for (var idx in result.features) {
+                   if(!pobResult.hasOwnProperty(result.features[idx].attributes.NOM_ENT)){
+                       if(!estados.includes(result.features[idx].attributes.NOM_ENT)) estados.push(result.features[idx].attributes.NOM_ENT);
+                       pobResult[result.features[idx].attributes.NOM_ENT] = {
+                           "Estado": result.features[idx].attributes.NOM_ENT,
+                           "TotPob": result.features[idx].attributes.POBTOT,
+                           "TotViv": result.features[idx].attributes.VIVTOT,
+                           "PobMas": result.features[idx].attributes.POBMAS,
+                           "PobFem": result.features[idx].attributes.POBFEM,
+                           "Menor12": result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
+                           "Menor12M": result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
+                           "Menor12F": result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
+                           "Mas60": result.features[idx].attributes.P_60YMAS,
+                           "Mas60M": result.features[idx].attributes.P_60YMAS_M,
+                           "Mas60F": result.features[idx].attributes.P_60YMAS_F
+                       }
+                   } else {
+                       pobResult[result.features[idx].attributes.NOM_ENT] = {
+                           "Estado": result.features[idx].attributes.NOM_ENT,
+                           "TotPob": pobResult[result.features[idx].attributes.NOM_ENT]["TotPob"] + result.features[idx].attributes.POBTOT,
+                           "TotViv": pobResult[result.features[idx].attributes.NOM_ENT]["TotViv"] + result.features[idx].attributes.VIVTOT,
+                           "PobMas": pobResult[result.features[idx].attributes.NOM_ENT]["PobMas"] + result.features[idx].attributes.POBMAS,
+                           "PobFem": pobResult[result.features[idx].attributes.NOM_ENT]["PobFem"] + result.features[idx].attributes.POBFEM,
+                           "Menor12": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12"] + result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
+                           "Menor12M": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12M"] + result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
+                           "Menor12F": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12F"] + result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
+                           "Mas60": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60"] + result.features[idx].attributes.P_60YMAS,
+                           "Mas60M": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60M"] + result.features[idx].attributes.P_60YMAS_M,
+                           "Mas60F": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60F"] + result.features[idx].attributes.P_60YMAS_F
+                       }
+                   }
+                   suma += result.features[idx].attributes.POBTOT;
+               }
+   
+               if(idsArray.length > 0) {
+                   processResultPob(type, url, outFields, idsArray, suma, pobResult);
+                   console.log("Restantes: " + type + ":" + idsArray.length)
+               } else {
+                   pobTotal.push(pobResult);
+   
+                   console.log(type, suma);
+                   
+                   Object.keys(pobResult).forEach(function(d){
+                       ajustaDatosObjPob(pobResult[d]);
+                   });
+   
+                   pobTotalAjustada[type] = pobResult;
+   
+                   if(Object.keys(pobTotalAjustada).length === tiposAnalisisEspecial["Poblacion"].length){
+                       var evt = new CustomEvent('poblacion-obtenida');
+                       document.dispatchEvent(evt);
+                   }
+               }
+           })
+   
+           queryTaskPobArray.push(queryPob);
+       }
+    });
+}
+
+// function processResultPob(idsArray, serviceUrl, type){
+//     var pobResult = [];
+
+//     var objId = type == "ageb" ? "OBJECTID_1" : "OBJECTID";
+//     var queryTask = new esri.tasks.QueryTask(serviceUrl);
+//     var query = new esri.tasks.Query();
+//     query.returnGeometry = false;
+//     query.where = getQuery(idsArray, objId);
+//     query.groupByFieldsForStatistics = ["NOM_ENT"];
+
+//     var pobSD = new esri.tasks.StatisticDefinition();
+//     pobSD.statisticType = "sum";
+//     pobSD.onStatisticField = "POBTOT";
+//     pobSD.outStatisticFieldName = "POBTOT";
+//     var pobMSD = new esri.tasks.StatisticDefinition();
+//     pobMSD.statisticType = "sum";
+//     pobMSD.onStatisticField = "POBMAS";
+//     pobMSD.outStatisticFieldName = "POBMAS";
+//     var pobFSD = new esri.tasks.StatisticDefinition();
+//     pobFSD.statisticType = "sum";
+//     pobFSD.onStatisticField = "POBFEM";
+//     pobFSD.outStatisticFieldName = "POBFEM";
+//     var pob60SD = new esri.tasks.StatisticDefinition();
+//     pob60SD.statisticType = "sum";
+//     pob60SD.onStatisticField = "P_60YMAS";
+//     pob60SD.outStatisticFieldName = "P_60YMAS";
+//     var pob60MSD = new esri.tasks.StatisticDefinition();
+//     pob60MSD.statisticType = "sum";
+//     pob60MSD.onStatisticField = "P_60YMAS_M";
+//     pob60MSD.outStatisticFieldName = "P_60YMAS_M";
+//     var pob60FSD = new esri.tasks.StatisticDefinition();
+//     pob60FSD.statisticType = "sum";
+//     pob60FSD.onStatisticField = "P_60YMAS_F";
+//     pob60FSD.outStatisticFieldName = "P_60YMAS_F";
+//     var pob12SD = new esri.tasks.StatisticDefinition();
+//     pob12SD.statisticType = "sum";
+//     pob12SD.onStatisticField = "P_12YMAS";
+//     pob12SD.outStatisticFieldName = "P_12YMAS";
+//     var pob12MSD = new esri.tasks.StatisticDefinition();
+//     pob12MSD.statisticType = "sum";
+//     pob12MSD.onStatisticField = "P_12YMAS_M";
+//     pob12MSD.outStatisticFieldName = "P_12YMAS_M";
+//     var pob12FSD = new esri.tasks.StatisticDefinition();
+//     pob12FSD.statisticType = "sum";
+//     pob12FSD.onStatisticField = "P_12YMAS_F";
+//     pob12FSD.outStatisticFieldName = "P_12YMAS_F";
+//     var vivSD = new esri.tasks.StatisticDefinition();
+//     vivSD.statisticType = "sum";
+//     vivSD.onStatisticField = "VIVTOT";
+//     vivSD.outStatisticFieldName = "VIVTOT";
+
+//     query.outStatistics = [pobSD, pobMSD, pobFSD, pob60SD, pob60MSD, pob60FSD, pob12SD, pob12MSD, pob12FSD, vivSD];
+
+//     queryTask.execute(query, function(results){
+//         results.features.forEach(function(feature, idx){
+//             if(!estados.includes(feature.attributes.NOM_ENT)) estados.push(feature.attributes.NOM_ENT);
+//             pobResult[feature.attributes.NOM_ENT] = {
+//                 "Estado": feature.attributes.NOM_ENT,
+//                 "TotPob": feature.attributes.POBTOT,
+//                 "TotViv": feature.attributes.VIVTOT,
+//                 "PobMas": feature.attributes.POBMAS,
+//                 "PobFem": feature.attributes.POBFEM,
+//                 "Menor12": feature.attributes.POBTOT - feature.attributes.P_12YMAS,
+//                 "Menor12M": feature.attributes.POBMAS - feature.attributes.P_12YMAS_M,
+//                 "Menor12F": feature.attributes.POBFEM - feature.attributes.P_12YMAS_F,
+//                 "Mas60": feature.attributes.P_60YMAS,
+//                 "Mas60M": feature.attributes.P_60YMAS_M,
+//                 "Mas60F": feature.attributes.P_60YMAS_F
+//             }
+//         })
+
+//         pobTotal.push(pobResult);
+//         Object.keys(pobResult).forEach(function(d){
+//             ajustaDatosObjPob(pobResult[d]);
+//         });
+
+//         pobTotalAjustada[type] = pobResult;
+
+//         if(Object.keys(pobTotalAjustada).length === 2){
+//             var evt = new CustomEvent('poblacion-obtenida');
+//             document.dispatchEvent(evt);
+//         }
+//     })
+// }
+
+// function processResultPob(type, result){
+//     var pobResult = [];
+//     var suma = 0;
+
+//     for (var idx in result.features) {
+//         if(!pobResult.hasOwnProperty(result.features[idx].attributes.NOM_ENT)){
+//             if(!estados.includes(result.features[idx].attributes.NOM_ENT)) estados.push(result.features[idx].attributes.NOM_ENT);
+//             pobResult[result.features[idx].attributes.NOM_ENT] = {
+//                 "Estado": result.features[idx].attributes.NOM_ENT,
+//                 "TotPob": result.features[idx].attributes.POBTOT,
+//                 "TotViv": result.features[idx].attributes.VIVTOT,
+//                 "PobMas": result.features[idx].attributes.POBMAS,
+//                 "PobFem": result.features[idx].attributes.POBFEM,
+//                 "Menor12": result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
+//                 "Menor12M": result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
+//                 "Menor12F": result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
+//                 "Mas60": result.features[idx].attributes.P_60YMAS,
+//                 "Mas60M": result.features[idx].attributes.P_60YMAS_M,
+//                 "Mas60F": result.features[idx].attributes.P_60YMAS_F
+//             }
+//         } else {
+//             pobResult[result.features[idx].attributes.NOM_ENT] = {
+//                 "Estado": result.features[idx].attributes.NOM_ENT,
+//                 "TotPob": pobResult[result.features[idx].attributes.NOM_ENT]["TotPob"] + result.features[idx].attributes.POBTOT,
+//                 "TotViv": pobResult[result.features[idx].attributes.NOM_ENT]["TotViv"] + result.features[idx].attributes.VIVTOT,
+//                 "PobMas": pobResult[result.features[idx].attributes.NOM_ENT]["PobMas"] + result.features[idx].attributes.POBMAS,
+//                 "PobFem": pobResult[result.features[idx].attributes.NOM_ENT]["PobFem"] + result.features[idx].attributes.POBFEM,
+//                 "Menor12": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12"] + result.features[idx].attributes.POBTOT - result.features[idx].attributes.P_12YMAS,
+//                 "Menor12M": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12M"] + result.features[idx].attributes.POBMAS - result.features[idx].attributes.P_12YMAS_M,
+//                 "Menor12F": pobResult[result.features[idx].attributes.NOM_ENT]["Menor12F"] + result.features[idx].attributes.POBFEM - result.features[idx].attributes.P_12YMAS_F,
+//                 "Mas60": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60"] + result.features[idx].attributes.P_60YMAS,
+//                 "Mas60M": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60M"] + result.features[idx].attributes.P_60YMAS_M,
+//                 "Mas60F": pobResult[result.features[idx].attributes.NOM_ENT]["Mas60F"] + result.features[idx].attributes.P_60YMAS_F
+//             }
+//         }
+//         suma += result.features[idx].attributes.POBTOT;
+//     }
+    
+//     pobTotal.push(pobResult);
+
+//     console.log(type, suma);
+    
+//     Object.keys(pobResult).forEach(function(d){
+//         ajustaDatosObjPob(pobResult[d]);
+//     });
+
+//     pobTotalAjustada[type] = pobResult;
+// }
 
 function sumaPoblacion(){
     var obj;
@@ -969,14 +927,6 @@ function ajustaDatosObjPob(obj){
 
     return obj;
 }
-
-function createRandomText(){
-    randomTextInterval = setInterval(function(){
-            $(".resultNumber").each(function(){
-              $(this).text(agregasComas(Math.floor(Math.random() * 99999)));
-            })
-          }, delay);
-  }
 /*
 **********************************************************
 	Fin funciones de Obtener resultados outStatistics

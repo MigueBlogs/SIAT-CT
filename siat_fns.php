@@ -190,7 +190,7 @@
             "CONNECT BY PRIOR ID_BOLETIN = BOL_ID_BOLETIN) H ".
             "INNER JOIN CATEGORIA_EVENTO C ".
             "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
-            "ORDER BY H.FECHA DESC";
+            "ORDER BY H.FECHA DESC, H.ID_BOLETIN DESC";
 
         $query = oci_parse($conn, $queryStr);
 
@@ -238,7 +238,7 @@
             "CONNECT BY PRIOR BOL_ID_BOLETIN = ID_BOLETIN) H ".
             "INNER JOIN CATEGORIA_EVENTO C ".
             "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
-            "ORDER BY FECHA DESC";
+            "ORDER BY FECHA DESC, ID_BOLETIN DESC";
 
         $query = oci_parse($conn, $queryStr);
 

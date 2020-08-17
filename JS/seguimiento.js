@@ -11,7 +11,6 @@ $(function() {
             },
             dataType: "json",
             success: function(data) {
-                debugger
                 var noAlertamiento = data.length + 1;
                 $("#Number").text(noAlertamiento);
 
