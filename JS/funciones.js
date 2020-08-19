@@ -240,6 +240,7 @@ $(function() {
 		$("#ButtonFecha").hide();
 		$("#mostrar").hide();
 		$("#mapa_ciclon").hide();
+		$("#abort").hide();
 		$('#capture').hide();
 		$('#mapa_ciclon').hide();
 		$('#ButtonInfo').hide();
@@ -302,7 +303,7 @@ $(function() {
 
 	function saveEvent(){
 		if($('#textEvent').val() !== ''){
-			$('#name').text($('#textEvent').val());
+			$('#name').text($('#textEvent').val().trim().replace(/\"/g, ""));
 			$('#type').text($('#opt').val());
 			$("#type").attr("data-typeId", getIdCicloneType($('#opt').val()));
 			$('#sea').text($('#oceano').val());
@@ -980,6 +981,7 @@ $(function() {
 	$("#headerLogos").hide();
 	//$('#capture').hide();
 	$('#mapa_ciclon').hide();
+	$('#abort').hide();
 	//$('#ButtonInfo').hide();
 	$('#entradaInfo').hide();
 	$('#Select-Event').hide();
@@ -1026,11 +1028,25 @@ $(function() {
 //this section let the user upload an image to map, just (in the front-end)
 $(function(){
 	$('#uploadImg').click(function(){
+		$('#abort').show();
 		$('#capture').hide();
 		$('#mapa_ciclon').hide();
 		$('#customFileLangDiv').show();
 		$('#uploadImg').hide();
 		$("#customFileLang").val("");
+	});
+
+	$('#abort').click(function(){
+		window.captured=false;
+		$('#abort').hide();
+		$('#customFileLangDiv').hide();
+		$('#mapa_ciclon').hide();
+		$('#uploadImg').show();
+		$("#customFileLang").val("");
+		//caso en el que si ya se obtuvo una captura 
+		$('#capture').show();
+		$('#map-container').show();
+		$('#imagen').hide();
 	});
 
 	$('#customFileLang').on('change', function() {
@@ -1047,6 +1063,7 @@ $(function(){
 		$('.js-screenshot-image').hide();
 		$('#map-container').hide();
 		$('#capture').hide();
+		$('#abort').hide();
 		$('#mapa_ciclon').show();
 		//alert(this.src);  // blob url
 		$('#mapaTemp').attr('src', this.src);
