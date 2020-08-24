@@ -37,10 +37,32 @@ $(function() {
                 zoom: 5
             });
 
+            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+
+            const labelClass = {
+                symbol: {
+                    type: "text",
+                    color: "black",
+                    font: {
+                        family: "Arial",
+                        size: 9,
+                        weight: "bold"
+                    },
+                    haloColor: [255, 255, 255, 255],
+                    haloSize: 1
+                },
+                labelPlacement: "center-center",
+                labelExpressionInfo: {
+                    expression: "$feature.NOM_MUN"
+                }
+            };
+
             const redProp = {
+                url: urlMunicipios,
                 id: "statesRed",
                 opacity: 0,
                 outFields: ["*"],
+                labelingInfo: [labelClass],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -54,11 +76,14 @@ $(function() {
                         },
                 definitionExpression: "1 = 0"
             };
+
             const orangeProp = {
+                url: urlMunicipios,
                 id: "statesOrange",
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
+                labelingInfo: [labelClass],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -75,10 +100,12 @@ $(function() {
             };
 
             const yellowProp = {
+                url: urlMunicipios,
                 id: "statesYellow",
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
+                labelingInfo: [labelClass],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -93,11 +120,14 @@ $(function() {
                         },
                 definitionExpression: "1 = 0"
             };
+
             const greenProp = {
+                url: urlMunicipios,
                 id: "statesGreen",
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
+                labelingInfo: [labelClass],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -112,11 +142,14 @@ $(function() {
                         },
                 definitionExpression: "1 = 0"
             };
+
             const blueProp = {
+                url: urlMunicipios,
                 id: "statesBlue",
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
+                labelingInfo: [labelClass],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -132,12 +165,11 @@ $(function() {
                 definitionExpression: "1 = 0"
             };
 
-            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
-            addFeatureLayer(map, urlMunicipios, redProp);
-            addFeatureLayer(map, urlMunicipios, orangeProp);
-            addFeatureLayer(map, urlMunicipios, yellowProp);
-            addFeatureLayer(map, urlMunicipios, greenProp);
-            addFeatureLayer(map, urlMunicipios, blueProp)
+            addFeatureLayer(map, redProp);
+            addFeatureLayer(map, orangeProp);
+            addFeatureLayer(map, yellowProp);
+            addFeatureLayer(map, greenProp);
+            addFeatureLayer(map, blueProp)
 
             document.addEventListener("alerts", function(e){
                 var alerts = e.detail;
@@ -176,13 +208,13 @@ $(function() {
         });
     }
 
-    function addFeatureLayer(map, url, properties, renderer = null) {
+    function addFeatureLayer(map, properties, renderer = null) {
         require([
             "esri/layers/FeatureLayer"
         ], function(
             FeatureLayer
         ) {
-            const layer = new FeatureLayer(url, properties);
+            const layer = new FeatureLayer(properties);
             map.add(layer);
         });
     }

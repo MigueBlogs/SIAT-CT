@@ -17,8 +17,8 @@
     <script src="./lib/handlebars.js"></script>
     <script src="//d3js.org/d3.v4.min.js"></script>
 
-    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css">
-    <script src="https://js.arcgis.com/4.13/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/css/main.css">
+    <script src="https://js.arcgis.com/4.16/"></script>
 
     <link rel="stylesheet" href="./css/consulta.css">
 </head>
