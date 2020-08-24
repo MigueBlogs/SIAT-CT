@@ -372,6 +372,7 @@
 					<div id="capturaMapa" class="tituloTable">PRONÓSTICO DE TRAYECTORIA 
 						<button id="capture" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span> <ion-icon name="camera"></ion-icon> Obtener captura</button> 
 						<button id="mapa_ciclon" type="button" class="btn btn-danger"><ion-icon name="map"></ion-icon> Vista mapa</button>
+						<button id="abort" type="button" class="btn btn-danger"><ion-icon name="close-circle"></ion-icon>Cancelar subida</button>
 						<button id="uploadImg" type="button" class="btn btn-primary"> <ion-icon name="image"></ion-icon> Subir trayectoria</button> 
 						<div id="customFileLangDiv" style="display:none;" class="custom-file">
 							<input type="file" class="custom-file-input" id="customFileLang">
