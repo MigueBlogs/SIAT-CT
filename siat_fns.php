@@ -149,7 +149,7 @@
         } else 
             $queryStr .= "(SELECT SYSDATE FROM DUAL) ";
 
-        $queryStr .= "ORDER BY FECHA DESC, ID_BOLETIN DESC ";
+        $queryStr .= "ORDER BY FECHAHORA DESC, ID_BOLETIN DESC ";
 
         $query = oci_parse($conn, $queryStr);
 
@@ -184,13 +184,13 @@
             ":idBoletin" => $idBoletin
         );
 
-        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, TO_CHAR(H.FECHA, 'YYYY-MM-DD') FECHA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
-            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, FECHA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
+        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, TO_CHAR(H.FECHA, 'YYYY-MM-DD') FECHA, H.FECHAHORA FECHAHORA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
+            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, FECHA, FECHAHORA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
             "START WITH ID_BOLETIN = :idBoletin ".
             "CONNECT BY PRIOR ID_BOLETIN = BOL_ID_BOLETIN) H ".
             "INNER JOIN CATEGORIA_EVENTO C ".
             "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
-            "ORDER BY H.FECHA DESC, H.ID_BOLETIN DESC";
+            "ORDER BY H.FECHAHORA DESC, H.ID_BOLETIN DESC";
 
         $query = oci_parse($conn, $queryStr);
 
@@ -232,13 +232,13 @@
             ":idBoletin" => $idBoletin
         );
 
-        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, TO_CHAR(H.FECHA, 'YYYY-MM-DD') FECHA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
-            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, FECHA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
+        $queryStr = "SELECT H.ID_BOLETIN, H.NOMBRE_EVENTO, TO_CHAR(H.FECHA, 'YYYY-MM-DD') FECHA, H.FECHAHORA FECHAHORA, H.OCEANO, C.NOMBRE CATEGORIA FROM ".
+            "(SELECT ID_BOLETIN, NOMBRE_EVENTO, FECHA, FECHAHORA, ID_CATEGORIA_EVENTO, OCEANO FROM BOLETIN ".
             "START WITH ID_BOLETIN = :idBoletin ".
             "CONNECT BY PRIOR BOL_ID_BOLETIN = ID_BOLETIN) H ".
             "INNER JOIN CATEGORIA_EVENTO C ".
             "ON H.ID_CATEGORIA_EVENTO = C.ID_CATEGORIA_EVENTO ".
-            "ORDER BY FECHA DESC, ID_BOLETIN DESC";
+            "ORDER BY FECHAHORA DESC, ID_BOLETIN DESC";
 
         $query = oci_parse($conn, $queryStr);
 
@@ -323,6 +323,7 @@
             ":idCategoriaEvento" => (int)$propiedades->idCategoriaEvento,
             ":nombreEvento" => $propiedades->nombreEvento,
             ":fecha" => $propiedades->fechaParse,
+            ":fechaTime" => $propiedades->fechaTime,
             ":oceano" => $propiedades->oceano,
             ":latitud" => $propiedades->latitud,
             ":longitud" => $propiedades->longitud,
@@ -332,14 +333,14 @@
             ":final" => $propiedades->final
         );
 
-        $queryStr = "INSERT INTO BOLETIN(ID_BOLETIN, ID_CATEGORIA_EVENTO, NOMBRE_EVENTO, FECHA, OCEANO, LATITUD, LONGITUD, COMENTARIOS, INFO_GENERAL, ZONAS_VIGILANCIA, FINAL ";
+        $queryStr = "INSERT INTO BOLETIN(ID_BOLETIN, ID_CATEGORIA_EVENTO, NOMBRE_EVENTO, FECHA, FECHAHORA, OCEANO, LATITUD, LONGITUD, COMENTARIOS, INFO_GENERAL, ZONAS_VIGILANCIA, FINAL ";
 
         if(isset($propiedades->idSeguimiento)) {
             $paramsArray[":idSeguimiento"] = $propiedades->idSeguimiento;
             $queryStr .= ", BOL_ID_BOLETIN ";
         }
 
-        $queryStr .= ") VALUES (:idBoletin, :idCategoriaEvento, :nombreEvento, TO_DATE(:fecha, 'YYYY/MM/DD'), :oceano, :latitud, :longitud, :comentarios, :infoGeneral, :zonasVigilancia, :final ";
+        $queryStr .= ") VALUES (:idBoletin, :idCategoriaEvento, :nombreEvento, TO_DATE(:fecha, 'YYYY/MM/DD'), TO_DATE(:fechaTime, 'YYYY/MM/DD HH24:MI:SS'), :oceano, :latitud, :longitud, :comentarios, :infoGeneral, :zonasVigilancia, :final ";
         
         if(isset($propiedades->idSeguimiento)) $queryStr .= ", :idSeguimiento ";
 

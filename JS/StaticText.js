@@ -34,6 +34,7 @@ $("#guardarInfo").click(function(){
 		idCategoriaEvento : parseInt($('#type').attr("data-typeId")),
 		fecha: $('#datetime').attr("data-date"),
 		fechaParse: $('#datetime').attr("data-dateParse"),
+		fechaTime: $('#datetime').attr("data-datetime"),
 		oceano : $('#sea').attr("data-ocean"),
 		latitud : $('#coords').text().split(",")[0].trim(),
 		longitud: $('#coords').text().split(",")[1].trim(),
@@ -55,6 +56,7 @@ $("#guardarInfo").click(function(){
 		archivos: archivos
 	};
 
+	debugger 
 	var idBoletin = data["nombreEvento"].substr(0,3).toUpperCase() + data["fecha"] + $('#type').attr("data-typeId") + data["oceano"];
 	if(idBoletinSeguimiento) data["idSeguimiento"] = idBoletinSeguimiento;
 	dataArr.push(data);

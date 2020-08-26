@@ -8,6 +8,7 @@ $(function() {
 	document.getElementById("datetime").innerHTML = dt.toLocaleString("es-MX", fecha)+' / '+ dt.toLocaleString("es-MX",hora)+':00 h' + ' / ';
 	$("#datetime").attr("data-date", ('' + dt.getFullYear()).substr(2,2) + ('' + (dt.getMonth()+1)).padStart(2,'0') + ('' + dt.getDate()).padStart(2,'0') + ('' + dt.getHours()).padStart(2,'0'));
 	$("#datetime").attr("data-dateParse", dt.getFullYear() + "/" + ('' + (dt.getMonth()+1)).padStart(2,'0') + "/" + ('' + dt.getDate()).padStart(2,'0'));
+	$("#datetime").attr("data-datetime", dt.getFullYear() + "/" + ('' + (dt.getMonth()+1)).padStart(2,'0') + "/" + ('' + dt.getDate()).padStart(2,'0') + ' ' + ('' + dt.getHours()).padStart(2,'0') + ':' + ('' + dt.getMinutes()).padStart(2,'0') + ':' + ('' + dt.getSeconds()).padStart(2,'0'));
 	const roja = 3;
 	const naranja = 3;
 	const amarillo = 6;
@@ -296,6 +297,7 @@ $(function() {
 		document.getElementById("datetime").innerHTML = newDate.toLocaleString("es-MX", fecha)+' / '+ newDate.toLocaleString("es-MX", hora)+':00 h' + ' / ';
 		$("#datetime").attr("data-date", ('' + newDate.getFullYear()).substr(2,2) + ('' + (newDate.getMonth()+1)).padStart(2,'0') + ('' + newDate.getDate()).padStart(2,'0') + ('' + newDate.getHours()).padStart(2,'0'));
 		$("#datetime").attr("data-dateParse", newDate.getFullYear() + "/" + ('' + (newDate.getMonth()+1)).padStart(2,'0') + "/" + ('' + newDate.getDate()).padStart(2,'0'));
+		$("#datetime").attr("data-datetime", dt.getFullYear() + "/" + ('' + (dt.getMonth()+1)).padStart(2,'0') + "/" + ('' + dt.getDate()).padStart(2,'0') + ' ' + ('' + dt.getHours()).padStart(2,'0') + ':' + ('' + dt.getMinutes()).padStart(2,'0') + ':' + ('' + dt.getSeconds()).padStart(2,'0'));
 		$("#datetime").show();
 		$("#datePicker").hide();
 		$("#ButtonFecha").show();
