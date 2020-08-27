@@ -183,9 +183,9 @@
                 <u>ENLACES OFICIALES RELACIONADOS</u>
             </div>
             <table class="enlaces-img">
-                <td  style="border: none;"><img src="img/911.png" width="100%"></td>
-                <td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/manual-del-sistema-de-alerta-temprana-para-ciclones-tropicales-siat-ct-2019"><img src="img/manual.png"  width="100%"></a></td>
-                <td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/regionalizacion-para-alertas-hidrometeorologicas-2019"><img src="img/regiones.png"  width="100%"></a></td>
+                <td  style="border: none;"><img src="img/911.PNG" width="100%"></td>
+                <td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/manual-del-sistema-de-alerta-temprana-para-ciclones-tropicales-siat-ct-2019"><img src="img/manual.PNG"  width="100%"></a></td>
+                <td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/regionalizacion-para-alertas-hidrometeorologicas-2019"><img src="img/regiones.PNG"  width="100%"></a></td>
             </table>
 
             <div>

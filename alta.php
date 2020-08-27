@@ -477,8 +477,8 @@
 					<br><strong>UNIDADES ESTATALES DE PROTECCIÓN CIVIL</strong> – Atender la evolución de este ciclón tropical, notificar a integrantes del SINAPROC en ámbitos estatales y municipales, así como considerar las siguientes recomendaciones de acuerdo al nivel de  alerta del Sistema de Alerta Temprana para Ciclones Tropicales (SIAT-CT):
 				</div>
 				<div>
-					<a href="http://www.cenapred.unam.mx/es/Publicaciones/archivos/264-INFOGRAFACICLNACERCNDOSE.PDF"><img src="img/QR_1.png" width="100%"></a>
-					<a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/264-INFOGRAFACICLNALEJNDOSE.PDF"><img src="img/QR_2.png" href="" width="100%"></a>
+					<a href="http://www.cenapred.unam.mx/es/Publicaciones/archivos/264-INFOGRAFACICLNACERCNDOSE.PDF"><img src="img/QR_1.PNG" width="100%"></a>
+					<a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/264-INFOGRAFACICLNALEJNDOSE.PDF"><img src="img/QR_2.PNG" href="" width="100%"></a>
 				</div>
 			</div>
 			<hr style="height:5px; visibility:hidden; margin:0px" />
@@ -521,9 +521,9 @@
 				</div>
 				<div>
 					<table style="border: none;  width: 100%; height: 100%; text-align: center;">
-						<tr><th style="border: none;"><a href="http://sina.conagua.gob.mx/sina/almacenamientoPresas.php"><img src="img/QR_3.png" width="100%"></a></th></tr>
-						<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/278-INFOGRAFATEMPORADADELLUVIAS(PARAAUTORIDADES).PDF"><img src="img/QR_4.png"  width="100%"></a></th></tr>
-						<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/302-INFOGRAFATORMENTASELCTRICAS.PDF"><img src="img/QR_5.png"  width="100%"></a></th></tr>
+						<tr><th style="border: none;"><a href="http://sina.conagua.gob.mx/sina/almacenamientoPresas.php"><img src="img/QR_3.PNG" width="100%"></a></th></tr>
+						<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/278-INFOGRAFATEMPORADADELLUVIAS(PARAAUTORIDADES).PDF"><img src="img/QR_4.PNG"  width="100%"></a></th></tr>
+						<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/302-INFOGRAFATORMENTASELCTRICAS.PDF"><img src="img/QR_5.PNG"  width="100%"></a></th></tr>
 					</table>
 				</div>
 			</div>
@@ -557,17 +557,17 @@
 					</div>
 					<div>
 						<table style="border: none;  width: 100%; height: 100%; text-align: center;">
-							<tr><th style="border: none;"><a href="https://www.cenapred.gob.mx/es/Publicaciones/archivos/259-INFOGRAFAENCASODEINUNDACIN.PDF"><img src="img/QR_6.png" width="100%"></a></th></tr>
-							<tr><th style="border: none;"><a href="https://www.gob.mx/cms/uploads/attachment/file/110289/308-INFOGRAFAINUNDACIONESSBITAS.PDF"><img src="img/QR_7.png"  width="100%"></a></th></tr>
-							<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/281-INFOGRAFALADERASINESTABLES.PDF"><img src="img/QR_8.png"  width="100%"></a></th></tr>
+							<tr><th style="border: none;"><a href="https://www.cenapred.gob.mx/es/Publicaciones/archivos/259-INFOGRAFAENCASODEINUNDACIN.PDF"><img src="img/QR_6.PNG" width="100%"></a></th></tr>
+							<tr><th style="border: none;"><a href="https://www.gob.mx/cms/uploads/attachment/file/110289/308-INFOGRAFAINUNDACIONESSBITAS.PDF"><img src="img/QR_7.PNG"  width="100%"></a></th></tr>
+							<tr><th style="border: none;"><a href="http://www.cenapred.gob.mx/es/Publicaciones/archivos/281-INFOGRAFALADERASINESTABLES.PDF"><img src="img/QR_8.PNG"  width="100%"></a></th></tr>
 						</table>
 					</div>	
 				</div>
 				<div>
 					<table style="border: none; width:100%; height: 100%; text-align: center;">
-						<td  style="border: none;"><img src="img/911.png" width="40%"></td>
-						<td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/manual-del-sistema-de-alerta-temprana-para-ciclones-tropicales-siat-ct-2019"><img src="img/manual.png"  width="40%"></a></td>
-						<td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/regionalizacion-para-alertas-hidrometeorologicas-2019"><img src="img/regiones.png"  width="40%"></a></td>
+						<td  style="border: none;"><img src="img/911.PNG" width="40%"></td>
+						<td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/manual-del-sistema-de-alerta-temprana-para-ciclones-tropicales-siat-ct-2019"><img src="img/manual.PNG"  width="40%"></a></td>
+						<td  style="border: none;"><a href="https://www.gob.mx/sspc/documentos/regionalizacion-para-alertas-hidrometeorologicas-2019"><img src="img/regiones.PNG"  width="40%"></a></td>
 					</table>
 				</div>
 			</div>
