@@ -284,7 +284,7 @@
 		{{#each storms as |evento|}}
 			<div class="card">
                 <div class="text">
-                    <a href="http://preparados.gob.mx/SIAT-CT/consulta.php?idBoletin={{evento.idBoletin}}">
+                    <a href="http://preparados.cenapred.unam.mx/SIAT-CT/consulta.php?idBoletin={{evento.idBoletin}}">
                         <div>{{evento.categoria}} {{evento.nombre}}</div>
                         <div>Océano {{evento.oceano}}</div>
                     </a>
