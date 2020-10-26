@@ -263,7 +263,7 @@ $(function() {
                     var template = Handlebars.compile(templateSource);
                     var outputHTML = template(result);
                     $("#eventInfo").html(outputHTML);
-                }
+                } else { $("#eventInfo").html(""); }
 
                 var templateSource = $("#effects-template").html();
                 var template = Handlebars.compile(templateSource);

@@ -350,6 +350,7 @@
     <script id="eventInfo-template" type="text/x-handlebars-template">
         <div class="infoSection">
             <div class="infoElement"><strong>Estados alertados:</strong> <span id="noStates">{{#getEstados this.alertas}}{{/getEstados}}</span></div>
+            <div class="infoElement">Municipios alertados: <span id="noCounties">{{#getMunicipios this.alertas}}{{/getMunicipios}}</span></div>
             <div class="infoElement">
                 <ul id="statesList" class="list">
                    {{#getListaEstados this.alertas}}{{/getListaEstados}}
@@ -357,7 +358,6 @@
             </div>
         </div>
         <div class="infoSection">
-            <div class="infoElement">Municipios alertados: <span id="noCounties">{{#getMunicipios this.alertas}}{{/getMunicipios}}</span></div>
             <div class="infoElement charts">
                 <div id="countyChart"></div>
                 <div id="warningChart"></div>

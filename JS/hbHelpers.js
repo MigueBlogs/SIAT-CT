@@ -132,20 +132,27 @@ Handlebars.registerHelper("getListaEstados", function(statesDictionary) {
                 countyInfo[state]["ac"] = {}
             }
 
-            countyInfo[state]["ac"][color] = statesDictionary["ACERCÁNDOSE"][color][state]["municipios"].map((mun) => {
-                return mun["nombre"];
-            });
+            if(statesDictionary["ACERCÁNDOSE"][color]) {
+                countyInfo[state]["ac"][color] = statesDictionary["ACERCÁNDOSE"][color][state]["municipios"].map((mun) => {
+                    return mun["nombre"];
+                });
+            }
         });
 
         al.forEach((state) => {
             if(!countyInfo[state]) {
                 countyInfo[state] = {}
                 countyInfo[state]["al"] = {}
+            } else if(!countyInfo[state]["al"]) { 
+                countyInfo[state]["al"] = {}
             }
 
-            countyInfo[state]["al"][color] = statesDictionary["ALEJANDOSE"][color][state]["municipios"].map((mun) => {
-                return mun["nombre"];
-            });
+            if(statesDictionary["ALEJANDOSE"][color]) {
+                if(color == "NARANJA") debugger
+                countyInfo[state]["al"][color] = statesDictionary["ALEJANDOSE"][color][state]["municipios"].map((mun) => {
+                    return mun["nombre"];
+                });
+            }
         });
     });    
 
