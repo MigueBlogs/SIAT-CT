@@ -328,3 +328,26 @@ body {
     margin: 2em 0;
     width: 100%;
 }
+
+#eventInfo {
+    .typeCountyTitle {
+        font-style: italic;
+        text-decoration: underline;
+    }
+
+    .countyColorContainer {
+        margin: 0.5em 0;
+
+        .countyColorTitle {
+            font-weight: bold;
+            display: inline-block;
+            padding: 0 1em;
+
+            &.ROJO { background: red;}
+            &.NARANJA { background: orange;}
+            &.AMARILLA { background: yellow;}
+            &.VERDE { background: #38BF34;}
+            &.AZUL { background: #4F81BC;}
+        }
+    }
+}

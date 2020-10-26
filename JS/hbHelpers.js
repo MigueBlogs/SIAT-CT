@@ -120,10 +120,72 @@ Handlebars.registerHelper("getListaEstados", function(statesDictionary) {
     });
 
     states.sort();
+    var countyInfo = {};
+
+    colors.forEach(function(color) {
+        var ac = Object.keys(statesDictionary["ACERCÁNDOSE"][color]);
+        var al = Object.keys(statesDictionary["ALEJANDOSE"][color]);
+
+        ac.forEach((state) => {
+            if(!countyInfo[state]) {
+                countyInfo[state] = {}
+                countyInfo[state]["ac"] = {}
+            }
+
+            countyInfo[state]["ac"][color] = statesDictionary["ACERCÁNDOSE"][color][state]["municipios"].map((mun) => {
+                return mun["nombre"];
+            });
+        });
+
+        al.forEach((state) => {
+            if(!countyInfo[state]) {
+                countyInfo[state] = {}
+                countyInfo[state]["al"] = {}
+            }
+
+            countyInfo[state]["al"][color] = statesDictionary["ALEJANDOSE"][color][state]["municipios"].map((mun) => {
+                return mun["nombre"];
+            });
+        });
+    });    
+
     var output = "";
 
-    states.forEach(function(state) {
-        output += "<li class='listElement'>" + state + "</li>";
+    Object.keys(countyInfo).forEach((state) => {
+        var html = "<div class='stateInfoContainer'>" +
+            "<h3 class='stateName'>" + state + "</h3>" + 
+            "<div class='countyInfoContainer'>";
+        
+        if(countyInfo[state]["ac"]) {
+            html += "<div class='countyType'>" +
+                "<span class='typeCountyTitle'>" + "Acercándose" + "</span>";
+
+            Object.keys(countyInfo[state]["ac"]).forEach((color) => {
+                html += "<div class='countyColorContainer'>" +
+                    "<span class='countyColorTitle " + color + "'>" + color + " (" + countyInfo[state]["ac"][color].length + ")" + "</span>" + 
+                    countyInfo[state]["ac"][color].join(", ") + 
+                    "</div>";
+            });
+
+            html += "</div>";
+        }
+
+        if(countyInfo[state]["al"]) {
+            html += "<div class='countyType'>" +
+                "<span class='typeCountyTitle'>" + "Alejándose" + "</span>";
+
+            Object.keys(countyInfo[state]["al"]).forEach((color) => {
+                html += "<div class='countyColorContainer'>" +
+                    "<span class='countyColorTitle " + color + "'>" + color + " (" + countyInfo[state]["al"][color].length + ")" + "</span>" + 
+                    countyInfo[state]["al"][color].join(", ") + 
+                    "</div>";
+            });
+
+            html += "</div>";
+        }
+            
+        html += "</div></div>"
+        output += html;
     });
 
     return new Handlebars.SafeString(output);
