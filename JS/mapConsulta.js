@@ -37,7 +37,7 @@ $(function() {
                 zoom: 5
             });
 
-            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
+            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/ANR/Datos_Basicos/MapServer/5";
 
             const labelClass = {
                 symbol: {
@@ -313,7 +313,7 @@ $(function() {
                 query = "";
 
                 estados.forEach(function(estado, idxEstado) {
-                    query += "MUNID IN (";
+                    query += "CLAVE_MU_1 IN (";
                     alertas[tipoAlerta][nivelAlerta][estado]["municipios"].forEach(function(municipio, idxMunicipio) {
                         query += "'" + parseInt(municipio["clave"]) + "'";
                         if(idxMunicipio < alertas[tipoAlerta][nivelAlerta][estado]["municipios"].length - 1) query += ","
