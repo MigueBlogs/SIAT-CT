@@ -130,6 +130,8 @@ Handlebars.registerHelper("getListaEstados", function(statesDictionary) {
             if(!countyInfo[state]) {
                 countyInfo[state] = {}
                 countyInfo[state]["ac"] = {}
+            } else if(!countyInfo[state]["ac"]) {
+                countyInfo[state]["ac"] = {}
             }
 
             if(statesDictionary["ACERCÁNDOSE"][color]) {
