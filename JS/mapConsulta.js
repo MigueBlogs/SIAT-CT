@@ -8,6 +8,8 @@ $(function() {
         allIds: []
     };
 
+    var previusInfo;
+
     initMap();
     getYears();
 
@@ -205,6 +207,27 @@ $(function() {
                     layer.refresh();
                 });
             });
+
+            document.addEventListener("files", function(e) {
+                let fs = e.detail;
+                
+                fs.forEach(function(f, i) {
+                    const fUNAM = f.replace('www.preparados.gob.mx/uploads', 'www.preparados.cenapred.unam.mx/uploads/SIATCT');
+                    const prop = {
+                        url: fUNAM,
+                        id: "kml_" + i
+                    };
+
+                    addKmlLayer(map, prop);
+                });
+            });
+
+            document.addEventListener("destroyKML", function(e) {
+                const layers = e.detail;
+                layers.forEach(function(l, i) {
+                    map.findLayerById("kml_" + i).destroy();
+                });
+            });
         });
     }
 
@@ -219,6 +242,17 @@ $(function() {
         });
     }
 
+    function addKmlLayer(map, properties, renderer = null) {
+        require([
+            "esri/layers/KMLLayer"
+        ], function(
+            KMLLayer
+        ) {
+            const layer = new KMLLayer(properties);
+            map.add(layer);
+        });
+    }
+
     function getEventInfo(idBoletin) {
         $.ajax({
             type: "GET",
@@ -229,6 +263,7 @@ $(function() {
             },
             dataType: "json",
             success: function(result) {
+                previusInfo = result;
                 result["current"] = idBoletin;
                 var idsBoletin = eventoActual["allIds"].map(function(boletin) { return boletin.idBoletin });
                 result["previous"] = idsBoletin.indexOf(idBoletin) < idsBoletin.length - 1 ? eventoActual["allIds"][idsBoletin.indexOf(idBoletin) + 1] : "";
@@ -279,11 +314,18 @@ $(function() {
                     var idBoletin = $(this).attr("data-idBoletin");
                     clearTimeout(activeEvents["chartDrawing"]);
 
+                    var event = new CustomEvent('destroyKML', { detail: previusInfo["archivos"] });
+                    document.dispatchEvent(event);
+
                     getEventInfo(idBoletin);
                 });
 
                 var alertas = getAlertamiento(result);
                 var event = new CustomEvent('alerts', { detail: alertas });
+                document.dispatchEvent(event);
+
+                var archivos = result["archivos"];
+                var event = new CustomEvent('files', { detail: archivos });
                 document.dispatchEvent(event);
             },
             error: function(error) {

@@ -126,6 +126,39 @@
         }
         
         dbClose($conn, $query);   
+        getUrls($idBoletin, $boletin);
+    }
+
+    function getUrls($idBoletin, &$boletin) {
+        require_once("db_global.php");
+
+        $conn = dbConnect(user, pass, server);
+
+        $paramsArray = Array(
+            ":idBoletin" => $idBoletin
+        );
+
+        $queryStr = "SELECT URL ".
+            "FROM ARCHIVO ".
+            "WHERE ID_BOLETIN = :idBoletin ".
+            "AND TIPO IN ('kml', 'kmz', 'KML', 'KMZ') ";
+
+        $query = oci_parse($conn, $queryStr);
+
+        foreach ($paramsArray as $key => $value) {
+            oci_bind_by_name($query, $key, $paramsArray[$key]);
+        }
+
+        oci_execute($query);
+        $ar = Array();
+
+        $boletin["archivos"] = Array();
+
+        while ( ($row = oci_fetch_assoc($query)) != false ) {
+            $boletin["archivos"][] = $row["URL"]->load();
+        }
+        
+        dbClose($conn, $query);
         getCounties($idBoletin, $boletin);
     }
 
@@ -174,5 +207,6 @@
         
         dbClose($conn, $query);
         echo json_encode($boletin);
+        // getUrls($idBoletin, $boletin);
     }
 ?>
