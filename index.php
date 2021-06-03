@@ -18,8 +18,9 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+    <iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -5px;"></iframe>
     <?php includeNav(); ?>
-    <div class="main-container">
+    <div class="main-container" style="margin: 0;">
         <h1>Sistema de Alerta Temprana para Ciclones Tropicales<br/>(SIAT-CT)</h1>
         <div id="image-bg">
             <img src="./img/encabezado-bg.png" alt="Sistema de Alerta Temprana para Ciclones Tropicales (SIAT-CT)">
@@ -171,7 +172,6 @@
                         </table>
                     </div>
 
-                    <div>
                     <h3>Tabla de alejamiento</h3>
                     <div class="table-container">
                         <table class="table" cellpadding="0" cellspacing="0">
@@ -276,7 +276,7 @@
             </article>
         </section>
     </div>
-    <?php getFooter(); ?>
+    <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
 
     <script src="./JS/index.js"></script>
 
@@ -292,5 +292,8 @@
             </div>
 		{{/each}}
 	</script>
+
+    <script src="/js/nav-gob.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 </html>

@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
+    <iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -5px;"></iframe>
     <?php includeNav(); ?>
-    <div class="main-container">
+    <div class="main-container" style="margin-top: 0;height: calc(100vh - 130px);">
         <form  class="login-form" method="POST">
             <div class="form-header">
                 <h1>Inicio de sesión</h1>
@@ -35,5 +36,9 @@
         </form>
     </div>
     <script src="./JS/login.js"></script>
+
+    <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
+    <script src="/js/nav-gob.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 </html>

@@ -46,6 +46,7 @@
 	<title>SIAT-CT</title>
 </head>
 <body>
+	<iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -7px;"></iframe>
 	<?php includeNav(); ?>
 	<div class="box" id="root">
 		<!-- Menú del Modal -->
@@ -630,9 +631,11 @@
 	<button type="button" data-toggle="modal" data-target="#confirm" class="btn btn-outline-danger" id="lastOne">Ultimo boletín</button>
 	</center>
 
-	<div style="margin: 0 25%;">
+	<div style="margin: 0 25% 2em 0;">
 	<?php include("pdf/plantilla.html"); ?>
 	</div>
+
+	<iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
 
 	<script id="stormsActive-template" type="text/x-handlebars-template">
 		{{#each storms as |storm|}}
@@ -697,5 +700,8 @@
 	<script src="./JS/map.js"></script>	
 	<script src="./JS/hbHelpers.js"></script>
 	<script src="./JS/seguimiento.js"></script>
+
+	<script src="/js/nav-gob.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 </html>

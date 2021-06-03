@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="./css/consulta.css">
 </head>
 <body>
+    <iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -4px;"></iframe>
     <?php includeNav(); ?>
-    <div class="mainContainer">
+    <div class="mainContainer" style="margin-bottom: 2em;">
         <h1>Boletín SIAT-CT</h1>
 
         <div class="filters">
@@ -451,5 +452,9 @@
     <script src="./JS/mapConsulta.js"></script>
     <script src="./JS/chartConsulta.js"></script>
     <script src="./JS/hbHelpers.js"></script>
+
+    <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
+    <script src="/js/nav-gob.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 </html>
