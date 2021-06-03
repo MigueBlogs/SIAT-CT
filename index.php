@@ -20,7 +20,7 @@
 <body>
     <iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -5px;"></iframe>
     <?php includeNav(); ?>
-    <div class="main-container" style="margin: 0;">
+    <div class="main-container" style="margin: 0 0 2em 0;">
         <h1>Sistema de Alerta Temprana para Ciclones Tropicales<br/>(SIAT-CT)</h1>
         <div id="image-bg">
             <img src="./img/encabezado-bg.png" alt="Sistema de Alerta Temprana para Ciclones Tropicales (SIAT-CT)">
