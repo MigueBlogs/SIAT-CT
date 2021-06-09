@@ -40,9 +40,9 @@
 	<script src="https://js.arcgis.com/4.11/"></script>
 	<!-- Styles -->
 	<link rel="stylesheet" href="./css/styles.css">
-
 	<link rel="stylesheet" href="./pdf/styles.css">
-
+	<!-- se tuvo que agregar este elemento de CSS para modificar las propiedades de bootstrap 4.3.1 y que el sub Nav Bar tenga una vista correcta -->
+	<link rel="stylesheet" href="./css/initialNav.css">
 	<title>SIAT-CT</title>
 </head>
 <body>
@@ -635,7 +635,7 @@
 	<?php include("pdf/plantilla.html"); ?>
 	</div>
 
-	<iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
+	<?php getFooter(); ?>
 
 	<script id="stormsActive-template" type="text/x-handlebars-template">
 		{{#each storms as |storm|}}
@@ -702,6 +702,5 @@
 	<script src="./JS/seguimiento.js"></script>
 
 	<script src="/js/nav-gob.js"></script>
-    <script src="/js/footer.js"></script>
 </body>
 </html>

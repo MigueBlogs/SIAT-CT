@@ -17,45 +17,12 @@
 
     <link rel="stylesheet" href="./css/index.css">
 
-    <!-- IMPORTANTE AGREGAR REPARADOR DE ESTILOS -->
-    <link rel="stylesheet" href="/css/fixStylesAlternative.css">
-    <link rel="stylesheet" href="/css/onlyfornav.css">
+    
     
 </head>
 <body>
     <iframe id="iFrame-nav-gob" src="/nav.html" frameborder="0" style="width: 100%;height: 60px;margin-bottom: -5px;"></iframe>
-    <!-- sección de sub NavBar -->
-    <nav id="mainNav" class="navbar navbar-inverse sub-navbar navbar-fixed-top">
-        <div class="container containerNavBar">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
-              <span class="sr-only">Interruptor de Navegación</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a href="http://www.preparados.gob.mx/">
-                <img id="chimali" src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="Coordinación Nacional de Protección Civil">
-            </a>
-          </div>
-          <div class="collapse navbar-collapse" id="subenlaces">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="./">Inicio</a></li>
-              <li><a href="./consulta.php">Consulta</a></li>
-              <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Desplegable <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Acción</a></li>
-                  <li><a href="#">Otra acción</a></li>
-                  <li><a href="#">Algo más aquí</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">Enlace separado</a></li>
-                </ul>
-              </li> -->
-            </ul>
-          </div>
-        </div>
-    </nav>
+    <?php includeNav(); ?>
     <div class="main-container" style="margin: 0 0 2em 0;">
         <h1>Sistema de Alerta Temprana para Ciclones Tropicales<br/>(SIAT-CT)</h1>
         <div id="image-bg">
@@ -312,7 +279,7 @@
             </article>
         </section>
     </div>
-    <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;  margin-bottom: -5px;"></iframe>
+    <?php getFooter(); ?>
 
     <script src="./JS/index.js"></script>
 
@@ -330,7 +297,5 @@
 	</script>
 
     <script src="/js/nav-gob.js"></script>
-    <!-- myplugins.js complementa las funciones del toggle en el menú sel sub nav bar -->
-    <script src="/js/myplugins.js"></script>
 </body>
 </html>

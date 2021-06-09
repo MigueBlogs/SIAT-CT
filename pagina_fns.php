@@ -1,53 +1,48 @@
 <?php
     function includeNav() {
         ?>
-        <header>
-            <nav id="mainNavHeader">
-                <input class="trigger" type="checkbox" id="mainNavButton">
-                <label for="mainNavButton"><a href="http://www.preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></label>
-                <ul>
-                    <li><a href="http://www.preparados.gob.mx" target="_blank"><img src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="CNPC"></a></li>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="consulta.php">Consulta</a></li>
-                    <?php
-                        if(isset($_SESSION['username'])) {
-                    ?>
-                        <li><a href="alta.php" class="sessionActive">Nuevo</a></li>
-                        <li><a href="logout.php" class="sessionActive logout">Salir</a></li>
-                    <?php
-                        }
-                    ?>
+         <!-- IMPORTANTE AGREGAR REPARADOR DE ESTILOS -->
+        <link rel="stylesheet" href="/css/fixStylesAlternative.css">
+        <link rel="stylesheet" href="/css/onlyfornav.css">
+        <!-- sección de sub NavBar -->
+        <nav id="mainNav" class="navbar navbar-inverse sub-navbar navbar-fixed-top">
+            <div class="container containerNavBar">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subenlaces">
+                <span class="sr-only">Interruptor de Navegación</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a href="http://www.preparados.gob.mx/">
+                    <img id="chimali" src="http://www.atlasnacionalderiesgos.gob.mx/Imagenes/Logos/chimali.png" alt="Coordinación Nacional de Protección Civil">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse fixPosition" id="subenlaces">
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="./">Inicio</a></li>
+                <li><a href="./consulta.php">Consulta</a></li>
+                <?php
+                    if(isset($_SESSION['username'])) {
+                ?>
+                    <li><a href="alta.php" class="sessionActive">Nuevo</a></li>
+                    <li><a href="logout.php" class="sessionActive logout" style="background-color:#9D2449;color:white;">Salir</a></li>
+                <?php
+                    }
+                ?>
                 </ul>
-            </nav>
-        </header>
+            </div>
+            </div>
+        </nav>
+        <!-- myplugins.js complementa las funciones del toggle en el menú sel sub nav bar -->
+        <script src="/js/myplugins.js"></script>
         <?php
     }
 
     function getFooter() {
         ?>
-        <footer>
-            <div class="footer-container">
-                <div class="section logo">
-                    <h4><img src="http://www.preparados.gob.mx/blog/sites/default/files/inline-images/logofooter_0.png" alt="Gobierno de México"></h4>
-                </div>
-                <div class="section">
-                    <h4>¿QUÉ ES PREPARADOS?</h4>
-                    Es un portal que logra integrar, coordinar y supervisar el Sistema Nacional de Protección Civil para ofrecer prevención, auxilio y recuperación ante los desastres a toda la población, sus bienes y el entorno, a través de programas y acciones.
-                </div>
-                <div class="section">
-                    <h4>Otros sitios de interés</h4>
-                    <ul class="list">
-                        <li class="list-item"><a href="https://datos.gob.mx/" target="_blank">Portal de datos abiertos</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/accesibilidad" target="_blank">Declaración de accesibilidad</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/privacidadintegral" target="_blank">Aviso de privacidad integral</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/privacidadsimplificado" target="_blank">Aviso de privacidad simplificado</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/terminos" target="_blank">Términos y condiciones</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/terminos#medidas-seguridad-informacion" target="_blank">PolÃ­tica de seguridad</a></li>
-                        <li class="list-item"><a href="https://www.gob.mx/sitemap" target="_blank">Mapa del sitio</a></li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+        <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px; margin-bottom: -5px;"></iframe>
+        <script src="/js/footer.js"></script>
         <?php
     }
 ?>
