@@ -257,7 +257,7 @@
                     <a id="link" href="https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019">https://www.gob.mx/sspc/documentos/alertamientos-de-proteccioncivil-atiende-recomendaciones-del-sinaproc-mayo-2019</a>
                 </u>
                 <br>
-                Tel: 01 55 5128-0000 ext. 36346
+                Tel: 55 1103 6000 ext. 71565 y ext. 71570
             </div>
         </div>
     </div>
