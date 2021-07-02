@@ -150,7 +150,7 @@ Handlebars.registerHelper("getListaEstados", function(statesDictionary) {
             }
 
             if(statesDictionary["ALEJANDOSE"][color]) {
-                if(color == "NARANJA") debugger
+                if(color == "NARANJA")
                 countyInfo[state]["al"][color] = statesDictionary["ALEJANDOSE"][color][state]["municipios"].map((mun) => {
                     return mun["nombre"];
                 });

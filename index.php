@@ -16,8 +16,8 @@
     <script src="./lib/handlebars.js"></script>
 
     <link rel="stylesheet" href="./css/index.css">
-
-    
+    <link rel="stylesheet" href="/css/fixStylesAlternative.css">
+    <link rel="stylesheet" href="/css/onlyfornav.css"
     
 </head>
 <body>
@@ -279,7 +279,7 @@
             </article>
         </section>
     </div>
-    <?php getFooter(); ?>
+    <iframe id="MyIframe" src="/footer.html" scrolling="no" width="100%" height="425.5px" style="border: 0px;"></iframe>
 
     <script src="./JS/index.js"></script>
 
@@ -297,5 +297,10 @@
 	</script>
 
     <script src="/js/nav-gob.js"></script>
+    <script src="/js/gobiernoSub.js"></script>
+    <script src="/js/mainSub.js"></script>
+    <!-- myplugins.js complementa las funciones del toggle en el menú sel sub nav bar -->
+    <script src="/js/myplugins.js"></script>
+    <script src="/js/footer.js"></script>
 </body>
 </html>

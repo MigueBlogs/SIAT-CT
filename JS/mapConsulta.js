@@ -39,7 +39,7 @@ $(function() {
                 zoom: 5
             });
 
-            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/ANR/Datos_Basicos/MapServer/5";
+            const urlMunicipios = "http://rmgir.proyectomesoamerica.org/server/rest/services/DGPC/Regionalizacion_SIAT_CT/MapServer/0";
 
             const labelClass = {
                 symbol: {
@@ -53,7 +53,7 @@ $(function() {
                     haloColor: [255, 255, 255, 255],
                     haloSize: 1
                 },
-                labelPlacement: "center-center",
+                labelPlacement: 'always-horizontal'                ,
                 labelExpressionInfo: {
                     expression: "$feature.NOM_MUN"
                 }
@@ -64,7 +64,7 @@ $(function() {
                 id: "statesRed",
                 opacity: 0,
                 outFields: ["*"],
-                labelingInfo: [labelClass],
+                labelingInfo: [],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -85,7 +85,7 @@ $(function() {
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
-                labelingInfo: [labelClass],
+                labelingInfo: [],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -107,7 +107,7 @@ $(function() {
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
-                labelingInfo: [labelClass],
+                labelingInfo: [],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -129,7 +129,7 @@ $(function() {
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
-                labelingInfo: [labelClass],
+                labelingInfo: [],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -151,7 +151,7 @@ $(function() {
                 opacity: 0,
                 showLabels: true,
                 outFields: ["*"],
-                labelingInfo: [labelClass],
+                labelingInfo: [],
                 renderer: {
                     type: "simple",
                     symbol: {
@@ -355,7 +355,7 @@ $(function() {
                 query = "";
 
                 estados.forEach(function(estado, idxEstado) {
-                    query += "CLAVE_MU_1 IN (";
+                    query += "MUNID IN (";
                     alertas[tipoAlerta][nivelAlerta][estado]["municipios"].forEach(function(municipio, idxMunicipio) {
                         query += "'" + parseInt(municipio["clave"]) + "'";
                         if(idxMunicipio < alertas[tipoAlerta][nivelAlerta][estado]["municipios"].length - 1) query += ","
